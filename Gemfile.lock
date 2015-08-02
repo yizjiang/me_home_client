@@ -1,0 +1,85 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    activesupport (4.2.1)
+      i18n (~> 0.7)
+      json (~> 1.7, >= 1.7.7)
+      minitest (~> 5.1)
+      thread_safe (~> 0.3, >= 0.3.4)
+      tzinfo (~> 1.1)
+    addressable (2.3.8)
+    backports (3.6.4)
+    chunky_png (1.3.4)
+    compass (1.0.3)
+      chunky_png (~> 1.2)
+      compass-core (~> 1.0.2)
+      compass-import-once (~> 1.0.5)
+      rb-fsevent (>= 0.9.3)
+      rb-inotify (>= 0.9)
+      sass (>= 3.3.13, < 3.5)
+    compass-core (1.0.3)
+      multi_json (~> 1.0)
+      sass (>= 3.3.0, < 3.5)
+    compass-import-once (1.0.5)
+      sass (>= 3.2, < 3.5)
+    ethon (0.7.3)
+      ffi (>= 1.3.0)
+    execjs (2.5.2)
+    ffi (1.9.8)
+    i18n (0.7.0)
+    json (1.8.3)
+    minitest (5.7.0)
+    multi_json (1.11.0)
+    rack (1.6.1)
+    rack-mount (0.6.14)
+      rack (>= 1.0.0)
+    rack-protection (1.5.3)
+      rack
+    rack-test (0.6.3)
+      rack (>= 1.0)
+    rake (10.4.2)
+    rb-fsevent (0.9.5)
+    rb-inotify (0.9.5)
+      ffi (>= 0.5.0)
+    redis (3.2.1)
+    redis-rack (1.5.0)
+      rack (~> 1.5)
+      redis-store (~> 1.1.0)
+    redis-store (1.1.5)
+      redis (>= 2.2)
+    sass (3.4.14)
+    sinatra (1.4.6)
+      rack (~> 1.4)
+      rack-protection (~> 1.4)
+      tilt (>= 1.3, < 3)
+    sinatra-contrib (1.4.4)
+      backports (>= 2.0)
+      multi_json
+      rack-protection
+      rack-test
+      sinatra (~> 1.4.0)
+      tilt (>= 1.3, < 3)
+    thread_safe (0.3.5)
+    tilt (2.0.1)
+    typhoeus (0.7.1)
+      ethon (>= 0.7.1)
+    tzinfo (1.2.2)
+      thread_safe (~> 0.1)
+    uglifier (2.7.1)
+      execjs (>= 0.3.0)
+      json (>= 1.8.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  activesupport
+  addressable
+  compass
+  rack-mount
+  rake
+  redis-rack
+  sinatra
+  sinatra-contrib
+  typhoeus
+  uglifier
