@@ -6,11 +6,10 @@ var CommentBox = React.createClass({
 
   loadCommentsFromServer: function() {
     $.ajax({
-      url: this.props.url,
+      url: 'comments',
       dataType: 'json',
       cache: false,
       success: function(data) {
-        console.log(data);
         this.setState({data: data});
       }.bind(this),
       error: function(xhr, status, err) {
@@ -48,11 +47,11 @@ var CommentBox = React.createClass({
   },
 
   render: function() {
+    // <CommentForm onCommentSubmit={this.handleCommentSubmit} />
     return (
       <div className="commentBox">
-        <h1>Comments</h1>
+        <h1>对话框</h1>
         <CommentList data={this.state.data} />
-        <CommentForm onCommentSubmit={this.handleCommentSubmit} />
       </div>
       );
   }

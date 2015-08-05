@@ -3,7 +3,8 @@
 var React = require('react'),
     Base = require('./base/base.js'),
     CommentBox = require('./comment/comment_box.js'),
-    Product = require('./product/filter_box.js');
+    HomeMap = require('./home/home_map.js'),
+    Product = require('./product/filterable_product_table.js');
 
 var Agent = React.createClass({
   render: function () {
@@ -12,17 +13,18 @@ var Agent = React.createClass({
 });
 
 
-var Money = React.createClass({
-  render: function () {
-    return <h2>Money</h2>;
-  }
-});
-
 var HomeSearch = React.createClass({
   render: function () {
     return (
       <div>
-        <h2>HomeSearch</h2>;
+        <h2>HomeSearch</h2>
+        <input
+        type="text"
+        placeholder="Search..."
+        value={this.props.filterText}
+
+        onChange={this.handleChange}
+        />
         <RouteHandler/>
       </div>
       );
@@ -32,10 +34,13 @@ var HomeSearch = React.createClass({
 var Home = React.createClass({
   render: function () {
     return (
-      <div>{this.props.params.home_id}</div>
+      <div>
+       <p>{this.props.params.home_id}</p>
+      </div>
       );
   }
 });
+
 
 
 var Manage = React.createClass({
@@ -63,11 +68,12 @@ var App = React.createClass({
             <a><Link to="money">  找钱  </Link></a>
             <a><Link to="manage">  管理房产  </Link></a>
             <a><Link to="agent">  经纪人入口  </Link></a>
+            <a><Link to="dashboard">  我的觅家  </Link></a>
           </nav>
         </header>
         <RouteHandler/>
       </div>
-      );
+      )
   }
 });
 
@@ -88,16 +94,16 @@ var routes = (
     <Route name="home_search" handler={HomeSearch}>
       <Route name="home" path=":home_id" handler={Home}/>
     </Route>
-    <Route name="money" handler={Money}/>
+    <Route name="money" handler={Product}/>
     <Route name="manage" handler={Manage}/>
     <Route name="agent" handler={Agent}/>
+    <Route name="dashboard" handler={CommentBox}/>
     <DefaultRoute handler={HomeSearch}/>
   </Route>
   );
 
 Router.run(routes, function (Handler, state) {
   var params = state.params;
-  React.render(<Handler params={params}/>, document.body);
+  React.render(<Handler params={params}/>, document.getElementById('app'));
 });
 
-//React.render(<Base name="react page" />, document.getElementById('app'));

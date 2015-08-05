@@ -9,6 +9,7 @@
     "bootstrap-sass": "^3.3.5",
     "browserify": "^7.0.1",
     "browserify-global-shim": "^1.0.0",
+    "google-map-react": "^0.4.1",
     "gulp": "^3.9.0",
     "gulp-compass": "^2.0.3",
     "gulp-concat": "^2.4.2",
