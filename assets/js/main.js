@@ -1,62 +1,23 @@
 'use strict';
 
 var React = require('react'),
-    Base = require('./base/base.js'),
-    CommentBox = require('./comment/comment_box.js'),
-    HomeMap = require('./home/home_map.js'),
-    Product = require('./product/filterable_product_table.js');
+    Router = require('react-router'), // or var Router = ReactRouter; in browsers
+    Link = Router.Link,
+    Route = Router.Route,
+    DefaultRoute = Router.DefaultRoute,
+    RouteHandler = Router.RouteHandler,
+    ServerActions = require('./actions/server_action'),
+    Api = require('./utils/api'),
+    Dashboard = require('./components/dashboard/component/main.js'),
+    Money = require('./components/money/component/main.js'),
+    HomeMain = require('./components/home/main.js'),
+    HomeDetail = require('./components/home/home_detail.js'),
+    Manage = require('./components/manage/component/main.js'),
+    Agent = require('./components/agent/component/main.js'),
+    HomePage = require('./components/agent/component/home_page.js'),
+    Setting = require('./components/agent/component/setting.js');
 
-var Agent = React.createClass({
-  render: function () {
-    return <h2>Agent</h2>;
-  }
-});
-
-
-var HomeSearch = React.createClass({
-  render: function () {
-    return (
-      <div>
-        <h2>HomeSearch</h2>
-        <input
-        type="text"
-        placeholder="Search..."
-        value={this.props.filterText}
-
-        onChange={this.handleChange}
-        />
-        <RouteHandler/>
-      </div>
-      );
-  }
-});
-
-var Home = React.createClass({
-  render: function () {
-    return (
-      <div>
-       <p>{this.props.params.home_id}</p>
-      </div>
-      );
-  }
-});
-
-
-
-var Manage = React.createClass({
-  render: function () {
-    return <h2>Manage</h2>;
-  }
-});
-
-
-// declare our routes and their hierarchy
-var Router = require('react-router'); // or var Router = ReactRouter; in browsers
-
-var DefaultRoute = Router.DefaultRoute;
-var Link = Router.Link;
-var Route = Router.Route;
-var RouteHandler = Router.RouteHandler;
+ServerActions.fetchRegionRanking('');
 
 var App = React.createClass({
   render: function () {
@@ -64,7 +25,7 @@ var App = React.createClass({
       <div>
         <header>
           <nav>
-            <a><Link to="home_search">  找房  </Link></a>
+            <a><Link to="home_main">  找房  </Link></a>
             <a><Link to="money">  找钱  </Link></a>
             <a><Link to="manage">  管理房产  </Link></a>
             <a><Link to="agent">  经纪人入口  </Link></a>
@@ -77,28 +38,20 @@ var App = React.createClass({
   }
 });
 
-var Message = React.createClass({
-  contextTypes: {
-    router: React.PropTypes.func
-  },
-
-  render: function () {
-    return (
-      <div>{this.props.params.id}</div>
-      );
-  }
-});
-
 var routes = (
   <Route name="root" path="/" handler={App}>
-    <Route name="home_search" handler={HomeSearch}>
-      <Route name="home" path=":home_id" handler={Home}/>
+    <Route name="home_main" handler={HomeMain}>
+      <Route name="home_compare" path=":query" handler={HomeDetail}/>
     </Route>
-    <Route name="money" handler={Product}/>
+    <Route name="money" handler={Money}/>
     <Route name="manage" handler={Manage}/>
-    <Route name="agent" handler={Agent}/>
-    <Route name="dashboard" handler={CommentBox}/>
-    <DefaultRoute handler={HomeSearch}/>
+    <Route name="agent" handler={Agent}>
+      <Route name="home_page" path="home_page/:id" handler={HomePage}/>
+      <Route name="setting" path="setting/:id" handler={Setting}/>
+    </Route>
+    <Route name="dashboard" handler={Dashboard}/>
+    <Route name="home_detail/:id" handler={HomeDetail}/>
+    <DefaultRoute handler={HomeMain}/>
   </Route>
   );
 

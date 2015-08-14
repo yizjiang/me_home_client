@@ -1,3 +1,5 @@
+require 'typhoeus'
+
 module Routes
   class Home < Base
 
@@ -14,15 +16,14 @@ module Routes
       json [{author: 'Leo Jiang', text: 'React is good'}]
     end
 
-    post '/' do
-      content_type :html
-      erb :index
+    get '/homeSearch' do
+      response = Typhoeus.get("localhost:3032/home", params: params)
+      response.body
     end
 
-    get '/' do
-      content_type :html
-      erb :index
+    get '/regionSearch' do
+      response = Typhoeus.get("localhost:3032/region", params: params)
+      response.body
     end
-
   end
 end

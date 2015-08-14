@@ -12,7 +12,7 @@ module Routes
     set :raise_errors, :after_handler
     set :public_dir, 'dist'
 
-    configure :comment do
+    configure :dashboard do
       set :show_exceptions, false
     end
 
