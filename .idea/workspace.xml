@@ -2,249 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="23a03a21-e478-437a-b08e-daa5514527d2" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/js/utils/api.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/js/dispatcher/app_dispatcher.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/js/components/agent/component/customer.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/js/constants/home_constants.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/js/components/home/home_detail.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/js/components/home/home_list.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/js/stores/home_list_store.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/js/components/agent/component/home_page.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/js/components/agent/component/main.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/js/components/home/main.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/js/components/manage/component/main.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/js/components/agent/component/meeting.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/js/components/home/search_box.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/js/stores/search_panel_store.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/js/components/home/select_items.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/js/components/home/select_panel.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/js/actions/server_action.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/js/components/agent/component/setting.js" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/js/home/home_map.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/.npmignore" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/bower.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/lib/google_map.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/lib/google_map_map.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/lib/google_map_markers.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/lib/google_map_markers_prerender.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/lib/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/lib/marker_dispatcher.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/lib/umd/GoogleMapReact.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/lib/umd/GoogleMapReact.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/lib/utils/array_helper.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/lib/utils/detect.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/lib/utils/geo.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/lib/utils/lib_geo/lat_lng.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/lib/utils/lib_geo/lat_lng_bounds.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/lib/utils/lib_geo/transform.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/lib/utils/lib_geo/wrap.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/lib/utils/loaders/google_map_loader.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/eventemitter3/LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/eventemitter3/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/eventemitter3/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/eventemitter3/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.assign/LICENSE.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.assign/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.assign/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.assign/node_modules/lodash._baseassign/LICENSE.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.assign/node_modules/lodash._baseassign/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.assign/node_modules/lodash._baseassign/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.assign/node_modules/lodash._baseassign/node_modules/lodash._basecopy/LICENSE.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.assign/node_modules/lodash._baseassign/node_modules/lodash._basecopy/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.assign/node_modules/lodash._baseassign/node_modules/lodash._basecopy/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.assign/node_modules/lodash._baseassign/node_modules/lodash._basecopy/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.assign/node_modules/lodash._baseassign/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.assign/node_modules/lodash._createassigner/LICENSE.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.assign/node_modules/lodash._createassigner/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.assign/node_modules/lodash._createassigner/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.assign/node_modules/lodash._createassigner/node_modules/lodash._bindcallback/LICENSE.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.assign/node_modules/lodash._createassigner/node_modules/lodash._bindcallback/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.assign/node_modules/lodash._createassigner/node_modules/lodash._bindcallback/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.assign/node_modules/lodash._createassigner/node_modules/lodash._bindcallback/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.assign/node_modules/lodash._createassigner/node_modules/lodash._isiterateecall/LICENSE.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.assign/node_modules/lodash._createassigner/node_modules/lodash._isiterateecall/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.assign/node_modules/lodash._createassigner/node_modules/lodash._isiterateecall/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.assign/node_modules/lodash._createassigner/node_modules/lodash._isiterateecall/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.assign/node_modules/lodash._createassigner/node_modules/lodash.restparam/LICENSE.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.assign/node_modules/lodash._createassigner/node_modules/lodash.restparam/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.assign/node_modules/lodash._createassigner/node_modules/lodash.restparam/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.assign/node_modules/lodash._createassigner/node_modules/lodash.restparam/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.assign/node_modules/lodash._createassigner/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.assign/node_modules/lodash.keys/LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.assign/node_modules/lodash.keys/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.assign/node_modules/lodash.keys/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.assign/node_modules/lodash.keys/node_modules/lodash._getnative/LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.assign/node_modules/lodash.keys/node_modules/lodash._getnative/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.assign/node_modules/lodash.keys/node_modules/lodash._getnative/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.assign/node_modules/lodash.keys/node_modules/lodash._getnative/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.assign/node_modules/lodash.keys/node_modules/lodash.isarguments/LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.assign/node_modules/lodash.keys/node_modules/lodash.isarguments/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.assign/node_modules/lodash.keys/node_modules/lodash.isarguments/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.assign/node_modules/lodash.keys/node_modules/lodash.isarguments/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.assign/node_modules/lodash.keys/node_modules/lodash.isarray/LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.assign/node_modules/lodash.keys/node_modules/lodash.isarray/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.assign/node_modules/lodash.keys/node_modules/lodash.isarray/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.assign/node_modules/lodash.keys/node_modules/lodash.isarray/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.assign/node_modules/lodash.keys/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.assign/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.isfunction/LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.isfunction/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.isfunction/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.isfunction/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.isnumber/LICENSE.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.isnumber/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.isnumber/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.isnumber/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.isplainobject/LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.isplainobject/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.isplainobject/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.isplainobject/node_modules/lodash._basefor/LICENSE.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.isplainobject/node_modules/lodash._basefor/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.isplainobject/node_modules/lodash._basefor/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.isplainobject/node_modules/lodash._basefor/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.isplainobject/node_modules/lodash.isarguments/LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.isplainobject/node_modules/lodash.isarguments/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.isplainobject/node_modules/lodash.isarguments/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.isplainobject/node_modules/lodash.isarguments/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.isplainobject/node_modules/lodash.keysin/LICENSE.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.isplainobject/node_modules/lodash.keysin/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.isplainobject/node_modules/lodash.keysin/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.isplainobject/node_modules/lodash.keysin/node_modules/lodash.isarray/LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.isplainobject/node_modules/lodash.keysin/node_modules/lodash.isarray/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.isplainobject/node_modules/lodash.keysin/node_modules/lodash.isarray/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.isplainobject/node_modules/lodash.keysin/node_modules/lodash.isarray/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.isplainobject/node_modules/lodash.keysin/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.isplainobject/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.pick/LICENSE.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.pick/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.pick/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.pick/node_modules/lodash._baseflatten/LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.pick/node_modules/lodash._baseflatten/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.pick/node_modules/lodash._baseflatten/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.pick/node_modules/lodash._baseflatten/node_modules/lodash.isarguments/LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.pick/node_modules/lodash._baseflatten/node_modules/lodash.isarguments/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.pick/node_modules/lodash._baseflatten/node_modules/lodash.isarguments/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.pick/node_modules/lodash._baseflatten/node_modules/lodash.isarguments/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.pick/node_modules/lodash._baseflatten/node_modules/lodash.isarray/LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.pick/node_modules/lodash._baseflatten/node_modules/lodash.isarray/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.pick/node_modules/lodash._baseflatten/node_modules/lodash.isarray/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.pick/node_modules/lodash._baseflatten/node_modules/lodash.isarray/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.pick/node_modules/lodash._baseflatten/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.pick/node_modules/lodash._bindcallback/LICENSE.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.pick/node_modules/lodash._bindcallback/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.pick/node_modules/lodash._bindcallback/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.pick/node_modules/lodash._bindcallback/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.pick/node_modules/lodash._pickbyarray/LICENSE.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.pick/node_modules/lodash._pickbyarray/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.pick/node_modules/lodash._pickbyarray/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.pick/node_modules/lodash._pickbyarray/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.pick/node_modules/lodash._pickbycallback/LICENSE.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.pick/node_modules/lodash._pickbycallback/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.pick/node_modules/lodash._pickbycallback/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.pick/node_modules/lodash._pickbycallback/node_modules/lodash._basefor/LICENSE.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.pick/node_modules/lodash._pickbycallback/node_modules/lodash._basefor/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.pick/node_modules/lodash._pickbycallback/node_modules/lodash._basefor/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.pick/node_modules/lodash._pickbycallback/node_modules/lodash._basefor/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.pick/node_modules/lodash._pickbycallback/node_modules/lodash.keysin/LICENSE.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.pick/node_modules/lodash._pickbycallback/node_modules/lodash.keysin/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.pick/node_modules/lodash._pickbycallback/node_modules/lodash.keysin/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.pick/node_modules/lodash._pickbycallback/node_modules/lodash.keysin/node_modules/lodash.isarguments/LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.pick/node_modules/lodash._pickbycallback/node_modules/lodash.keysin/node_modules/lodash.isarguments/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.pick/node_modules/lodash._pickbycallback/node_modules/lodash.keysin/node_modules/lodash.isarguments/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.pick/node_modules/lodash._pickbycallback/node_modules/lodash.keysin/node_modules/lodash.isarguments/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.pick/node_modules/lodash._pickbycallback/node_modules/lodash.keysin/node_modules/lodash.isarray/LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.pick/node_modules/lodash._pickbycallback/node_modules/lodash.keysin/node_modules/lodash.isarray/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.pick/node_modules/lodash._pickbycallback/node_modules/lodash.keysin/node_modules/lodash.isarray/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.pick/node_modules/lodash._pickbycallback/node_modules/lodash.keysin/node_modules/lodash.isarray/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.pick/node_modules/lodash._pickbycallback/node_modules/lodash.keysin/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.pick/node_modules/lodash._pickbycallback/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.pick/node_modules/lodash.restparam/LICENSE.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.pick/node_modules/lodash.restparam/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.pick/node_modules/lodash.restparam/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.pick/node_modules/lodash.restparam/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/lodash.pick/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/point-geometry/.travis.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/point-geometry/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/point-geometry/coverage/coverage.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/point-geometry/coverage/lcov-report/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/point-geometry/coverage/lcov-report/point-geometry/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/point-geometry/coverage/lcov-report/point-geometry/index.js.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/point-geometry/coverage/lcov-report/point-geometry/test.js.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/point-geometry/coverage/lcov-report/prettify.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/point-geometry/coverage/lcov-report/prettify.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/point-geometry/coverage/lcov.info" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/point-geometry/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/point-geometry/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/point-geometry/test.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/react-pure-render/.babelrc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/react-pure-render/.eslintrc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/react-pure-render/.npmignore" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/react-pure-render/LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/react-pure-render/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/react-pure-render/component.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/react-pure-render/function.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/react-pure-render/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/react-pure-render/mixin.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/react-pure-render/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/react-pure-render/shallowEqual.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/scriptjs/.npmignore" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/scriptjs/Makefile" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/scriptjs/Makefile.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/scriptjs/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/scriptjs/benchmarks/headjs.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/scriptjs/benchmarks/labjs.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/scriptjs/benchmarks/scriptjs.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/scriptjs/demos/advanced.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/scriptjs/demos/analytics.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/scriptjs/demos/basic.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/scriptjs/demos/css/demos.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/scriptjs/demos/js/bar.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/scriptjs/demos/js/baz.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/scriptjs/demos/js/foo.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/scriptjs/demos/js/thunk.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/scriptjs/dist/script.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/scriptjs/dist/script.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/scriptjs/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/scriptjs/src/ender.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/scriptjs/src/header.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/scriptjs/src/script.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/scriptjs/tests/test.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/scriptjs/tests/tests.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/scriptjs/vendor/bird.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/scriptjs/vendor/double-load.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/scriptjs/vendor/head.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/scriptjs/vendor/jquery.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/scriptjs/vendor/lab2.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/scriptjs/vendor/lab2.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/scriptjs/vendor/mootools.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/scriptjs/vendor/order-a.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/scriptjs/vendor/order-b.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/scriptjs/vendor/order-c.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/scriptjs/vendor/patha.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/scriptjs/vendor/pathb.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/scriptjs/vendor/pathc.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/node_modules/scriptjs/vendor/yui-utilities.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/google-map-react/webpack.config.js" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/js/base/base.js" afterPath="$PROJECT_DIR$/assets/js/components/base/base.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/js/comment/comment.js" afterPath="$PROJECT_DIR$/assets/js/components/dashboard/component/comment.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/js/comment/comment_box.js" afterPath="$PROJECT_DIR$/assets/js/components/dashboard/component/main.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/js/comment/comment_form.js" afterPath="$PROJECT_DIR$/assets/js/components/dashboard/component/comment_form.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/js/comment/comment_list.js" afterPath="$PROJECT_DIR$/assets/js/components/dashboard/component/comment_list.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/js/comment/data.js" afterPath="$PROJECT_DIR$/assets/js/components/dashboard/component/data.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/js/product/filterable_product_table.js" afterPath="$PROJECT_DIR$/assets/js/components/money/component/main.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/js/product/product_category_row.js" afterPath="$PROJECT_DIR$/assets/js/components/money/component/product_category_row.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/js/product/product_row.js" afterPath="$PROJECT_DIR$/assets/js/components/money/component/product_row.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/js/product/product_table.js" afterPath="$PROJECT_DIR$/assets/js/components/money/component/product_table.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/js/product/search_box.js" afterPath="$PROJECT_DIR$/assets/js/components/money/component/search_box.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/base.rb" afterPath="$PROJECT_DIR$/app/routes/base.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/js/bundle.js" afterPath="$PROJECT_DIR$/dist/js/bundle.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/home.rb" afterPath="$PROJECT_DIR$/app/routes/home.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/js/main.js" afterPath="$PROJECT_DIR$/assets/js/main.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/.sass-cache/7029c3218bed133c996ea4120a07db99071ed55e/main.scssc" afterPath="$PROJECT_DIR$/assets/.sass-cache/7029c3218bed133c996ea4120a07db99071ed55e/main.scssc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/css/bundle.css" afterPath="$PROJECT_DIR$/dist/css/bundle.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/index.erb" afterPath="$PROJECT_DIR$/app/views/index.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/tmp/sass/main.css" afterPath="$PROJECT_DIR$/assets/tmp/sass/main.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/sass/main.scss" afterPath="$PROJECT_DIR$/assets/sass/main.scss" />
     </list>
     <ignored path="me_home_client.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -285,28 +47,46 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="home_list.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="home_list.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assets/js/components/home/home_list.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="101" selection-start="292" selection-end="292" vertical-scroll-proportion="0.20454545" vertical-offset="0" max-vertical-offset="660">
+            <state line="9" column="101" selection-start="292" selection-end="292" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="360">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/assets/js/components/home/main.js">
+      <file leaf-file-name="index.erb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/index.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="0" selection-start="870" selection-end="937" vertical-scroll-proportion="0.0" vertical-offset="152" max-vertical-offset="825">
+            <state line="5" column="2" selection-start="158" selection-end="158" vertical-scroll-proportion="-3.125" vertical-offset="0" max-vertical-offset="315">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="search_box.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/assets/js/components/home/search_box.js">
+      <file leaf-file-name="main.scss" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/assets/sass/main.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="21" selection-start="571" selection-end="571" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="660">
+            <state line="8" column="18" selection-start="156" selection-end="156" vertical-scroll-proportion="0.18489985" vertical-offset="0" max-vertical-offset="649">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="gulpfile.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gulpfile.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="18" column="2" selection-start="603" selection-end="603" vertical-scroll-proportion="0.0" vertical-offset="932" max-vertical-offset="1605">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="base.scss" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assets/sass/base.scss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="122" column="1" selection-start="1840" selection-end="1840" vertical-scroll-proportion="-76.25" vertical-offset="0" max-vertical-offset="1920">
               <folding />
             </state>
           </provider>
@@ -321,28 +101,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="home_constants.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/assets/js/constants/home_constants.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="28" selection-start="174" selection-end="174" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="210">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="select_panel.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assets/js/components/home/select_panel.js">
           <provider selected="true" editor-type-id="text-editor">
             <state line="15" column="17" selection-start="433" selection-end="433" vertical-scroll-proportion="0.0" vertical-offset="167" max-vertical-offset="840">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="select_items.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/assets/js/components/home/select_items.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="29" selection-start="293" selection-end="293" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="585">
               <folding />
             </state>
           </provider>
@@ -382,10 +144,7 @@
         <option value="$PROJECT_DIR$/Gemfile" />
         <option value="$PROJECT_DIR$/assets/stylesheet/main.scss" />
         <option value="$PROJECT_DIR$/assets/sass/vendor/_bootstrap.scss" />
-        <option value="$PROJECT_DIR$/assets/sass/main.scss" />
         <option value="$PROJECT_DIR$/assets/sass/base.scss" />
-        <option value="$PROJECT_DIR$/gulpfile.js" />
-        <option value="$PROJECT_DIR$/app/views/index.erb" />
         <option value="$PROJECT_DIR$/assets/js/base/base.js" />
         <option value="$PROJECT_DIR$/assets/js/product/sample_data.js" />
         <option value="$PROJECT_DIR$/assets/js/product/product_category_row.js" />
@@ -425,12 +184,14 @@
         <option value="$PROJECT_DIR$/assets/js/components/home/home_detail.js" />
         <option value="$PROJECT_DIR$/assets/js/stores/home_list_store.js" />
         <option value="$PROJECT_DIR$/assets/js/components/home/home_list.js" />
+        <option value="$PROJECT_DIR$/app/views/index.erb" />
+        <option value="$PROJECT_DIR$/gulpfile.js" />
+        <option value="$PROJECT_DIR$/assets/sass/main.scss" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-11" />
-    <option name="y" value="40" />
+    <option name="y" value="38" />
     <option name="width" value="1420" />
     <option name="height" value="790" />
   </component>
@@ -553,6 +314,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="dist" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="me_home_client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="me_home_client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="config" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -585,165 +364,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="me_home_client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="me_home_client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="utils" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="me_home_client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="me_home_client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="stores" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="me_home_client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="me_home_client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dispatcher" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="me_home_client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="me_home_client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="constants" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="me_home_client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="me_home_client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="me_home_client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="me_home_client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="home" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="me_home_client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="me_home_client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="actions" />
+              <option name="myItemId" value="sass" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -938,7 +559,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-11" y="40" width="1420" height="790" extended-state="0" />
+    <frame x="0" y="38" width="1420" height="790" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1004,22 +625,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/routes/base.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="840" />
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="840">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/js/components/dashboard/component/main.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="60" column="25" selection-start="1534" selection-end="1534" vertical-scroll-proportion="0.0" vertical-offset="900" max-vertical-offset="1050" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/sass/main.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="33" selection-start="61" selection-end="61" vertical-scroll-proportion="0.06849315" vertical-offset="0" max-vertical-offset="0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/sass/base.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="122" column="1" selection-start="1840" selection-end="1840" vertical-scroll-proportion="3.0722892" vertical-offset="0" max-vertical-offset="0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/sass/vendor/_bootstrap.scss">
@@ -1040,11 +653,6 @@
     <entry file="file://$PROJECT_DIR$/assets/js/vendor.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="673" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gulpfile.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="2" selection-start="1308" selection-end="1308" vertical-scroll-proportion="0.0" vertical-offset="932" max-vertical-offset="1605" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/routes.rb">
@@ -1131,22 +739,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/routes/base.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0" />
-      </provider>
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/assets/js/dispatcher/app_dispatcher.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="10" column="14" selection-start="282" selection-end="282" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="300" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/index.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="24" selection-start="291" selection-end="291" vertical-scroll-proportion="-6.25" vertical-offset="0" max-vertical-offset="315" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/js/components/agent/component/customer.js">
@@ -1267,7 +862,45 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/js/components/home/home_list.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="101" selection-start="292" selection-end="292" vertical-scroll-proportion="0.20454545" vertical-offset="0" max-vertical-offset="660">
+        <state line="9" column="101" selection-start="292" selection-end="292" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="360">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/routes/base.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="25" selection-start="517" selection-end="532" vertical-scroll-proportion="0.24368499" vertical-offset="151" max-vertical-offset="840">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/sass/base.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="122" column="1" selection-start="1840" selection-end="1840" vertical-scroll-proportion="-76.25" vertical-offset="0" max-vertical-offset="1920">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/index.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="2" selection-start="158" selection-end="158" vertical-scroll-proportion="-3.125" vertical-offset="0" max-vertical-offset="315">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gulpfile.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="2" selection-start="603" selection-end="603" vertical-scroll-proportion="0.0" vertical-offset="932" max-vertical-offset="1605">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/sass/main.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="18" selection-start="156" selection-end="156" vertical-scroll-proportion="0.18489985" vertical-offset="0" max-vertical-offset="649">
           <folding />
         </state>
       </provider>

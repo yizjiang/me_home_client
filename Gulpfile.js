@@ -52,7 +52,7 @@ var map = {
 gulp.task('watch', function(){
   gulp.watch(path.js, ['build']);
   gulp.watch(path.vendor.js, ['vendor']);
-  //gulp.watch(path.sass, ['sass']);
+  gulp.watch(path.sass, ['sass']);
 });
 
 gulp.task('images', function() {
