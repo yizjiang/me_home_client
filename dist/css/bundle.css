@@ -1,5 +1,134 @@
+.navbar-collapse.collapse {
+  height: 60px !important;
+}
+
+#navbar > ul > li > a {
+  height: 60px !important;
+  padding-top: 20px;
+}
+
+a.navbar-brand {
+  font-size: 15px;
+  color: #fff !important;
+}
+
+a.navbar-brand:hover {
+  color: #ccc !important;
+}
+
+.navbar-brand span {
+  font-size: 25px;
+  color: #74c005;
+}
+
+.modal-backdrop {
+  z-index: -1;
+}
+
+div.modal-wrapper {
+  position: absolute;
+  top: 28px;
+  right: 68px;
+  z-index: 111;
+}
+
+div.modal-wrapper button {
+  background-color: #eee;
+  color: #333;
+  border: none;
+  outline: none;
+}
+
+div.modal-wrapper button:link {
+  background-color: #333;
+  color: #eee;
+  border: none;
+  outline: none;
+}
+
+div.modal-wrapper button:visited {
+  background-color: #333;
+  color: #eee;
+  border: none;
+  outline: none;
+}
+
+div.modal-wrapper button:hover {
+  background-color: #333;
+  color: #eee;
+  border: none;
+  outline: none;
+}
+
+div.modal-wrapper button:focus {
+  background-color: #333;
+  color: #eee;
+  border: none;
+  outline: none;
+}
+
+div.modal-wrapper button:active {
+  background-color: #333;
+  color: #eee;
+  border: none;
+  outline: none;
+}
+
+input[type="text"] {
+  display: block;
+  margin: 0;
+  width: 80%;
+  height: 60px;
+  font-family: sans-serif;
+  font-size: 18px;
+  appearance: none;
+  box-shadow: none !important;
+  border-radius: 8px 0 0 8px;
+  color: #333;
+  padding-left: 20px;
+  border: none;
+  float: left;
+}
+
+input[type="text"]:focus {
+  outline: none;
+}
+
+.carousel-caption {
+  bottom: 200px;
+}
+
+button.search-btn {
+  display: block;
+  background-color: #74c005;
+  appearance: none;
+  box-shadow: none !important;
+  border-radius: 0 8px 8px 0;
+  height: 60px;
+  width: 100px;
+  border: none;
+  font-size: 18px;
+}
+
+button.search-btn:focus {
+  outline: none;
+  background-color: #74c005;
+  color: #333;
+}
+
+button.search-btn:hover {
+  outline: none;
+  background-color: #74c005;
+  color: #333;
+}
+
 body {
   font-family: Roboto, sans-serif;
+  font-weight: 900;
+}
+
+.select {
+  color: blue;
 }
 
 header {
@@ -46,13 +175,138 @@ div.content {
   display: block;
   background-size: cover;
   width: 100%;
-  height: 100%;
+  height: 768px;
 }
 
 li.hotArea {
   list-style: none;
 }
 
-.select {
-  color: blue;
+div.searchDiv {
+  width: 30%;
+  margin-left: 35%;
+  padding-top: 200px;
+}
+
+input#regionValue {
+  height: 40px;
+  width: 100%;
+  border: 0;
+  padding: 0;
+  margin-bottom: 10px;
+}
+
+input.pricebox {
+  height: 40px;
+  width: 49%;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+input#priceMin {
+  margin-right: 1%;
+}
+
+input#priceMax {
+  margin-left: 1%;
+}
+
+button#search {
+  height: 40px;
+  border: 0;
+  width: 100%;
+  color: #fff;
+  background: #74c005;
+  border-radius: 5px;
+  margin-top: 10px;
+  font-size: 16px;
+  padding: 0;
+}
+
+div.panelDiv {
+  width: 30%;
+  margin-left: 35%;
+  margin-bottom: 150px;
+}
+
+div.citylistDiv ul {
+  list-style-type: none;
+  padding: 0;
+  max-height: 320px;
+  display: block;
+  width: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  margin: 10px 0;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+div.citylistDiv ul li {
+  display: inline-block;
+  width: 50%;
+  text-align: center;
+  max-height: 150px;
+  margin-bottom: 10px;
+}
+div.citylistDiv ul li img.cityimg {
+  width: 95px;
+  padding: 2.5px;
+  margin: 5px calc(50% - 50px);
+  box-shadow: 0 0 6px #333;
+  background-color: #fff;
+  border-radius: 100px;
+  clear: right;
+}
+div.citylistDiv ul li span {
+  line-height: 30px;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+div.citylistDiv ul li.select {
+  color: #fff;
+}
+div.citylistDiv ul li.select span {
+  line-height: 30px;
+  background-color: #74c005;
+  border-radius: 30px;
+  padding: 10px;
+}
+
+button.btngroup {
+  height: 40px;
+  background: #74c005;
+  box-shadow: none;
+  color: #fff;
+  font-size: 16px;
+  border: 0;
+  outline: none;
+  width: 49%;
+  border-radius: 5px;
+}
+
+button#backbtn {
+  margin-right: 1%;
+}
+
+button#choosebtn {
+  margin-left: 1%;
+}
+
+div.homelistDiv {
+  width: 40%;
+  margin: 0 30% 0 30%;
+}
+div.homelistDiv ul {
+  list-style: none;
+  padding: 0px;
+  width: 100%;
+}
+div.homelistDiv ul li {
+  border-bottom: 1px solid #ccc;
+}
+div.homelistDiv ul li a {
+  text-decoration: none;
+  color: #222;
+  font-size: 16px;
+  line-height: 80px;
 }
