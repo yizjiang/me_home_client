@@ -595,10 +595,14 @@ var React = require('react');
 var HomeList = React.createClass({displayName: "HomeList",
   render: function () {
     return (
-      React.createElement("div", null, 
+      React.createElement("div", {className: "homelistDiv"}, 
          React.createElement("ul", null, 
           this.props.list.map(function(value){
-           return React.createElement("li", null, React.createElement("a", {href: '#/home_detail/' + value.id}, " ", value.addr1 + " " + value.city + " " + value.home_type + " $" + value.price))
+           return React.createElement("li", null, 
+                    React.createElement("a", {href: '#/home_detail/' + value.id}, 
+                      value.addr1 + ", " + value.city + ": " + value.home_type + " $" + value.price
+                    )
+                  )
            })
          
          )
@@ -690,11 +694,11 @@ var SearchBox = React.createClass({displayName: "SearchBox",
 
   render: function() {
     return (
-      React.createElement("div", null, 
-        React.createElement("input", {id: "regionValue", value: this.state.regionValue, onChange: this.handleFilterChange, placeholder: "城市 邮编"}), 
-        React.createElement("input", {id: "priceMin", value: this.state.priceMin, onChange: this.handleFilterChange, placeholder: "10万"}), 
-        React.createElement("input", {id: "priceMax", value: this.state.priceMax, onChange: this.handleFilterChange, placeholder: "10万"}), 
-        React.createElement("button", {id: "search", type: "button", onClick: this.homeSearch}, "Search")
+      React.createElement("div", {className: "searchDiv"}, 
+        React.createElement("input", {id: "regionValue", value: this.state.regionValue, onChange: this.handleFilterChange, placeholder: "城市 邮编"}), React.createElement("br", null), 
+        React.createElement("input", {id: "priceMin", className: "pricebox", value: this.state.priceMin, onChange: this.handleFilterChange, placeholder: "eg. 10万"}), 
+        React.createElement("input", {id: "priceMax", className: "pricebox", value: this.state.priceMax, onChange: this.handleFilterChange, placeholder: "eg. 10万"}), 
+        React.createElement("button", {id: "search", type: "button", onClick: this.homeSearch}, "觅 家")
       )
       );
   }
@@ -723,7 +727,7 @@ var SelectItems = React.createClass({displayName: "SelectItems",
     var that = this;
     console.log(this.props.selected_list);
     return (
-      React.createElement("div", null, 
+      React.createElement("div", {className: "citylistDiv"}, 
         React.createElement("ul", null, 
          this.props.search_options.map(function(value, index){
           var className = '';
@@ -732,7 +736,10 @@ var SelectItems = React.createClass({displayName: "SelectItems",
           }
 
           return(
-            React.createElement("li", {className: className, id: 'li' + that.props.level + index, onClick: that.selectVariant.bind(that, value)}, value)
+            React.createElement("li", {className: className, id: 'li' + that.props.level + index, onClick: that.selectVariant.bind(that, value)}, 
+              React.createElement("img", {className: "cityimg", src: "../img/bay-area.jpg"}), 
+              value
+            )
       )
       })
       
@@ -743,6 +750,7 @@ var SelectItems = React.createClass({displayName: "SelectItems",
 });
 
 module.exports = SelectItems
+
 
 },{"../../actions/server_action":2,"react":232}],20:[function(require,module,exports){
 var React = require('react'),
@@ -787,10 +795,10 @@ var SelectPanel = React.createClass({displayName: "SelectPanel",
 
   render: function() {
     return (
-      React.createElement("div", null, 
+      React.createElement("div", {className: "panelDiv"}, 
         React.createElement(SelectItems, {search_options: this.state.search_list, selected_list: this.state.selected}), 
-        React.createElement("button", {type: "button", onClick: this.selectPanelBack}, "Back"), 
-        React.createElement("button", {type: "button", onClick: this.homeSearch}, "Search ")
+        React.createElement("button", {type: "button", id: "backbtn", className: "btngroup", onClick: this.selectPanelBack}, "后 退"), 
+        React.createElement("button", {type: "button", id: "choosebtn", className: "btngroup", onClick: this.homeSearch}, "查 看")
     )
      );
   }
