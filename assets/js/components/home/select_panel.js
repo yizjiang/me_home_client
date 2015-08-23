@@ -31,20 +31,21 @@ var SelectPanel = React.createClass({
   },
 
   homeSearch: function() {
-    console.log(this.state.selected);
-    ServerActions.homeSearch({regionValue: this.state.selected});
+    ServerActions.homeSearch({regionValue: this.state.selected.join(',')});
+  },
+
+  selectPanelBack: function(){
+    ServerActions.panelBack();
   },
 
   render: function() {
     return (
       <div>
-       {this.state.search_list.map(function(value, index){
-         return <SelectItems search_options={value} level={index}/>
-       })}
-      <button type="button">Back</button>
-      <button type="button" onClick={this.homeSearch} >Search </button>
+        <SelectItems search_options={this.state.search_list} selected_list={this.state.selected}  />
+        <button type="button" onClick={this.selectPanelBack} >Back</button>
+        <button type="button" onClick={this.homeSearch} >Search </button>
     </div>
-      );
+     );
   }
 });
 

@@ -5,27 +5,29 @@ var HomeConstants = require('../constants/home_constants'),
 var _ = require('underscore');
 
 // Define initial data points
-var _selected = null;
+var _selected = [];
 var _currentList = [];
+var _global_list = [];
 
 // Method to load product data from mock API
 function loadSearchData(data) {
   if(data.length > 0){
-    _currentList.push(data);
+    _selected = [];
+    _currentList = data;
+    _global_list.push(data);
   }
 }
 
 function selectRegion(data) {
-  console.log(data);
-  _selected = data;
+  _selected.push(data);
 }
 // Method to set the currently selected product variation
 function setSelected(index) {
   _selected = _currentList.variants[index];
 }
 
-function filterSearchData(data) {
-  _currentList = Api.getSearchPanelData(data);
+function panelBack() {
+  _currentList = _global_list[0]; //TODO
 }
 
 // Extend ProductStore with EventEmitter to add eventing capabilities
@@ -72,6 +74,10 @@ AppDispatcher.register(function(payload) {
 
     case HomeConstants.SELECT_REGION:
       selectRegion(action.data);
+      break;
+
+    case HomeConstants.PANEL_BACK:
+      panelBack();
       break;
 
     default:

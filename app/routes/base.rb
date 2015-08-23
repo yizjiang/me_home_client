@@ -6,7 +6,7 @@ module Routes
     set :erb, :escape_html => true
     set :root, File.expand_path('../../..', __FILE__)
     set :views, 'app/views'
-    set :sessions, false
+    enable :sessions
     set :redis, Redis.new
     set :show_exceptions, :after_handler
     set :raise_errors, :after_handler

@@ -5,6 +5,7 @@ var React = require('react'),
     Link = Router.Link,
     Route = Router.Route,
     DefaultRoute = Router.DefaultRoute,
+    NotFoundRoute = Router.NotFoundRoute,
     RouteHandler = Router.RouteHandler,
     ServerActions = require('./actions/server_action'),
     Api = require('./utils/api'),
@@ -15,12 +16,16 @@ var React = require('react'),
     Manage = require('./components/manage/component/main.js'),
     Agent = require('./components/agent/component/main.js'),
     HomePage = require('./components/agent/component/home_page.js'),
-    Setting = require('./components/agent/component/setting.js');
+    College = require('./components/college/page.js'),
+    Setting = require('./components/agent/component/setting.js'),
+    UserPanel = require('./components/base/user_panel.js');
 
 ServerActions.fetchRegionRanking('');
+ServerActions.getCurrentUser();
 
 var App = React.createClass({
   render: function () {
+
     return (
       <div>
         <header>
@@ -32,6 +37,7 @@ var App = React.createClass({
             <a><Link to="dashboard">  我的觅家  </Link></a>
           </nav>
         </header>
+        <UserPanel/>
         <RouteHandler/>
       </div>
       )
@@ -52,6 +58,7 @@ var routes = (
     <Route name="dashboard" handler={Dashboard}/>
     <Route name="home_detail/:id" handler={HomeDetail}/>
     <DefaultRoute handler={HomeMain}/>
+    <NotFoundRoute handler={HomeMain}/>
   </Route>
   );
 

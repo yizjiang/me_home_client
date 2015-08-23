@@ -16,12 +16,18 @@ var SelectItems = React.createClass({
 
   render: function() {
     var that = this;
+    console.log(this.props.selected_list);
     return (
       <div>
         <ul>
-        { this.props.search_options.map(function(value){
+        { this.props.search_options.map(function(value, index){
+          var className = '';
+          if(_.include(that.props.selected_list, value)){
+            className = 'select'
+          }
+
           return(
-            <li id={'li' + value} onClick={that.selectVariant.bind(that, value)}>{value}</li>
+            <li className={className} id={'li' + that.props.level + index} onClick={that.selectVariant.bind(that, value)}>{value}</li>
       )
       })
       }

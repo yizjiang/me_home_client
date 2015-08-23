@@ -17,7 +17,7 @@ var SearchBox = React.createClass({
       return returnObj;
     }.bind(event)();
     this.setState( stateObject );
-    // ES6: this.setState({ [event.target.id]: event.target.value });
+    //TODO ES6: this.setState({ [event.target.id]: event.target.value });
   },
 
   homeSearch: function() {

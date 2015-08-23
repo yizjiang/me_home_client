@@ -4,6 +4,10 @@
   <title>Meejia</title>
   <link href="//fonts.googleapis.com/css?family=Roboto:300,100,700" rel="stylesheet" type="text/css">
   <%= stylesheet_link '/css/bundle.css' %>
+  <script>
+    var SERVER_URL = "<%= MEEHOME_SERVER_URL %>";
+    var current_user_id = "<%= params['uid'] %>";
+  </script>
 </head>
 <body>
 <div id="app"></div>

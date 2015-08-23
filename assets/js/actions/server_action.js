@@ -35,6 +35,12 @@ var ServerActions = {
     });
   },
 
+  panelBack: function() {
+    AppDispatcher.handleAction({
+      actionType: HomeConstants.PANEL_BACK,
+    })
+  },
+
   homeSearch: function(query) {
     $.ajax({
       url: '/homeSearch',
@@ -43,7 +49,7 @@ var ServerActions = {
 
       dataType: 'json',
 
-      data: query,
+      data: query,              //TODO
 
       success: function(data) {
         AppDispatcher.handleAction({
@@ -56,6 +62,58 @@ var ServerActions = {
         AppDispatcher.handleAction({
           actionType: HomeConstants.HOME_SEARCH,
           data: query
+        })
+      }
+    });
+  },
+
+  logout: function() {
+    $.ajax({
+      url: '/clear',
+
+      type: 'GET',
+
+      dataType: 'json',
+
+      data: {},
+
+      success: function() {
+        AppDispatcher.handleAction({
+          actionType: 'USER_LOGIN',
+          data: {}
+        })
+      },
+
+      error: function() {
+        AppDispatcher.handleAction({
+          actionType: 'USER_LOGIN',
+          data: {}
+        })
+      }
+    });
+  },
+
+  getCurrentUser: function() {
+    $.ajax({
+      url: '/user',
+
+      type: 'GET',
+
+      dataType: 'json',
+
+      data: {},
+
+      success: function(data) {
+        AppDispatcher.handleAction({
+          actionType: 'USER_LOGIN',
+          data: data
+        })
+      },
+
+      error: function() {
+        AppDispatcher.handleAction({
+          actionType: 'USER_LOGIN',
+          data: {}
         })
       }
     });
