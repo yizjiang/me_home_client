@@ -29,12 +29,13 @@ var App = React.createClass({
     return (
       <div>
         <header>
-          <nav>
-            <a><Link to="home_main">  找房  </Link></a>
-            <a><Link to="money">  找钱  </Link></a>
-            <a><Link to="manage">  管理房产  </Link></a>
-            <a><Link to="agent">  经纪人入口  </Link></a>
-            <a><Link to="dashboard">  我的觅家  </Link></a>
+          <img className='logoImg' src="/img/logo.png" />
+          <nav className='mainNav'>
+            <Link to="home_main">找房</Link>
+            <Link to="money">找钱</Link>
+            <Link to="manage">管理房产</Link>
+            <Link to="agent">经纪人入口</Link>
+            <Link to="dashboard">我的觅家</Link>
           </nav>
         </header>
         <UserPanel/>
