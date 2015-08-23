@@ -40,10 +40,10 @@ var SelectPanel = React.createClass({
 
   render: function() {
     return (
-      <div>
+      <div className="panelDiv">
         <SelectItems search_options={this.state.search_list} selected_list={this.state.selected}  />
-        <button type="button" onClick={this.selectPanelBack} >Back</button>
-        <button type="button" onClick={this.homeSearch} >Search </button>
+        <button type="button" id='backbtn' className='btngroup' onClick={this.selectPanelBack} >后 退</button>
+        <button type="button" id='choosebtn' className='btngroup' onClick={this.homeSearch} >查 看</button>
     </div>
      );
   }

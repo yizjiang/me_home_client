@@ -18,7 +18,7 @@ var SelectItems = React.createClass({
     var that = this;
     console.log(this.props.selected_list);
     return (
-      <div>
+      <div className='citylistDiv'>
         <ul>
         { this.props.search_options.map(function(value, index){
           var className = '';
@@ -27,7 +27,10 @@ var SelectItems = React.createClass({
           }
 
           return(
-            <li className={className} id={'li' + that.props.level + index} onClick={that.selectVariant.bind(that, value)}>{value}</li>
+            <li className={className} id={'li' + that.props.level + index} onClick={that.selectVariant.bind(that, value)}>
+              <img className="cityimg" src="../img/bay-area.jpg" />
+              {value}
+            </li>
       )
       })
       }
