@@ -37,7 +37,7 @@ var HomeMain = React.createClass({
 
   render: function () {
     return (
-      <div>
+      <div className="content">
         <SearchBox/>
         <SelectPanel/>
         <HomeList list={this.state.home_list}/>

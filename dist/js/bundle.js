@@ -30,12 +30,13 @@ var App = React.createClass({displayName: "App",
     return (
       React.createElement("div", null, 
         React.createElement("header", null, 
-          React.createElement("nav", null, 
-            React.createElement("a", null, React.createElement(Link, {to: "home_main"}, "  找房  ")), 
-            React.createElement("a", null, React.createElement(Link, {to: "money"}, "  找钱  ")), 
-            React.createElement("a", null, React.createElement(Link, {to: "manage"}, "  管理房产  ")), 
-            React.createElement("a", null, React.createElement(Link, {to: "agent"}, "  经纪人入口  ")), 
-            React.createElement("a", null, React.createElement(Link, {to: "dashboard"}, "  我的觅家  "))
+          React.createElement("img", {className: "logoImg", src: "/img/logo.png"}), 
+          React.createElement("nav", {className: "mainNav"}, 
+            React.createElement(Link, {to: "home_main"}, "找房"), 
+            React.createElement(Link, {to: "money"}, "找钱"), 
+            React.createElement(Link, {to: "manage"}, "管理房产"), 
+            React.createElement(Link, {to: "agent"}, "经纪人入口"), 
+            React.createElement(Link, {to: "dashboard"}, "我的觅家")
           )
         ), 
         React.createElement(UserPanel, null), 
@@ -648,7 +649,7 @@ var HomeMain = React.createClass({displayName: "HomeMain",
 
   render: function () {
     return (
-      React.createElement("div", null, 
+      React.createElement("div", {className: "content"}, 
         React.createElement(SearchBox, null), 
         React.createElement(SelectPanel, null), 
         React.createElement(HomeList, {list: this.state.home_list}), 

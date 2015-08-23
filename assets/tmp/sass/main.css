@@ -1,6 +1,56 @@
 body {
   font-family: Roboto, sans-serif;
-  font-weight: 900;
+}
+
+header {
+  width: 100%;
+}
+
+header > nav.mainNav {
+  display: block;
+  background-color: #222;
+  border-radius: 5px;
+}
+
+header > img.logoImg {
+  height: 60px;
+  float: left;
+  background-color: #fff;
+  padding-right: 15px;
+}
+
+nav.mainNav > a {
+  font-family: Arial, sans-serif;
+  text-decoration: none;
+  font-size: 20px;
+  color: #fff;
+  line-height: 60px;
+  letter-spacing: 2px;
+  font-weight: 100 !important;
+  display: inline-block;
+  height: 60px;
+  padding: 0 30px;
+}
+
+nav.mainNav > a.active {
+  color: #ccc !important;
+  background-color: #080808;
+}
+
+nav.mainNav > a:visited {
+  color: #fff;
+}
+
+div.content {
+  background-image: url("../img/house1.jpg");
+  display: block;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+}
+
+li.hotArea {
+  list-style: none;
 }
 
 .select {
