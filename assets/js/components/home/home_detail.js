@@ -86,7 +86,7 @@ var HomeDetail = React.createClass({
         )
 
          }
-        </ul>
+         </ul>
       </div>
       );
   }

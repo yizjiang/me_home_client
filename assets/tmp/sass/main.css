@@ -133,6 +133,7 @@ body {
 
 header {
   width: 100%;
+  padding: 10px;
 }
 
 header > nav.mainNav {
@@ -168,6 +169,10 @@ nav.mainNav > a.active {
 
 nav.mainNav > a:visited {
   color: #fff;
+}
+
+button#login {
+  display: none;
 }
 
 div.content {
@@ -227,7 +232,7 @@ button#search {
 div.panelDiv {
   width: 30%;
   margin-left: 35%;
-  margin-bottom: 150px;
+  min-height: 450px;
 }
 
 div.citylistDiv ul {
@@ -283,6 +288,10 @@ button.btngroup {
   width: 49%;
   border-radius: 5px;
 }
+button.btngroup a {
+  text-decoration: none;
+  color: #fff;
+}
 
 button#backbtn {
   margin-right: 1%;
@@ -291,10 +300,14 @@ button#backbtn {
 button#choosebtn {
   margin-left: 1%;
 }
+button#choosebtn a {
+  text-decoration: none;
+  color: #fff;
+}
 
 div.homelistDiv {
-  width: 40%;
-  margin: 0 30% 0 30%;
+  width: 50%;
+  margin: 0 25% 30px 25%;
 }
 div.homelistDiv ul {
   list-style: none;
@@ -303,10 +316,32 @@ div.homelistDiv ul {
 }
 div.homelistDiv ul li {
   border-bottom: 1px solid #ccc;
+  width: 100%;
+  padding: 10px 0;
 }
 div.homelistDiv ul li a {
   text-decoration: none;
   color: #222;
   font-size: 16px;
-  line-height: 80px;
+  line-height: 25px;
+}
+div.homelistDiv ul li a img {
+  height: 150px;
+  border-radius: 150px;
+  margin-right: 20px;
+  display: inline-block;
+  vertical-align: bottom;
+}
+div.homelistDiv ul li a div {
+  display: inline-block;
+}
+
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+  width: 80%;
+  margin: auto;
+}
+
+#myCarousel {
+  min-height: 450px;
 }
