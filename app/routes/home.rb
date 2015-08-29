@@ -24,7 +24,7 @@ module Routes
     end
 
     get '/comments' do
-      json [{author: 'Leo Jiang', text: 'React is good'}]
+      json [{text: 'Where to buy'}]
     end
 
     get '/homeSearch' do
@@ -34,6 +34,25 @@ module Routes
 
     get '/regionSearch' do
       response = Typhoeus.get("#{MEEHOME_SERVER_URL}/region", params: params)
+      response.body
+    end
+
+    post '/saveSearch' do
+      request_payload = JSON.parse request.body.read
+      response = Typhoeus.post("#{MEEHOME_SERVER_URL}/user/save_search", headers: {user_id: request.env['HTTP_USER_ID'] }, body: request_payload )
+      response.body
+    end
+
+    post '/submitQuestion' do
+      request_payload = JSON.parse request.body.read
+      p "xxx #{request_payload}"
+      response = Typhoeus.post("#{MEEHOME_SERVER_URL}/user/submit_question", headers: {user_id: request.env['HTTP_USER_ID'] }, body: request_payload )
+      response.body
+    end
+
+    get '/home/show' do
+      p "xxx #{MEEHOME_SERVER_URL}/home/#{params[:home_id]}"
+      response = Typhoeus.get("#{MEEHOME_SERVER_URL}/home/#{params[:home_id]}")
       response.body
     end
 

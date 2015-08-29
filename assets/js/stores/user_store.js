@@ -2,12 +2,19 @@ var AppDispatcher = require('../dispatcher/app_dispatcher');
 var EventEmitter = require('events').EventEmitter;
 var Api = require('../utils/api');
 var _ = require('underscore');
+var UserConstants = require('../constants/user_constants');
 
 // Extend ProductStore with EventEmitter to add eventing capabilities
-var _currentUser;
+var _currentUser = {};
+var _questions = [];
 
 function setCurrentUser(user) {
-  _currentUser = user
+  _currentUser = user;
+  _questions = user.questions;
+}
+
+function setQuestions(questions) {
+  _questions = questions
 }
 
 var UserStore = _.extend({}, EventEmitter.prototype, {
@@ -15,6 +22,10 @@ var UserStore = _.extend({}, EventEmitter.prototype, {
   // Return Product data
   getCurrentUser: function() {
     return _currentUser;
+  },
+
+  getQuestions: function() {
+    return _questions;
   },
 
   // Emit Change event
@@ -44,7 +55,12 @@ AppDispatcher.register(function(payload) {
     case 'USER_LOGIN':
       setCurrentUser(action.data);
       break;
-
+    case UserConstants.SAVED_SEARCH:
+      setCurrentUser(action.data);
+      break;
+    case UserConstants.SUBMIT_QUESTION:
+      setQuestions(action.data);
+      break;
     default:
       return true;
   }

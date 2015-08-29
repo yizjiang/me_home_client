@@ -1,4 +1,5 @@
-var ServerActions = require('../../actions/server_action');
+var ServerActions = require('../../actions/server_action'),
+  UserStore = require('../../stores/user_store');
 
 var SearchBox = React.createClass({
 
@@ -24,6 +25,10 @@ var SearchBox = React.createClass({
     ServerActions.homeSearch(this.state);
   },
 
+  saveSearch: function() {
+    ServerActions.saveUserSearch(this.state, UserStore.getCurrentUser());    //TODO login first
+  },
+
   render: function() {
     return (
       <div className='searchDiv'>
@@ -31,6 +36,7 @@ var SearchBox = React.createClass({
         <input id='priceMin' className='pricebox' value={this.state.priceMin} onChange={this.handleFilterChange} placeholder="eg. 10万"/>
         <input id='priceMax' className='pricebox' value={this.state.priceMax} onChange={this.handleFilterChange} placeholder="eg. 10万"/>
         <button id='search' type="button" onClick={this.homeSearch} >觅 家</button>
+        <button id='saveSearch' type="button" onClick={this.saveSearch} >保存</button>
       </div>
       );
   }

@@ -1,5 +1,6 @@
 var AppDispatcher = require('../dispatcher/app_dispatcher');
 var HomeConstants = require('../constants/home_constants');
+var UserConstants = require('../constants/user_constants');
 
 // Define action methods
 var ServerActions = {
@@ -39,6 +40,63 @@ var ServerActions = {
     AppDispatcher.handleAction({
       actionType: HomeConstants.PANEL_BACK,
     })
+  },
+
+  submitQuestion: function(question, user) {
+    $.ajax({
+      url: '/submitQuestion',
+      headers: {
+        'USER_ID': user.id
+      },
+      type: 'POST',
+
+      dataType: 'json',
+
+      data: JSON.stringify(question),              //TODO
+
+      success: function(data) {
+        console.log(data.questions);
+        AppDispatcher.handleAction({
+          actionType: UserConstants.SUBMIT_QUESTION,
+          data: data.questions
+        })
+      },
+
+      error: function() {
+//        AppDispatcher.handleAction({
+//          actionType: UserConstants.SAVED_SEARCH,
+//          data: query
+//        })
+      }
+    });
+  },
+
+  saveUserSearch: function(query, user) {
+    $.ajax({
+      url: '/saveSearch',
+      headers: {
+       'USER_ID': user.id
+      },
+      type: 'POST',
+
+      dataType: 'json',
+
+      data: JSON.stringify(query),              //TODO
+
+      success: function(data) {
+        AppDispatcher.handleAction({
+          actionType: UserConstants.SAVED_SEARCH,
+          data: data
+        })
+      },
+
+      error: function() {
+        AppDispatcher.handleAction({
+          actionType: UserConstants.SAVED_SEARCH,
+          data: query
+        })
+      }
+    });
   },
 
   homeSearch: function(query) {

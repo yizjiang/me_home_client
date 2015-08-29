@@ -31,7 +31,7 @@
     "marked": "^0.3.3",
     "react": "^0.13.0",
     "react-async": "^2.1.0",
-    "react-bootstrap": "0.16.0",
+    "react-bootstrap": "^0.16.0",
     "react-router": ">=0.13.0",
     "react-tools": "^0.13.3",
     "reactify": "^1.1.1",

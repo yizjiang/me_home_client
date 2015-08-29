@@ -24,8 +24,6 @@ var UserPanel = React.createClass({
   },
 
   _onChange: function() {
-    console.log(getUser());
-
     this.setState(getUser());
   },
 

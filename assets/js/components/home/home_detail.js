@@ -4,8 +4,30 @@ var React = require('react'),
 
 
 var HomeDetail = React.createClass({
+
+  loadHomeFromServer: function(id) {
+    $.ajax({
+      url: 'home/show',
+      dataType: 'json',
+      data: {home_id: id},
+      success: function(data) {
+        console.log(data);
+        this.setState({currentHome: data});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.log(err);
+      }.bind(this)
+    });
+  },
+
   getInitialState: function() {
-    return {currentHome: HomeListStore.getHomeById(this.props.params.id)}
+    var currentHome =  HomeListStore.getHomeById(this.props.params.id)
+    if(_.isEmpty(currentHome)) {
+      this.loadHomeFromServer(this.props.params.id)
+      currentHome = {};
+    }
+
+    return {currentHome: currentHome}
   },
 
   // Add change listeners to stores
