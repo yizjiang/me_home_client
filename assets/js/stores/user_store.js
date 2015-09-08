@@ -7,10 +7,22 @@ var UserConstants = require('../constants/user_constants');
 // Extend ProductStore with EventEmitter to add eventing capabilities
 var _currentUser = {};
 var _questions = [];
+var _savedSearches = [];
+var _favoriteHomes = [];
 
 function setCurrentUser(user) {
   _currentUser = user;
   _questions = user.questions;
+  _savedSearches = user.saved_searches;
+  _favoriteHomes = user.homes
+}
+
+function setSavedSearch(savedSearches) {
+  _savedSearches = savedSearches
+}
+
+function setFavorites(favorites) {
+  _favoriteHomes = favorites
 }
 
 function setQuestions(questions) {
@@ -26,6 +38,14 @@ var UserStore = _.extend({}, EventEmitter.prototype, {
 
   getQuestions: function() {
     return _questions;
+  },
+
+  getSavedSearches: function() {
+    return _savedSearches;
+  },
+
+  getFavoriteHomes: function() {
+    return _favoriteHomes;
   },
 
   // Emit Change event
@@ -56,7 +76,10 @@ AppDispatcher.register(function(payload) {
       setCurrentUser(action.data);
       break;
     case UserConstants.SAVED_SEARCH:
-      setCurrentUser(action.data);
+      setSavedSearch(action.data.saved_searches);
+      break;
+    case UserConstants.FAVORITE_HOME:
+      setFavorites(action.data.homes);
       break;
     case UserConstants.SUBMIT_QUESTION:
       setQuestions(action.data);

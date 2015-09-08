@@ -3,10 +3,9 @@ var React = require('react');
 
 var HomePage = React.createClass({
   render: function () {
-    console.log(this.props);
     return (
       <div>
-        <h3>Home Page: {this.props.params.id}</h3>
+        <h3>Home Page: 123</h3>
       </div>
       );
   }

@@ -1,6 +1,7 @@
 var AppDispatcher = require('../dispatcher/app_dispatcher');
 var HomeConstants = require('../constants/home_constants');
 var UserConstants = require('../constants/user_constants');
+var QuestionConstants = require('../constants/question_constants');
 
 // Define action methods
 var ServerActions = {
@@ -55,7 +56,6 @@ var ServerActions = {
       data: JSON.stringify(question),              //TODO
 
       success: function(data) {
-        console.log(data.questions);
         AppDispatcher.handleAction({
           actionType: UserConstants.SUBMIT_QUESTION,
           data: data.questions
@@ -99,6 +99,62 @@ var ServerActions = {
     });
   },
 
+  removeFavorite: function(home_id, user) {
+    $.ajax({
+      url: '/unfavoriteHome',
+      headers: {
+        'USER_ID': user.id
+      },
+      type: 'POST',
+
+      dataType: 'json',
+
+      data: JSON.stringify({home_id: home_id}),
+
+      success: function(data) {
+        AppDispatcher.handleAction({
+          actionType: UserConstants.FAVORITE_HOME,
+          data: data
+        })
+      },
+
+      error: function() {
+        AppDispatcher.handleAction({
+          actionType: UserConstants.FAVORITE_HOME,
+          data: data
+        })
+      }
+    });
+  },
+
+  addFavorite: function(home_id, user) {
+    $.ajax({
+      url: '/favoriteHome',
+      headers: {
+        'USER_ID': user.id
+      },
+      type: 'POST',
+
+      dataType: 'json',
+
+      data: JSON.stringify({home_id: home_id}),
+
+      success: function(data) {
+        AppDispatcher.handleAction({
+          actionType: UserConstants.FAVORITE_HOME,
+          data: data
+        })
+      },
+
+      error: function() {
+        AppDispatcher.handleAction({
+          actionType: UserConstants.FAVORITE_HOME,
+          data: data
+        })
+      }
+    });
+  },
+
   homeSearch: function(query) {
     $.ajax({
       url: '/homeSearch',
@@ -120,6 +176,65 @@ var ServerActions = {
         AppDispatcher.handleAction({
           actionType: HomeConstants.HOME_SEARCH,
           data: query
+        })
+      }
+    });
+  },
+
+  getAllQuestions: function(user) {
+    $.ajax({
+      url: '/questions',
+      headers: {
+        'USER_ID': user.id
+      },
+      type: 'GET',
+
+      dataType: 'json',
+
+      data: {},
+
+      success: function(data) {
+        AppDispatcher.handleAction({
+          actionType: QuestionConstants.RECEIVE_DATA,
+          data: data
+        })
+      },
+
+      error: function() {
+        AppDispatcher.handleAction({
+          actionType: QuestionConstants.RECEIVE_DATA,
+          data: []
+        })
+      }
+    });
+  },
+
+  replyQuestion: function(answer, user) {
+    $.ajax({
+      url: '/post_answer',
+
+      headers: {
+        'USER_ID': user.id
+      },
+
+      type: 'post',
+
+      dataType: 'json',
+
+      data: JSON.stringify(answer),
+
+      success: function(data) {
+        console.log(data);
+        AppDispatcher.handleAction({
+          actionType: QuestionConstants.REPLY_POST,
+          data: data
+        })
+      },
+
+      error: function() {
+        AppDispatcher.handleAction({
+          actionType: QuestionConstants.REPLY_POST,
+          data: []
         })
       }
     });
@@ -169,38 +284,11 @@ var ServerActions = {
       },
 
       error: function() {
-        AppDispatcher.handleAction({
-          actionType: 'USER_LOGIN',
-          data: {}
-        })
+        console.log('error when getting user');
       }
     });
-  },
-
-  // Add item to cart
-  addToCart: function(sku, update) {
-    AppDispatcher.handleAction({
-      actionType: FluxCartConstants.CART_ADD,
-      sku: sku,
-      update: update
-    })
-  },
-
-  // Remove item from cart
-  removeFromCart: function(sku) {
-    AppDispatcher.handleAction({
-      actionType: FluxCartConstants.CART_REMOVE,
-      sku: sku
-    })
-  },
-
-  // Update cart visibility status
-  updateCartVisible: function(cartVisible) {
-    AppDispatcher.handleAction({
-      actionType: FluxCartConstants.CART_VISIBLE,
-      cartVisible: cartVisible
-    })
   }
+
 
 };
 

@@ -33,6 +33,7 @@
     "react-async": "^2.1.0",
     "react-bootstrap": "^0.16.0",
     "react-router": ">=0.13.0",
+    "react-tabs": "^0.4.0",
     "react-tools": "^0.13.3",
     "reactify": "^1.1.1",
     "underscore": "^1.7.0",

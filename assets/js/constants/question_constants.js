@@ -2,7 +2,7 @@ var keyMirror = require('react/lib/keyMirror');
 
 // Define action constants
 module.exports = keyMirror({
-  SAVED_SEARCH: null,
-  SUBMIT_QUESTION: null,
-  FAVORITE_HOME: null
+  RECEIVE_DATA: null,
+  RECEIVE_USER_DATA: null,
+  REPLY_POST: null
 });

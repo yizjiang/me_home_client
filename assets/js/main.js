@@ -14,14 +14,13 @@ var React = require('react'),
     HomeMain = require('./components/home/main.js'),
     HomeDetail = require('./components/home/home_detail.js'),
     Manage = require('./components/manage/component/main.js'),
-    Agent = require('./components/agent/component/main.js'),
-    HomePage = require('./components/agent/component/home_page.js'),
+    Agent = require('./components/agent/main.js'),
     College = require('./components/college/page.js'),
-    Setting = require('./components/agent/component/setting.js'),
-    UserPanel = require('./components/base/user_panel.js');
+    UserPanel = require('./components/base/user_panel.js'),
+    UserStore = require('./stores/user_store.js');
 
 ServerActions.fetchRegionRanking('');
-ServerActions.getCurrentUser();
+ServerActions.getCurrentUser();//TODO .promise().then(ServerActions.getUserQuestions(UserStore.getCurrentUser()));
 
 var App = React.createClass({
   render: function () {
@@ -52,10 +51,7 @@ var routes = (
     </Route>
     <Route name="money" handler={Money}/>
     <Route name="manage" handler={Manage}/>
-    <Route name="agent" handler={Agent}>
-      <Route name="home_page" path="home_page/:id" handler={HomePage}/>
-      <Route name="setting" path="setting/:id" handler={Setting}/>
-    </Route>
+    <Route name="agent" handler={Agent}/>
     <Route name="dashboard" handler={Dashboard}/>
     <Route name="home_detail/:id" handler={HomeDetail}/>
     <DefaultRoute handler={HomeMain}/>

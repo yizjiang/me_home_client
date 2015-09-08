@@ -6,6 +6,7 @@ var Link = Router.Link;
 var Route = Router.Route;
 
 var SearchBox = require('./search_box.js'),
+    SearchPanel = require('./search_panel.js'),
     SelectPanel = require('./select_panel.js'),
     HomeList = require('./home_list.js'),
     HomeListStore = require('../../stores/home_list_store');

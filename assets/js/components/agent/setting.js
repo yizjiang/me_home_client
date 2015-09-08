@@ -5,7 +5,7 @@ var Setting = React.createClass({
   render: function () {
     return (
       <div>
-        <h3>Settings: {this.props.params.id}</h3>
+        <h3>Settings: 1234</h3>
       </div>
       );
   }

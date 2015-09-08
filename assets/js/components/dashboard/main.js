@@ -4,7 +4,8 @@ var QuestionList = require('./question_list.js'),
   UserStore = require('../../stores/user_store'),
   ServerActions = require('../../actions/server_action'),
   HomeList = require('../home/home_list'),
-  SavedSearchList = require('./saved_search_list.js');
+  SavedSearchList = require('./saved_search_list.js'),
+  HomeListStore = require('../../stores/home_list_store');
 
 var Dashboard = React.createClass({
 
@@ -23,7 +24,6 @@ var Dashboard = React.createClass({
 //  },
 
   handleQuestionSubmit: function(comment) {
-      console.log(comment);
     ServerActions.submitQuestion(comment, UserStore.getCurrentUser());
 //    $.ajax({
 //      url: this.props.url,
@@ -40,28 +40,42 @@ var Dashboard = React.createClass({
   },
 
   getInitialState: function() {
-    return {data: UserStore.getQuestions(), current_user: UserStore.getCurrentUser(), home_list: []};       //TODO re-design
+    return {data: UserStore.getQuestions(),
+      saved_searches: UserStore.getSavedSearches(),
+      current_user: UserStore.getCurrentUser(),
+      home_list: HomeListStore.getProduct(),
+      favorite_list: UserStore.getFavoriteHomes()};       //TODO re-design
   },
 
   // Remove change listeners from stores
   componentWillUnmount: function() {
     UserStore.removeChangeListener(this._onChange);
+    HomeListStore.removeChangeListener(this._onChange);
   },
 
   _onChange: function() {
-    this.setState({data: UserStore.getQuestions(), current_user: UserStore.getCurrentUser()});
+    this.setState({data: UserStore.getQuestions(),
+      saved_searches: UserStore.getSavedSearches(),
+      current_user: UserStore.getCurrentUser(),
+      home_list: HomeListStore.getProduct(),
+      favorite_list: UserStore.getFavoriteHomes()});
   },
 
   componentDidMount: function() {
     UserStore.addChangeListener(this._onChange);
+    HomeListStore.addChangeListener(this._onChange);
     //setInterval(this.loadCommentsFromServer, this.props.pollInterval);
   },
 
   render: function() {
     return (
-
       <div className="commentBox">
-        <SavedSearchList current_user={this.state.current_user}/>
+        <SavedSearchList list={this.state.saved_searches}/>
+        <h3>红心房源</h3>
+        <HomeList list={this.state.favorite_list}/>
+        <p>------------------------------------------------------
+        ---------------------------------------------------------
+        ----------------------------------------------------------</p>
         <HomeList list={this.state.home_list}/>
         <QuestionForm onCommentSubmit={this.handleQuestionSubmit} />
         <QuestionList data={this.state.data} />

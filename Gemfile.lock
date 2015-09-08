@@ -47,6 +47,11 @@ GEM
       redis-store (~> 1.1.0)
     redis-store (1.1.5)
       redis (>= 2.2)
+    rqrcode (0.7.0)
+      chunky_png
+    rqrcode_png (0.1.5)
+      chunky_png
+      rqrcode
     sass (3.4.14)
     sinatra (1.4.6)
       rack (~> 1.4)
@@ -79,6 +84,7 @@ DEPENDENCIES
   rack-mount
   rake
   redis-rack
+  rqrcode_png
   sinatra
   sinatra-contrib
   typhoeus
