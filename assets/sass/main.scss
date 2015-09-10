@@ -4,6 +4,7 @@
 
 $font-family: Roboto, sans-serif;
 $btn-color: #74c005;
+$yellow: #fbc03d;
 $chinese-font-family: Arial, sans-serif;
 
 $border-radius: 5px;
@@ -63,10 +64,6 @@ nav.mainNav > a:visited{
 	color: #fff;
 }
 
-button#login{
-	display:none;
-}
-
 div.content{
 	background-image: url('../img/house1.jpg');
 	display: block;
@@ -109,16 +106,22 @@ input#priceMax{
 	margin-left:1%;
 }
 
-button#search{
+button#search, button#saveSearch{
 	height:$inputbox-height;
 	border: 0;
-	width: 100%;
+	width: 60%;
 	color: #fff;
 	background: $btn-color;
 	border-radius: 5px;
 	margin-top: 10px;
 	font-size: 16px;
 	padding: 0;
+}
+
+button#saveSearch{
+	width: 38%;
+	margin-left: 2%;
+	background-color: $yellow;
 }
 
 div.panelDiv{
@@ -246,4 +249,20 @@ div.homelistDiv{
 
 #myCarousel{
 	min-height: 450px;
+}
+
+div.detailDiv{
+	width: 100%;
+	padding: 30px 15%;
+	
+	button.btngroup{
+		display: none;
+	}
+}
+
+div.detailDiv .detailPara{
+	font-size: 20px;
+	line-height: 35px;
+	font-weight: 100;
+	word-wrap: break-word;
 }
