@@ -19,6 +19,7 @@ var path = {
   sass: ['./assets/sass/**/*.scss', './assets/sass/*.scss'],
   app: {
     js: './assets/js/main.js',
+    agent: './assets/js/agent_main.js',
     image: './assets/img/*',
     sass: './assets/sass/main.scss',
     fonts: [
@@ -50,7 +51,7 @@ var map = {
 };
 
 gulp.task('watch', function(){
-  gulp.watch(path.js, ['build']);
+  gulp.watch(path.js, ['build', 'agent']);
   gulp.watch(path.vendor.js, ['vendor']);
   gulp.watch(path.sass, ['sass']);
 });
@@ -78,9 +79,17 @@ gulp.task('sass', function() {
 
 gulp.task('build', function() {
   return browserify(path.app.js)
-    .transform(reactify)
+    .transform(babelify)
     .bundle()
     .pipe(source('bundle.js'))
+    .pipe(gulp.dest(path.dist.js));
+})
+
+gulp.task('agent', function() {
+  return browserify(path.app.agent)
+    .transform(babelify)
+    .bundle()
+    .pipe(source('agent.js'))
     .pipe(gulp.dest(path.dist.js));
 })
 

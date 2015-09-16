@@ -10,5 +10,6 @@ require 'rack/mount'
 module MeHome
   App = Rack::Mount::RouteSet.new do |set|
     set.add_route Routes::Home, :path_info => %r{^/.*$}
+    set.add_route Routes::Agent, :path_info => %r{^/.*$}
   end
 end

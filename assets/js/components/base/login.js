@@ -19,7 +19,7 @@ var Login = React.createClass({
   },
 
   login: function() {
-    window.location.href = SERVER_URL;
+    window.location.href = SERVER_URL + '/users/login';
   },
 
   render: function(){

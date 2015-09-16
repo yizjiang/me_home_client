@@ -8,6 +8,9 @@ var React = require('react'),
   RouteHandler = Router.RouteHandler,
   HomePage = require('./home_page'),
   Questions = require('./questions'),
+  UserStore = require('../../stores/user_store'),
+  AgentStore = require('../../stores/agent_page_store'),
+  ServerActions = require('../../actions/server_action'),
   Setting = require('./setting');
 
 var ReactTabs = require('react-tabs');
@@ -16,7 +19,30 @@ var Tabs = ReactTabs.Tabs;
 var TabList = ReactTabs.TabList;
 var TabPanel = ReactTabs.TabPanel;
 
+
 var Agent = React.createClass({
+
+  getInitialState: function() {
+    return {data: UserStore.getAgentPublishedPage()}
+  },
+
+  _onChange: function() {
+    if(!_.isEmpty(UserStore.getCurrentUser()) && _.isEmpty(this.state.data)){
+      ServerActions.getAgentPage(UserStore.getCurrentUser())
+    }
+    this.setState({data: UserStore.getAgentPublishedPage()});
+  },
+
+  // Add change listeners to stores
+  componentDidMount: function() {
+    UserStore.addChangeListener(this._onChange);
+  },
+
+  // Remove change listeners from stores
+  componentWillUnmount: function() {
+    UserStore.removeChangeListener(this._onChange);
+  },
+
 
   handleSelect: function (index, last) {
     console.log('Selected tab: ' + index + ', Last tab: ' + last);
@@ -28,7 +54,7 @@ var Agent = React.createClass({
       <h2>Agent</h2>
             <Tabs
             onSelect={this.handleSelected}
-            selectedIndex={2}
+            selectedIndex={1}
             >
 
         {/*
@@ -68,7 +94,7 @@ var Agent = React.createClass({
          */}
 
               <TabPanel>
-                <HomePage/>
+                <HomePage data={this.state.data}/>
               </TabPanel>
               <TabPanel>
                 <Setting/>

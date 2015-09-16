@@ -9,16 +9,27 @@ var _currentUser = {};
 var _questions = [];
 var _savedSearches = [];
 var _favoriteHomes = [];
+var _publishedPageConfig = {};
+var _publishedPage = {};
 
 function setCurrentUser(user) {
   _currentUser = user;
   _questions = user.questions;
   _savedSearches = user.saved_searches;
-  _favoriteHomes = user.homes
+  _favoriteHomes = user.homes;
+  _publishedPageConfig = user.published_page_config;
 }
 
 function setSavedSearch(savedSearches) {
   _savedSearches = savedSearches
+}
+
+function setPublishedPageConfig(result) {
+  _publishedPageConfig = result
+}
+
+function setPublishedPage(result) {
+  _publishedPage = result
 }
 
 function setFavorites(favorites) {
@@ -34,6 +45,14 @@ var UserStore = _.extend({}, EventEmitter.prototype, {
   // Return Product data
   getCurrentUser: function() {
     return _currentUser;
+  },
+
+  getAgentPublishedPageConfig: function() {
+    return _publishedPageConfig;
+  },
+
+  getAgentPublishedPage: function() {
+    return _publishedPage;
   },
 
   getQuestions: function() {
@@ -83,6 +102,12 @@ AppDispatcher.register(function(payload) {
       break;
     case UserConstants.SUBMIT_QUESTION:
       setQuestions(action.data);
+      break;
+    case UserConstants.PUBLISH_PAGE_CONFIG:
+      setPublishedPageConfig(action.data);
+      break;
+    case UserConstants.PUBLISH_PAGE:
+      setPublishedPage(action.data);
       break;
     default:
       return true;

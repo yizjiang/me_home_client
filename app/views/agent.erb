@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Meejia</title>
+  <link href="//fonts.googleapis.com/css?family=Roboto:300,100,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <%= stylesheet_link '/css/bundle.css' %>
+  <script>
+    var SERVER_URL = "<%= MEEHOME_SERVER_URL %>";
+    var meta_data = <%= @data %>;    //Todo
+  </script>
+</head>
+<body>
+  agent <%= params[:name]%>
+  <div id="content"></div>
+</body>
+<%= javascript_tag '/js/bundle_vendor.js' %>
+<%= javascript_tag '/js/agent.js' %>
+</html>

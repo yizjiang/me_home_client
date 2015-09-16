@@ -1,6 +1,7 @@
 var Button = require('react-bootstrap').Button;
 var Input = require('react-bootstrap').Input,
-    ServerActions = require('../../actions/server_action');
+    ServerActions = require('../../actions/server_action'),
+    _ = require('lodash');
 
 var SavedSearchList = React.createClass({
 
@@ -9,7 +10,11 @@ var SavedSearchList = React.createClass({
      $('input:checked').each(function() {
          query.push($(this).attr('value'));
      });
-     ServerActions.homeSearch(JSON.parse(query[0]));     //TODO clever search
+     if(this.props.callback){ //TODO clever search
+       this.props.callback(query);
+     } else {
+       ServerActions.homeSearch(JSON.parse(query[0]));
+     }
   },
 
   render: function() {
@@ -22,8 +27,11 @@ var SavedSearchList = React.createClass({
          {this.props.list.map(function(value){
             var searchOption = JSON.parse(value.search_query);
             var label = '地区: ' + searchOption.regionValue + ' 最低价: ' + searchOption.priceMin + ' 最高价: ' + searchOption.priceMax;
+            var checked = _.findIndex(self.props.selected, function(search){
+              return search.regionValue == searchOption.regionValue && search.priceMin == searchOption.priceMin && search.priceMax == searchOption.priceMax
+            })
             return(
-                   <Input type='checkbox' label={label} value={value.search_query}/>
+                   <Input type='checkbox' checked={checked != -1} label={label} value={value.search_query}/>
               )
             })}
           </form>

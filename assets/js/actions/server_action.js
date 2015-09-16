@@ -2,6 +2,7 @@ var AppDispatcher = require('../dispatcher/app_dispatcher');
 var HomeConstants = require('../constants/home_constants');
 var UserConstants = require('../constants/user_constants');
 var QuestionConstants = require('../constants/question_constants');
+var AgentConstants = require('../constants/agent_constants');
 
 // Define action methods
 var ServerActions = {
@@ -209,6 +210,58 @@ var ServerActions = {
     });
   },
 
+  getAgentPage: function(user) {
+    $.ajax({
+      url: '/agent/' + user.agent_identifier + '/page',
+      type: 'GET',
+
+      dataType: 'json',
+
+      data: {},
+
+      success: function(data) {
+        AppDispatcher.handleAction({
+          actionType: UserConstants.PUBLISH_PAGE,
+          data: data
+        })
+      },
+
+      error: function() {
+
+      }
+    });
+  },
+
+  savePageConfig: function(user, value) {
+    $.ajax({
+      url: '/save_page_config',
+
+      headers: {
+        'USER_ID': user.id
+      },
+
+      type: 'post',
+
+      dataType: 'json',
+
+      data: JSON.stringify(value),
+
+      success: function(data) {
+        AppDispatcher.handleAction({
+          actionType: UserConstants.PUBLISH_PAGE,
+          data: data
+        })
+      },
+
+      error: function() {
+//        AppDispatcher.handleAction({
+//          actionType: QuestionConstants.REPLY_POST,
+//          data: []
+//        })
+      }
+    });
+  },
+
   replyQuestion: function(answer, user) {
     $.ajax({
       url: '/post_answer',
@@ -267,7 +320,8 @@ var ServerActions = {
   },
 
   getCurrentUser: function() {
-    $.ajax({
+    var self = this;
+    return $.ajax({
       url: '/user',
 
       type: 'GET',

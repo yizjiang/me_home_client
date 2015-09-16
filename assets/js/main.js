@@ -20,10 +20,35 @@ var React = require('react'),
     UserStore = require('./stores/user_store.js');
 
 ServerActions.fetchRegionRanking('');
-ServerActions.getCurrentUser();//TODO .promise().then(ServerActions.getUserQuestions(UserStore.getCurrentUser()));
+ServerActions.getCurrentUser().then(function(value){console.log(value)});
 
 var App = React.createClass({
+
+  getInitialState: function() {
+    return {isAgent: false}
+  },
+
+  _onChange: function() {
+    this.setState({isAgent: UserStore.getCurrentUser().agent_identifier != undefined});
+  },
+
+  // Add change listeners to stores
+  componentDidMount: function() {
+    UserStore.addChangeListener(this._onChange);
+  },
+
+  // Remove change listeners from stores
+  componentWillUnmount: function() {
+    UserStore.removeChangeListener(this._onChange);
+  },
+
   render: function () {
+    var linkComponent;
+    if(this.state.isAgent == true){
+      linkComponent =  <Link to="agent">经纪人入口</Link>
+    } else {
+      linkComponent = <Link to="dashboard">我的觅家</Link>
+    }
 
     return (
       <div>
@@ -33,8 +58,7 @@ var App = React.createClass({
             <Link to="home_main">找房</Link>
             <Link to="money">找钱</Link>
             <Link to="manage">管理房产</Link>
-            <Link to="agent">经纪人入口</Link>
-            <Link to="dashboard">我的觅家</Link>
+            {linkComponent}
           </nav>
         </header>
         <UserPanel/>

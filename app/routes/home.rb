@@ -15,7 +15,7 @@ module Routes
 
     get '/clear' do
       session[:uid] = ''
-      redirect MEEHOME_SERVER_URL + '?action=logout'
+      redirect MEEHOME_SERVER_URL + '?user_action=logout'
     end
 
     get '/uid' do
