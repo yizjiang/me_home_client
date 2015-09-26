@@ -43,7 +43,7 @@ var SelectPanel = React.createClass({
       <div className="panelDiv">
         <SelectItems search_options={this.state.search_list} selected_list={this.state.selected}  />
         <button type="button" id='backbtn' className='btngroup' onClick={this.selectPanelBack} >后 退</button>
-        <button type="button" id='choosebtn' className='btngroup' onClick={this.homeSearch} >查 看</button>
+        <button type="button" id='choosebtn' className='btngroup' onClick={this.homeSearch} ><a href="#homelistAnchor">查 看</a></button>
     </div>
      );
   }

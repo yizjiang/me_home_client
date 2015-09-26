@@ -4,6 +4,7 @@
 
 $font-family: Roboto, sans-serif;
 $btn-color: #74c005;
+$yellow: #fbc03d;
 $chinese-font-family: Arial, sans-serif;
 
 $border-radius: 5px;
@@ -17,49 +18,125 @@ $box-placeholder-margin: 10px;
 body {
   font-family: $font-family;
   font-weight: 900;
+  width: 100%;
+  display: block;
+  overflow-x: hidden;
 }
 
 .select {
   color: blue
 }
 
+ul.nav.navbar-nav{
+	display: block;
+	position: absolute;
+	width: 100%;
+	height: 300px;
+	background-color: #555;
+
+	li{
+		width: 100%;
+		height: 60px;
+		line-height: 60px;
+
+		a{
+			border-bottom: 1px solid white;
+			width: 90%;
+			color: #aaa;
+			line-height: 60px;
+			padding: 0;
+			margin: 0 5%;
+			font-size: 20px;
+			font-weight: 100;
+		}
+
+		a:hover{
+			background-color: transparent;
+			color: #fff;
+		}
+	}
+
+	li:last-child{
+		a{
+			border-bottom: none;
+		}
+	}
+}
+
+
 header{
 	width: 100%;
-}
 
-header > nav.mainNav{
-	display: block;
-	background-color: $dark-grey;
-	border-radius: $border-radius;
-}
+	img.logoImg{
+		width: 200px;
+		left: 25px;
+		top:25px;
+		padding-right: 15px;
+		position: absolute;
+	}
 
-header > img.logoImg{
-	height: 60px;
-	float: left;
-	background-color: #fff;
-	padding-right: 15px;
-}
+	#nav-toggle{
+		cursor: pointer;
+		padding: 10px 35px 16px 0px;
+		position: absolute;
+		right: 25px;
+		top: 25px;
+		tansition: all 0.5s;
+		
+		span{
+			transition: all 500ms;
+			cursor: pointer;
+			border-radius: 1px;
+			height: 5px;
+			width: 35px;
+			background: #fff;
+			position: absolute;
+			display: block;
+			content: '';
+		}
 
-nav.mainNav > a{
-	font-family: $chinese-font-family;
-	text-decoration: none;
-	font-size: 20px;
-	color: #fff;
-	line-height:60px;
-	letter-spacing: 2px;
-	font-weight: 100 !important;
-	display: inline-block;
-	height: 60px;
-	padding: 0 30px;
-}
+		span:before, span:after{
+			transition: all 500ms;
+			cursor: pointer;
+			border-radius: 1px;
+			height: 5px;
+			width: 35px;
+			background: #fff;
+			position: absolute;
+			display: block;
+			content: '';
+		}
 
-nav.mainNav > a.active{
-	color: #ccc !important;
-	background-color: #080808;
-}
+		span:before{
+			top: -10px;
+		}
+			
 
-nav.mainNav > a:visited{
-	color: #fff;
+		span:after{
+			bottom: -10px;
+		}
+	}
+
+	#nav-toggle.active{
+		span{
+			background-color: transparent;
+		}
+
+		span:before, span:after{
+			top: 0;
+		}
+			
+
+		span:before{
+			transform: rotate(45deg);
+		}
+
+		span:after{
+			transform: translateY(-10px) rotate(-45deg);
+			top: 10px;
+		}
+	}
+
 }
 
 div.content{
@@ -75,8 +152,8 @@ li.hotArea{
 }
 
 div.searchDiv{
-	width: 30%;
-	margin-left: 35%;
+	width: 340px;
+	margin-left: calc(50% - 170px);
 	padding-top: 200px;
 }
 
@@ -90,24 +167,24 @@ input#regionValue{
 
 input.pricebox{
 	height:$inputbox-height;
-	width: 49%;
+	width: 48%;
 	padding: 0;
 	margin: 0;
 	border: 0;
 }
 
 input#priceMin{
-	margin-right:1%;
+	margin-right:2%;
 }
 
 input#priceMax{
-	margin-left:1%;
+	margin-left:2%;
 }
 
-button#search{
+button#search, button#saveSearch{
 	height:$inputbox-height;
 	border: 0;
-	width: 100%;
+	width: 60%;
 	color: #fff;
 	background: $btn-color;
 	border-radius: 5px;
@@ -116,10 +193,16 @@ button#search{
 	padding: 0;
 }
 
+button#saveSearch{
+	width: 38%;
+	margin-left: 2%;
+	background-color: $yellow;
+}
+
 div.panelDiv{
-	width: 30%;
-	margin-left:35%;
-	margin-bottom: 150px;
+	width: 340px;
+	margin-left:calc(50% - 170px);
+	min-height: 50px;
 }
 
 div.citylistDiv ul{
@@ -178,6 +261,10 @@ button.btngroup{
 	outline: none;
 	width: 49%;
 	border-radius: 5px;
+	a{
+		text-decoration: none;
+		color: #fff;
+	}
 }
 
 button#backbtn{
@@ -186,11 +273,15 @@ button#backbtn{
 
 button#choosebtn{
 	margin-left: 1%;
+	a{
+		text-decoration: none;
+		color: #fff;
+	}
 }
 
 div.homelistDiv{
-	width: 40%;
-	margin: 0 30% 0 30%;
+	width: 80%;
+	margin: 30px 10%;
 
 	ul{
 		list-style: none;
@@ -199,14 +290,197 @@ div.homelistDiv{
 
 		li{
 			border-bottom: 1px solid #ccc;
+			width: 48%;
+			margin: 0 1%;
+			display: inline-block;
+			padding: 10px 0;
 
 			a{
 				text-decoration: none;
 				color: $dark-grey;
 				font-size: 16px;
-				line-height: 80px;
+				line-height: 25px;
+
+
+				img{
+					height: 150px;
+					width: 150px;
+					border-radius: 150px;
+					margin-right: 20px;
+					display: inline-block;
+					vertical-align: bottom;
+				}
+				div{
+					display: inline-block;
+				}
 			}
 		}
 		
+	}
+}
+
+@media screen and (max-width:640px){
+	div.homelistDiv{
+		width: 80%;
+		margin: 30px 10%;
+
+		li{
+			width: 100% !important;
+			margin: 0 !important;
+			display: block !important;
+		}
+	}
+
+}
+
+
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+	width: 100%;
+	margin: auto;
+	max-height: 800px;
+}
+
+#myCarousel{
+	min-height: 450px;
+}
+
+div.detailDiv{
+	width: 100%;
+	padding: 30px 15%;
+	height: auto;
+	margin-bottom: 20px;
+	
+	button.btngroup{
+		display: none;
+	}
+	.detailWrap{
+		margin-bottom: 20px;
+		display: inline-block;
+
+		.detailPara{
+			padding-top: 15px;
+			font-size: 20px;
+			line-height: 35px;
+			font-weight: 100;
+			word-wrap: break-word;
+			border-bottom: 1px solid #ccc;
+			display: block;
+			height: 180px;
+		}
+		.singledetail{
+			border: none;
+			height: 120px;
+		}
+		.detailother{
+			border-top: 1px solid #ccc;
+			height: auto;
+		}
+	}	
+}
+
+#homelistAnchor{
+	ul{
+		text-align: left;
+		li{
+			padding-left: 20px;
+		}
+	}
+}
+
+div.commentBox{
+	width: 100%;
+	text-align: center;
+}
+
+input#question, input#answer9{
+	width: 50%;
+	margin-left: 25%;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+}
+
+div.react-tabs div#react-tabs-5 button#search{
+	width: 50%;
+	margin-left: 25%;
+}
+
+
+div.searchResult{
+	border-bottom: 1px solid #ccc;
+}
+
+li:last-child{
+	border-bottom: none !important;
+}
+
+
+@media screen and (min-width:768px){
+	div.loginWrap{
+		position: absolute;
+		top: 30px;
+		right: 100px;
+		color: green;
+		font-size: 20px;
+		font-weight: 100;
+		line-height: 60px;
+
+		p{
+			display: inline-block;
+			float: left;
+			margin-right: 10px;
+		}
+		button.nobutton{
+			background: none;
+			border: none;
+			display: inline-block;
+			padding: 0 !important;
+		}
+		button.nobutton:active, button.nobutton:focus{
+			outline: 0;
+		}
+	}
+}
+
+@media screen and (max-width: 767px){
+	img.logoImg{
+		position: absolute;
+		top: 0px;
+		left: 0;
+	}
+
+	div.loginWrap{
+		position: absolute;
+		top: 55px;
+		right: 10px;
+		color: green;
+		font-size: 16px;
+		font-weight: 100;
+		line-height: 30px;
+
+		p{
+			display: inline-block;
+			float: left;
+			margin-right: 10px;
+		}
+		button.nobutton{
+			background: none;
+			border: none;
+			display: inline-block;
+			padding: 0 !important;
+		}
+		button.nobutton:active, button.nobutton:focus{
+			outline: 0;
+		}
+	}
+
+	div.searchDiv{
+		padding-top: 40px;
+	}
+	div.content{
+		height: 510px;
+	}
+	div.citylistDiv ul{
+		max-height: 270px;
 	}
 }

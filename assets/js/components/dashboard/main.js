@@ -73,10 +73,10 @@ var Dashboard = React.createClass({
         <SavedSearchList list={this.state.saved_searches}/>
         <h3>红心房源</h3>
         <HomeList list={this.state.favorite_list}/>
-        <p>------------------------------------------------------
-        ---------------------------------------------------------
-        ----------------------------------------------------------</p>
-        <HomeList list={this.state.home_list}/>
+        <hr/>
+        <div className='searchResult'>
+          <HomeList list={this.state.home_list}/>
+        </div>
         <QuestionForm onCommentSubmit={this.handleQuestionSubmit} />
         <QuestionList data={this.state.data} />
       </div>
