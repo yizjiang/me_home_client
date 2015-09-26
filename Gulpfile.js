@@ -10,8 +10,7 @@ var gulp = require('gulp'),
     react = require('gulp-react'),
     imagemin = require('gulp-imagemin'),
     source = require('vinyl-source-stream'),
-    sourcemaps = require('gulp-sourcemaps'),
-    reactify = require('reactify');
+    sourcemaps = require('gulp-sourcemaps');
 
 
 var path = {

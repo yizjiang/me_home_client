@@ -25,7 +25,7 @@ ServerActions.getCurrentUser().then(function(value){console.log(value)});
 var App = React.createClass({
 
   getInitialState: function() {
-    return {isAgent: false}
+    return {isAgent: undefined}
   },
 
   _onChange: function() {
@@ -43,11 +43,14 @@ var App = React.createClass({
   },
 
   render: function () {
+    console.log(this.state.isAgent);
     var linkComponent;
     if(this.state.isAgent == true){
       linkComponent =  <Link to="agent">经纪人入口</Link>
-    } else {
+    } else if (this.state.isAgent == false) {
       linkComponent = <Link to="dashboard">我的觅家</Link>
+    } else {
+      linkComponent = ''
     }
 
     return (

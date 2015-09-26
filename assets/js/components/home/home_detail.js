@@ -67,6 +67,7 @@ var HomeDetail = React.createClass({
 
   render: function () {
     var home = this.state.currentHome;
+    console.log(home);
     var bgStyle = this.isFavorite() ? 'danger' : 'warning'
     //TODO go back
     return (

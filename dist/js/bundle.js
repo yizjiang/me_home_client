@@ -30,7 +30,7 @@ var App = React.createClass({
   displayName: 'App',
 
   getInitialState: function getInitialState() {
-    return { isAgent: false };
+    return { isAgent: undefined };
   },
 
   _onChange: function _onChange() {
@@ -48,6 +48,7 @@ var App = React.createClass({
   },
 
   render: function render() {
+    console.log(this.state.isAgent);
     var linkComponent;
     if (this.state.isAgent == true) {
       linkComponent = React.createElement(
@@ -55,12 +56,14 @@ var App = React.createClass({
         { to: 'agent' },
         '经纪人入口'
       );
-    } else {
+    } else if (this.state.isAgent == false) {
       linkComponent = React.createElement(
         Link,
         { to: 'dashboard' },
         '我的觅家'
       );
+    } else {
+      linkComponent = '';
     }
 
     return React.createElement(
@@ -1345,6 +1348,7 @@ var HomeDetail = React.createClass({
 
   render: function render() {
     var home = this.state.currentHome;
+    console.log(home);
     var bgStyle = this.isFavorite() ? 'danger' : 'warning';
     //TODO go back
     return React.createElement(

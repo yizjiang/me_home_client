@@ -7,12 +7,6 @@ module Routes
       set :assets_debug, ENV['ASSET_DEBUG'].present?
     end
 
-    get '/signature' do
-      response = Typhoeus.get('https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=FDM-QhI0XCh_hyHadEV0ILXX_d8OvHEN88moX2whXYlEZ-llW0fV8MfaZRMm7vilOvKvIqiUPJUJYDQiq5SwbgkS7ApM3z8eeo336fNYt7o&type=jsapi')
-      p response
-      response.body
-    end
-
     get '/clear' do
       session[:uid] = ''
       redirect MEEHOME_SERVER_URL + '?user_action=logout'
@@ -23,7 +17,7 @@ module Routes
     end
 
     get '/' do
-      session[:uid] = get_user_session unless session[:uid] != ''  #TODO
+      session[:uid] = get_user_session if session[:uid].to_s == ''  #TODO
       p "root #{session[:uid]}"
       content_type :html
       erb :index
