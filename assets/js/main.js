@@ -56,8 +56,8 @@ var App = React.createClass({
 
     return (
       <div>
-        <div id='MenuBox' className='menuDiv'> {/* This is the eventKey referenced */}
-          <ul className='nav navbar-nav'>
+        <div className='menuDiv'>
+          <ul id='MenuBox' className='nav navbar-nav'>
             <li><a href='/#/main'>找房</a></li>
             <li><a href='/#/money'>找钱</a></li>
             <li><a href='/#/manage'>管理房产</a></li>
@@ -103,4 +103,5 @@ Router.run(routes, function (Handler, state) {
 $('#nav-toggle').click(function(){
     console.log('clicked');
     $(this).toggleClass('active');
+    $('#MenuBox').fadeToggle(300, 'linear');
 })

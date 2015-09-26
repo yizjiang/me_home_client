@@ -44,21 +44,62 @@ var React = require('react');
 var HomeList = React.createClass({
   displayName: 'HomeList',
 
+  scrollToList: function scrollToList() {},
+
   render: function render() {
+    if (this.props.list.length > 0) {
+      this.scrollToList();
+    }
     return React.createElement(
       'div',
-      { className: 'homelistDiv' },
+      { className: 'homelistDiv', id: 'homelistAnchor' },
       React.createElement(
         'ul',
         null,
         this.props.list.map(function (value) {
+          console.log(value);
+          console.log(value.images);
+          var imgUrl;
+          if (value.images != undefined && value.images.length > 0) {
+            imgUrl = SERVER_URL + value.images[0].image_url;
+          } else {
+            imgUrl = '../img/bay-area.jpg';
+          };
           return React.createElement(
             'li',
             null,
             React.createElement(
               'a',
               { href: '#/home_detail/' + value.id },
-              value.addr1 + ', ' + value.city + ': ' + value.home_type + ' $' + value.price
+              React.createElement('img', { src: imgUrl }),
+              React.createElement(
+                'div',
+                null,
+                React.createElement(
+                  'p',
+                  null,
+                  '地址：',
+                  value.addr1 + ', ' + value.city
+                ),
+                React.createElement(
+                  'p',
+                  null,
+                  '房型：',
+                  value.bed_num + ' bedrooms' + value.bath_num + ' bathrooms'
+                ),
+                React.createElement(
+                  'p',
+                  null,
+                  '房屋种类：',
+                  value.home_type
+                ),
+                React.createElement(
+                  'p',
+                  null,
+                  '价格：',
+                  '$' + value.price
+                )
+              )
             )
           );
         })

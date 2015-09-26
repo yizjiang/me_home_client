@@ -94,7 +94,7 @@ gulp.task('agent', function() {
 
 gulp.task('vendor', function() {
   return browserify(path.vendor.js)
-    .transform(reactify)
+    .transform(babelify)
     .bundle()
     .pipe(source('bundle_vendor.js'))
     .pipe(gulp.dest(path.dist.js));
