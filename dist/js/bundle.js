@@ -20,6 +20,7 @@ var React = require('react'),
     UserPanel = require('./components/base/user_panel.js'),
     UserStore = require('./stores/user_store.js');
 
+
 ServerActions.fetchRegionRanking('');
 ServerActions.getCurrentUser();//TODO .promise().then(ServerActions.getUserQuestions(UserStore.getCurrentUser()));
 
@@ -28,16 +29,22 @@ var App = React.createClass({displayName: "App",
 
     return (
       React.createElement("div", null, 
-        React.createElement("header", null, 
-          React.createElement("img", {className: "logoImg", src: "/img/logo.png"}), 
-          React.createElement("nav", {className: "mainNav"}, 
-            React.createElement(Link, {to: "home_main"}, "找房"), 
-            React.createElement(Link, {to: "money"}, "找钱"), 
-            React.createElement(Link, {to: "manage"}, "管理房产"), 
-            React.createElement(Link, {to: "agent"}, "经纪人入口"), 
-            React.createElement(Link, {to: "dashboard"}, "我的觅家")
+        React.createElement("div", {id: "MenuBox", className: "menuDiv"}, " ", /* This is the eventKey referenced */
+          React.createElement("ul", {className: "nav navbar-nav"}, 
+            React.createElement("li", null, React.createElement("a", {href: "/#/main"}, "找房")), 
+            React.createElement("li", null, React.createElement("a", {href: "/#/money"}, "找钱")), 
+            React.createElement("li", null, React.createElement("a", {href: "/#/manage"}, "管理房产")), 
+            React.createElement("li", null, React.createElement("a", {href: "/#/agent"}, "经纪人入口")), 
+            React.createElement("li", null, React.createElement("a", {href: "/#/dashboard"}, "我的觅家"))
           )
         ), 
+        React.createElement("header", null, 
+            React.createElement("img", {className: "logoImg", src: "/img/logo.png"}), 
+            React.createElement("div", null, 
+              React.createElement("a", {id: "nav-toggle", className: "nav_slide_button", href: "#"}, React.createElement("span", null))
+            )
+        ), 
+
         React.createElement(UserPanel, null), 
         React.createElement(RouteHandler, null)
       )
@@ -66,12 +73,12 @@ Router.run(routes, function (Handler, state) {
 });
 
 
+$('#nav-toggle').click(function(){
+    console.log('clicked');
+    $(this).toggleClass('active');
+})
 
-<<<<<<< HEAD
 },{"./actions/server_action":2,"./components/agent/main.js":4,"./components/base/user_panel.js":10,"./components/college/page.js":11,"./components/dashboard/main.js":14,"./components/home/home_detail.js":19,"./components/home/main.js":21,"./components/manage/component/main.js":27,"./components/money/component/main.js":28,"./stores/user_store.js":40,"./utils/api":41,"react":328,"react-router":132}],2:[function(require,module,exports){
-=======
-},{"./actions/server_action":2,"./components/agent/component/home_page.js":3,"./components/agent/component/main.js":4,"./components/agent/component/setting.js":5,"./components/base/user_panel.js":8,"./components/college/page.js":9,"./components/dashboard/main.js":11,"./components/home/home_detail.js":16,"./components/home/main.js":18,"./components/manage/component/main.js":22,"./components/money/component/main.js":23,"./utils/api":34,"react":293,"react-router":124}],2:[function(require,module,exports){
->>>>>>> css change
 var AppDispatcher = require('../dispatcher/app_dispatcher');
 var HomeConstants = require('../constants/home_constants');
 var UserConstants = require('../constants/user_constants');
@@ -385,11 +392,7 @@ var HomePage = React.createClass({displayName: "HomePage",
 
 module.exports = HomePage;
 
-<<<<<<< HEAD
 },{"react":328}],4:[function(require,module,exports){
-=======
-},{"react":293}],4:[function(require,module,exports){
->>>>>>> css change
 'use strict';
 
 var React = require('react'),
@@ -480,7 +483,6 @@ var Agent = React.createClass({displayName: "Agent",
 
 module.exports = Agent;
 
-<<<<<<< HEAD
 },{"./home_page":3,"./questions":5,"./setting":7,"react":328,"react-router":132,"react-tabs":154}],5:[function(require,module,exports){
 'use strict';
 var React = require('react'),
@@ -559,9 +561,6 @@ var ReplyForm = React.createClass({displayName: "ReplyForm",
 module.exports = ReplyForm;
 
 },{}],7:[function(require,module,exports){
-=======
-},{"./home_page":3,"./setting":5,"react":293,"react-router":124}],5:[function(require,module,exports){
->>>>>>> css change
 'use strict';
 var React = require('react');
 
@@ -577,11 +576,7 @@ var Setting = React.createClass({displayName: "Setting",
 
 module.exports = Setting;
 
-<<<<<<< HEAD
 },{"react":328}],8:[function(require,module,exports){
-=======
-},{"react":293}],6:[function(require,module,exports){
->>>>>>> css change
 var React = require('react')
 
 var Login = React.createClass({displayName: "Login",
@@ -603,7 +598,7 @@ var Login = React.createClass({displayName: "Login",
   },
 
   login: function() {
-    window.location.href = SERVER_URL;
+    window.location.href = SERVER_URL + '/users/login';
   },
 
   render: function(){
@@ -614,7 +609,7 @@ var Login = React.createClass({displayName: "Login",
         <input id='username' value={this.state.username} onChange={this.handleFilterChange} placeholder='用户名'/>
         <input id='password' value={this.state.password} onChange={this.handleFilterChange} placeholder='密码'/>
       */
-        React.createElement("button", {id: "login", type: "button", onClick: this.login}, "登陆")
+        React.createElement("button", {id: "login", type: "button", onClick: this.login, className: "nobutton"}, "登 陆")
       )
       )
   }
@@ -623,11 +618,8 @@ var Login = React.createClass({displayName: "Login",
 module.exports = Login;
 
 
-<<<<<<< HEAD
 },{"react":328}],9:[function(require,module,exports){
-=======
-},{"react":293}],7:[function(require,module,exports){
->>>>>>> css change
+
 var React = require('react'),
   ServerActions = require('../../actions/server_action');
 
@@ -642,10 +634,12 @@ var Profile = React.createClass({displayName: "Profile",
   },
 
   render: function(){
+    console.log(this.props.currentUser.email);
+    
     return (
       React.createElement("div", null, 
-         React.createElement("p", null, " welcome ",  this.props.currentUser.email, " "), 
-        React.createElement("button", {id: "login", type: "button", onClick: this.logout}, "退出")
+        React.createElement("p", null, "Welcome"), 
+        React.createElement("button", {id: "login", type: "button", onClick: this.logout, className: "nobutton"}, "退 出")
       )
       )
   }
@@ -654,11 +648,7 @@ var Profile = React.createClass({displayName: "Profile",
 module.exports = Profile;
 
 
-<<<<<<< HEAD
 },{"../../actions/server_action":2,"react":328}],10:[function(require,module,exports){
-=======
-},{"../../actions/server_action":2,"react":293}],8:[function(require,module,exports){
->>>>>>> css change
 var React = require('react'),
   Profile = require('./profile'),
   Login = require('./login'),
@@ -690,7 +680,7 @@ var UserPanel = React.createClass({displayName: "UserPanel",
 
   render: function(){
     return (
-      React.createElement("div", null, 
+      React.createElement("div", {className: "loginWrap"}, 
          _.isEmpty(this.state.currentUser) ? React.createElement(Login, null) : React.createElement(Profile, {currentUser: this.state.currentUser})
       )
       )
@@ -700,7 +690,6 @@ var UserPanel = React.createClass({displayName: "UserPanel",
 module.exports = UserPanel;
 
 
-<<<<<<< HEAD
 },{"../../actions/server_action":2,"../../stores/user_store":40,"./login":8,"./profile":9,"react":328}],11:[function(require,module,exports){
 
 
@@ -724,9 +713,6 @@ var Answer = React.createClass({displayName: "Answer",
       );
   }
 });
-=======
-},{"../../actions/server_action":2,"../../stores/user_store":33,"./login":6,"./profile":7,"react":293}],9:[function(require,module,exports){
->>>>>>> css change
 
 module.exports = Answer;
 
@@ -813,10 +799,10 @@ var Dashboard = React.createClass({displayName: "Dashboard",
         React.createElement(SavedSearchList, {list: this.state.saved_searches}), 
         React.createElement("h3", null, "红心房源"), 
         React.createElement(HomeList, {list: this.state.favorite_list}), 
-        React.createElement("p", null, "------------------------------------------------------" + ' ' +
-        "---------------------------------------------------------" + ' ' +
-        "----------------------------------------------------------"), 
-        React.createElement(HomeList, {list: this.state.home_list}), 
+        React.createElement("hr", null), 
+        React.createElement("div", {className: "searchResult"}, 
+          React.createElement(HomeList, {list: this.state.home_list})
+        ), 
         React.createElement(QuestionForm, {onCommentSubmit: this.handleQuestionSubmit}), 
         React.createElement(QuestionList, {data: this.state.data})
       )
@@ -941,16 +927,12 @@ module.exports = SavedSearchList;
 'use strict';
 var React = require('react'),
     HomeListStore = require('../../stores/home_list_store'),
-<<<<<<< HEAD
     ServerActions = require('../../actions/server_action'),
     UserStore = require('../../stores/user_store'),
-    Button = require('react-bootstrap').Button;
-=======
     Button = require('react-bootstrap').Button,
     Col = require('react-bootstrap').Col,
     Carousel = require('react-bootstrap').Carousel,
     CarouselItem = require('react-bootstrap').CarouselItem;
->>>>>>> css change
 
 
 var HomeDetail = React.createClass({displayName: "HomeDetail",
@@ -974,7 +956,7 @@ var HomeDetail = React.createClass({displayName: "HomeDetail",
     var self = this;
     if(_.isEmpty(currentHome)) {
       this.loadHomeFromServer(this.props.params.id)
-      currentHome = {};
+      currentHome = {images: []};
     }
     return {currentHome: currentHome, currentFavorite: UserStore.getFavoriteHomes()}
   },
@@ -993,7 +975,6 @@ var HomeDetail = React.createClass({displayName: "HomeDetail",
     UserStore.removeChangeListener(this._onChange);
   },
 
-<<<<<<< HEAD
   favoriteAction: function() {
     if(!this.isFavorite()) {
       ServerActions.addFavorite(this.state.currentHome.id, UserStore.getCurrentUser());      //Todo use then
@@ -1015,188 +996,142 @@ var HomeDetail = React.createClass({displayName: "HomeDetail",
 
   render: function () {
     var home = this.state.currentHome;
-    var bgStyle = this.isFavorite() ? 'danger' : 'warning'
-    //TODO go back
-    return (
-      React.createElement("div", null, 
-        React.createElement("button", null, React.createElement("a", {href: "#"}, " go back ")), 
-        React.createElement(Button, {id: "favoriteBtn", bsStyle: bgStyle, onClick: this.favoriteAction}, "红心"), 
-        React.createElement("h3", null, "Home Details: "), 
-        React.createElement("ul", null, 
-         Object.keys(home).map(function(key){
-             return (
-                 React.createElement("li", null, 
-                   key + ':' + JSON.stringify(home[key])
-                  )
-=======
-  render: function () {
-    var home = this.state.currentHome;
-     var mapping = {addr1: '地址', 
-                      addr2: '门牌',
-                      city: '城市',
-                      state: '州',
-                      zipcode: '邮编',
-                      county: '国家', 
-                      home_type: '房型',
-                      bed_num: '卧', 
-                      bath_num: '卫', 
-                      created_at: '发布日',
-                      description: '详情',
-                      indoor_size: '室内面积',
-                      link: '网址',
-                      lot_size: '总体面积',
-                      neighborhood: '社区',
-                      price: '价格',
-                      status: '状态',
-                      stores: '层数',
-                      unit_price: '单价',
-                      year_built: '建造时间',
-                      last_refresh_at: '上次更新时间',
-                      id: 'ID'
-                    };
-    return (
-      React.createElement("div", null, 
-      React.createElement(Carousel, null, 
-        React.createElement(CarouselItem, null, 
-          React.createElement("img", {alt: "Home XXX", src: "../img/1-1.jpg"}), 
-          React.createElement("div", {className: "carousel-caption"}, 
-            React.createElement("h3", null, "Home XXX"), 
-            React.createElement("p", null, "Nulla vitae elit libero, a pharetra augue mollis interdum.")
-          )
-        ), 
-        React.createElement(CarouselItem, null, 
-          React.createElement("img", {alt: "Home XXX", src: "../img/1-2.jpg"}), 
-          React.createElement("div", {className: "carousel-caption"}, 
-            React.createElement("h3", null, "Home XXX"), 
-            React.createElement("p", null, "Lorem ipsum dolor sit amet, consectetur adipiscing elit.")
-          )
-        ), 
-        React.createElement(CarouselItem, null, 
-          React.createElement("img", {alt: "Home XXX", src: "../img/1-3.jpg"}), 
-          React.createElement("div", {className: "carousel-caption"}, 
-            React.createElement("h3", null, "Home XXX"), 
-            React.createElement("p", null, "Praesent commodo cursus magna, vel scelerisque nisl consectetur.")
-          )
-        ), 
-        React.createElement(CarouselItem, null, 
-          React.createElement("img", {alt: "Home XXX", src: "../img/1-4.jpg"}), 
-          React.createElement("div", {className: "carousel-caption"}, 
-            React.createElement("h3", null, "Home XXX"), 
-            React.createElement("p", null, "Praesent commodo cursus magna, vel scelerisque nisl consectetur.")
-          )
-        ), 
-        React.createElement(CarouselItem, null, 
-          React.createElement("img", {alt: "Home XXX", src: "../img/1-5.jpg"}), 
-          React.createElement("div", {className: "carousel-caption"}, 
-            React.createElement("h3", null, "Home XXX"), 
-            React.createElement("p", null, "Praesent commodo cursus magna, vel scelerisque nisl consectetur.")
-          )
-        ), 
-        React.createElement(CarouselItem, null, 
-          React.createElement("img", {alt: "Home XXX", src: "../img/1-6.jpg"}), 
-          React.createElement("div", {className: "carousel-caption"}, 
-            React.createElement("h3", null, "Home XXX"), 
-            React.createElement("p", null, "Praesent commodo cursus magna, vel scelerisque nisl consectetur.")
-          )
-        ), 
-        React.createElement(CarouselItem, null, 
-          React.createElement("img", {alt: "Home XXX", src: "../img/1-7.jpg"}), 
-          React.createElement("div", {className: "carousel-caption"}, 
-            React.createElement("h3", null, "Home XXX"), 
-            React.createElement("p", null, "Praesent commodo cursus magna, vel scelerisque nisl consectetur.")
-          )
-        ), 
-        React.createElement(CarouselItem, null, 
-          React.createElement("img", {alt: "Home XXX", src: "../img/1-8.jpg"}), 
-          React.createElement("div", {className: "carousel-caption"}, 
-            React.createElement("h3", null, "Home XXX"), 
-            React.createElement("p", null, "Praesent commodo cursus magna, vel scelerisque nisl consectetur.")
-          )
-        ), 
-        React.createElement(CarouselItem, null, 
-          React.createElement("img", {alt: "Home XXX", src: "../img/1-9.jpg"}), 
-          React.createElement("div", {className: "carousel-caption"}, 
-            React.createElement("h3", null, "Home XXX"), 
-            React.createElement("p", null, "Praesent commodo cursus magna, vel scelerisque nisl consectetur.")
-          )
-        ), 
-        React.createElement(CarouselItem, null, 
-          React.createElement("img", {alt: "Home XXX", src: "../img/1-10.jpg"}), 
-          React.createElement("div", {className: "carousel-caption"}, 
-            React.createElement("h3", null, "Home XXX"), 
-            React.createElement("p", null, "Praesent commodo cursus magna, vel scelerisque nisl consectetur.")
-          )
-        ), 
-        React.createElement(CarouselItem, null, 
-          React.createElement("img", {alt: "Home XXX", src: "../img/1-11.jpg"}), 
-          React.createElement("div", {className: "carousel-caption"}, 
-            React.createElement("h3", null, "Home XXX"), 
-            React.createElement("p", null, "Praesent commodo cursus magna, vel scelerisque nisl consectetur.")
-          )
-        ), 
-        React.createElement(CarouselItem, null, 
-          React.createElement("img", {alt: "Home XXX", src: "../img/1-12.jpg"}), 
-          React.createElement("div", {className: "carousel-caption"}, 
-            React.createElement("h3", null, "Home XXX"), 
-            React.createElement("p", null, "Praesent commodo cursus magna, vel scelerisque nisl consectetur.")
-          )
-        ), 
-        React.createElement(CarouselItem, null, 
-          React.createElement("img", {alt: "Home XXX", src: "../img/1-13.jpg"}), 
-          React.createElement("div", {className: "carousel-caption"}, 
-            React.createElement("h3", null, "Home XXX"), 
-            React.createElement("p", null, "Praesent commodo cursus magna, vel scelerisque nisl consectetur.")
-          )
-        ), 
-        React.createElement(CarouselItem, null, 
-          React.createElement("img", {alt: "Home XXX", src: "../img/1-14.jpg"}), 
-          React.createElement("div", {className: "carousel-caption"}, 
-            React.createElement("h3", null, "Home XXX"), 
-            React.createElement("p", null, "Praesent commodo cursus magna, vel scelerisque nisl consectetur.")
-          )
-        ), 
-        React.createElement(CarouselItem, null, 
-          React.createElement("img", {alt: "Home XXX", src: "../img/1-15.jpg"}), 
-          React.createElement("div", {className: "carousel-caption"}, 
-            React.createElement("h3", null, "Home XXX"), 
-            React.createElement("p", null, "Praesent commodo cursus magna, vel scelerisque nisl consectetur.")
-          )
-        ), 
-        React.createElement(CarouselItem, null, 
-          React.createElement("img", {alt: "Home XXX", src: "../img/1-16.jpg"}), 
-          React.createElement("div", {className: "carousel-caption"}, 
-            React.createElement("h3", null, "Home XXX"), 
-            React.createElement("p", null, "Praesent commodo cursus magna, vel scelerisque nisl consectetur.")
-          )
-        )
-      ), 
-      React.createElement("div", {className: "detailDiv"}, 
-        React.createElement("button", {className: "btngroup"}, React.createElement("a", {href: "#"}, "后 退")), 
-        React.createElement("h3", null, "房屋详情"), 
-        Object.keys(home).map(function(key){
-             return (
-                 React.createElement(Col, {xs: 6, md: 4, className: "detailPara"}, " ", mapping[key] + ': ' + JSON.stringify(home[key]), " ")
->>>>>>> css change
-               )
-           }
-        )
+    var bgStyle = this.isFavorite() ? 'danger' : 'warning';
+    var mapping = {addr1: '地址', 
+                   addr2: '门牌',
+                   city: '城市',
+                   state: '州',
+                   zipcode: '邮编',
+                   county: '国家', 
+                   home_type: '房型',
+                   bed_num: '卧', 
+                   bath_num: '卫', 
+                   created_at: '发布日',
+                   description: '详情',
+                   indoor_size: '室内面积',
+                   link: '网址',
+                   lot_size: '总体面积',
+                   neighborhood: '社区',
+                   price: '价格',
+                   status: '状态',
+                   stores: '层',
+                   unit_price: '单价',
+                   year_built: '建造时间',
+                   last_refresh_at: '上次更新时间',
+                   id: 'ID',
+                   schools: '学校'
+                  };
+   
+    
+    if(home.addr2 == null) {
+      home.addr2 = '';
+    }else{
+      home.addr2 = home.addr2 + ',';
+    };
+    var address = home.addr1 + ', ' + home.addr2 + ' ' + home.city + ', ' + home.state + ', ' + home.county;
+    
+    if (home.stores >= 0) {
+      home.stores = home.stores + 1;
+    }else{
+      home.stores = '';
+      mapping.stores = '';
+    }
 
-         
-         )
+    //TODO go back
+    console.log(home);
+    console.log(home.schools);
+    return (
+      React.createElement("div", null, 
+        React.createElement(Carousel, null, 
+            
+              home.images.map(function(img){
+                return (
+                  React.createElement(CarouselItem, null, 
+                    React.createElement("img", {src: SERVER_URL + img.image_url}), 
+                    React.createElement("div", {className: "carousel-caption"}, 
+                      React.createElement("h3", null, address)
+                    )
+                  )
+                )
+              }
+              )
+            
+        ), 
+
+        React.createElement("div", {className: "detailDiv"}, 
+          React.createElement("button", {className: "btngroup"}, React.createElement("a", {href: "#"}, "后 退")), 
+          React.createElement(Button, {id: "favoriteBtn", bsStyle: bgStyle, onClick: this.favoriteAction}, "红心"), 
+          React.createElement("h3", null, "房屋详情"), 
+          React.createElement("div", {className: "detailWrap"}, 
+              
+              React.createElement(Col, {md: 6, className: "detailPara"}, 
+                 React.createElement("h3", {className: "detailh3"}, mapping['addr1']), 
+                 React.createElement("p", {className: "detailp"}, address + ' ' +home['zipcode']), 
+                 React.createElement("p", {className: "detailp"}, mapping['neighborhood'] + ' ' + home['neighborhood'])
+              ), 
+
+              React.createElement(Col, {md: 6, className: "detailPara"}, 
+                  React.createElement("h3", {className: "detailh3"}, mapping['home_type']), 
+                  React.createElement("p", {className: "detailp"}, home['home_type'] 
+                                          + ': ' 
+                                          + home['bed_num'] 
+                                          + mapping['bed_num'] 
+                                          + home['bath_num'] 
+                                          + mapping['bath_num']
+                                         
+                  ), 
+                  React.createElement("p", {className: "detailp"}, 
+                                          mapping['indoor_size']
+                                          + ': '
+                                          + home['indoor_size']
+                                          + '千平方英尺, '
+                                          + mapping['lot_size']
+                                          + ': '
+                                          + home['lot_size']
+                                          + '千平方英尺, '
+                                          + home['stores'] 
+                                          + mapping['stores']
+                                         
+                  )
+              ), 
+
+              React.createElement(Col, {md: 6, className: "detailPara singledetail"}, 
+                React.createElement("h3", {className: "detailh3"}, 
+                 mapping['price'] + ': ' + home['price']
+                ), 
+                React.createElement("p", {className: "detailp"}, mapping['unit_price'] + ': ' + home['unit_price'] + '美金/平方英尺')
+              ), 
+
+              React.createElement(Col, {md: 12, className: "detailPara detailother"}, 
+                React.createElement("h3", {className: "detailh3"}, 
+                 mapping['description']
+                ), 
+                React.createElement("p", {className: "detailp"}, home['description'])
+              ), 
+
+              React.createElement(Col, {md: 6, className: "detailPara "}, 
+                React.createElement("h3", {className: "detailh3"}, 
+                 mapping['schools']
+                ), 
+                React.createElement("p", {className: "detailp"}, home['schools'])
+              ), 
+              React.createElement(Col, {md: 6, className: "detailPara "}, 
+                React.createElement("h3", {className: "detailh3"}, 
+                 "其他"
+                ), 
+                React.createElement("p", {className: "detailp"}, " ")
+              )
+          )
+        )
       )
-    )
   );
   }
 });
 
 module.exports = HomeDetail;
 
-<<<<<<< HEAD
 
 },{"../../actions/server_action":2,"../../stores/home_list_store":37,"../../stores/user_store":40,"react":328,"react-bootstrap":97}],20:[function(require,module,exports){
-=======
-},{"../../stores/home_list_store":31,"react":293,"react-bootstrap":89}],17:[function(require,module,exports){
->>>>>>> css change
 'use strict';
 var React = require('react');
 
@@ -1214,9 +1149,17 @@ var HomeList = React.createClass({displayName: "HomeList",
       React.createElement("div", {className: "homelistDiv", id: "homelistAnchor"}, 
          React.createElement("ul", null, 
           this.props.list.map(function(value){
+           console.log(value);
+           console.log(value.images);
+           var imgUrl;
+           if(value.images != undefined && value.images.length > 0){
+            imgUrl = SERVER_URL + value.images[0].image_url;
+           }else{
+            imgUrl = '../img/bay-area.jpg';
+           };
            return React.createElement("li", null, 
                     React.createElement("a", {href: '#/home_detail/' + value.id}, 
-                      React.createElement("img", {src: "../img/bay-area.jpg"}), 
+                      React.createElement("img", {src: imgUrl}), 
                       React.createElement("div", null, 
                         React.createElement("p", null, "地址：", value.addr1 + ", " + value.city), 
                         React.createElement("p", null, "房型：", value.bed_num + " bedrooms" + value.bath_num + " bathrooms"), 
@@ -1235,11 +1178,7 @@ var HomeList = React.createClass({displayName: "HomeList",
 
 module.exports = HomeList;
 
-<<<<<<< HEAD
 },{"react":328}],21:[function(require,module,exports){
-=======
-},{"react":293}],18:[function(require,module,exports){
->>>>>>> css change
 'use strict';
 var React = require('react');
 var Router = require('react-router'); // or var Router = ReactRouter; in browsers
@@ -1292,14 +1231,10 @@ var HomeMain = React.createClass({displayName: "HomeMain",
 
 module.exports = HomeMain;
 
-<<<<<<< HEAD
 },{"../../stores/home_list_store":37,"./home_list.js":20,"./search_box.js":23,"./search_panel.js":24,"./select_panel.js":26,"react":328,"react-router":132}],22:[function(require,module,exports){
 
 
 },{}],23:[function(require,module,exports){
-=======
-},{"../../stores/home_list_store":31,"./home_list.js":17,"./search_box.js":19,"./select_panel.js":21,"react":293,"react-router":124}],19:[function(require,module,exports){
->>>>>>> css change
 var ServerActions = require('../../actions/server_action'),
   UserStore = require('../../stores/user_store');
 
@@ -1422,11 +1357,7 @@ var SelectItems = React.createClass({displayName: "SelectItems",
 module.exports = SelectItems
 
 
-<<<<<<< HEAD
 },{"../../actions/server_action":2,"react":328}],26:[function(require,module,exports){
-=======
-},{"../../actions/server_action":2,"react":293}],21:[function(require,module,exports){
->>>>>>> css change
 var React = require('react'),
     ServerActions = require('../../actions/server_action'),
     SelectItems = require('./select_items.js'),
@@ -1480,11 +1411,7 @@ var SelectPanel = React.createClass({displayName: "SelectPanel",
 
 module.exports = SelectPanel
 
-<<<<<<< HEAD
 },{"../../actions/server_action":2,"../../stores/search_panel_store":39,"./select_items.js":25,"react":328}],27:[function(require,module,exports){
-=======
-},{"../../actions/server_action":2,"../../stores/search_panel_store":32,"./select_items.js":20,"react":293}],22:[function(require,module,exports){
->>>>>>> css change
 'use strict';
 var React = require('react');
 
@@ -1497,11 +1424,7 @@ var Manage = React.createClass({displayName: "Manage",
 
 module.exports = Manage;
 
-<<<<<<< HEAD
 },{"react":328}],28:[function(require,module,exports){
-=======
-},{"react":293}],23:[function(require,module,exports){
->>>>>>> css change
 var ProductCategoryRow = require('./product_category_row.js');
 var ProductRow = require('./product_row.js');
 var ProductTable = require('./product_table.js');
@@ -1660,7 +1583,6 @@ module.exports = keyMirror({
 });
 
 
-<<<<<<< HEAD
 },{"react/lib/keyMirror":312}],34:[function(require,module,exports){
 var keyMirror = require('react/lib/keyMirror');
 
@@ -1673,9 +1595,6 @@ module.exports = keyMirror({
 
 
 },{"react/lib/keyMirror":312}],35:[function(require,module,exports){
-=======
-},{"react/lib/keyMirror":278}],29:[function(require,module,exports){
->>>>>>> css change
 var keyMirror = require('react/lib/keyMirror');
 
 // Define action constants
@@ -1686,11 +1605,7 @@ module.exports = keyMirror({
 });
 
 
-<<<<<<< HEAD
 },{"react/lib/keyMirror":312}],36:[function(require,module,exports){
-=======
-},{"react/lib/keyMirror":278}],30:[function(require,module,exports){
->>>>>>> css change
 var Dispatcher = require('flux').Dispatcher;
 
 // Create dispatcher instance
@@ -1776,7 +1691,6 @@ AppDispatcher.register(function(payload) {
 module.exports = HomeListStore;
 
 
-<<<<<<< HEAD
 },{"../constants/home_constants":33,"../dispatcher/app_dispatcher":36,"../utils/api":41,"events":42,"underscore":329}],38:[function(require,module,exports){
 var AppDispatcher = require('../dispatcher/app_dispatcher'),
   EventEmitter = require('events').EventEmitter,
@@ -1851,9 +1765,6 @@ module.exports = QuestionStore;
 
 
 },{"../constants/question_constants":34,"../dispatcher/app_dispatcher":36,"events":42,"lodash":47}],39:[function(require,module,exports){
-=======
-},{"../constants/home_constants":28,"../dispatcher/app_dispatcher":30,"../utils/api":34,"events":35,"underscore":294}],32:[function(require,module,exports){
->>>>>>> css change
 var AppDispatcher = require('../dispatcher/app_dispatcher');
 var EventEmitter = require('events').EventEmitter;
 var HomeConstants = require('../constants/home_constants'),
@@ -1950,11 +1861,7 @@ AppDispatcher.register(function(payload) {
 module.exports = SearchPanelStore;
 
 
-<<<<<<< HEAD
 },{"../constants/home_constants":33,"../dispatcher/app_dispatcher":36,"../utils/api":41,"events":42,"underscore":329}],40:[function(require,module,exports){
-=======
-},{"../constants/home_constants":28,"../dispatcher/app_dispatcher":30,"../utils/api":34,"events":35,"underscore":294}],33:[function(require,module,exports){
->>>>>>> css change
 var AppDispatcher = require('../dispatcher/app_dispatcher');
 var EventEmitter = require('events').EventEmitter;
 var Api = require('../utils/api');
@@ -2055,11 +1962,7 @@ AppDispatcher.register(function(payload) {
 module.exports = UserStore;
 
 
-<<<<<<< HEAD
 },{"../constants/user_constants":35,"../dispatcher/app_dispatcher":36,"../utils/api":41,"events":42,"underscore":329}],41:[function(require,module,exports){
-=======
-},{"../constants/user_constants":29,"../dispatcher/app_dispatcher":30,"../utils/api":34,"events":35,"underscore":294}],34:[function(require,module,exports){
->>>>>>> css change
 var ServerActions = require('../actions/server_action');
 
 module.exports = {
@@ -2732,7 +2635,7 @@ var _prefix = 'ID_';
 
 module.exports = Dispatcher;
 
-},{"./invariant":39}],39:[function(require,module,exports){
+},{"./invariant":46}],46:[function(require,module,exports){
 /**
  * Copyright (c) 2014, Facebook, Inc.
  * All rights reserved.
@@ -2787,5143 +2690,6 @@ var invariant = function(condition, format, a, b, c, d, e, f) {
 
 module.exports = invariant;
 
-},{}],40:[function(require,module,exports){
-var React = require('react');
-var PanelGroup = require('./PanelGroup');
-
-var Accordion = React.createClass({displayName: "Accordion",
-  render: function () {
-    return (
-      React.createElement(PanelGroup, React.__spread({},  this.props, {accordion: true}), 
-        this.props.children
-      )
-    );
-  }
-});
-
-module.exports = Accordion;
-},{"./PanelGroup":77,"react":293}],41:[function(require,module,exports){
-var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var AffixMixin = require('./AffixMixin');
-var domUtils = require('./utils/domUtils');
-
-var Affix = React.createClass({displayName: "Affix",
-  statics: {
-    domUtils: domUtils
-  },
-
-  mixins: [AffixMixin],
-
-  render: function () {
-    var holderStyle = {top: this.state.affixPositionTop};
-    return (
-      React.createElement("div", React.__spread({},  this.props, {className: joinClasses(this.props.className, this.state.affixClass), style: holderStyle}), 
-        this.props.children
-      )
-    );
-  }
-});
-
-module.exports = Affix;
-},{"./AffixMixin":42,"./utils/domUtils":98,"./utils/joinClasses":99,"react":293}],42:[function(require,module,exports){
-/* global window, document */
-
-var React = require('react');
-var domUtils = require('./utils/domUtils');
-var EventListener = require('./utils/EventListener');
-
-var AffixMixin = {
-  propTypes: {
-    offset: React.PropTypes.number,
-    offsetTop: React.PropTypes.number,
-    offsetBottom: React.PropTypes.number
-  },
-
-  getInitialState: function () {
-    return {
-      affixClass: 'affix-top'
-    };
-  },
-
-  getPinnedOffset: function (DOMNode) {
-    if (this.pinnedOffset) {
-      return this.pinnedOffset;
-    }
-
-    DOMNode.className = DOMNode.className.replace(/affix-top|affix-bottom|affix/, '');
-    DOMNode.className += DOMNode.className.length ? ' affix' : 'affix';
-
-    this.pinnedOffset = domUtils.getOffset(DOMNode).top - window.pageYOffset;
-
-    return this.pinnedOffset;
-  },
-
-  checkPosition: function () {
-    var DOMNode, scrollHeight, scrollTop, position, offsetTop, offsetBottom,
-        affix, affixType, affixPositionTop;
-
-    // TODO: or not visible
-    if (!this.isMounted()) {
-      return;
-    }
-
-    DOMNode = this.getDOMNode();
-    scrollHeight = document.documentElement.offsetHeight;
-    scrollTop = window.pageYOffset;
-    position = domUtils.getOffset(DOMNode);
-    offsetTop;
-    offsetBottom;
-
-    if (this.affixed === 'top') {
-      position.top += scrollTop;
-    }
-
-    offsetTop = this.props.offsetTop != null ?
-      this.props.offsetTop : this.props.offset;
-    offsetBottom = this.props.offsetBottom != null ?
-      this.props.offsetBottom : this.props.offset;
-
-    if (offsetTop == null && offsetBottom == null) {
-      return;
-    }
-    if (offsetTop == null) {
-      offsetTop = 0;
-    }
-    if (offsetBottom == null) {
-      offsetBottom = 0;
-    }
-
-    if (this.unpin != null && (scrollTop + this.unpin <= position.top)) {
-      affix = false;
-    } else if (offsetBottom != null && (position.top + DOMNode.offsetHeight >= scrollHeight - offsetBottom)) {
-      affix = 'bottom';
-    } else if (offsetTop != null && (scrollTop <= offsetTop)) {
-      affix = 'top';
-    } else {
-      affix = false;
-    }
-
-    if (this.affixed === affix) {
-      return;
-    }
-
-    if (this.unpin != null) {
-      DOMNode.style.top = '';
-    }
-
-    affixType = 'affix' + (affix ? '-' + affix : '');
-
-    this.affixed = affix;
-    this.unpin = affix === 'bottom' ?
-      this.getPinnedOffset(DOMNode) : null;
-
-    if (affix === 'bottom') {
-      DOMNode.className = DOMNode.className.replace(/affix-top|affix-bottom|affix/, 'affix-bottom');
-      affixPositionTop = scrollHeight - offsetBottom - DOMNode.offsetHeight - domUtils.getOffset(DOMNode).top;
-    }
-
-    this.setState({
-      affixClass: affixType,
-      affixPositionTop: affixPositionTop
-    });
-  },
-
-  checkPositionWithEventLoop: function () {
-    setTimeout(this.checkPosition, 0);
-  },
-
-  componentDidMount: function () {
-    this._onWindowScrollListener =
-      EventListener.listen(window, 'scroll', this.checkPosition);
-    this._onDocumentClickListener =
-      EventListener.listen(document, 'click', this.checkPositionWithEventLoop);
-  },
-
-  componentWillUnmount: function () {
-    if (this._onWindowScrollListener) {
-      this._onWindowScrollListener.remove();
-    }
-
-    if (this._onDocumentClickListener) {
-      this._onDocumentClickListener.remove();
-    }
-  },
-
-  componentDidUpdate: function (prevProps, prevState) {
-    if (prevState.affixClass === this.state.affixClass) {
-      this.checkPositionWithEventLoop();
-    }
-  }
-};
-
-module.exports = AffixMixin;
-},{"./utils/EventListener":91,"./utils/domUtils":98,"react":293}],43:[function(require,module,exports){
-var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
-var BootstrapMixin = require('./BootstrapMixin');
-
-
-var Alert = React.createClass({displayName: "Alert",
-  mixins: [BootstrapMixin],
-
-  propTypes: {
-    onDismiss: React.PropTypes.func,
-    dismissAfter: React.PropTypes.number
-  },
-
-  getDefaultProps: function () {
-    return {
-      bsClass: 'alert',
-      bsStyle: 'info'
-    };
-  },
-
-  renderDismissButton: function () {
-    return (
-      React.createElement("button", {
-        type: "button", 
-        className: "close", 
-        onClick: this.props.onDismiss, 
-        "aria-hidden": "true"}, 
-        "×"
-      )
-    );
-  },
-
-  render: function () {
-    var classes = this.getBsClassSet();
-    var isDismissable = !!this.props.onDismiss;
-
-    classes['alert-dismissable'] = isDismissable;
-
-    return (
-      React.createElement("div", React.__spread({},  this.props, {className: joinClasses(this.props.className, classSet(classes))}), 
-        isDismissable ? this.renderDismissButton() : null, 
-        this.props.children
-      )
-    );
-  },
-
-  componentDidMount: function() {
-    if (this.props.dismissAfter && this.props.onDismiss) {
-      this.dismissTimer = setTimeout(this.props.onDismiss, this.props.dismissAfter);
-    }
-  },
-
-  componentWillUnmount: function() {
-    clearTimeout(this.dismissTimer);
-  }
-});
-
-module.exports = Alert;
-},{"./BootstrapMixin":45,"./utils/classSet":95,"./utils/joinClasses":99,"react":293}],44:[function(require,module,exports){
-var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var ValidComponentChildren = require('./utils/ValidComponentChildren');
-var classSet = require('./utils/classSet');
-
-var Badge = React.createClass({displayName: "Badge",
-  propTypes: {
-    pullRight: React.PropTypes.bool
-  },
-
-  hasContent: function () {
-    return ValidComponentChildren.hasValidComponent(this.props.children) ||
-      (typeof this.props.children === 'string') ||
-      (typeof this.props.children === 'number')
-  },
-
-  render: function () {
-    var classes = {
-      'pull-right': this.props.pullRight,
-      'badge': this.hasContent()
-    };
-    return (
-      React.createElement("span", React.__spread({}, 
-        this.props, 
-        {className: joinClasses(this.props.className, classSet(classes))}), 
-        this.props.children
-      )
-    );
-  }
-});
-
-module.exports = Badge;
-
-},{"./utils/ValidComponentChildren":94,"./utils/classSet":95,"./utils/joinClasses":99,"react":293}],45:[function(require,module,exports){
-var React = require('react');
-var constants = require('./constants');
-
-var BootstrapMixin = {
-  propTypes: {
-    bsClass: React.PropTypes.oneOf(Object.keys(constants.CLASSES)),
-    bsStyle: React.PropTypes.oneOf(Object.keys(constants.STYLES)),
-    bsSize: React.PropTypes.oneOf(Object.keys(constants.SIZES))
-  },
-
-  getBsClassSet: function () {
-    var classes = {};
-
-    var bsClass = this.props.bsClass && constants.CLASSES[this.props.bsClass];
-    if (bsClass) {
-      classes[bsClass] = true;
-
-      var prefix = bsClass + '-';
-
-      var bsSize = this.props.bsSize && constants.SIZES[this.props.bsSize];
-      if (bsSize) {
-        classes[prefix + bsSize] = true;
-      }
-
-      var bsStyle = this.props.bsStyle && constants.STYLES[this.props.bsStyle];
-      if (this.props.bsStyle) {
-        classes[prefix + bsStyle] = true;
-      }
-    }
-
-    return classes;
-  }
-};
-
-module.exports = BootstrapMixin;
-},{"./constants":88,"react":293}],46:[function(require,module,exports){
-var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
-var BootstrapMixin = require('./BootstrapMixin');
-
-var Button = React.createClass({displayName: "Button",
-  mixins: [BootstrapMixin],
-
-  propTypes: {
-    active:   React.PropTypes.bool,
-    disabled: React.PropTypes.bool,
-    block:    React.PropTypes.bool,
-    navItem:    React.PropTypes.bool,
-    navDropdown: React.PropTypes.bool,
-    componentClass: React.PropTypes.node,
-    href: React.PropTypes.string,
-    target: React.PropTypes.string
-  },
-
-  getDefaultProps: function () {
-    return {
-      bsClass: 'button',
-      bsStyle: 'default',
-      type: 'button'
-    };
-  },
-
-  render: function () {
-    var classes = this.props.navDropdown ? {} : this.getBsClassSet();
-    var renderFuncName;
-
-    classes['active'] = this.props.active;
-    classes['btn-block'] = this.props.block;
-
-    if (this.props.navItem) {
-      return this.renderNavItem(classes);
-    }
-
-    renderFuncName = this.props.href || this.props.target || this.props.navDropdown ?
-      'renderAnchor' : 'renderButton';
-
-    return this[renderFuncName](classes);
-  },
-
-  renderAnchor: function (classes) {
-
-    var Component = this.props.componentClass || 'a';
-    var href = this.props.href || '#';
-    classes['disabled'] = this.props.disabled;
-
-    return (
-      React.createElement(Component, React.__spread({}, 
-        this.props, 
-        {href: href, 
-        className: joinClasses(this.props.className, classSet(classes)), 
-        role: "button"}), 
-        this.props.children
-      )
-    );
-  },
-
-  renderButton: function (classes) {
-    var Component = this.props.componentClass || 'button';
-
-    return (
-      React.createElement(Component, React.__spread({}, 
-        this.props, 
-        {className: joinClasses(this.props.className, classSet(classes))}), 
-        this.props.children
-      )
-    );
-  },
-
-  renderNavItem: function (classes) {
-    var liClasses = {
-      active: this.props.active
-    };
-
-    return (
-      React.createElement("li", {className: classSet(liClasses)}, 
-        this.renderAnchor(classes)
-      )
-    );
-  }
-});
-
-module.exports = Button;
-
-},{"./BootstrapMixin":45,"./utils/classSet":95,"./utils/joinClasses":99,"react":293}],47:[function(require,module,exports){
-var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
-var BootstrapMixin = require('./BootstrapMixin');
-var Button = require('./Button');
-
-var ButtonGroup = React.createClass({displayName: "ButtonGroup",
-  mixins: [BootstrapMixin],
-
-  propTypes: {
-    vertical:  React.PropTypes.bool,
-    justified: React.PropTypes.bool
-  },
-
-  getDefaultProps: function () {
-    return {
-      bsClass: 'button-group'
-    };
-  },
-
-  render: function () {
-    var classes = this.getBsClassSet();
-    classes['btn-group'] = !this.props.vertical;
-    classes['btn-group-vertical'] = this.props.vertical;
-    classes['btn-group-justified'] = this.props.justified;
-
-    return (
-      React.createElement("div", React.__spread({}, 
-        this.props, 
-        {className: joinClasses(this.props.className, classSet(classes))}), 
-        this.props.children
-      )
-    );
-  }
-});
-
-module.exports = ButtonGroup;
-},{"./BootstrapMixin":45,"./Button":46,"./utils/classSet":95,"./utils/joinClasses":99,"react":293}],48:[function(require,module,exports){
-var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
-var BootstrapMixin = require('./BootstrapMixin');
-var Button = require('./Button');
-
-var ButtonToolbar = React.createClass({displayName: "ButtonToolbar",
-  mixins: [BootstrapMixin],
-
-  getDefaultProps: function () {
-    return {
-      bsClass: 'button-toolbar'
-    };
-  },
-
-  render: function () {
-    var classes = this.getBsClassSet();
-
-    return (
-      React.createElement("div", React.__spread({}, 
-        this.props, 
-        {role: "toolbar", 
-        className: joinClasses(this.props.className, classSet(classes))}), 
-        this.props.children
-      )
-    );
-  }
-});
-
-module.exports = ButtonToolbar;
-},{"./BootstrapMixin":45,"./Button":46,"./utils/classSet":95,"./utils/joinClasses":99,"react":293}],49:[function(require,module,exports){
-var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
-var cloneWithProps = require('./utils/cloneWithProps');
-var BootstrapMixin = require('./BootstrapMixin');
-var ValidComponentChildren = require('./utils/ValidComponentChildren');
-
-var Carousel = React.createClass({displayName: "Carousel",
-  mixins: [BootstrapMixin],
-
-  propTypes: {
-    slide: React.PropTypes.bool,
-    indicators: React.PropTypes.bool,
-    controls: React.PropTypes.bool,
-    pauseOnHover: React.PropTypes.bool,
-    wrap: React.PropTypes.bool,
-    onSelect: React.PropTypes.func,
-    onSlideEnd: React.PropTypes.func,
-    activeIndex: React.PropTypes.number,
-    defaultActiveIndex: React.PropTypes.number,
-    direction: React.PropTypes.oneOf(['prev', 'next'])
-  },
-
-  getDefaultProps: function () {
-    return {
-      slide: true,
-      interval: 5000,
-      pauseOnHover: true,
-      wrap: true,
-      indicators: true,
-      controls: true
-    };
-  },
-
-  getInitialState: function () {
-    return {
-      activeIndex: this.props.defaultActiveIndex == null ?
-        0 : this.props.defaultActiveIndex,
-      previousActiveIndex: null,
-      direction: null
-    };
-  },
-
-  getDirection: function (prevIndex, index) {
-    if (prevIndex === index) {
-      return null;
-    }
-
-    return prevIndex > index ?
-      'prev' : 'next';
-  },
-
-  componentWillReceiveProps: function (nextProps) {
-    var activeIndex = this.getActiveIndex();
-
-    if (nextProps.activeIndex != null && nextProps.activeIndex !== activeIndex) {
-      clearTimeout(this.timeout);
-      this.setState({
-        previousActiveIndex: activeIndex,
-        direction: nextProps.direction != null ?
-          nextProps.direction : this.getDirection(activeIndex, nextProps.activeIndex)
-      });
-    }
-  },
-
-  componentDidMount: function () {
-    this.waitForNext();
-  },
-
-  componentWillUnmount: function() {
-    clearTimeout(this.timeout);
-  },
-
-  next: function (e) {
-    if (e) {
-      e.preventDefault();
-    }
-
-    var index = this.getActiveIndex() + 1;
-    var count = ValidComponentChildren.numberOf(this.props.children);
-
-    if (index > count - 1) {
-      if (!this.props.wrap) {
-        return;
-      }
-      index = 0;
-    }
-
-    this.handleSelect(index, 'next');
-  },
-
-  prev: function (e) {
-    if (e) {
-      e.preventDefault();
-    }
-
-    var index = this.getActiveIndex() - 1;
-
-    if (index < 0) {
-      if (!this.props.wrap) {
-        return;
-      }
-      index = ValidComponentChildren.numberOf(this.props.children) - 1;
-    }
-
-    this.handleSelect(index, 'prev');
-  },
-
-  pause: function () {
-    this.isPaused = true;
-    clearTimeout(this.timeout);
-  },
-
-  play: function () {
-    this.isPaused = false;
-    this.waitForNext();
-  },
-
-  waitForNext: function () {
-    if (!this.isPaused && this.props.slide && this.props.interval &&
-        this.props.activeIndex == null) {
-      this.timeout = setTimeout(this.next, this.props.interval);
-    }
-  },
-
-  handleMouseOver: function () {
-    if (this.props.pauseOnHover) {
-      this.pause();
-    }
-  },
-
-  handleMouseOut: function () {
-    if (this.isPaused) {
-      this.play();
-    }
-  },
-
-  render: function () {
-    var classes = {
-      carousel: true,
-      slide: this.props.slide
-    };
-
-    return (
-      React.createElement("div", React.__spread({}, 
-        this.props, 
-        {className: joinClasses(this.props.className, classSet(classes)), 
-        onMouseOver: this.handleMouseOver, 
-        onMouseOut: this.handleMouseOut}), 
-        this.props.indicators ? this.renderIndicators() : null, 
-        React.createElement("div", {className: "carousel-inner", ref: "inner"}, 
-          ValidComponentChildren.map(this.props.children, this.renderItem)
-        ), 
-        this.props.controls ? this.renderControls() : null
-      )
-    );
-  },
-
-  renderPrev: function () {
-    return (
-      React.createElement("a", {className: "left carousel-control", href: "#prev", key: 0, onClick: this.prev}, 
-        React.createElement("span", {className: "glyphicon glyphicon-chevron-left"})
-      )
-    );
-  },
-
-  renderNext: function () {
-    return (
-      React.createElement("a", {className: "right carousel-control", href: "#next", key: 1, onClick: this.next}, 
-        React.createElement("span", {className: "glyphicon glyphicon-chevron-right"})
-      )
-    );
-  },
-
-  renderControls: function () {
-    if (this.props.wrap) {
-      var activeIndex = this.getActiveIndex();
-      var count = ValidComponentChildren.numberOf(this.props.children);
-
-      return [
-        (activeIndex !== 0) ? this.renderPrev() : null,
-        (activeIndex !== count - 1) ? this.renderNext() : null
-      ];
-    }
-
-    return [
-      this.renderPrev(),
-      this.renderNext()
-    ];
-  },
-
-  renderIndicator: function (child, index) {
-    var className = (index === this.getActiveIndex()) ?
-      'active' : null;
-
-    return (
-      React.createElement("li", {
-        key: index, 
-        className: className, 
-        onClick: this.handleSelect.bind(this, index, null)})
-    );
-  },
-
-  renderIndicators: function () {
-    var indicators = [];
-    ValidComponentChildren
-      .forEach(this.props.children, function(child, index) {
-        indicators.push(
-          this.renderIndicator(child, index),
-
-          // Force whitespace between indicator elements, bootstrap
-          // requires this for correct spacing of elements.
-          ' '
-        );
-      }, this);
-
-    return (
-      React.createElement("ol", {className: "carousel-indicators"}, 
-        indicators
-      )
-    );
-  },
-
-  getActiveIndex: function () {
-    return this.props.activeIndex != null ? this.props.activeIndex : this.state.activeIndex;
-  },
-
-  handleItemAnimateOutEnd: function () {
-    this.setState({
-      previousActiveIndex: null,
-      direction: null
-    }, function() {
-      this.waitForNext();
-
-      if (this.props.onSlideEnd) {
-        this.props.onSlideEnd();
-      }
-    });
-  },
-
-  renderItem: function (child, index) {
-    var activeIndex = this.getActiveIndex();
-    var isActive = (index === activeIndex);
-    var isPreviousActive = this.state.previousActiveIndex != null &&
-            this.state.previousActiveIndex === index && this.props.slide;
-
-    return cloneWithProps(
-        child,
-        {
-          active: isActive,
-          ref: child.ref,
-          key: child.key ? child.key : index,
-          index: index,
-          animateOut: isPreviousActive,
-          animateIn: isActive && this.state.previousActiveIndex != null && this.props.slide,
-          direction: this.state.direction,
-          onAnimateOutEnd: isPreviousActive ? this.handleItemAnimateOutEnd: null
-        }
-      );
-  },
-
-  handleSelect: function (index, direction) {
-    clearTimeout(this.timeout);
-
-    var previousActiveIndex = this.getActiveIndex();
-    direction = direction || this.getDirection(previousActiveIndex, index);
-
-    if (this.props.onSelect) {
-      this.props.onSelect(index, direction);
-    }
-
-    if (this.props.activeIndex == null && index !== previousActiveIndex) {
-      if (this.state.previousActiveIndex != null) {
-        // If currently animating don't activate the new index.
-        // TODO: look into queuing this canceled call and
-        // animating after the current animation has ended.
-        return;
-      }
-
-      this.setState({
-        activeIndex: index,
-        previousActiveIndex: previousActiveIndex,
-        direction: direction
-      });
-    }
-  }
-});
-
-module.exports = Carousel;
-},{"./BootstrapMixin":45,"./utils/ValidComponentChildren":94,"./utils/classSet":95,"./utils/cloneWithProps":96,"./utils/joinClasses":99,"react":293}],50:[function(require,module,exports){
-var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
-var TransitionEvents = require('./utils/TransitionEvents');
-
-var CarouselItem = React.createClass({displayName: "CarouselItem",
-  propTypes: {
-    direction: React.PropTypes.oneOf(['prev', 'next']),
-    onAnimateOutEnd: React.PropTypes.func,
-    active: React.PropTypes.bool,
-    caption: React.PropTypes.node
-  },
-
-  getInitialState: function () {
-    return {
-      direction: null
-    };
-  },
-
-  getDefaultProps: function () {
-    return {
-      animation: true
-    };
-  },
-
-  handleAnimateOutEnd: function () {
-    if (this.props.onAnimateOutEnd && this.isMounted()) {
-      this.props.onAnimateOutEnd(this.props.index);
-    }
-  },
-
-  componentWillReceiveProps: function (nextProps) {
-    if (this.props.active !== nextProps.active) {
-      this.setState({
-        direction: null
-      });
-    }
-  },
-
-  componentDidUpdate: function (prevProps) {
-    if (!this.props.active && prevProps.active) {
-      TransitionEvents.addEndEventListener(
-        this.getDOMNode(),
-        this.handleAnimateOutEnd
-      );
-    }
-
-    if (this.props.active !== prevProps.active) {
-      setTimeout(this.startAnimation, 20);
-    }
-  },
-
-  startAnimation: function () {
-    if (!this.isMounted()) {
-      return;
-    }
-
-    this.setState({
-      direction: this.props.direction === 'prev' ?
-        'right' : 'left'
-    });
-  },
-
-  render: function () {
-    var classes = {
-      item: true,
-      active: (this.props.active && !this.props.animateIn) || this.props.animateOut,
-      next: this.props.active && this.props.animateIn && this.props.direction === 'next',
-      prev: this.props.active && this.props.animateIn && this.props.direction === 'prev'
-    };
-
-    if (this.state.direction && (this.props.animateIn || this.props.animateOut)) {
-      classes[this.state.direction] = true;
-    }
-
-    return (
-      React.createElement("div", React.__spread({},  this.props, {className: joinClasses(this.props.className, classSet(classes))}), 
-        this.props.children, 
-        this.props.caption ? this.renderCaption() : null
-      )
-    );
-  },
-
-  renderCaption: function () {
-    return (
-      React.createElement("div", {className: "carousel-caption"}, 
-        this.props.caption
-      )
-    );
-  }
-});
-
-module.exports = CarouselItem;
-},{"./utils/TransitionEvents":93,"./utils/classSet":95,"./utils/joinClasses":99,"react":293}],51:[function(require,module,exports){
-var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
-var constants = require('./constants');
-
-
-var Col = React.createClass({displayName: "Col",
-  propTypes: {
-    xs: React.PropTypes.number,
-    sm: React.PropTypes.number,
-    md: React.PropTypes.number,
-    lg: React.PropTypes.number,
-    xsOffset: React.PropTypes.number,
-    smOffset: React.PropTypes.number,
-    mdOffset: React.PropTypes.number,
-    lgOffset: React.PropTypes.number,
-    xsPush: React.PropTypes.number,
-    smPush: React.PropTypes.number,
-    mdPush: React.PropTypes.number,
-    lgPush: React.PropTypes.number,
-    xsPull: React.PropTypes.number,
-    smPull: React.PropTypes.number,
-    mdPull: React.PropTypes.number,
-    lgPull: React.PropTypes.number,
-    componentClass: React.PropTypes.node.isRequired
-  },
-
-  getDefaultProps: function () {
-    return {
-      componentClass: 'div'
-    };
-  },
-
-  render: function () {
-    var ComponentClass = this.props.componentClass;
-    var classes = {};
-
-    Object.keys(constants.SIZES).forEach(function (key) {
-      var size = constants.SIZES[key];
-      var prop = size;
-      var classPart = size + '-';
-
-      if (this.props[prop]) {
-        classes['col-' + classPart + this.props[prop]] = true;
-      }
-
-      prop = size + 'Offset';
-      classPart = size + '-offset-';
-      if (this.props[prop]) {
-        classes['col-' + classPart + this.props[prop]] = true;
-      }
-
-      prop = size + 'Push';
-      classPart = size + '-push-';
-      if (this.props[prop]) {
-        classes['col-' + classPart + this.props[prop]] = true;
-      }
-
-      prop = size + 'Pull';
-      classPart = size + '-pull-';
-      if (this.props[prop]) {
-        classes['col-' + classPart + this.props[prop]] = true;
-      }
-    }, this);
-
-    return (
-      React.createElement(ComponentClass, React.__spread({},  this.props, {className: joinClasses(this.props.className, classSet(classes))}), 
-        this.props.children
-      )
-    );
-  }
-});
-
-module.exports = Col;
-},{"./constants":88,"./utils/classSet":95,"./utils/joinClasses":99,"react":293}],52:[function(require,module,exports){
-var React = require('react');
-var TransitionEvents = require('./utils/TransitionEvents');
-
-var CollapsableMixin = {
-
-  propTypes: {
-    collapsable: React.PropTypes.bool,
-    defaultExpanded: React.PropTypes.bool,
-    expanded: React.PropTypes.bool
-  },
-
-  getInitialState: function () {
-    return {
-      expanded: this.props.defaultExpanded != null ? this.props.defaultExpanded : null,
-      collapsing: false
-    };
-  },
-
-  handleTransitionEnd: function () {
-    this._collapseEnd = true;
-    this.setState({
-      collapsing: false
-    });
-  },
-
-  componentWillReceiveProps: function (newProps) {
-    if (this.props.collapsable && newProps.expanded !== this.props.expanded) {
-      this._collapseEnd = false;
-      this.setState({
-        collapsing: true
-      });
-    }
-  },
-
-  _addEndTransitionListener: function () {
-    var node = this.getCollapsableDOMNode();
-
-    if (node) {
-      TransitionEvents.addEndEventListener(
-        node,
-        this.handleTransitionEnd
-      );
-    }
-  },
-
-  _removeEndTransitionListener: function () {
-    var node = this.getCollapsableDOMNode();
-
-    if (node) {
-      TransitionEvents.removeEndEventListener(
-        node,
-        this.handleTransitionEnd
-      );
-    }
-  },
-
-  componentDidMount: function () {
-    this._afterRender();
-  },
-
-  componentWillUnmount: function () {
-    this._removeEndTransitionListener();
-  },
-
-  componentWillUpdate: function (nextProps) {
-    var dimension = (typeof this.getCollapsableDimension === 'function') ?
-      this.getCollapsableDimension() : 'height';
-    var node = this.getCollapsableDOMNode();
-
-    this._removeEndTransitionListener();
-  },
-
-  componentDidUpdate: function (prevProps, prevState) {
-    this._afterRender();
-  },
-
-  _afterRender: function () {
-    if (!this.props.collapsable) {
-      return;
-    }
-
-    this._addEndTransitionListener();
-    setTimeout(this._updateDimensionAfterRender, 0);
-  },
-
-  _updateDimensionAfterRender: function () {
-    var node = this.getCollapsableDOMNode();
-    if (node) {
-        var dimension = (typeof this.getCollapsableDimension === 'function') ?
-            this.getCollapsableDimension() : 'height';
-        node.style[dimension] = this.isExpanded() ?
-            this.getCollapsableDimensionValue() + 'px' : '0px';
-    }
-  },
-
-  isExpanded: function () {
-    return (this.props.expanded != null) ?
-      this.props.expanded : this.state.expanded;
-  },
-
-  getCollapsableClassSet: function (className) {
-    var classes = {};
-
-    if (typeof className === 'string') {
-      className.split(' ').forEach(function (className) {
-        if (className) {
-          classes[className] = true;
-        }
-      });
-    }
-
-    classes.collapsing = this.state.collapsing;
-    classes.collapse = !this.state.collapsing;
-    classes['in'] = this.isExpanded() && !this.state.collapsing;
-
-    return classes;
-  }
-};
-
-module.exports = CollapsableMixin;
-
-},{"./utils/TransitionEvents":93,"react":293}],53:[function(require,module,exports){
-var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
-var cloneWithProps = require('./utils/cloneWithProps');
-
-var createChainedFunction = require('./utils/createChainedFunction');
-var BootstrapMixin = require('./BootstrapMixin');
-var DropdownStateMixin = require('./DropdownStateMixin');
-var Button = require('./Button');
-var ButtonGroup = require('./ButtonGroup');
-var DropdownMenu = require('./DropdownMenu');
-var ValidComponentChildren = require('./utils/ValidComponentChildren');
-
-
-var DropdownButton = React.createClass({displayName: "DropdownButton",
-  mixins: [BootstrapMixin, DropdownStateMixin],
-
-  propTypes: {
-    pullRight: React.PropTypes.bool,
-    dropup:    React.PropTypes.bool,
-    title:     React.PropTypes.node,
-    href:      React.PropTypes.string,
-    onClick:   React.PropTypes.func,
-    onSelect:  React.PropTypes.func,
-    navItem:   React.PropTypes.bool,
-    noCaret:   React.PropTypes.bool
-  },
-
-  render: function () {
-    var renderMethod = this.props.navItem ?
-      'renderNavItem' : 'renderButtonGroup';
-
-    var caret = this.props.noCaret ?
-        null : (React.createElement("span", {className: "caret"}));
-
-    return this[renderMethod]([
-      React.createElement(Button, React.__spread({}, 
-        this.props, 
-        {ref: "dropdownButton", 
-        className: "dropdown-toggle", 
-        onClick: this.handleDropdownClick, 
-        key: 0, 
-        navDropdown: this.props.navItem, 
-        navItem: null, 
-        title: null, 
-        pullRight: null, 
-        dropup: null}), 
-        this.props.title, ' ', 
-        caret
-      ),
-      React.createElement(DropdownMenu, {
-        ref: "menu", 
-        "aria-labelledby": this.props.id, 
-        pullRight: this.props.pullRight, 
-        key: 1}, 
-        ValidComponentChildren.map(this.props.children, this.renderMenuItem)
-      )
-    ]);
-  },
-
-  renderButtonGroup: function (children) {
-    var groupClasses = {
-        'open': this.state.open,
-        'dropup': this.props.dropup
-      };
-
-    return (
-      React.createElement(ButtonGroup, {
-        bsSize: this.props.bsSize, 
-        className: joinClasses(this.props.className, classSet(groupClasses))}, 
-        children
-      )
-    );
-  },
-
-  renderNavItem: function (children) {
-    var classes = {
-        'dropdown': true,
-        'open': this.state.open,
-        'dropup': this.props.dropup
-      };
-
-    return (
-      React.createElement("li", {className: joinClasses(this.props.className, classSet(classes))}, 
-        children
-      )
-    );
-  },
-
-  renderMenuItem: function (child, index) {
-    // Only handle the option selection if an onSelect prop has been set on the
-    // component or it's child, this allows a user not to pass an onSelect
-    // handler and have the browser preform the default action.
-    var handleOptionSelect = this.props.onSelect || child.props.onSelect ?
-      this.handleOptionSelect : null;
-
-    return cloneWithProps(
-      child,
-      {
-        // Capture onSelect events
-        onSelect: createChainedFunction(child.props.onSelect, handleOptionSelect),
-
-        // Force special props to be transferred
-        key: child.key ? child.key : index,
-        ref: child.ref
-      }
-    );
-  },
-
-  handleDropdownClick: function (e) {
-    e.preventDefault();
-
-    this.setDropdownState(!this.state.open);
-  },
-
-  handleOptionSelect: function (key) {
-    if (this.props.onSelect) {
-      this.props.onSelect(key);
-    }
-
-    this.setDropdownState(false);
-  }
-});
-
-module.exports = DropdownButton;
-
-},{"./BootstrapMixin":45,"./Button":46,"./ButtonGroup":47,"./DropdownMenu":54,"./DropdownStateMixin":55,"./utils/ValidComponentChildren":94,"./utils/classSet":95,"./utils/cloneWithProps":96,"./utils/createChainedFunction":97,"./utils/joinClasses":99,"react":293}],54:[function(require,module,exports){
-var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
-var cloneWithProps = require('./utils/cloneWithProps');
-
-var createChainedFunction = require('./utils/createChainedFunction');
-var ValidComponentChildren = require('./utils/ValidComponentChildren');
-
-var DropdownMenu = React.createClass({displayName: "DropdownMenu",
-  propTypes: {
-    pullRight: React.PropTypes.bool,
-    onSelect: React.PropTypes.func
-  },
-
-  render: function () {
-    var classes = {
-        'dropdown-menu': true,
-        'dropdown-menu-right': this.props.pullRight
-      };
-
-    return (
-        React.createElement("ul", React.__spread({}, 
-          this.props, 
-          {className: joinClasses(this.props.className, classSet(classes)), 
-          role: "menu"}), 
-          ValidComponentChildren.map(this.props.children, this.renderMenuItem)
-        )
-      );
-  },
-
-  renderMenuItem: function (child, index) {
-    return cloneWithProps(
-      child,
-      {
-        // Capture onSelect events
-        onSelect: createChainedFunction(child.props.onSelect, this.props.onSelect),
-
-        // Force special props to be transferred
-        key: child.key ? child.key : index,
-        ref: child.ref
-      }
-    );
-  }
-});
-
-module.exports = DropdownMenu;
-},{"./utils/ValidComponentChildren":94,"./utils/classSet":95,"./utils/cloneWithProps":96,"./utils/createChainedFunction":97,"./utils/joinClasses":99,"react":293}],55:[function(require,module,exports){
-var React = require('react');
-var EventListener = require('./utils/EventListener');
-
-/**
- * Checks whether a node is within
- * a root nodes tree
- *
- * @param {DOMElement} node
- * @param {DOMElement} root
- * @returns {boolean}
- */
-function isNodeInRoot(node, root) {
-  while (node) {
-    if (node === root) {
-      return true;
-    }
-    node = node.parentNode;
-  }
-
-  return false;
-}
-
-var DropdownStateMixin = {
-  getInitialState: function () {
-    return {
-      open: false
-    };
-  },
-
-  setDropdownState: function (newState, onStateChangeComplete) {
-    if (newState) {
-      this.bindRootCloseHandlers();
-    } else {
-      this.unbindRootCloseHandlers();
-    }
-
-    this.setState({
-      open: newState
-    }, onStateChangeComplete);
-  },
-
-  handleDocumentKeyUp: function (e) {
-    if (e.keyCode === 27) {
-      this.setDropdownState(false);
-    }
-  },
-
-  handleDocumentClick: function (e) {
-    // If the click originated from within this component
-    // don't do anything.
-    if (isNodeInRoot(e.target, this.getDOMNode())) {
-      return;
-    }
-
-    this.setDropdownState(false);
-  },
-
-  bindRootCloseHandlers: function () {
-    this._onDocumentClickListener =
-      EventListener.listen(document, 'click', this.handleDocumentClick);
-    this._onDocumentKeyupListener =
-      EventListener.listen(document, 'keyup', this.handleDocumentKeyUp);
-  },
-
-  unbindRootCloseHandlers: function () {
-    if (this._onDocumentClickListener) {
-      this._onDocumentClickListener.remove();
-    }
-
-    if (this._onDocumentKeyupListener) {
-      this._onDocumentKeyupListener.remove();
-    }
-  },
-
-  componentWillUnmount: function () {
-    this.unbindRootCloseHandlers();
-  }
-};
-
-module.exports = DropdownStateMixin;
-},{"./utils/EventListener":91,"react":293}],56:[function(require,module,exports){
-/*global document */
-// TODO: listen for onTransitionEnd to remove el
-function getElementsAndSelf (root, classes){
-  var els = root.querySelectorAll('.' + classes.join('.'));
-
-  els = [].map.call(els, function(e){ return e; });
-
-  for(var i = 0; i < classes.length; i++){
-    if( !root.className.match(new RegExp('\\b' +  classes[i] + '\\b'))){
-      return els;
-    }
-  }
-  els.unshift(root);
-  return els;
-}
-
-module.exports = {
-  _fadeIn: function () {
-    var els;
-
-    if (this.isMounted()) {
-      els = getElementsAndSelf(this.getDOMNode(), ['fade']);
-
-      if (els.length) {
-        els.forEach(function (el) {
-          el.className += ' in';
-        });
-      }
-    }
-  },
-
-  _fadeOut: function () {
-    var els = getElementsAndSelf(this._fadeOutEl, ['fade', 'in']);
-
-    if (els.length) {
-      els.forEach(function (el) {
-        el.className = el.className.replace(/\bin\b/, '');
-      });
-    }
-
-    setTimeout(this._handleFadeOutEnd, 300);
-  },
-
-  _handleFadeOutEnd: function () {
-    if (this._fadeOutEl && this._fadeOutEl.parentNode) {
-      this._fadeOutEl.parentNode.removeChild(this._fadeOutEl);
-    }
-  },
-
-  componentDidMount: function () {
-    if (document.querySelectorAll) {
-      // Firefox needs delay for transition to be triggered
-      setTimeout(this._fadeIn, 20);
-    }
-  },
-
-  componentWillUnmount: function () {
-    var els = getElementsAndSelf(this.getDOMNode(), ['fade']),
-        container = (this.props.container && this.props.container.getDOMNode()) || document.body;
-
-    if (els.length) {
-      this._fadeOutEl = document.createElement('div');
-      container.appendChild(this._fadeOutEl);
-      this._fadeOutEl.appendChild(this.getDOMNode().cloneNode(true));
-      // Firefox needs delay for transition to be triggered
-      setTimeout(this._fadeOut, 20);
-    }
-  }
-};
-
-},{}],57:[function(require,module,exports){
-var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
-var BootstrapMixin = require('./BootstrapMixin');
-var constants = require('./constants');
-
-var Glyphicon = React.createClass({displayName: "Glyphicon",
-  mixins: [BootstrapMixin],
-
-  propTypes: {
-    glyph: React.PropTypes.oneOf(constants.GLYPHS).isRequired
-  },
-
-  getDefaultProps: function () {
-    return {
-      bsClass: 'glyphicon'
-    };
-  },
-
-  render: function () {
-    var classes = this.getBsClassSet();
-
-    classes['glyphicon-' + this.props.glyph] = true;
-
-    return (
-      React.createElement("span", React.__spread({},  this.props, {className: joinClasses(this.props.className, classSet(classes))}), 
-        this.props.children
-      )
-    );
-  }
-});
-
-module.exports = Glyphicon;
-},{"./BootstrapMixin":45,"./constants":88,"./utils/classSet":95,"./utils/joinClasses":99,"react":293}],58:[function(require,module,exports){
-var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-
-var Grid = React.createClass({displayName: "Grid",
-  propTypes: {
-    fluid: React.PropTypes.bool,
-    componentClass: React.PropTypes.node.isRequired
-  },
-
-  getDefaultProps: function () {
-    return {
-      componentClass: 'div'
-    };
-  },
-
-  render: function () {
-    var ComponentClass = this.props.componentClass;
-    var className = this.props.fluid ? 'container-fluid' : 'container';
-
-    return (
-      React.createElement(ComponentClass, React.__spread({}, 
-        this.props, 
-        {className: joinClasses(this.props.className, className)}), 
-        this.props.children
-      )
-    );
-  }
-});
-
-module.exports = Grid;
-},{"./utils/joinClasses":99,"react":293}],59:[function(require,module,exports){
-var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
-var Button = require('./Button');
-
-var Input = React.createClass({displayName: "Input",
-  propTypes: {
-    type: React.PropTypes.string,
-    label: React.PropTypes.node,
-    help: React.PropTypes.node,
-    addonBefore: React.PropTypes.node,
-    addonAfter: React.PropTypes.node,
-    buttonBefore: React.PropTypes.node,
-    buttonAfter: React.PropTypes.node,
-    bsStyle: function(props) {
-      if (props.type === 'submit') {
-        // Return early if `type=submit` as the `Button` component
-        // it transfers these props to has its own propType checks.
-        return;
-      }
-
-      return React.PropTypes.oneOf(['success', 'warning', 'error']).apply(null, arguments);
-    },
-    hasFeedback: React.PropTypes.bool,
-    groupClassName: React.PropTypes.string,
-    wrapperClassName: React.PropTypes.string,
-    labelClassName: React.PropTypes.string,
-    disabled: React.PropTypes.bool
-  },
-
-  getInputDOMNode: function () {
-    return this.refs.input.getDOMNode();
-  },
-
-  getValue: function () {
-    if (this.props.type === 'static') {
-      return this.props.value;
-    }
-    else if (this.props.type) {
-      if (this.props.type == "select" && this.props.multiple) {
-        return this.getSelectedOptions();
-      } else {
-        return this.getInputDOMNode().value;
-      }
-    }
-    else {
-      throw Error('Cannot use getValue without specifying input type.');
-    }
-  },
-
-  getChecked: function () {
-    return this.getInputDOMNode().checked;
-  },
-
-  getSelectedOptions: function () {
-    var values = [];
-
-    Array.prototype.forEach.call(
-      this.getInputDOMNode().getElementsByTagName('option'),
-      function (option) {
-        if (option.selected) {
-          var value = option.getAttribute('value') || option.innerHTML;
-
-          values.push(value);
-        }
-      }
-    );
-
-    return values;
-  },
-
-  isCheckboxOrRadio: function () {
-    return this.props.type === 'radio' || this.props.type === 'checkbox';
-  },
-
-  isFile: function () {
-    return this.props.type === 'file';
-  },
-
-  renderInput: function () {
-    var input = null;
-
-    if (!this.props.type) {
-      return this.props.children
-    }
-
-    switch (this.props.type) {
-      case 'select':
-        input = (
-          React.createElement("select", React.__spread({},  this.props, {className: joinClasses(this.props.className, 'form-control'), ref: "input", key: "input"}), 
-            this.props.children
-          )
-        );
-        break;
-      case 'textarea':
-        input = React.createElement("textarea", React.__spread({},  this.props, {className: joinClasses(this.props.className, 'form-control'), ref: "input", key: "input"}));
-        break;
-      case 'static':
-        input = (
-          React.createElement("p", React.__spread({},  this.props, {className: joinClasses(this.props.className, 'form-control-static'), ref: "input", key: "input"}), 
-            this.props.value
-          )
-        );
-        break;
-      case 'submit':
-        input = (
-          React.createElement(Button, React.__spread({},  this.props, {componentClass: "input", ref: "input", key: "input"}))
-        );
-        break;
-      default:
-        var className = this.isCheckboxOrRadio() || this.isFile() ? '' : 'form-control';
-        input = React.createElement("input", React.__spread({},  this.props, {className: joinClasses(this.props.className, className), ref: "input", key: "input"}));
-    }
-
-    return input;
-  },
-
-  renderInputGroup: function (children) {
-    var addonBefore = this.props.addonBefore ? (
-      React.createElement("span", {className: "input-group-addon", key: "addonBefore"}, 
-        this.props.addonBefore
-      )
-    ) : null;
-
-    var addonAfter = this.props.addonAfter ? (
-      React.createElement("span", {className: "input-group-addon", key: "addonAfter"}, 
-        this.props.addonAfter
-      )
-    ) : null;
-
-    var buttonBefore = this.props.buttonBefore ? (
-      React.createElement("span", {className: "input-group-btn"}, 
-        this.props.buttonBefore
-      )
-    ) : null;
-
-    var buttonAfter = this.props.buttonAfter ? (
-      React.createElement("span", {className: "input-group-btn"}, 
-        this.props.buttonAfter
-      )
-    ) : null;
-
-    return addonBefore || addonAfter || buttonBefore || buttonAfter ? (
-      React.createElement("div", {className: "input-group", key: "input-group"}, 
-        addonBefore, 
-        buttonBefore, 
-        children, 
-        addonAfter, 
-        buttonAfter
-      )
-    ) : children;
-  },
-
-  renderIcon: function () {
-    var classes = {
-      'glyphicon': true,
-      'form-control-feedback': true,
-      'glyphicon-ok': this.props.bsStyle === 'success',
-      'glyphicon-warning-sign': this.props.bsStyle === 'warning',
-      'glyphicon-remove': this.props.bsStyle === 'error'
-    };
-
-    return this.props.hasFeedback ? (
-      React.createElement("span", {className: classSet(classes), key: "icon"})
-    ) : null;
-  },
-
-  renderHelp: function () {
-    return this.props.help ? (
-      React.createElement("span", {className: "help-block", key: "help"}, 
-        this.props.help
-      )
-    ) : null;
-  },
-
-  renderCheckboxandRadioWrapper: function (children) {
-    var classes = {
-      'checkbox': this.props.type === 'checkbox',
-      'radio': this.props.type === 'radio'
-    };
-
-    return (
-      React.createElement("div", {className: classSet(classes), key: "checkboxRadioWrapper"}, 
-        children
-      )
-    );
-  },
-
-  renderWrapper: function (children) {
-    return this.props.wrapperClassName ? (
-      React.createElement("div", {className: this.props.wrapperClassName, key: "wrapper"}, 
-        children
-      )
-    ) : children;
-  },
-
-  renderLabel: function (children) {
-    var classes = {
-      'control-label': !this.isCheckboxOrRadio()
-    };
-    classes[this.props.labelClassName] = this.props.labelClassName;
-
-    return this.props.label ? (
-      React.createElement("label", {htmlFor: this.props.id, className: classSet(classes), key: "label"}, 
-        children, 
-        this.props.label
-      )
-    ) : children;
-  },
-
-  renderFormGroup: function (children) {
-    var classes = {
-      'form-group': true,
-      'has-feedback': this.props.hasFeedback,
-      'has-success': this.props.bsStyle === 'success',
-      'has-warning': this.props.bsStyle === 'warning',
-      'has-error': this.props.bsStyle === 'error'
-    };
-    classes[this.props.groupClassName] = this.props.groupClassName;
-
-    return (
-      React.createElement("div", {className: classSet(classes)}, 
-        children
-      )
-    );
-  },
-
-  render: function () {
-    if (this.isCheckboxOrRadio()) {
-      return this.renderFormGroup(
-        this.renderWrapper([
-          this.renderCheckboxandRadioWrapper(
-            this.renderLabel(
-              this.renderInput()
-            )
-          ),
-          this.renderHelp()
-        ])
-      );
-    }
-    else {
-      return this.renderFormGroup([
-        this.renderLabel(),
-        this.renderWrapper([
-          this.renderInputGroup(
-            this.renderInput()
-          ),
-          this.renderIcon(),
-          this.renderHelp()
-        ])
-      ]);
-    }
-  }
-});
-
-module.exports = Input;
-
-},{"./Button":46,"./utils/classSet":95,"./utils/joinClasses":99,"react":293}],60:[function(require,module,exports){
-// https://www.npmjs.org/package/react-interpolate-component
-'use strict';
-
-var React = require('react');
-var ValidComponentChildren = require('./utils/ValidComponentChildren');
-var assign = require('./utils/Object.assign');
-
-var REGEXP = /\%\((.+?)\)s/;
-
-var Interpolate = React.createClass({
-  displayName: 'Interpolate',
-
-  propTypes: {
-    format: React.PropTypes.string
-  },
-
-  getDefaultProps: function() {
-    return { component: 'span' };
-  },
-
-  render: function() {
-    var format = (ValidComponentChildren.hasValidComponent(this.props.children) ||
-        (typeof this.props.children === 'string')) ?
-        this.props.children : this.props.format;
-    var parent = this.props.component;
-    var unsafe = this.props.unsafe === true;
-    var props = assign({}, this.props);
-
-    delete props.children;
-    delete props.format;
-    delete props.component;
-    delete props.unsafe;
-
-    if (unsafe) {
-      var content = format.split(REGEXP).reduce(function(memo, match, index) {
-        var html;
-
-        if (index % 2 === 0) {
-          html = match;
-        } else {
-          html = props[match];
-          delete props[match];
-        }
-
-        if (React.isValidElement(html)) {
-          throw new Error('cannot interpolate a React component into unsafe text');
-        }
-
-        memo += html;
-
-        return memo;
-      }, '');
-
-      props.dangerouslySetInnerHTML = { __html: content };
-
-      return React.createElement(parent, props);
-    } else {
-      var kids = format.split(REGEXP).reduce(function(memo, match, index) {
-        var child;
-
-        if (index % 2 === 0) {
-          if (match.length === 0) {
-            return memo;
-          }
-
-          child = match;
-        } else {
-          child = props[match];
-          delete props[match];
-        }
-
-        memo.push(child);
-
-        return memo;
-      }, []);
-
-      return React.createElement(parent, props, kids);
-    }
-  }
-});
-
-module.exports = Interpolate;
-
-},{"./utils/Object.assign":92,"./utils/ValidComponentChildren":94,"react":293}],61:[function(require,module,exports){
-var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-
-var Jumbotron = React.createClass({displayName: "Jumbotron",
-
-  render: function () {
-    return (
-      React.createElement("div", React.__spread({},  this.props, {className: joinClasses(this.props.className, 'jumbotron')}), 
-        this.props.children
-      )
-    );
-  }
-});
-
-module.exports = Jumbotron;
-},{"./utils/joinClasses":99,"react":293}],62:[function(require,module,exports){
-var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
-var BootstrapMixin = require('./BootstrapMixin');
-
-var Label = React.createClass({displayName: "Label",
-  mixins: [BootstrapMixin],
-
-  getDefaultProps: function () {
-    return {
-      bsClass: 'label',
-      bsStyle: 'default'
-    };
-  },
-
-  render: function () {
-    var classes = this.getBsClassSet();
-
-    return (
-      React.createElement("span", React.__spread({},  this.props, {className: joinClasses(this.props.className, classSet(classes))}), 
-        this.props.children
-      )
-    );
-  }
-});
-
-module.exports = Label;
-},{"./BootstrapMixin":45,"./utils/classSet":95,"./utils/joinClasses":99,"react":293}],63:[function(require,module,exports){
-var React = require('react');
-var classSet = require('./utils/classSet');
-var cloneWithProps = require('./utils/cloneWithProps');
-
-var ValidComponentChildren = require('./utils/ValidComponentChildren');
-var createChainedFunction = require('./utils/createChainedFunction');
-
-var ListGroup = React.createClass({displayName: "ListGroup",
-  propTypes: {
-    onClick: React.PropTypes.func
-  },
-
-  render: function () {
-    return (
-      React.createElement("div", {className: "list-group"}, 
-        ValidComponentChildren.map(this.props.children, this.renderListItem)
-      )
-    );
-  },
-
-  renderListItem: function (child, index) {
-    return cloneWithProps(child, {
-      ref: child.ref,
-      key: child.key ? child.key : index
-    });
-  }
-});
-
-module.exports = ListGroup;
-
-},{"./utils/ValidComponentChildren":94,"./utils/classSet":95,"./utils/cloneWithProps":96,"./utils/createChainedFunction":97,"react":293}],64:[function(require,module,exports){
-var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var BootstrapMixin = require('./BootstrapMixin');
-var classSet = require('./utils/classSet');
-var cloneWithProps = require('./utils/cloneWithProps');
-
-var ValidComponentChildren = require('./utils/ValidComponentChildren');
-
-var ListGroupItem = React.createClass({displayName: "ListGroupItem",
-  mixins: [BootstrapMixin],
-
-  propTypes: {
-    bsStyle: React.PropTypes.oneOf(['danger','info','success','warning']),
-    active: React.PropTypes.any,
-    disabled: React.PropTypes.any,
-    header: React.PropTypes.node,
-    onClick: React.PropTypes.func,
-    eventKey: React.PropTypes.any,
-    href: React.PropTypes.string,
-    target: React.PropTypes.string
-  },
-
-  getDefaultProps: function () {
-    return {
-      bsClass: 'list-group-item'
-    };
-  },
-
-  render: function () {
-    var classes = this.getBsClassSet();
-
-    classes['active'] = this.props.active;
-    classes['disabled'] = this.props.disabled;
-
-    if (this.props.href || this.props.target || this.props.onClick) {
-      return this.renderAnchor(classes);
-    } else {
-      return this.renderSpan(classes);
-    }
-  },
-
-  renderSpan: function (classes) {
-    return (
-      React.createElement("span", React.__spread({},  this.props, {className: joinClasses(this.props.className, classSet(classes))}), 
-        this.props.header ? this.renderStructuredContent() : this.props.children
-      )
-    );
-  },
-
-  renderAnchor: function (classes) {
-    return (
-      React.createElement("a", React.__spread({}, 
-        this.props, 
-        {className: joinClasses(this.props.className, classSet(classes))
-      }), 
-        this.props.header ? this.renderStructuredContent() : this.props.children
-      )
-    );
-  },
-
-  renderStructuredContent: function () {
-    var header;
-    if (React.isValidElement(this.props.header)) {
-      header = cloneWithProps(this.props.header, {
-        className: 'list-group-item-heading'
-      });
-    } else {
-      header = (
-        React.createElement("h4", {className: "list-group-item-heading"}, 
-          this.props.header
-        )
-      );
-    }
-
-    var content = (
-      React.createElement("p", {className: "list-group-item-text"}, 
-        this.props.children
-      )
-    );
-
-    return {
-      header: header,
-      content: content
-    };
-  }
-});
-
-module.exports = ListGroupItem;
-
-},{"./BootstrapMixin":45,"./utils/ValidComponentChildren":94,"./utils/classSet":95,"./utils/cloneWithProps":96,"./utils/joinClasses":99,"react":293}],65:[function(require,module,exports){
-var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
-
-var MenuItem = React.createClass({displayName: "MenuItem",
-  propTypes: {
-    header:    React.PropTypes.bool,
-    divider:   React.PropTypes.bool,
-    href:      React.PropTypes.string,
-    title:     React.PropTypes.string,
-    target:    React.PropTypes.string,
-    onSelect:  React.PropTypes.func,
-    eventKey:  React.PropTypes.any
-  },
-
-  getDefaultProps: function () {
-    return {
-      href: '#'
-    };
-  },
-
-  handleClick: function (e) {
-    if (this.props.onSelect) {
-      e.preventDefault();
-      this.props.onSelect(this.props.eventKey, this.props.href, this.props.target);
-    }
-  },
-
-  renderAnchor: function () {
-    return (
-      React.createElement("a", {onClick: this.handleClick, href: this.props.href, target: this.props.target, title: this.props.title, tabIndex: "-1"}, 
-        this.props.children
-      )
-    );
-  },
-
-  render: function () {
-    var classes = {
-        'dropdown-header': this.props.header,
-        'divider': this.props.divider
-      };
-
-    var children = null;
-    if (this.props.header) {
-      children = this.props.children;
-    } else if (!this.props.divider) {
-      children = this.renderAnchor();
-    }
-
-    return (
-      React.createElement("li", React.__spread({},  this.props, {role: "presentation", title: null, href: null, 
-        className: joinClasses(this.props.className, classSet(classes))}), 
-        children
-      )
-    );
-  }
-});
-
-module.exports = MenuItem;
-},{"./utils/classSet":95,"./utils/joinClasses":99,"react":293}],66:[function(require,module,exports){
-/* global document:false */
-
-var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
-var BootstrapMixin = require('./BootstrapMixin');
-var FadeMixin = require('./FadeMixin');
-var EventListener = require('./utils/EventListener');
-
-
-// TODO:
-// - aria-labelledby
-// - Add `modal-body` div if only one child passed in that doesn't already have it
-// - Tests
-
-var Modal = React.createClass({displayName: "Modal",
-  mixins: [BootstrapMixin, FadeMixin],
-
-  propTypes: {
-    title: React.PropTypes.node,
-    backdrop: React.PropTypes.oneOf(['static', true, false]),
-    keyboard: React.PropTypes.bool,
-    closeButton: React.PropTypes.bool,
-    animation: React.PropTypes.bool,
-    onRequestHide: React.PropTypes.func.isRequired
-  },
-
-  getDefaultProps: function () {
-    return {
-      bsClass: 'modal',
-      backdrop: true,
-      keyboard: true,
-      animation: true,
-      closeButton: true
-    };
-  },
-
-  render: function () {
-    var modalStyle = {display: 'block'};
-    var dialogClasses = this.getBsClassSet();
-    delete dialogClasses.modal;
-    dialogClasses['modal-dialog'] = true;
-
-    var classes = {
-      modal: true,
-      fade: this.props.animation,
-      'in': !this.props.animation || !document.querySelectorAll
-    };
-
-    var modal = (
-      React.createElement("div", React.__spread({}, 
-        this.props, 
-        {title: null, 
-        tabIndex: "-1", 
-        role: "dialog", 
-        style: modalStyle, 
-        className: joinClasses(this.props.className, classSet(classes)), 
-        onClick: this.props.backdrop === true ? this.handleBackdropClick : null, 
-        ref: "modal"}), 
-        React.createElement("div", {className: classSet(dialogClasses)}, 
-          React.createElement("div", {className: "modal-content", style: {overflow: 'hidden'}}, 
-            this.props.title ? this.renderHeader() : null, 
-            this.props.children
-          )
-        )
-      )
-    );
-
-    return this.props.backdrop ?
-      this.renderBackdrop(modal) : modal;
-  },
-
-  renderBackdrop: function (modal) {
-    var classes = {
-      'modal-backdrop': true,
-      'fade': this.props.animation
-    };
-
-    classes['in'] = !this.props.animation || !document.querySelectorAll;
-
-    var onClick = this.props.backdrop === true ?
-      this.handleBackdropClick : null;
-
-    return (
-      React.createElement("div", null, 
-        React.createElement("div", {className: classSet(classes), ref: "backdrop", onClick: onClick}), 
-        modal
-      )
-    );
-  },
-
-  renderHeader: function () {
-    var closeButton;
-    if (this.props.closeButton) {
-      closeButton = (
-          React.createElement("button", {type: "button", className: "close", "aria-hidden": "true", onClick: this.props.onRequestHide}, "×")
-        );
-    }
-
-    var style = this.props.bsStyle;
-    var classes = {
-      'modal-header': true
-    };
-    classes['bg-' + style] = style;
-    classes['text-' + style] = style;
-
-    var className = classSet(classes);
-
-    return (
-      React.createElement("div", {className: className}, 
-        closeButton, 
-        this.renderTitle()
-      )
-    );
-  },
-
-  renderTitle: function () {
-    return (
-      React.isValidElement(this.props.title) ?
-        this.props.title : React.createElement("h4", {className: "modal-title"}, this.props.title)
-    );
-  },
-
-  iosClickHack: function () {
-    // IOS only allows click events to be delegated to the document on elements
-    // it considers 'clickable' - anchors, buttons, etc. We fake a click handler on the
-    // DOM nodes themselves. Remove if handled by React: https://github.com/facebook/react/issues/1169
-    this.refs.modal.getDOMNode().onclick = function () {};
-    this.refs.backdrop.getDOMNode().onclick = function () {};
-  },
-
-  componentDidMount: function () {
-    this._onDocumentKeyupListener =
-      EventListener.listen(document, 'keyup', this.handleDocumentKeyUp);
-
-    var container = (this.props.container && this.props.container.getDOMNode()) || document.body;
-    container.className += container.className.length ? ' modal-open' : 'modal-open';
-
-    if (this.props.backdrop) {
-      this.iosClickHack();
-    }
-  },
-
-  componentDidUpdate: function (prevProps) {
-    if (this.props.backdrop && this.props.backdrop !== prevProps.backdrop) {
-      this.iosClickHack();
-    }
-  },
-
-  componentWillUnmount: function () {
-    this._onDocumentKeyupListener.remove();
-    var container = (this.props.container && this.props.container.getDOMNode()) || document.body;
-    container.className = container.className.replace(/ ?modal-open/, '');
-  },
-
-  handleBackdropClick: function (e) {
-    if (e.target !== e.currentTarget) {
-      return;
-    }
-
-    this.props.onRequestHide();
-  },
-
-  handleDocumentKeyUp: function (e) {
-    if (this.props.keyboard && e.keyCode === 27) {
-      this.props.onRequestHide();
-    }
-  }
-});
-
-module.exports = Modal;
-
-},{"./BootstrapMixin":45,"./FadeMixin":56,"./utils/EventListener":91,"./utils/classSet":95,"./utils/joinClasses":99,"react":293}],67:[function(require,module,exports){
-var React = require('react');
-var OverlayMixin = require('./OverlayMixin');
-var cloneWithProps = require('./utils/cloneWithProps');
-
-var createChainedFunction = require('./utils/createChainedFunction');
-
-var ModalTrigger = React.createClass({displayName: "ModalTrigger",
-  mixins: [OverlayMixin],
-
-  propTypes: {
-    modal: React.PropTypes.node.isRequired
-  },
-
-  getInitialState: function () {
-    return {
-      isOverlayShown: false
-    };
-  },
-
-  show: function () {
-    this.setState({
-      isOverlayShown: true
-    });
-  },
-
-  hide: function () {
-    this.setState({
-      isOverlayShown: false
-    });
-  },
-
-  toggle: function () {
-    this.setState({
-      isOverlayShown: !this.state.isOverlayShown
-    });
-  },
-
-  renderOverlay: function () {
-    if (!this.state.isOverlayShown) {
-      return React.createElement("span", null);
-    }
-
-    return cloneWithProps(
-      this.props.modal,
-      {
-        onRequestHide: this.hide
-      }
-    );
-  },
-
-  render: function () {
-    var child = React.Children.only(this.props.children);
-    return cloneWithProps(
-      child,
-      {
-        onClick: createChainedFunction(child.props.onClick, this.toggle)
-      }
-    );
-  }
-});
-
-module.exports = ModalTrigger;
-},{"./OverlayMixin":71,"./utils/cloneWithProps":96,"./utils/createChainedFunction":97,"react":293}],68:[function(require,module,exports){
-var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var BootstrapMixin = require('./BootstrapMixin');
-var CollapsableMixin = require('./CollapsableMixin');
-var classSet = require('./utils/classSet');
-var domUtils = require('./utils/domUtils');
-var cloneWithProps = require('./utils/cloneWithProps');
-
-var ValidComponentChildren = require('./utils/ValidComponentChildren');
-var createChainedFunction = require('./utils/createChainedFunction');
-
-
-var Nav = React.createClass({displayName: "Nav",
-  mixins: [BootstrapMixin, CollapsableMixin],
-
-  propTypes: {
-    bsStyle: React.PropTypes.oneOf(['tabs','pills']),
-    stacked: React.PropTypes.bool,
-    justified: React.PropTypes.bool,
-    onSelect: React.PropTypes.func,
-    collapsable: React.PropTypes.bool,
-    expanded: React.PropTypes.bool,
-    navbar: React.PropTypes.bool,
-    eventKey: React.PropTypes.any,
-    right: React.PropTypes.bool
-  },
-
-  getDefaultProps: function () {
-    return {
-      bsClass: 'nav'
-    };
-  },
-
-  getCollapsableDOMNode: function () {
-    return this.getDOMNode();
-  },
-
-  getCollapsableDimensionValue: function () {
-    var node = this.refs.ul.getDOMNode(),
-        height = node.offsetHeight,
-        computedStyles = domUtils.getComputedStyles(node);
-
-    return height + parseInt(computedStyles.marginTop, 10) + parseInt(computedStyles.marginBottom, 10);
-  },
-
-  render: function () {
-    var classes = this.props.collapsable ? this.getCollapsableClassSet() : {};
-
-    classes['navbar-collapse'] = this.props.collapsable;
-
-    if (this.props.navbar && !this.props.collapsable) {
-      return (this.renderUl());
-    }
-
-    return (
-      React.createElement("nav", React.__spread({},  this.props, {className: joinClasses(this.props.className, classSet(classes))}), 
-        this.renderUl()
-      )
-    );
-  },
-
-  renderUl: function () {
-    var classes = this.getBsClassSet();
-
-    classes['nav-stacked'] = this.props.stacked;
-    classes['nav-justified'] = this.props.justified;
-    classes['navbar-nav'] = this.props.navbar;
-    classes['pull-right'] = this.props.pullRight;
-    classes['navbar-right'] = this.props.right;
-
-    return (
-      React.createElement("ul", React.__spread({},  this.props, {className: joinClasses(this.props.className, classSet(classes)), ref: "ul"}), 
-        ValidComponentChildren.map(this.props.children, this.renderNavItem)
-      )
-    );
-  },
-
-  getChildActiveProp: function (child) {
-    if (child.props.active) {
-      return true;
-    }
-    if (this.props.activeKey != null) {
-      if (child.props.eventKey == this.props.activeKey) {
-        return true;
-      }
-    }
-    if (this.props.activeHref != null) {
-      if (child.props.href === this.props.activeHref) {
-        return true;
-      }
-    }
-
-    return child.props.active;
-  },
-
-  renderNavItem: function (child, index) {
-    return cloneWithProps(
-      child,
-      {
-        active: this.getChildActiveProp(child),
-        activeKey: this.props.activeKey,
-        activeHref: this.props.activeHref,
-        onSelect: createChainedFunction(child.props.onSelect, this.props.onSelect),
-        ref: child.ref,
-        key: child.key ? child.key : index,
-        navItem: true
-      }
-    );
-  }
-});
-
-module.exports = Nav;
-
-},{"./BootstrapMixin":45,"./CollapsableMixin":52,"./utils/ValidComponentChildren":94,"./utils/classSet":95,"./utils/cloneWithProps":96,"./utils/createChainedFunction":97,"./utils/domUtils":98,"./utils/joinClasses":99,"react":293}],69:[function(require,module,exports){
-var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
-var BootstrapMixin = require('./BootstrapMixin');
-
-var NavItem = React.createClass({displayName: "NavItem",
-  mixins: [BootstrapMixin],
-
-  propTypes: {
-    onSelect: React.PropTypes.func,
-    active: React.PropTypes.bool,
-    disabled: React.PropTypes.bool,
-    href: React.PropTypes.string,
-    title: React.PropTypes.string,
-    eventKey: React.PropTypes.any,
-    target: React.PropTypes.string
-  },
-
-  getDefaultProps: function () {
-    return {
-      href: '#'
-    };
-  },
-
-  render: function () {
-    var $__0= 
-        
-        
-        
-        
-        
-        
-           this.props,disabled=$__0.disabled,active=$__0.active,href=$__0.href,title=$__0.title,target=$__0.target,children=$__0.children,props=(function(source, exclusion) {var rest = {};var hasOwn = Object.prototype.hasOwnProperty;if (source == null) {throw new TypeError();}for (var key in source) {if (hasOwn.call(source, key) && !hasOwn.call(exclusion, key)) {rest[key] = source[key];}}return rest;})($__0,{disabled:1,active:1,href:1,title:1,target:1,children:1}),
-        classes = {
-          'active': active,
-          'disabled': disabled
-        };
-
-    return (
-      React.createElement("li", React.__spread({},  props, {className: joinClasses(props.className, classSet(classes))}), 
-        React.createElement("a", {
-          href: href, 
-          title: title, 
-          target: target, 
-          onClick: this.handleClick, 
-          ref: "anchor"}, 
-          children 
-        )
-      )
-    );
-  },
-
-  handleClick: function (e) {
-    if (this.props.onSelect) {
-      e.preventDefault();
-
-      if (!this.props.disabled) {
-        this.props.onSelect(this.props.eventKey, this.props.href, this.props.target);
-      }
-    }
-  }
-});
-
-module.exports = NavItem;
-},{"./BootstrapMixin":45,"./utils/classSet":95,"./utils/joinClasses":99,"react":293}],70:[function(require,module,exports){
-var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var BootstrapMixin = require('./BootstrapMixin');
-var classSet = require('./utils/classSet');
-var cloneWithProps = require('./utils/cloneWithProps');
-
-var ValidComponentChildren = require('./utils/ValidComponentChildren');
-var createChainedFunction = require('./utils/createChainedFunction');
-var Nav = require('./Nav');
-
-
-var Navbar = React.createClass({displayName: "Navbar",
-  mixins: [BootstrapMixin],
-
-  propTypes: {
-    fixedTop: React.PropTypes.bool,
-    fixedBottom: React.PropTypes.bool,
-    staticTop: React.PropTypes.bool,
-    inverse: React.PropTypes.bool,
-    fluid: React.PropTypes.bool,
-    role: React.PropTypes.string,
-    componentClass: React.PropTypes.node.isRequired,
-    brand: React.PropTypes.node,
-    toggleButton: React.PropTypes.node,
-    toggleNavKey: React.PropTypes.oneOfType([
-      React.PropTypes.string,
-      React.PropTypes.number
-    ]),
-    onToggle: React.PropTypes.func,
-    navExpanded: React.PropTypes.bool,
-    defaultNavExpanded: React.PropTypes.bool
-  },
-
-  getDefaultProps: function () {
-    return {
-      bsClass: 'navbar',
-      bsStyle: 'default',
-      role: 'navigation',
-      componentClass: 'Nav'
-    };
-  },
-
-  getInitialState: function () {
-    return {
-      navExpanded: this.props.defaultNavExpanded
-    };
-  },
-
-  shouldComponentUpdate: function() {
-    // Defer any updates to this component during the `onSelect` handler.
-    return !this._isChanging;
-  },
-
-  handleToggle: function () {
-    if (this.props.onToggle) {
-      this._isChanging = true;
-      this.props.onToggle();
-      this._isChanging = false;
-    }
-
-    this.setState({
-      navExpanded: !this.state.navExpanded
-    });
-  },
-
-  isNavExpanded: function () {
-    return this.props.navExpanded != null ? this.props.navExpanded : this.state.navExpanded;
-  },
-
-  render: function () {
-    var classes = this.getBsClassSet();
-    var ComponentClass = this.props.componentClass;
-
-    classes['navbar-fixed-top'] = this.props.fixedTop;
-    classes['navbar-fixed-bottom'] = this.props.fixedBottom;
-    classes['navbar-static-top'] = this.props.staticTop;
-    classes['navbar-inverse'] = this.props.inverse;
-
-    return (
-      React.createElement(ComponentClass, React.__spread({},  this.props, {className: joinClasses(this.props.className, classSet(classes))}), 
-        React.createElement("div", {className: this.props.fluid ? 'container-fluid' : 'container'}, 
-          (this.props.brand || this.props.toggleButton || this.props.toggleNavKey != null) ? this.renderHeader() : null, 
-          ValidComponentChildren.map(this.props.children, this.renderChild)
-        )
-      )
-    );
-  },
-
-  renderChild: function (child, index) {
-    return cloneWithProps(child, {
-      navbar: true,
-      collapsable: this.props.toggleNavKey != null && this.props.toggleNavKey === child.props.eventKey,
-      expanded: this.props.toggleNavKey != null && this.props.toggleNavKey === child.props.eventKey && this.isNavExpanded(),
-      key: child.key ? child.key : index,
-      ref: child.ref
-    });
-  },
-
-  renderHeader: function () {
-    var brand;
-
-    if (this.props.brand) {
-      brand = React.isValidElement(this.props.brand) ?
-        cloneWithProps(this.props.brand, {
-          className: 'navbar-brand'
-        }) : React.createElement("span", {className: "navbar-brand"}, this.props.brand);
-    }
-
-    return (
-      React.createElement("div", {className: "navbar-header"}, 
-        brand, 
-        (this.props.toggleButton || this.props.toggleNavKey != null) ? this.renderToggleButton() : null
-      )
-    );
-  },
-
-  renderToggleButton: function () {
-    var children;
-
-    if (React.isValidElement(this.props.toggleButton)) {
-      return cloneWithProps(this.props.toggleButton, {
-        className: 'navbar-toggle',
-        onClick: createChainedFunction(this.handleToggle, this.props.toggleButton.props.onClick)
-      });
-    }
-
-    children = (this.props.toggleButton != null) ?
-      this.props.toggleButton : [
-        React.createElement("span", {className: "sr-only", key: 0}, "Toggle navigation"),
-        React.createElement("span", {className: "icon-bar", key: 1}),
-        React.createElement("span", {className: "icon-bar", key: 2}),
-        React.createElement("span", {className: "icon-bar", key: 3})
-    ];
-
-    return (
-      React.createElement("button", {className: "navbar-toggle", type: "button", onClick: this.handleToggle}, 
-        children
-      )
-    );
-  }
-});
-
-module.exports = Navbar;
-
-},{"./BootstrapMixin":45,"./Nav":68,"./utils/ValidComponentChildren":94,"./utils/classSet":95,"./utils/cloneWithProps":96,"./utils/createChainedFunction":97,"./utils/joinClasses":99,"react":293}],71:[function(require,module,exports){
-var React = require('react');
-var CustomPropTypes = require('./utils/CustomPropTypes');
-
-module.exports = {
-  propTypes: {
-    container: CustomPropTypes.mountable
-  },
-
-  getDefaultProps: function () {
-    return {
-      container: {
-        // Provide `getDOMNode` fn mocking a React component API. The `document.body`
-        // reference needs to be contained within this function so that it is not accessed
-        // in environments where it would not be defined, e.g. nodejs. Equally this is needed
-        // before the body is defined where `document.body === null`, this ensures
-        // `document.body` is only accessed after componentDidMount.
-        getDOMNode: function getDOMNode() {
-          return document.body;
-        }
-      }
-    };
-  },
-
-  componentWillUnmount: function () {
-    this._unrenderOverlay();
-    if (this._overlayTarget) {
-      this.getContainerDOMNode()
-        .removeChild(this._overlayTarget);
-      this._overlayTarget = null;
-    }
-  },
-
-  componentDidUpdate: function () {
-    this._renderOverlay();
-  },
-
-  componentDidMount: function () {
-    this._renderOverlay();
-  },
-
-  _mountOverlayTarget: function () {
-    this._overlayTarget = document.createElement('div');
-    this.getContainerDOMNode()
-      .appendChild(this._overlayTarget);
-  },
-
-  _renderOverlay: function () {
-    if (!this._overlayTarget) {
-      this._mountOverlayTarget();
-    }
-
-    var overlay = this.renderOverlay();
-
-    // Save reference to help testing
-    if (overlay !== null) {
-      this._overlayInstance = React.render(overlay, this._overlayTarget);
-    } else {
-      // Unrender if the component is null for transitions to null
-      this._unrenderOverlay();
-    }
-  },
-
-  _unrenderOverlay: function () {
-    React.unmountComponentAtNode(this._overlayTarget);
-    this._overlayInstance = null;
-  },
-
-  getOverlayDOMNode: function () {
-    if (!this.isMounted()) {
-      throw new Error('getOverlayDOMNode(): A component must be mounted to have a DOM node.');
-    }
-
-    if (this._overlayInstance) {
-      return this._overlayInstance.getDOMNode();
-    }
-
-    return null;
-  },
-
-  getContainerDOMNode: function () {
-    return this.props.container.getDOMNode ?
-      this.props.container.getDOMNode() : this.props.container;
-  }
-};
-
-},{"./utils/CustomPropTypes":90,"react":293}],72:[function(require,module,exports){
-var React = require('react');
-var OverlayMixin = require('./OverlayMixin');
-var domUtils = require('./utils/domUtils');
-var cloneWithProps = require('./utils/cloneWithProps');
-
-var createChainedFunction = require('./utils/createChainedFunction');
-var assign = require('./utils/Object.assign');
-
-/**
- * Check if value one is inside or equal to the of value
- *
- * @param {string} one
- * @param {string|array} of
- * @returns {boolean}
- */
-function isOneOf(one, of) {
-  if (Array.isArray(of)) {
-    return of.indexOf(one) >= 0;
-  }
-  return one === of;
-}
-
-var OverlayTrigger = React.createClass({displayName: "OverlayTrigger",
-  mixins: [OverlayMixin],
-
-  propTypes: {
-    trigger: React.PropTypes.oneOfType([
-      React.PropTypes.oneOf(['manual', 'click', 'hover', 'focus']),
-      React.PropTypes.arrayOf(React.PropTypes.oneOf(['click', 'hover', 'focus']))
-    ]),
-    placement: React.PropTypes.oneOf(['top','right', 'bottom', 'left']),
-    delay: React.PropTypes.number,
-    delayShow: React.PropTypes.number,
-    delayHide: React.PropTypes.number,
-    defaultOverlayShown: React.PropTypes.bool,
-    overlay: React.PropTypes.node.isRequired
-  },
-
-  getDefaultProps: function () {
-    return {
-      placement: 'right',
-      trigger: ['hover', 'focus']
-    };
-  },
-
-  getInitialState: function () {
-    return {
-      isOverlayShown: this.props.defaultOverlayShown == null ?
-        false : this.props.defaultOverlayShown,
-      overlayLeft: null,
-      overlayTop: null
-    };
-  },
-
-  show: function () {
-    this.setState({
-      isOverlayShown: true
-    }, function() {
-      this.updateOverlayPosition();
-    });
-  },
-
-  hide: function () {
-    this.setState({
-      isOverlayShown: false
-    });
-  },
-
-  toggle: function () {
-    this.state.isOverlayShown ?
-      this.hide() : this.show();
-  },
-
-  renderOverlay: function () {
-    if (!this.state.isOverlayShown) {
-      return React.createElement("span", null);
-    }
-
-    return cloneWithProps(
-      this.props.overlay,
-      {
-        onRequestHide: this.hide,
-        placement: this.props.placement,
-        positionLeft: this.state.overlayLeft,
-        positionTop: this.state.overlayTop
-      }
-    );
-  },
-
-  render: function () {
-    if (this.props.trigger === 'manual') {
-      return React.Children.only(this.props.children);
-    }
-
-    var props = {};
-
-    if (isOneOf('click', this.props.trigger)) {
-      props.onClick = createChainedFunction(this.toggle, this.props.onClick);
-    }
-
-    if (isOneOf('hover', this.props.trigger)) {
-      props.onMouseOver = createChainedFunction(this.handleDelayedShow, this.props.onMouseOver);
-      props.onMouseOut = createChainedFunction(this.handleDelayedHide, this.props.onMouseOut);
-    }
-
-    if (isOneOf('focus', this.props.trigger)) {
-      props.onFocus = createChainedFunction(this.handleDelayedShow, this.props.onFocus);
-      props.onBlur = createChainedFunction(this.handleDelayedHide, this.props.onBlur);
-    }
-
-    return cloneWithProps(
-      React.Children.only(this.props.children),
-      props
-    );
-  },
-
-  componentWillUnmount: function() {
-    clearTimeout(this._hoverDelay);
-  },
-
-  componentDidMount: function() {
-    this.updateOverlayPosition();
-  },
-
-  handleDelayedShow: function () {
-    if (this._hoverDelay != null) {
-      clearTimeout(this._hoverDelay);
-      this._hoverDelay = null;
-      return;
-    }
-
-    var delay = this.props.delayShow != null ?
-      this.props.delayShow : this.props.delay;
-
-    if (!delay) {
-      this.show();
-      return;
-    }
-
-    this._hoverDelay = setTimeout(function() {
-      this._hoverDelay = null;
-      this.show();
-    }.bind(this), delay);
-  },
-
-  handleDelayedHide: function () {
-    if (this._hoverDelay != null) {
-      clearTimeout(this._hoverDelay);
-      this._hoverDelay = null;
-      return;
-    }
-
-    var delay = this.props.delayHide != null ?
-      this.props.delayHide : this.props.delay;
-
-    if (!delay) {
-      this.hide();
-      return;
-    }
-
-    this._hoverDelay = setTimeout(function() {
-      this._hoverDelay = null;
-      this.hide();
-    }.bind(this), delay);
-  },
-
-  updateOverlayPosition: function () {
-    if (!this.isMounted()) {
-      return;
-    }
-
-    var pos = this.calcOverlayPosition();
-
-    this.setState({
-      overlayLeft: pos.left,
-      overlayTop: pos.top
-    });
-  },
-
-  calcOverlayPosition: function () {
-    var childOffset = this.getPosition();
-
-    var overlayNode = this.getOverlayDOMNode();
-    var overlayHeight = overlayNode.offsetHeight;
-    var overlayWidth = overlayNode.offsetWidth;
-
-    switch (this.props.placement) {
-      case 'right':
-        return {
-          top: childOffset.top + childOffset.height / 2 - overlayHeight / 2,
-          left: childOffset.left + childOffset.width
-        };
-      case 'left':
-        return {
-          top: childOffset.top + childOffset.height / 2 - overlayHeight / 2,
-          left: childOffset.left - overlayWidth
-        };
-      case 'top':
-        return {
-          top: childOffset.top - overlayHeight,
-          left: childOffset.left + childOffset.width / 2 - overlayWidth / 2
-        };
-      case 'bottom':
-        return {
-          top: childOffset.top + childOffset.height,
-          left: childOffset.left + childOffset.width / 2 - overlayWidth / 2
-        };
-      default:
-        throw new Error('calcOverlayPosition(): No such placement of "' + this.props.placement + '" found.');
-    }
-  },
-
-  getPosition: function () {
-    var node = this.getDOMNode();
-    var container = this.getContainerDOMNode();
-
-    var offset = container.tagName == 'BODY' ?
-      domUtils.getOffset(node) : domUtils.getPosition(node, container);
-
-    return assign({}, offset, {
-      height: node.offsetHeight,
-      width: node.offsetWidth
-    });
-  }
-});
-
-module.exports = OverlayTrigger;
-},{"./OverlayMixin":71,"./utils/Object.assign":92,"./utils/cloneWithProps":96,"./utils/createChainedFunction":97,"./utils/domUtils":98,"react":293}],73:[function(require,module,exports){
-var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-
-var PageHeader = React.createClass({displayName: "PageHeader",
-
-  render: function () {
-    return (
-      React.createElement("div", React.__spread({},  this.props, {className: joinClasses(this.props.className, 'page-header')}), 
-        React.createElement("h1", null, this.props.children)
-      )
-    );
-  }
-});
-
-module.exports = PageHeader;
-},{"./utils/joinClasses":99,"react":293}],74:[function(require,module,exports){
-var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
-
-var PageItem = React.createClass({displayName: "PageItem",
-
-  propTypes: {
-    href: React.PropTypes.string,
-    target: React.PropTypes.string,
-    disabled: React.PropTypes.bool,
-    previous: React.PropTypes.bool,
-    next: React.PropTypes.bool,
-    onSelect: React.PropTypes.func,
-    eventKey: React.PropTypes.any
-  },
-
-  getDefaultProps: function () {
-    return {
-      href: '#'
-    };
-  },
-
-  render: function () {
-    var classes = {
-      'disabled': this.props.disabled,
-      'previous': this.props.previous,
-      'next': this.props.next
-    };
-
-    return (
-      React.createElement("li", React.__spread({}, 
-        this.props, 
-        {className: joinClasses(this.props.className, classSet(classes))}), 
-        React.createElement("a", {
-          href: this.props.href, 
-          title: this.props.title, 
-          target: this.props.target, 
-          onClick: this.handleSelect, 
-          ref: "anchor"}, 
-          this.props.children
-        )
-      )
-    );
-  },
-
-  handleSelect: function (e) {
-    if (this.props.onSelect) {
-      e.preventDefault();
-
-      if (!this.props.disabled) {
-        this.props.onSelect(this.props.eventKey, this.props.href, this.props.target);
-      }
-    }
-  }
-});
-
-module.exports = PageItem;
-},{"./utils/classSet":95,"./utils/joinClasses":99,"react":293}],75:[function(require,module,exports){
-var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var cloneWithProps = require('./utils/cloneWithProps');
-
-var ValidComponentChildren = require('./utils/ValidComponentChildren');
-var createChainedFunction = require('./utils/createChainedFunction');
-
-var Pager = React.createClass({displayName: "Pager",
-
-  propTypes: {
-    onSelect: React.PropTypes.func
-  },
-
-  render: function () {
-    return (
-      React.createElement("ul", React.__spread({}, 
-        this.props, 
-        {className: joinClasses(this.props.className, 'pager')}), 
-        ValidComponentChildren.map(this.props.children, this.renderPageItem)
-      )
-    );
-  },
-
-  renderPageItem: function (child, index) {
-    return cloneWithProps(
-      child,
-      {
-        onSelect: createChainedFunction(child.props.onSelect, this.props.onSelect),
-        ref: child.ref,
-        key: child.key ? child.key : index
-      }
-    );
-  }
-});
-
-module.exports = Pager;
-},{"./utils/ValidComponentChildren":94,"./utils/cloneWithProps":96,"./utils/createChainedFunction":97,"./utils/joinClasses":99,"react":293}],76:[function(require,module,exports){
-var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
-var cloneWithProps = require('./utils/cloneWithProps');
-
-var BootstrapMixin = require('./BootstrapMixin');
-var CollapsableMixin = require('./CollapsableMixin');
-
-var Panel = React.createClass({displayName: "Panel",
-  mixins: [BootstrapMixin, CollapsableMixin],
-
-  propTypes: {
-    onSelect: React.PropTypes.func,
-    header: React.PropTypes.node,
-    footer: React.PropTypes.node,
-    eventKey: React.PropTypes.any
-  },
-
-  getDefaultProps: function () {
-    return {
-      bsClass: 'panel',
-      bsStyle: 'default'
-    };
-  },
-
-  handleSelect: function (e) {
-    if (this.props.onSelect) {
-      this._isChanging = true;
-      this.props.onSelect(this.props.eventKey);
-      this._isChanging = false;
-    }
-
-    e.preventDefault();
-
-    this.setState({
-      expanded: !this.state.expanded
-    });
-  },
-
-  shouldComponentUpdate: function () {
-    return !this._isChanging;
-  },
-
-  getCollapsableDimensionValue: function () {
-    return this.refs.panel.getDOMNode().scrollHeight;
-  },
-
-  getCollapsableDOMNode: function () {
-    if (!this.isMounted() || !this.refs || !this.refs.panel) {
-      return null;
-    }
-
-    return this.refs.panel.getDOMNode();
-  },
-
-  render: function () {
-    var classes = this.getBsClassSet();
-    classes['panel'] = true;
-
-    return (
-      React.createElement("div", React.__spread({},  this.props, {className: joinClasses(this.props.className, classSet(classes)), 
-        id: this.props.collapsable ? null : this.props.id, onSelect: null}), 
-        this.renderHeading(), 
-        this.props.collapsable ? this.renderCollapsableBody() : this.renderBody(), 
-        this.renderFooter()
-      )
-    );
-  },
-
-  renderCollapsableBody: function () {
-    return (
-      React.createElement("div", {className: classSet(this.getCollapsableClassSet('panel-collapse')), id: this.props.id, ref: "panel"}, 
-        this.renderBody()
-      )
-    );
-  },
-
-  renderBody: function () {
-    var allChildren = this.props.children;
-    var bodyElements = [];
-
-    function getProps() {
-      return {key: bodyElements.length};
-    }
-
-    function addPanelChild (child) {
-      bodyElements.push(cloneWithProps(child, getProps()));
-    }
-
-    function addPanelBody (children) {
-      bodyElements.push(
-        React.createElement("div", React.__spread({className: "panel-body"},  getProps()), 
-          children
-        )
-      );
-    }
-
-    // Handle edge cases where we should not iterate through children.
-    if (!Array.isArray(allChildren) || allChildren.length == 0) {
-      if (this.shouldRenderFill(allChildren)) {
-        addPanelChild(allChildren);
-      } else {
-        addPanelBody(allChildren);
-      }
-    } else {
-      var panelBodyChildren = [];
-
-      function maybeRenderPanelBody () {
-        if (panelBodyChildren.length == 0) {
-          return;
-        }
-
-        addPanelBody(panelBodyChildren);
-        panelBodyChildren = [];
-      }
-
-      allChildren.forEach(function(child) {
-        if (this.shouldRenderFill(child)) {
-          maybeRenderPanelBody();
-
-          // Separately add the filled element.
-          addPanelChild(child);
-        } else {
-          panelBodyChildren.push(child);
-        }
-      }.bind(this));
-
-      maybeRenderPanelBody();
-    }
-
-    return bodyElements;
-  },
-
-  shouldRenderFill: function (child) {
-    return React.isValidElement(child) && child.props.fill != null
-  },
-
-  renderHeading: function () {
-    var header = this.props.header;
-
-    if (!header) {
-      return null;
-    }
-
-    if (!React.isValidElement(header) || Array.isArray(header)) {
-      header = this.props.collapsable ?
-        this.renderCollapsableTitle(header) : header;
-    } else if (this.props.collapsable) {
-      header = cloneWithProps(header, {
-        className: 'panel-title',
-        children: this.renderAnchor(header.props.children)
-      });
-    } else {
-      header = cloneWithProps(header, {
-        className: 'panel-title'
-      });
-    }
-
-    return (
-      React.createElement("div", {className: "panel-heading"}, 
-        header
-      )
-    );
-  },
-
-  renderAnchor: function (header) {
-    return (
-      React.createElement("a", {
-        href: '#' + (this.props.id || ''), 
-        className: this.isExpanded() ? null : 'collapsed', 
-        onClick: this.handleSelect}, 
-        header
-      )
-    );
-  },
-
-  renderCollapsableTitle: function (header) {
-    return (
-      React.createElement("h4", {className: "panel-title"}, 
-        this.renderAnchor(header)
-      )
-    );
-  },
-
-  renderFooter: function () {
-    if (!this.props.footer) {
-      return null;
-    }
-
-    return (
-      React.createElement("div", {className: "panel-footer"}, 
-        this.props.footer
-      )
-    );
-  }
-});
-
-module.exports = Panel;
-
-},{"./BootstrapMixin":45,"./CollapsableMixin":52,"./utils/classSet":95,"./utils/cloneWithProps":96,"./utils/joinClasses":99,"react":293}],77:[function(require,module,exports){
-var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
-var cloneWithProps = require('./utils/cloneWithProps');
-
-var BootstrapMixin = require('./BootstrapMixin');
-var ValidComponentChildren = require('./utils/ValidComponentChildren');
-
-var PanelGroup = React.createClass({displayName: "PanelGroup",
-  mixins: [BootstrapMixin],
-
-  propTypes: {
-    collapsable: React.PropTypes.bool,
-    activeKey: React.PropTypes.any,
-    defaultActiveKey: React.PropTypes.any,
-    onSelect: React.PropTypes.func
-  },
-
-  getDefaultProps: function () {
-    return {
-      bsClass: 'panel-group'
-    };
-  },
-
-  getInitialState: function () {
-    var defaultActiveKey = this.props.defaultActiveKey;
-
-    return {
-      activeKey: defaultActiveKey
-    };
-  },
-
-  render: function () {
-    var classes = this.getBsClassSet();
-    return (
-      React.createElement("div", React.__spread({},  this.props, {className: joinClasses(this.props.className, classSet(classes)), onSelect: null}), 
-        ValidComponentChildren.map(this.props.children, this.renderPanel)
-      )
-    );
-  },
-
-  renderPanel: function (child, index) {
-    var activeKey =
-      this.props.activeKey != null ? this.props.activeKey : this.state.activeKey;
-
-    var props = {
-      bsStyle: child.props.bsStyle || this.props.bsStyle,
-      key: child.key ? child.key : index,
-      ref: child.ref
-    };
-
-    if (this.props.accordion) {
-      props.collapsable = true;
-      props.expanded = (child.props.eventKey === activeKey);
-      props.onSelect = this.handleSelect;
-    }
-
-    return cloneWithProps(
-      child,
-      props
-    );
-  },
-
-  shouldComponentUpdate: function() {
-    // Defer any updates to this component during the `onSelect` handler.
-    return !this._isChanging;
-  },
-
-  handleSelect: function (key) {
-    if (this.props.onSelect) {
-      this._isChanging = true;
-      this.props.onSelect(key);
-      this._isChanging = false;
-    }
-
-    if (this.state.activeKey === key) {
-      key = null;
-    }
-
-    this.setState({
-      activeKey: key
-    });
-  }
-});
-
-module.exports = PanelGroup;
-},{"./BootstrapMixin":45,"./utils/ValidComponentChildren":94,"./utils/classSet":95,"./utils/cloneWithProps":96,"./utils/joinClasses":99,"react":293}],78:[function(require,module,exports){
-var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
-var BootstrapMixin = require('./BootstrapMixin');
-
-
-var Popover = React.createClass({displayName: "Popover",
-  mixins: [BootstrapMixin],
-
-  propTypes: {
-    placement: React.PropTypes.oneOf(['top','right', 'bottom', 'left']),
-    positionLeft: React.PropTypes.number,
-    positionTop: React.PropTypes.number,
-    arrowOffsetLeft: React.PropTypes.number,
-    arrowOffsetTop: React.PropTypes.number,
-    title: React.PropTypes.node
-  },
-
-  getDefaultProps: function () {
-    return {
-      placement: 'right'
-    };
-  },
-
-  render: function () {
-    var classes = {};
-    classes['popover'] = true;
-    classes[this.props.placement] = true;
-    classes['in'] = this.props.positionLeft != null || this.props.positionTop != null;
-
-    var style = {};
-    style['left'] = this.props.positionLeft;
-    style['top'] = this.props.positionTop;
-    style['display'] = 'block';
-
-    var arrowStyle = {};
-    arrowStyle['left'] = this.props.arrowOffsetLeft;
-    arrowStyle['top'] = this.props.arrowOffsetTop;
-
-    return (
-      React.createElement("div", React.__spread({},  this.props, {className: joinClasses(this.props.className, classSet(classes)), style: style, title: null}), 
-        React.createElement("div", {className: "arrow", style: arrowStyle}), 
-        this.props.title ? this.renderTitle() : null, 
-        React.createElement("div", {className: "popover-content"}, 
-          this.props.children
-        )
-      )
-    );
-  },
-
-  renderTitle: function() {
-    return (
-      React.createElement("h3", {className: "popover-title"}, this.props.title)
-    );
-  }
-});
-
-module.exports = Popover;
-},{"./BootstrapMixin":45,"./utils/classSet":95,"./utils/joinClasses":99,"react":293}],79:[function(require,module,exports){
-var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var Interpolate = require('./Interpolate');
-var BootstrapMixin = require('./BootstrapMixin');
-var classSet = require('./utils/classSet');
-var cloneWithProps = require('./utils/cloneWithProps');
-
-var ValidComponentChildren = require('./utils/ValidComponentChildren');
-
-
-var ProgressBar = React.createClass({displayName: "ProgressBar",
-  propTypes: {
-    min: React.PropTypes.number,
-    now: React.PropTypes.number,
-    max: React.PropTypes.number,
-    label: React.PropTypes.node,
-    srOnly: React.PropTypes.bool,
-    striped: React.PropTypes.bool,
-    active: React.PropTypes.bool
-  },
-
-  mixins: [BootstrapMixin],
-
-  getDefaultProps: function () {
-    return {
-      bsClass: 'progress-bar',
-      min: 0,
-      max: 100
-    };
-  },
-
-  getPercentage: function (now, min, max) {
-    return Math.ceil((now - min) / (max - min) * 100);
-  },
-
-  render: function () {
-    var classes = {
-        progress: true
-      };
-
-    if (this.props.active) {
-      classes['progress-striped'] = true;
-      classes['active'] = true;
-    } else if (this.props.striped) {
-      classes['progress-striped'] = true;
-    }
-
-    if (!ValidComponentChildren.hasValidComponent(this.props.children)) {
-      if (!this.props.isChild) {
-        return (
-          React.createElement("div", React.__spread({},  this.props, {className: joinClasses(this.props.className, classSet(classes))}), 
-            this.renderProgressBar()
-          )
-        );
-      } else {
-        return (
-          this.renderProgressBar()
-        );
-      }
-    } else {
-      return (
-        React.createElement("div", React.__spread({},  this.props, {className: joinClasses(this.props.className, classSet(classes))}), 
-          ValidComponentChildren.map(this.props.children, this.renderChildBar)
-        )
-      );
-    }
-  },
-
-  renderChildBar: function (child, index) {
-    return cloneWithProps(child, {
-      isChild: true,
-      key: child.key ? child.key : index,
-      ref: child.ref
-    });
-  },
-
-  renderProgressBar: function () {
-    var percentage = this.getPercentage(
-        this.props.now,
-        this.props.min,
-        this.props.max
-      );
-
-    var label;
-
-    if (typeof this.props.label === "string") {
-      label = this.renderLabel(percentage);
-    } else if (this.props.label) {
-      label = this.props.label;
-    }
-
-    if (this.props.srOnly) {
-      label = this.renderScreenReaderOnlyLabel(label);
-    }
-
-    var classes = this.getBsClassSet();
-
-    return (
-      React.createElement("div", React.__spread({},  this.props, {className: joinClasses(this.props.className, classSet(classes)), role: "progressbar", 
-        style: {width: percentage + '%'}, 
-        "aria-valuenow": this.props.now, 
-        "aria-valuemin": this.props.min, 
-        "aria-valuemax": this.props.max}), 
-        label
-      )
-    );
-  },
-
-  renderLabel: function (percentage) {
-    var InterpolateClass = this.props.interpolateClass || Interpolate;
-
-    return (
-      React.createElement(InterpolateClass, {
-        now: this.props.now, 
-        min: this.props.min, 
-        max: this.props.max, 
-        percent: percentage, 
-        bsStyle: this.props.bsStyle}, 
-        this.props.label
-      )
-    );
-  },
-
-  renderScreenReaderOnlyLabel: function (label) {
-    return (
-      React.createElement("span", {className: "sr-only"}, 
-        label
-      )
-    );
-  }
-});
-
-module.exports = ProgressBar;
-
-},{"./BootstrapMixin":45,"./Interpolate":60,"./utils/ValidComponentChildren":94,"./utils/classSet":95,"./utils/cloneWithProps":96,"./utils/joinClasses":99,"react":293}],80:[function(require,module,exports){
-var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-
-var Row = React.createClass({displayName: "Row",
-  propTypes: {
-    componentClass: React.PropTypes.node.isRequired
-  },
-
-  getDefaultProps: function () {
-    return {
-      componentClass: 'div'
-    };
-  },
-
-  render: function () {
-    var ComponentClass = this.props.componentClass;
-
-    return (
-      React.createElement(ComponentClass, React.__spread({},  this.props, {className: joinClasses(this.props.className, 'row')}), 
-        this.props.children
-      )
-    );
-  }
-});
-
-module.exports = Row;
-},{"./utils/joinClasses":99,"react":293}],81:[function(require,module,exports){
-var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
-var BootstrapMixin = require('./BootstrapMixin');
-var DropdownStateMixin = require('./DropdownStateMixin');
-var Button = require('./Button');
-var ButtonGroup = require('./ButtonGroup');
-var DropdownMenu = require('./DropdownMenu');
-
-var SplitButton = React.createClass({displayName: "SplitButton",
-  mixins: [BootstrapMixin, DropdownStateMixin],
-
-  propTypes: {
-    pullRight:     React.PropTypes.bool,
-    title:         React.PropTypes.node,
-    href:          React.PropTypes.string,
-    target:        React.PropTypes.string,
-    dropdownTitle: React.PropTypes.node,
-    onClick:       React.PropTypes.func,
-    onSelect:      React.PropTypes.func,
-    disabled:      React.PropTypes.bool
-  },
-
-  getDefaultProps: function () {
-    return {
-      dropdownTitle: 'Toggle dropdown'
-    };
-  },
-
-  render: function () {
-    var groupClasses = {
-        'open': this.state.open,
-        'dropup': this.props.dropup
-      };
-
-    var button = (
-      React.createElement(Button, React.__spread({}, 
-        this.props, 
-        {ref: "button", 
-        onClick: this.handleButtonClick, 
-        title: null, 
-        id: null}), 
-        this.props.title
-      )
-    );
-
-    var dropdownButton = (
-      React.createElement(Button, React.__spread({}, 
-        this.props, 
-        {ref: "dropdownButton", 
-        className: joinClasses(this.props.className, 'dropdown-toggle'), 
-        onClick: this.handleDropdownClick, 
-        title: null, 
-        href: null, 
-        target: null, 
-        id: null}), 
-        React.createElement("span", {className: "sr-only"}, this.props.dropdownTitle), 
-        React.createElement("span", {className: "caret"})
-      )
-    );
-
-    return (
-      React.createElement(ButtonGroup, {
-        bsSize: this.props.bsSize, 
-        className: classSet(groupClasses), 
-        id: this.props.id}, 
-        button, 
-        dropdownButton, 
-        React.createElement(DropdownMenu, {
-          ref: "menu", 
-          onSelect: this.handleOptionSelect, 
-          "aria-labelledby": this.props.id, 
-          pullRight: this.props.pullRight}, 
-          this.props.children
-        )
-      )
-    );
-  },
-
-  handleButtonClick: function (e) {
-    if (this.state.open) {
-      this.setDropdownState(false);
-    }
-
-    if (this.props.onClick) {
-      this.props.onClick(e, this.props.href, this.props.target);
-    }
-  },
-
-  handleDropdownClick: function (e) {
-    e.preventDefault();
-
-    this.setDropdownState(!this.state.open);
-  },
-
-  handleOptionSelect: function (key) {
-    if (this.props.onSelect) {
-      this.props.onSelect(key);
-    }
-
-    this.setDropdownState(false);
-  }
-});
-
-module.exports = SplitButton;
-
-},{"./BootstrapMixin":45,"./Button":46,"./ButtonGroup":47,"./DropdownMenu":54,"./DropdownStateMixin":55,"./utils/classSet":95,"./utils/joinClasses":99,"react":293}],82:[function(require,module,exports){
-var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
-var cloneWithProps = require('./utils/cloneWithProps');
-
-var ValidComponentChildren = require('./utils/ValidComponentChildren');
-var createChainedFunction = require('./utils/createChainedFunction');
-var BootstrapMixin = require('./BootstrapMixin');
-
-
-var SubNav = React.createClass({displayName: "SubNav",
-  mixins: [BootstrapMixin],
-
-  propTypes: {
-    onSelect: React.PropTypes.func,
-    active: React.PropTypes.bool,
-    disabled: React.PropTypes.bool,
-    href: React.PropTypes.string,
-    title: React.PropTypes.string,
-    text: React.PropTypes.node,
-    target: React.PropTypes.string
-  },
-
-  getDefaultProps: function () {
-    return {
-      bsClass: 'nav'
-    };
-  },
-
-  handleClick: function (e) {
-    if (this.props.onSelect) {
-      e.preventDefault();
-
-      if (!this.props.disabled) {
-        this.props.onSelect(this.props.eventKey, this.props.href, this.props.target);
-      }
-    }
-  },
-
-  isActive: function () {
-    return this.isChildActive(this);
-  },
-
-  isChildActive: function (child) {
-    if (child.props.active) {
-      return true;
-    }
-
-    if (this.props.activeKey != null && this.props.activeKey === child.props.eventKey) {
-      return true;
-    }
-
-    if (this.props.activeHref != null && this.props.activeHref === child.props.href) {
-      return true;
-    }
-
-    if (child.props.children) {
-      var isActive = false;
-
-      ValidComponentChildren.forEach(
-        child.props.children,
-        function (child) {
-          if (this.isChildActive(child)) {
-            isActive = true;
-          }
-        },
-        this
-      );
-
-      return isActive;
-    }
-
-    return false;
-  },
-
-  getChildActiveProp: function (child) {
-    if (child.props.active) {
-      return true;
-    }
-    if (this.props.activeKey != null) {
-      if (child.props.eventKey == this.props.activeKey) {
-        return true;
-      }
-    }
-    if (this.props.activeHref != null) {
-      if (child.props.href === this.props.activeHref) {
-        return true;
-      }
-    }
-
-    return child.props.active;
-  },
-
-  render: function () {
-    var classes = {
-      'active': this.isActive(),
-      'disabled': this.props.disabled
-    };
-
-    return (
-      React.createElement("li", React.__spread({},  this.props, {className: joinClasses(this.props.className, classSet(classes))}), 
-        React.createElement("a", {
-          href: this.props.href, 
-          title: this.props.title, 
-          target: this.props.target, 
-          onClick: this.handleClick, 
-          ref: "anchor"}, 
-          this.props.text
-        ), 
-        React.createElement("ul", {className: "nav"}, 
-          ValidComponentChildren.map(this.props.children, this.renderNavItem)
-        )
-      )
-    );
-  },
-
-  renderNavItem: function (child, index) {
-    return cloneWithProps(
-      child,
-      {
-        active: this.getChildActiveProp(child),
-        onSelect: createChainedFunction(child.props.onSelect, this.props.onSelect),
-        ref: child.ref,
-        key: child.key ? child.key : index
-      }
-    );
-  }
-});
-
-module.exports = SubNav;
-
-},{"./BootstrapMixin":45,"./utils/ValidComponentChildren":94,"./utils/classSet":95,"./utils/cloneWithProps":96,"./utils/createChainedFunction":97,"./utils/joinClasses":99,"react":293}],83:[function(require,module,exports){
-var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
-var TransitionEvents = require('./utils/TransitionEvents');
-
-var TabPane = React.createClass({displayName: "TabPane",
-  getDefaultProps: function () {
-    return {
-      animation: true
-    };
-  },
-
-  getInitialState: function () {
-    return {
-      animateIn: false,
-      animateOut: false
-    };
-  },
-
-  componentWillReceiveProps: function (nextProps) {
-    if (this.props.animation) {
-      if (!this.state.animateIn && nextProps.active && !this.props.active) {
-        this.setState({
-          animateIn: true
-        });
-      } else if (!this.state.animateOut && !nextProps.active && this.props.active) {
-        this.setState({
-          animateOut: true
-        });
-      }
-    }
-  },
-
-  componentDidUpdate: function () {
-    if (this.state.animateIn) {
-      setTimeout(this.startAnimateIn, 0);
-    }
-    if (this.state.animateOut) {
-      TransitionEvents.addEndEventListener(
-        this.getDOMNode(),
-        this.stopAnimateOut
-      );
-    }
-  },
-
-  startAnimateIn: function () {
-    if (this.isMounted()) {
-      this.setState({
-        animateIn: false
-      });
-    }
-  },
-
-  stopAnimateOut: function () {
-    if (this.isMounted()) {
-      this.setState({
-        animateOut: false
-      });
-
-      if (typeof this.props.onAnimateOutEnd === 'function') {
-        this.props.onAnimateOutEnd();
-      }
-    }
-  },
-
-  render: function () {
-    var classes = {
-      'tab-pane': true,
-      'fade': true,
-      'active': this.props.active || this.state.animateOut,
-      'in': this.props.active && !this.state.animateIn
-    };
-
-    return (
-      React.createElement("div", React.__spread({},  this.props, {className: joinClasses(this.props.className, classSet(classes))}), 
-        this.props.children
-      )
-    );
-  }
-});
-
-module.exports = TabPane;
-},{"./utils/TransitionEvents":93,"./utils/classSet":95,"./utils/joinClasses":99,"react":293}],84:[function(require,module,exports){
-var React = require('react');
-var BootstrapMixin = require('./BootstrapMixin');
-var cloneWithProps = require('./utils/cloneWithProps');
-
-var ValidComponentChildren = require('./utils/ValidComponentChildren');
-var Nav = require('./Nav');
-var NavItem = require('./NavItem');
-
-function getDefaultActiveKeyFromChildren(children) {
-  var defaultActiveKey;
-
-  ValidComponentChildren.forEach(children, function(child) {
-    if (defaultActiveKey == null) {
-      defaultActiveKey = child.props.eventKey;
-    }
-  });
-
-  return defaultActiveKey;
-}
-
-var TabbedArea = React.createClass({displayName: "TabbedArea",
-  mixins: [BootstrapMixin],
-
-  propTypes: {
-    bsStyle: React.PropTypes.oneOf(['tabs','pills']),
-    animation: React.PropTypes.bool,
-    onSelect: React.PropTypes.func
-  },
-
-  getDefaultProps: function () {
-    return {
-      bsStyle: "tabs",
-      animation: true
-    };
-  },
-
-  getInitialState: function () {
-    var defaultActiveKey = this.props.defaultActiveKey != null ?
-      this.props.defaultActiveKey : getDefaultActiveKeyFromChildren(this.props.children);
-
-    // TODO: In __DEV__ mode warn via `console.warn` if no `defaultActiveKey` has
-    // been set by this point, invalid children or missing key properties are likely the cause.
-
-    return {
-      activeKey: defaultActiveKey,
-      previousActiveKey: null
-    };
-  },
-
-  componentWillReceiveProps: function (nextProps) {
-    if (nextProps.activeKey != null && nextProps.activeKey !== this.props.activeKey) {
-      this.setState({
-        previousActiveKey: this.props.activeKey
-      });
-    }
-  },
-
-  handlePaneAnimateOutEnd: function () {
-    this.setState({
-      previousActiveKey: null
-    });
-  },
-
-  render: function () {
-    var activeKey =
-      this.props.activeKey != null ? this.props.activeKey : this.state.activeKey;
-
-    function renderTabIfSet(child) {
-      return child.props.tab != null ? this.renderTab(child) : null;
-    }
-
-    var nav = (
-      React.createElement(Nav, React.__spread({},  this.props, {activeKey: activeKey, onSelect: this.handleSelect, ref: "tabs"}), 
-        ValidComponentChildren.map(this.props.children, renderTabIfSet, this)
-      )
-    );
-
-    return (
-      React.createElement("div", null, 
-        nav, 
-        React.createElement("div", {id: this.props.id, className: "tab-content", ref: "panes"}, 
-          ValidComponentChildren.map(this.props.children, this.renderPane)
-        )
-      )
-    );
-  },
-
-  getActiveKey: function () {
-    return this.props.activeKey != null ? this.props.activeKey : this.state.activeKey;
-  },
-
-  renderPane: function (child, index) {
-    var activeKey = this.getActiveKey();
-
-    return cloneWithProps(
-        child,
-        {
-          active: (child.props.eventKey === activeKey &&
-            (this.state.previousActiveKey == null || !this.props.animation)),
-          ref: child.ref,
-          key: child.key ? child.key : index,
-          animation: this.props.animation,
-          onAnimateOutEnd: (this.state.previousActiveKey != null &&
-            child.props.eventKey === this.state.previousActiveKey) ? this.handlePaneAnimateOutEnd: null
-        }
-      );
-  },
-
-  renderTab: function (child) {
-    var key = child.props.eventKey;
-    return (
-      React.createElement(NavItem, {
-        ref: 'tab' + key, 
-        eventKey: key}, 
-        child.props.tab
-      )
-    );
-  },
-
-  shouldComponentUpdate: function() {
-    // Defer any updates to this component during the `onSelect` handler.
-    return !this._isChanging;
-  },
-
-  handleSelect: function (key) {
-    if (this.props.onSelect) {
-      this._isChanging = true;
-      this.props.onSelect(key);
-      this._isChanging = false;
-    } else if (key !== this.getActiveKey()) {
-      this.setState({
-        activeKey: key,
-        previousActiveKey: this.getActiveKey()
-      });
-    }
-  }
-});
-
-module.exports = TabbedArea;
-},{"./BootstrapMixin":45,"./Nav":68,"./NavItem":69,"./utils/ValidComponentChildren":94,"./utils/cloneWithProps":96,"react":293}],85:[function(require,module,exports){
-var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
-
-var Table = React.createClass({displayName: "Table",
-  propTypes: {
-    striped: React.PropTypes.bool,
-    bordered: React.PropTypes.bool,
-    condensed: React.PropTypes.bool,
-    hover: React.PropTypes.bool,
-    responsive: React.PropTypes.bool
-  },
-
-  render: function () {
-    var classes = {
-      'table': true,
-      'table-striped': this.props.striped,
-      'table-bordered': this.props.bordered,
-      'table-condensed': this.props.condensed,
-      'table-hover': this.props.hover
-    };
-    var table = (
-      React.createElement("table", React.__spread({},  this.props, {className: joinClasses(this.props.className, classSet(classes))}), 
-        this.props.children
-      )
-    );
-
-    return this.props.responsive ? (
-      React.createElement("div", {className: "table-responsive"}, 
-        table
-      )
-    ) : table;
-  }
-});
-
-module.exports = Table;
-},{"./utils/classSet":95,"./utils/joinClasses":99,"react":293}],86:[function(require,module,exports){
-var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
-var BootstrapMixin = require('./BootstrapMixin');
-
-
-var Tooltip = React.createClass({displayName: "Tooltip",
-  mixins: [BootstrapMixin],
-
-  propTypes: {
-    placement: React.PropTypes.oneOf(['top','right', 'bottom', 'left']),
-    positionLeft: React.PropTypes.number,
-    positionTop: React.PropTypes.number,
-    arrowOffsetLeft: React.PropTypes.number,
-    arrowOffsetTop: React.PropTypes.number
-  },
-
-  getDefaultProps: function () {
-    return {
-      placement: 'right'
-    };
-  },
-
-  render: function () {
-    var classes = {};
-    classes['tooltip'] = true;
-    classes[this.props.placement] = true;
-    classes['in'] = this.props.positionLeft != null || this.props.positionTop != null;
-
-    var style = {};
-    style['left'] = this.props.positionLeft;
-    style['top'] = this.props.positionTop;
-
-    var arrowStyle = {};
-    arrowStyle['left'] = this.props.arrowOffsetLeft;
-    arrowStyle['top'] = this.props.arrowOffsetTop;
-
-    return (
-        React.createElement("div", React.__spread({},  this.props, {className: joinClasses(this.props.className, classSet(classes)), style: style}), 
-          React.createElement("div", {className: "tooltip-arrow", style: arrowStyle}), 
-          React.createElement("div", {className: "tooltip-inner"}, 
-            this.props.children
-          )
-        )
-      );
-  }
-});
-
-module.exports = Tooltip;
-},{"./BootstrapMixin":45,"./utils/classSet":95,"./utils/joinClasses":99,"react":293}],87:[function(require,module,exports){
-var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
-var BootstrapMixin = require('./BootstrapMixin');
-
-var Well = React.createClass({displayName: "Well",
-  mixins: [BootstrapMixin],
-
-  getDefaultProps: function () {
-    return {
-      bsClass: 'well'
-    };
-  },
-
-  render: function () {
-    var classes = this.getBsClassSet();
-
-    return (
-      React.createElement("div", React.__spread({},  this.props, {className: joinClasses(this.props.className, classSet(classes))}), 
-        this.props.children
-      )
-    );
-  }
-});
-
-module.exports = Well;
-},{"./BootstrapMixin":45,"./utils/classSet":95,"./utils/joinClasses":99,"react":293}],88:[function(require,module,exports){
-module.exports = {
-  CLASSES: {
-    'alert': 'alert',
-    'button': 'btn',
-    'button-group': 'btn-group',
-    'button-toolbar': 'btn-toolbar',
-    'column': 'col',
-    'input-group': 'input-group',
-    'form': 'form',
-    'glyphicon': 'glyphicon',
-    'label': 'label',
-    'list-group-item': 'list-group-item',
-    'panel': 'panel',
-    'panel-group': 'panel-group',
-    'progress-bar': 'progress-bar',
-    'nav': 'nav',
-    'navbar': 'navbar',
-    'modal': 'modal',
-    'row': 'row',
-    'well': 'well'
-  },
-  STYLES: {
-    'default': 'default',
-    'primary': 'primary',
-    'success': 'success',
-    'info': 'info',
-    'warning': 'warning',
-    'danger': 'danger',
-    'link': 'link',
-    'inline': 'inline',
-    'tabs': 'tabs',
-    'pills': 'pills'
-  },
-  SIZES: {
-    'large': 'lg',
-    'medium': 'md',
-    'small': 'sm',
-    'xsmall': 'xs'
-  },
-  GLYPHS: [
-    'asterisk',
-    'plus',
-    'euro',
-    'eur',
-    'minus',
-    'cloud',
-    'envelope',
-    'pencil',
-    'glass',
-    'music',
-    'search',
-    'heart',
-    'star',
-    'star-empty',
-    'user',
-    'film',
-    'th-large',
-    'th',
-    'th-list',
-    'ok',
-    'remove',
-    'zoom-in',
-    'zoom-out',
-    'off',
-    'signal',
-    'cog',
-    'trash',
-    'home',
-    'file',
-    'time',
-    'road',
-    'download-alt',
-    'download',
-    'upload',
-    'inbox',
-    'play-circle',
-    'repeat',
-    'refresh',
-    'list-alt',
-    'lock',
-    'flag',
-    'headphones',
-    'volume-off',
-    'volume-down',
-    'volume-up',
-    'qrcode',
-    'barcode',
-    'tag',
-    'tags',
-    'book',
-    'bookmark',
-    'print',
-    'camera',
-    'font',
-    'bold',
-    'italic',
-    'text-height',
-    'text-width',
-    'align-left',
-    'align-center',
-    'align-right',
-    'align-justify',
-    'list',
-    'indent-left',
-    'indent-right',
-    'facetime-video',
-    'picture',
-    'map-marker',
-    'adjust',
-    'tint',
-    'edit',
-    'share',
-    'check',
-    'move',
-    'step-backward',
-    'fast-backward',
-    'backward',
-    'play',
-    'pause',
-    'stop',
-    'forward',
-    'fast-forward',
-    'step-forward',
-    'eject',
-    'chevron-left',
-    'chevron-right',
-    'plus-sign',
-    'minus-sign',
-    'remove-sign',
-    'ok-sign',
-    'question-sign',
-    'info-sign',
-    'screenshot',
-    'remove-circle',
-    'ok-circle',
-    'ban-circle',
-    'arrow-left',
-    'arrow-right',
-    'arrow-up',
-    'arrow-down',
-    'share-alt',
-    'resize-full',
-    'resize-small',
-    'exclamation-sign',
-    'gift',
-    'leaf',
-    'fire',
-    'eye-open',
-    'eye-close',
-    'warning-sign',
-    'plane',
-    'calendar',
-    'random',
-    'comment',
-    'magnet',
-    'chevron-up',
-    'chevron-down',
-    'retweet',
-    'shopping-cart',
-    'folder-close',
-    'folder-open',
-    'resize-vertical',
-    'resize-horizontal',
-    'hdd',
-    'bullhorn',
-    'bell',
-    'certificate',
-    'thumbs-up',
-    'thumbs-down',
-    'hand-right',
-    'hand-left',
-    'hand-up',
-    'hand-down',
-    'circle-arrow-right',
-    'circle-arrow-left',
-    'circle-arrow-up',
-    'circle-arrow-down',
-    'globe',
-    'wrench',
-    'tasks',
-    'filter',
-    'briefcase',
-    'fullscreen',
-    'dashboard',
-    'paperclip',
-    'heart-empty',
-    'link',
-    'phone',
-    'pushpin',
-    'usd',
-    'gbp',
-    'sort',
-    'sort-by-alphabet',
-    'sort-by-alphabet-alt',
-    'sort-by-order',
-    'sort-by-order-alt',
-    'sort-by-attributes',
-    'sort-by-attributes-alt',
-    'unchecked',
-    'expand',
-    'collapse-down',
-    'collapse-up',
-    'log-in',
-    'flash',
-    'log-out',
-    'new-window',
-    'record',
-    'save',
-    'open',
-    'saved',
-    'import',
-    'export',
-    'send',
-    'floppy-disk',
-    'floppy-saved',
-    'floppy-remove',
-    'floppy-save',
-    'floppy-open',
-    'credit-card',
-    'transfer',
-    'cutlery',
-    'header',
-    'compressed',
-    'earphone',
-    'phone-alt',
-    'tower',
-    'stats',
-    'sd-video',
-    'hd-video',
-    'subtitles',
-    'sound-stereo',
-    'sound-dolby',
-    'sound-5-1',
-    'sound-6-1',
-    'sound-7-1',
-    'copyright-mark',
-    'registration-mark',
-    'cloud-download',
-    'cloud-upload',
-    'tree-conifer',
-    'tree-deciduous',
-    'cd',
-    'save-file',
-    'open-file',
-    'level-up',
-    'copy',
-    'paste',
-    'alert',
-    'equalizer',
-    'king',
-    'queen',
-    'pawn',
-    'bishop',
-    'knight',
-    'baby-formula',
-    'tent',
-    'blackboard',
-    'bed',
-    'apple',
-    'erase',
-    'hourglass',
-    'lamp',
-    'duplicate',
-    'piggy-bank',
-    'scissors',
-    'bitcoin',
-    'yen',
-    'ruble',
-    'scale',
-    'ice-lolly',
-    'ice-lolly-tasted',
-    'education',
-    'option-horizontal',
-    'option-vertical',
-    'menu-hamburger',
-    'modal-window',
-    'oil',
-    'grain',
-    'sunglasses',
-    'text-size',
-    'text-color',
-    'text-background',
-    'object-align-top',
-    'object-align-bottom',
-    'object-align-horizontal',
-    'object-align-left',
-    'object-align-vertical',
-    'object-align-right',
-    'triangle-right',
-    'triangle-left',
-    'triangle-bottom',
-    'triangle-top',
-    'console',
-    'superscript',
-    'subscript',
-    'menu-left',
-    'menu-right',
-    'menu-down',
-    'menu-up'
-  ]
-};
-
-},{}],89:[function(require,module,exports){
-module.exports = {
-  Accordion: require('./Accordion'),
-  Affix: require('./Affix'),
-  AffixMixin: require('./AffixMixin'),
-  Alert: require('./Alert'),
-  BootstrapMixin: require('./BootstrapMixin'),
-  Badge: require('./Badge'),
-  Button: require('./Button'),
-  ButtonGroup: require('./ButtonGroup'),
-  ButtonToolbar: require('./ButtonToolbar'),
-  Carousel: require('./Carousel'),
-  CarouselItem: require('./CarouselItem'),
-  Col: require('./Col'),
-  CollapsableMixin: require('./CollapsableMixin'),
-  DropdownButton: require('./DropdownButton'),
-  DropdownMenu: require('./DropdownMenu'),
-  DropdownStateMixin: require('./DropdownStateMixin'),
-  FadeMixin: require('./FadeMixin'),
-  Glyphicon: require('./Glyphicon'),
-  Grid: require('./Grid'),
-  Input: require('./Input'),
-  Interpolate: require('./Interpolate'),
-  Jumbotron: require('./Jumbotron'),
-  Label: require('./Label'),
-  ListGroup: require('./ListGroup'),
-  ListGroupItem: require('./ListGroupItem'),
-  MenuItem: require('./MenuItem'),
-  Modal: require('./Modal'),
-  Nav: require('./Nav'),
-  Navbar: require('./Navbar'),
-  NavItem: require('./NavItem'),
-  ModalTrigger: require('./ModalTrigger'),
-  OverlayTrigger: require('./OverlayTrigger'),
-  OverlayMixin: require('./OverlayMixin'),
-  PageHeader: require('./PageHeader'),
-  Panel: require('./Panel'),
-  PanelGroup: require('./PanelGroup'),
-  PageItem: require('./PageItem'),
-  Pager: require('./Pager'),
-  Popover: require('./Popover'),
-  ProgressBar: require('./ProgressBar'),
-  Row: require('./Row'),
-  SplitButton: require('./SplitButton'),
-  SubNav: require('./SubNav'),
-  TabbedArea: require('./TabbedArea'),
-  Table: require('./Table'),
-  TabPane: require('./TabPane'),
-  Tooltip: require('./Tooltip'),
-  Well: require('./Well')
-};
-
-},{"./Accordion":40,"./Affix":41,"./AffixMixin":42,"./Alert":43,"./Badge":44,"./BootstrapMixin":45,"./Button":46,"./ButtonGroup":47,"./ButtonToolbar":48,"./Carousel":49,"./CarouselItem":50,"./Col":51,"./CollapsableMixin":52,"./DropdownButton":53,"./DropdownMenu":54,"./DropdownStateMixin":55,"./FadeMixin":56,"./Glyphicon":57,"./Grid":58,"./Input":59,"./Interpolate":60,"./Jumbotron":61,"./Label":62,"./ListGroup":63,"./ListGroupItem":64,"./MenuItem":65,"./Modal":66,"./ModalTrigger":67,"./Nav":68,"./NavItem":69,"./Navbar":70,"./OverlayMixin":71,"./OverlayTrigger":72,"./PageHeader":73,"./PageItem":74,"./Pager":75,"./Panel":76,"./PanelGroup":77,"./Popover":78,"./ProgressBar":79,"./Row":80,"./SplitButton":81,"./SubNav":82,"./TabPane":83,"./TabbedArea":84,"./Table":85,"./Tooltip":86,"./Well":87}],90:[function(require,module,exports){
-var React = require('react');
-
-var ANONYMOUS = '<<anonymous>>';
-
-var CustomPropTypes = {
-  /**
-   * Checks whether a prop provides a DOM element
-   *
-   * The element can be provided in two forms:
-   * - Directly passed
-   * - Or passed an object which has a `getDOMNode` method which will return the required DOM element
-   *
-   * @param props
-   * @param propName
-   * @param componentName
-   * @returns {Error|undefined}
-   */
-  mountable: createMountableChecker()
-};
-
-/**
- * Create chain-able isRequired validator
- *
- * Largely copied directly from:
- *  https://github.com/facebook/react/blob/0.11-stable/src/core/ReactPropTypes.js#L94
- */
-function createChainableTypeChecker(validate) {
-  function checkType(isRequired, props, propName, componentName) {
-    componentName = componentName || ANONYMOUS;
-    if (props[propName] == null) {
-      if (isRequired) {
-        return new Error(
-          'Required prop `' + propName + '` was not specified in ' +
-            '`' + componentName + '`.'
-        );
-      }
-    } else {
-      return validate(props, propName, componentName);
-    }
-  }
-
-  var chainedCheckType = checkType.bind(null, false);
-  chainedCheckType.isRequired = checkType.bind(null, true);
-
-  return chainedCheckType;
-}
-
-function createMountableChecker() {
-  function validate(props, propName, componentName) {
-    if (typeof props[propName] !== 'object' ||
-      typeof props[propName].getDOMNode !== 'function' && props[propName].nodeType !== 1) {
-      return new Error(
-        'Invalid prop `' + propName + '` supplied to ' +
-          '`' + componentName + '`, expected a DOM element or an object that has a `getDOMNode` method'
-      );
-    }
-  }
-
-  return createChainableTypeChecker(validate);
-}
-
-module.exports = CustomPropTypes;
-},{"react":293}],91:[function(require,module,exports){
-/**
- * Copyright 2013-2014 Facebook, Inc.
- *
- * This file contains a modified version of:
- * https://github.com/facebook/react/blob/v0.12.0/src/vendor/stubs/EventListener.js
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * TODO: remove in favour of solution provided by:
- *  https://github.com/facebook/react/issues/285
- */
-
-/**
- * Does not take into account specific nature of platform.
- */
-var EventListener = {
-  /**
-   * Listen to DOM events during the bubble phase.
-   *
-   * @param {DOMEventTarget} target DOM element to register listener on.
-   * @param {string} eventType Event type, e.g. 'click' or 'mouseover'.
-   * @param {function} callback Callback function.
-   * @return {object} Object with a `remove` method.
-   */
-  listen: function(target, eventType, callback) {
-    if (target.addEventListener) {
-      target.addEventListener(eventType, callback, false);
-      return {
-        remove: function() {
-          target.removeEventListener(eventType, callback, false);
-        }
-      };
-    } else if (target.attachEvent) {
-      target.attachEvent('on' + eventType, callback);
-      return {
-        remove: function() {
-          target.detachEvent('on' + eventType, callback);
-        }
-      };
-    }
-  }
-};
-
-module.exports = EventListener;
-
-},{}],92:[function(require,module,exports){
-/**
- * Copyright 2014, Facebook, Inc.
- * All rights reserved.
- *
- * This file contains an unmodified version of:
- * https://github.com/facebook/react/blob/v0.12.0/src/vendor/stubs/Object.assign.js
- *
- * This source code is licensed under the BSD-style license found here:
- * https://github.com/facebook/react/blob/v0.12.0/LICENSE
- * An additional grant of patent rights can be found here:
- * https://github.com/facebook/react/blob/v0.12.0/PATENTS
- */
-
-// https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.assign
-
-function assign(target, sources) {
-  if (target == null) {
-    throw new TypeError('Object.assign target cannot be null or undefined');
-  }
-
-  var to = Object(target);
-  var hasOwnProperty = Object.prototype.hasOwnProperty;
-
-  for (var nextIndex = 1; nextIndex < arguments.length; nextIndex++) {
-    var nextSource = arguments[nextIndex];
-    if (nextSource == null) {
-      continue;
-    }
-
-    var from = Object(nextSource);
-
-    // We don't currently support accessors nor proxies. Therefore this
-    // copy cannot throw. If we ever supported this then we must handle
-    // exceptions and side-effects. We don't support symbols so they won't
-    // be transferred.
-
-    for (var key in from) {
-      if (hasOwnProperty.call(from, key)) {
-        to[key] = from[key];
-      }
-    }
-  }
-
-  return to;
-};
-
-module.exports = assign;
-
-},{}],93:[function(require,module,exports){
-/**
- * Copyright 2013-2014, Facebook, Inc.
- * All rights reserved.
- *
- * This file contains a modified version of:
- * https://github.com/facebook/react/blob/v0.12.0/src/addons/transitions/ReactTransitionEvents.js
- *
- * This source code is licensed under the BSD-style license found here:
- * https://github.com/facebook/react/blob/v0.12.0/LICENSE
- * An additional grant of patent rights can be found here:
- * https://github.com/facebook/react/blob/v0.12.0/PATENTS
- */
-
-var canUseDOM = !!(
-  typeof window !== 'undefined' &&
-    window.document &&
-    window.document.createElement
-  );
-
-/**
- * EVENT_NAME_MAP is used to determine which event fired when a
- * transition/animation ends, based on the style property used to
- * define that event.
- */
-var EVENT_NAME_MAP = {
-  transitionend: {
-    'transition': 'transitionend',
-    'WebkitTransition': 'webkitTransitionEnd',
-    'MozTransition': 'mozTransitionEnd',
-    'OTransition': 'oTransitionEnd',
-    'msTransition': 'MSTransitionEnd'
-  },
-
-  animationend: {
-    'animation': 'animationend',
-    'WebkitAnimation': 'webkitAnimationEnd',
-    'MozAnimation': 'mozAnimationEnd',
-    'OAnimation': 'oAnimationEnd',
-    'msAnimation': 'MSAnimationEnd'
-  }
-};
-
-var endEvents = [];
-
-function detectEvents() {
-  var testEl = document.createElement('div');
-  var style = testEl.style;
-
-  // On some platforms, in particular some releases of Android 4.x,
-  // the un-prefixed "animation" and "transition" properties are defined on the
-  // style object but the events that fire will still be prefixed, so we need
-  // to check if the un-prefixed events are useable, and if not remove them
-  // from the map
-  if (!('AnimationEvent' in window)) {
-    delete EVENT_NAME_MAP.animationend.animation;
-  }
-
-  if (!('TransitionEvent' in window)) {
-    delete EVENT_NAME_MAP.transitionend.transition;
-  }
-
-  for (var baseEventName in EVENT_NAME_MAP) {
-    var baseEvents = EVENT_NAME_MAP[baseEventName];
-    for (var styleName in baseEvents) {
-      if (styleName in style) {
-        endEvents.push(baseEvents[styleName]);
-        break;
-      }
-    }
-  }
-}
-
-if (canUseDOM) {
-  detectEvents();
-}
-
-// We use the raw {add|remove}EventListener() call because EventListener
-// does not know how to remove event listeners and we really should
-// clean up. Also, these events are not triggered in older browsers
-// so we should be A-OK here.
-
-function addEventListener(node, eventName, eventListener) {
-  node.addEventListener(eventName, eventListener, false);
-}
-
-function removeEventListener(node, eventName, eventListener) {
-  node.removeEventListener(eventName, eventListener, false);
-}
-
-var ReactTransitionEvents = {
-  addEndEventListener: function(node, eventListener) {
-    if (endEvents.length === 0) {
-      // If CSS transitions are not supported, trigger an "end animation"
-      // event immediately.
-      window.setTimeout(eventListener, 0);
-      return;
-    }
-    endEvents.forEach(function(endEvent) {
-      addEventListener(node, endEvent, eventListener);
-    });
-  },
-
-  removeEndEventListener: function(node, eventListener) {
-    if (endEvents.length === 0) {
-      return;
-    }
-    endEvents.forEach(function(endEvent) {
-      removeEventListener(node, endEvent, eventListener);
-    });
-  }
-};
-
-module.exports = ReactTransitionEvents;
-
-},{}],94:[function(require,module,exports){
-var React = require('react');
-
-/**
- * Maps children that are typically specified as `props.children`,
- * but only iterates over children that are "valid components".
- *
- * The mapFunction provided index will be normalised to the components mapped,
- * so an invalid component would not increase the index.
- *
- * @param {?*} children Children tree container.
- * @param {function(*, int)} mapFunction.
- * @param {*} mapContext Context for mapFunction.
- * @return {object} Object containing the ordered map of results.
- */
-function mapValidComponents(children, func, context) {
-  var index = 0;
-
-  return React.Children.map(children, function (child) {
-    if (React.isValidElement(child)) {
-      var lastIndex = index;
-      index++;
-      return func.call(context, child, lastIndex);
-    }
-
-    return child;
-  });
-}
-
-/**
- * Iterates through children that are typically specified as `props.children`,
- * but only iterates over children that are "valid components".
- *
- * The provided forEachFunc(child, index) will be called for each
- * leaf child with the index reflecting the position relative to "valid components".
- *
- * @param {?*} children Children tree container.
- * @param {function(*, int)} forEachFunc.
- * @param {*} forEachContext Context for forEachContext.
- */
-function forEachValidComponents(children, func, context) {
-  var index = 0;
-
-  return React.Children.forEach(children, function (child) {
-    if (React.isValidElement(child)) {
-      func.call(context, child, index);
-      index++;
-    }
-  });
-}
-
-/**
- * Count the number of "valid components" in the Children container.
- *
- * @param {?*} children Children tree container.
- * @returns {number}
- */
-function numberOfValidComponents(children) {
-  var count = 0;
-
-  React.Children.forEach(children, function (child) {
-    if (React.isValidElement(child)) { count++; }
-  });
-
-  return count;
-}
-
-/**
- * Determine if the Child container has one or more "valid components".
- *
- * @param {?*} children Children tree container.
- * @returns {boolean}
- */
-function hasValidComponent(children) {
-  var hasValid = false;
-
-  React.Children.forEach(children, function (child) {
-    if (!hasValid && React.isValidElement(child)) {
-      hasValid = true;
-    }
-  });
-
-  return hasValid;
-}
-
-module.exports = {
-  map: mapValidComponents,
-  forEach: forEachValidComponents,
-  numberOf: numberOfValidComponents,
-  hasValidComponent: hasValidComponent
-};
-},{"react":293}],95:[function(require,module,exports){
-/**
- * Copyright 2013-2014, Facebook, Inc.
- * All rights reserved.
- *
- * This file contains an unmodified version of:
- * https://github.com/facebook/react/blob/v0.12.0/src/vendor/stubs/cx.js
- *
- * This source code is licensed under the BSD-style license found here:
- * https://github.com/facebook/react/blob/v0.12.0/LICENSE
- * An additional grant of patent rights can be found here:
- * https://github.com/facebook/react/blob/v0.12.0/PATENTS
- */
-
-/**
- * This function is used to mark string literals representing CSS class names
- * so that they can be transformed statically. This allows for modularization
- * and minification of CSS class names.
- *
- * In static_upstream, this function is actually implemented, but it should
- * eventually be replaced with something more descriptive, and the transform
- * that is used in the main stack should be ported for use elsewhere.
- *
- * @param string|object className to modularize, or an object of key/values.
- *                      In the object case, the values are conditions that
- *                      determine if the className keys should be included.
- * @param [string ...]  Variable list of classNames in the string case.
- * @return string       Renderable space-separated CSS className.
- */
-function cx(classNames) {
-  if (typeof classNames == 'object') {
-    return Object.keys(classNames).filter(function(className) {
-      return classNames[className];
-    }).join(' ');
-  } else {
-    return Array.prototype.join.call(arguments, ' ');
-  }
-}
-
-module.exports = cx;
-},{}],96:[function(require,module,exports){
-/**
- * Copyright 2013-2014, Facebook, Inc.
- * All rights reserved.
- *
- * This file contains modified versions of:
- * https://github.com/facebook/react/blob/v0.12.0/src/utils/cloneWithProps.js
- * https://github.com/facebook/react/blob/v0.12.0/src/core/ReactPropTransferer.js
- *
- * This source code is licensed under the BSD-style license found here:
- * https://github.com/facebook/react/blob/v0.12.0/LICENSE
- * An additional grant of patent rights can be found here:
- * https://github.com/facebook/react/blob/v0.12.0/PATENTS
- *
- * TODO: This should be replaced as soon as cloneWithProps is available via
- *  the core React package or a separate package.
- *  @see https://github.com/facebook/react/issues/1906
- */
-
-var React = require('react');
-var joinClasses = require('./joinClasses');
-var assign = require("./Object.assign");
-
-/**
- * Creates a transfer strategy that will merge prop values using the supplied
- * `mergeStrategy`. If a prop was previously unset, this just sets it.
- *
- * @param {function} mergeStrategy
- * @return {function}
- */
-function createTransferStrategy(mergeStrategy) {
-  return function(props, key, value) {
-    if (!props.hasOwnProperty(key)) {
-      props[key] = value;
-    } else {
-      props[key] = mergeStrategy(props[key], value);
-    }
-  };
-}
-
-var transferStrategyMerge = createTransferStrategy(function(a, b) {
-  // `merge` overrides the first object's (`props[key]` above) keys using the
-  // second object's (`value`) keys. An object's style's existing `propA` would
-  // get overridden. Flip the order here.
-  return assign({}, b, a);
-});
-
-function emptyFunction() {}
-
-/**
- * Transfer strategies dictate how props are transferred by `transferPropsTo`.
- * NOTE: if you add any more exceptions to this list you should be sure to
- * update `cloneWithProps()` accordingly.
- */
-var TransferStrategies = {
-  /**
-   * Never transfer `children`.
-   */
-  children: emptyFunction,
-  /**
-   * Transfer the `className` prop by merging them.
-   */
-  className: createTransferStrategy(joinClasses),
-  /**
-   * Transfer the `style` prop (which is an object) by merging them.
-   */
-  style: transferStrategyMerge
-};
-
-/**
- * Mutates the first argument by transferring the properties from the second
- * argument.
- *
- * @param {object} props
- * @param {object} newProps
- * @return {object}
- */
-function transferInto(props, newProps) {
-  for (var thisKey in newProps) {
-    if (!newProps.hasOwnProperty(thisKey)) {
-      continue;
-    }
-
-    var transferStrategy = TransferStrategies[thisKey];
-
-    if (transferStrategy && TransferStrategies.hasOwnProperty(thisKey)) {
-      transferStrategy(props, thisKey, newProps[thisKey]);
-    } else if (!props.hasOwnProperty(thisKey)) {
-      props[thisKey] = newProps[thisKey];
-    }
-  }
-  return props;
-}
-
-/**
- * Merge two props objects using TransferStrategies.
- *
- * @param {object} oldProps original props (they take precedence)
- * @param {object} newProps new props to merge in
- * @return {object} a new object containing both sets of props merged.
- */
-function mergeProps(oldProps, newProps) {
-  return transferInto(assign({}, oldProps), newProps);
-}
-
-
-var ReactPropTransferer = {
-  mergeProps: mergeProps
-};
-
-var CHILDREN_PROP = 'children';
-
-/**
- * Sometimes you want to change the props of a child passed to you. Usually
- * this is to add a CSS class.
- *
- * @param {object} child child component you'd like to clone
- * @param {object} props props you'd like to modify. They will be merged
- * as if you used `transferPropsTo()`.
- * @return {object} a clone of child with props merged in.
- */
-function cloneWithProps(child, props) {
-  var newProps = ReactPropTransferer.mergeProps(props, child.props);
-
-  // Use `child.props.children` if it is provided.
-  if (!newProps.hasOwnProperty(CHILDREN_PROP) &&
-    child.props.hasOwnProperty(CHILDREN_PROP)) {
-    newProps.children = child.props.children;
-  }
-
-  if (React.version.substr(0, 4) === '0.12'){
-    var mockLegacyFactory = function(){};
-    mockLegacyFactory.isReactLegacyFactory = true;
-    mockLegacyFactory.type = child.type;
-
-    return React.createElement(mockLegacyFactory, newProps);
-  }
-
-  // The current API doesn't retain _owner and _context, which is why this
-  // doesn't use ReactElement.cloneAndReplaceProps.
-  return React.createElement(child.type, newProps);
-}
-
-module.exports = cloneWithProps;
-},{"./Object.assign":92,"./joinClasses":99,"react":293}],97:[function(require,module,exports){
-/**
- * Safe chained function
- *
- * Will only create a new function if needed,
- * otherwise will pass back existing functions or null.
- *
- * @param {function} one
- * @param {function} two
- * @returns {function|null}
- */
-function createChainedFunction(one, two) {
-  var hasOne = typeof one === 'function';
-  var hasTwo = typeof two === 'function';
-
-  if (!hasOne && !hasTwo) { return null; }
-  if (!hasOne) { return two; }
-  if (!hasTwo) { return one; }
-
-  return function chainedFunction() {
-    one.apply(this, arguments);
-    two.apply(this, arguments);
-  };
-}
-
-module.exports = createChainedFunction;
-},{}],98:[function(require,module,exports){
-
-/**
- * Shortcut to compute element style
- *
- * @param {HTMLElement} elem
- * @returns {CssStyle}
- */
-function getComputedStyles(elem) {
-  return elem.ownerDocument.defaultView.getComputedStyle(elem, null);
-}
-
-<<<<<<< HEAD
-},{"./invariant":46}],46:[function(require,module,exports){
-=======
->>>>>>> css change
-/**
- * Get elements offset
- *
- * TODO: REMOVE JQUERY!
- *
- * @param {HTMLElement} DOMNode
- * @returns {{top: number, left: number}}
- */
-function getOffset(DOMNode) {
-  if (window.jQuery) {
-    return window.jQuery(DOMNode).offset();
-  }
-
-  var docElem = document.documentElement;
-  var box = { top: 0, left: 0 };
-
-  // If we don't have gBCR, just use 0,0 rather than error
-  // BlackBerry 5, iOS 3 (original iPhone)
-  if ( typeof DOMNode.getBoundingClientRect !== 'undefined' ) {
-    box = DOMNode.getBoundingClientRect();
-  }
-
-  return {
-    top: box.top + window.pageYOffset - docElem.clientTop,
-    left: box.left + window.pageXOffset - docElem.clientLeft
-  };
-}
-
-/**
- * Get elements position
- *
- * TODO: REMOVE JQUERY!
- *
- * @param {HTMLElement} elem
- * @param {HTMLElement?} offsetParent
- * @returns {{top: number, left: number}}
- */
-function getPosition(elem, offsetParent) {
-  if (window.jQuery) {
-    return window.jQuery(elem).position();
-  }
-
-  var offset,
-      parentOffset = {top: 0, left: 0};
-
-  // Fixed elements are offset from window (parentOffset = {top:0, left: 0}, because it is its only offset parent
-  if (getComputedStyles(elem).position === 'fixed' ) {
-    // We assume that getBoundingClientRect is available when computed position is fixed
-    offset = elem.getBoundingClientRect();
-
-  } else {
-    if (!offsetParent) {
-      // Get *real* offsetParent
-      offsetParent = offsetParent(elem);
-    }
-
-    // Get correct offsets
-    offset = getOffset(elem);
-    if ( offsetParent.nodeName !== 'HTML') {
-      parentOffset = getOffset(offsetParent);
-    }
-
-    // Add offsetParent borders
-    parentOffset.top += parseInt(getComputedStyles(offsetParent).borderTopWidth, 10);
-    parentOffset.left += parseInt(getComputedStyles(offsetParent).borderLeftWidth, 10);
-  }
-
-  // Subtract parent offsets and element margins
-  return {
-    top: offset.top - parentOffset.top - parseInt(getComputedStyles(elem).marginTop, 10),
-    left: offset.left - parentOffset.left - parseInt(getComputedStyles(elem).marginLeft, 10)
-  };
-}
-
-/**
- * Get parent element
- *
- * @param {HTMLElement?} elem
- * @returns {HTMLElement}
- */
-function offsetParent(elem) {
-  var docElem = document.documentElement;
-  var offsetParent = elem.offsetParent || docElem;
-
-  while ( offsetParent && ( offsetParent.nodeName !== 'HTML' &&
-    getComputedStyles(offsetParent).position === 'static' ) ) {
-    offsetParent = offsetParent.offsetParent;
-  }
-
-  return offsetParent || docElem;
-}
-
-module.exports = {
-  getComputedStyles: getComputedStyles,
-  getOffset: getOffset,
-  getPosition: getPosition,
-  offsetParent: offsetParent
-};
-},{}],99:[function(require,module,exports){
-/**
- * Copyright 2013-2014, Facebook, Inc.
- * All rights reserved.
- *
- * This file contains an unmodified version of:
- * https://github.com/facebook/react/blob/v0.12.0/src/utils/joinClasses.js
- *
- * This source code is licensed under the BSD-style license found here:
- * https://github.com/facebook/react/blob/v0.12.0/LICENSE
- * An additional grant of patent rights can be found here:
- * https://github.com/facebook/react/blob/v0.12.0/PATENTS
- */
-
-"use strict";
-
-<<<<<<< HEAD
 },{}],47:[function(require,module,exports){
 (function (global){
 /**
@@ -8129,40 +2895,6 @@ module.exports = {
     '\xde': 'Th', '\xfe': 'th',
     '\xdf': 'ss'
   };
-=======
-/**
- * Combines multiple className strings into one.
- * http://jsperf.com/joinclasses-args-vs-array
- *
- * @param {...?string} classes
- * @return {string}
- */
-function joinClasses(className/*, ... */) {
-  if (!className) {
-    className = '';
-  }
-  var nextClass;
-  var argLength = arguments.length;
-  if (argLength > 1) {
-    for (var ii = 1; ii < argLength; ii++) {
-      nextClass = arguments[ii];
-      if (nextClass) {
-        className = (className ? className + ' ' : '') + nextClass;
-      }
-    }
-  }
-  return className;
-}
-
-module.exports = joinClasses;
-
-},{}],100:[function(require,module,exports){
-/**
- * Represents a cancellation caused by navigating away
- * before the previous transition has fully resolved.
- */
-"use strict";
->>>>>>> css change
 
   /** Used to map characters to HTML entities. */
   var htmlEscapes = {
@@ -8174,7 +2906,6 @@ module.exports = joinClasses;
     '`': '&#96;'
   };
 
-<<<<<<< HEAD
   /** Used to map HTML entities to characters. */
   var htmlUnescapes = {
     '&amp;': '&',
@@ -8184,11 +2915,6 @@ module.exports = joinClasses;
     '&#39;': "'",
     '&#96;': '`'
   };
-=======
-module.exports = Cancellation;
-},{}],101:[function(require,module,exports){
-'use strict';
->>>>>>> css change
 
   /** Used to determine if values are of the language type `Object`. */
   var objectTypes = {
@@ -8227,14 +2953,8 @@ module.exports = Cancellation;
   /** Detect free variable `self`. */
   var freeSelf = objectTypes[typeof self] && self && self.Object && self;
 
-<<<<<<< HEAD
   /** Detect free variable `window`. */
   var freeWindow = objectTypes[typeof window] && window && window.Object && window;
-=======
-module.exports = History;
-},{"react/lib/ExecutionEnvironment":158,"react/lib/invariant":273}],102:[function(require,module,exports){
-'use strict';
->>>>>>> css change
 
   /** Detect the popular CommonJS extension `module.exports`. */
   var moduleExports = freeModule && freeModule.exports === freeExports && freeExports;
@@ -8441,7 +3161,6 @@ module.exports = History;
     return object.index - other.index;
   }
 
-<<<<<<< HEAD
   /**
    * Used by `_.deburr` to convert latin-1 supplementary letters to basic latin letters.
    *
@@ -8452,11 +3171,6 @@ module.exports = History;
   function deburrLetter(letter) {
     return deburredLetters[letter];
   }
-=======
-module.exports = Match;
-},{"./PathUtils":104}],103:[function(require,module,exports){
-'use strict';
->>>>>>> css change
 
   /**
    * Used by `_.escape` to convert characters to HTML entities.
@@ -8544,7 +3258,6 @@ module.exports = Match;
       (charCode >= 8192 && (charCode <= 8202 || charCode == 8232 || charCode == 8233 || charCode == 8239 || charCode == 8287 || charCode == 12288 || charCode == 65279)));
   }
 
-<<<<<<< HEAD
   /**
    * Replaces all `placeholder` elements in `array` with an internal placeholder
    * and returns an array of their indexes.
@@ -8564,37 +3277,6 @@ module.exports = Match;
       if (array[index] === placeholder) {
         array[index] = PLACEHOLDER;
         result[++resIndex] = index;
-=======
-};
-
-module.exports = Navigation;
-},{"./PropTypes":105}],104:[function(require,module,exports){
-'use strict';
-
-var invariant = require('react/lib/invariant');
-var assign = require('object-assign');
-var qs = require('qs');
-
-var paramCompileMatcher = /:([a-zA-Z_$][a-zA-Z0-9_$]*)|[*.()\[\]\\+|{}^$]/g;
-var paramInjectMatcher = /:([a-zA-Z_$][a-zA-Z0-9_$?]*[?]?)|[*]/g;
-var paramInjectTrailingSlashMatcher = /\/\/\?|\/\?\/|\/\?/g;
-var queryMatcher = /\?(.*)$/;
-
-var _compiledPatterns = {};
-
-function compilePattern(pattern) {
-  if (!(pattern in _compiledPatterns)) {
-    var paramNames = [];
-    var source = pattern.replace(paramCompileMatcher, function (match, paramName) {
-      if (paramName) {
-        paramNames.push(paramName);
-        return '([^/?#]+)';
-      } else if (match === '*') {
-        paramNames.push('splat');
-        return '(.*?)';
-      } else {
-        return '\\' + match;
->>>>>>> css change
       }
     }
     return result;
@@ -8986,7 +3668,6 @@ function compilePattern(pattern) {
        */
       'variable': '',
 
-<<<<<<< HEAD
       /**
        * Used to import variables into the compiled template.
        *
@@ -9004,11 +3685,6 @@ function compilePattern(pattern) {
         '_': lodash
       }
     };
-=======
-module.exports = PathUtils;
-},{"object-assign":133,"qs":134,"react/lib/invariant":273}],105:[function(require,module,exports){
-'use strict';
->>>>>>> css change
 
     /*------------------------------------------------------------------------*/
 
@@ -9100,7 +3776,6 @@ module.exports = PathUtils;
       while (length-- && resIndex < takeCount) {
         index += dir;
 
-<<<<<<< HEAD
         var iterIndex = -1,
             value = array[index];
 
@@ -9124,18 +3799,9 @@ module.exports = PathUtils;
       }
       return result;
     }
-=======
-module.exports = PropTypes;
-},{"./Route":107,"react":293,"react/lib/Object.assign":164}],106:[function(require,module,exports){
-/**
- * Encapsulates a redirect to the given route.
- */
-"use strict";
->>>>>>> css change
 
     /*------------------------------------------------------------------------*/
 
-<<<<<<< HEAD
     /**
      * Creates a cache object to store key/value pairs.
      *
@@ -9147,11 +3813,6 @@ module.exports = PropTypes;
     function MapCache() {
       this.__data__ = {};
     }
-=======
-module.exports = Redirect;
-},{}],107:[function(require,module,exports){
-'use strict';
->>>>>>> css change
 
     /**
      * Removes `key` and its value from the cache.
@@ -9476,7 +4137,6 @@ module.exports = Redirect;
       var index = -1,
           length = array.length;
 
-<<<<<<< HEAD
       if (initFromArray && length) {
         accumulator = array[++index];
       }
@@ -9485,11 +4145,6 @@ module.exports = Redirect;
       }
       return accumulator;
     }
-=======
-module.exports = Route;
-},{"./PathUtils":104,"react/lib/Object.assign":164,"react/lib/invariant":273,"react/lib/warning":292}],108:[function(require,module,exports){
-'use strict';
->>>>>>> css change
 
     /**
      * A specialized version of `_.reduceRight` for arrays without support for
@@ -9768,18 +4423,12 @@ module.exports = Route;
       stackA.push(value);
       stackB.push(result);
 
-<<<<<<< HEAD
       // Recursively populate clone (susceptible to call stack limits).
       (isArr ? arrayEach : baseForOwn)(value, function(subValue, key) {
         result[key] = baseClone(subValue, isDeep, customizer, key, value, stackA, stackB);
       });
       return result;
     }
-=======
-module.exports = ScrollHistory;
-},{"./getWindowScrollPosition":123,"react/lib/ExecutionEnvironment":158,"react/lib/invariant":273}],109:[function(require,module,exports){
-'use strict';
->>>>>>> css change
 
     /**
      * The base implementation of `_.create` without support for assigning
@@ -9956,17 +4605,11 @@ module.exports = ScrollHistory;
       length = start > end ? 0 : (end >>> 0);
       start >>>= 0;
 
-<<<<<<< HEAD
       while (start < length) {
         array[start++] = value;
       }
       return array;
     }
-=======
-module.exports = State;
-},{"./PropTypes":105}],110:[function(require,module,exports){
-/* jshint -W058 */
->>>>>>> css change
 
     /**
      * The base implementation of `_.filter` without support for callback
@@ -10160,7 +4803,6 @@ module.exports = State;
       return (index && index == length) ? object : undefined;
     }
 
-<<<<<<< HEAD
     /**
      * The base implementation of `_.isEqual` without support for `this` binding
      * `customizer` functions.
@@ -10183,14 +4825,6 @@ module.exports = State;
       }
       return baseIsEqualDeep(value, other, baseIsEqual, customizer, isLoose, stackA, stackB);
     }
-=======
-module.exports = Transition;
-},{"./Cancellation":100,"./Redirect":106}],111:[function(require,module,exports){
-/**
- * Actions that modify the URL.
- */
-'use strict';
->>>>>>> css change
 
     /**
      * A specialized version of `baseIsEqual` for arrays and objects which performs
@@ -10264,14 +4898,8 @@ module.exports = Transition;
 
       var result = (objIsArr ? equalArrays : equalObjects)(object, other, equalFunc, customizer, isLoose, stackA, stackB);
 
-<<<<<<< HEAD
       stackA.pop();
       stackB.pop();
-=======
-module.exports = LocationActions;
-},{}],112:[function(require,module,exports){
-'use strict';
->>>>>>> css change
 
       return result;
     }
@@ -10324,7 +4952,6 @@ module.exports = LocationActions;
       return true;
     }
 
-<<<<<<< HEAD
     /**
      * The base implementation of `_.map` without support for callback shorthands
      * and `this` binding.
@@ -10337,15 +4964,6 @@ module.exports = LocationActions;
     function baseMap(collection, iteratee) {
       var index = -1,
           result = isArrayLike(collection) ? Array(collection.length) : [];
-=======
-module.exports = ImitateBrowserBehavior;
-},{"../actions/LocationActions":111}],113:[function(require,module,exports){
-/**
- * A scroll behavior that always scrolls to the top of the page
- * after a transition.
- */
-"use strict";
->>>>>>> css change
 
       baseEach(collection, function(value, key, collection) {
         result[++index] = iteratee(value, key, collection);
@@ -10412,7 +5030,6 @@ module.exports = ImitateBrowserBehavior;
       };
     }
 
-<<<<<<< HEAD
     /**
      * The base implementation of `_.merge` without support for argument juggling,
      * multiple sources, and `this` binding `customizer` functions.
@@ -10431,11 +5048,6 @@ module.exports = ImitateBrowserBehavior;
       }
       var isSrcArr = isArrayLike(source) && (isArray(source) || isTypedArray(source)),
           props = isSrcArr ? undefined : keys(source);
-=======
-module.exports = ScrollToTopBehavior;
-},{}],114:[function(require,module,exports){
-'use strict';
->>>>>>> css change
 
       arrayEach(props || source, function(srcValue, key) {
         if (props) {
@@ -10620,7 +5232,6 @@ module.exports = ScrollToTopBehavior;
       return func;
     };
 
-<<<<<<< HEAD
     /**
      * The base implementation of `_.slice` without an iteratee call guard.
      *
@@ -10633,11 +5244,6 @@ module.exports = ScrollToTopBehavior;
     function baseSlice(array, start, end) {
       var index = -1,
           length = array.length;
-=======
-module.exports = ContextWrapper;
-},{"react":293}],115:[function(require,module,exports){
-'use strict';
->>>>>>> css change
 
       start = start == null ? 0 : (+start || 0);
       if (start < 0) {
@@ -10722,7 +5328,6 @@ module.exports = ContextWrapper;
       });
     }
 
-<<<<<<< HEAD
     /**
      * The base implementation of `_.sum` without support for callback shorthands
      * and `this` binding.
@@ -10739,11 +5344,6 @@ module.exports = ContextWrapper;
       });
       return result;
     }
-=======
-module.exports = DefaultRoute;
-},{"../PropTypes":105,"./Route":119,"./RouteHandler":120}],116:[function(require,module,exports){
-'use strict';
->>>>>>> css change
 
     /**
      * The base implementation of `_.uniq` without support for callback shorthands
@@ -11276,7 +5876,6 @@ module.exports = DefaultRoute;
       return curryFunc;
     }
 
-<<<<<<< HEAD
     /**
      * Creates a `_.defaults` or `_.defaultsDeep` function.
      *
@@ -11295,11 +5894,6 @@ module.exports = DefaultRoute;
         return assigner.apply(undefined, args);
       });
     }
-=======
-module.exports = Link;
-},{"../PropTypes":105,"react":293,"react/lib/Object.assign":164}],117:[function(require,module,exports){
-'use strict';
->>>>>>> css change
 
     /**
      * Creates a `_.max` or `_.min` function.
@@ -11417,17 +6011,11 @@ module.exports = Link;
           var args = arguments,
               value = args[0];
 
-<<<<<<< HEAD
           if (wrapper && args.length == 1 && isArray(value) && value.length >= LARGE_ARRAY_SIZE) {
             return wrapper.plant(value).value();
           }
           var index = 0,
               result = length ? funcs[index].apply(this, args) : value;
-=======
-module.exports = NotFoundRoute;
-},{"../PropTypes":105,"./Route":119,"./RouteHandler":120}],118:[function(require,module,exports){
-'use strict';
->>>>>>> css change
 
           while (++index < length) {
             result = funcs[index].call(this, result);
@@ -11641,7 +6229,6 @@ module.exports = NotFoundRoute;
       return wrapper;
     }
 
-<<<<<<< HEAD
     /**
      * Creates the padding required for `string` based on the given `length`.
      * The `chars` string is truncated if the number of characters exceeds `length`.
@@ -11655,11 +6242,6 @@ module.exports = NotFoundRoute;
     function createPadding(string, length, chars) {
       var strLength = string.length;
       length = +length;
-=======
-module.exports = Redirect;
-},{"../PropTypes":105,"./Route":119}],119:[function(require,module,exports){
-'use strict';
->>>>>>> css change
 
       if (strLength >= length || !nativeIsFinite(length)) {
         return '';
@@ -11913,7 +6495,6 @@ module.exports = Redirect;
           othProps = keys(other),
           othLength = othProps.length;
 
-<<<<<<< HEAD
       if (objLength != othLength && !isLoose) {
         return false;
       }
@@ -11951,11 +6532,6 @@ module.exports = Redirect;
       }
       return true;
     }
-=======
-module.exports = Route;
-},{"../PropTypes":105,"./RouteHandler":120,"react":293,"react/lib/invariant":273}],120:[function(require,module,exports){
-'use strict';
->>>>>>> css change
 
     /**
      * Gets the appropriate "callback" function. If the `_.callback` method is
@@ -12295,7 +6871,6 @@ module.exports = Route;
       return value === value && !isObject(value);
     }
 
-<<<<<<< HEAD
     /**
      * Merges the function metadata of `source` into `data`.
      *
@@ -12362,63 +6937,6 @@ module.exports = Route;
       // Use source `func` and merge bitmasks.
       data[0] = source[0];
       data[1] = newBitmask;
-=======
-RouteHandler.childContextTypes = {
-  routeDepth: PropTypes.number.isRequired
-};
-
-module.exports = RouteHandler;
-},{"../PropTypes":105,"./ContextWrapper":114,"react":293,"react/lib/Object.assign":164}],121:[function(require,module,exports){
-(function (process){
-/* jshint -W058 */
-'use strict';
-
-var React = require('react');
-var warning = require('react/lib/warning');
-var invariant = require('react/lib/invariant');
-var canUseDOM = require('react/lib/ExecutionEnvironment').canUseDOM;
-var LocationActions = require('./actions/LocationActions');
-var ImitateBrowserBehavior = require('./behaviors/ImitateBrowserBehavior');
-var HashLocation = require('./locations/HashLocation');
-var HistoryLocation = require('./locations/HistoryLocation');
-var RefreshLocation = require('./locations/RefreshLocation');
-var StaticLocation = require('./locations/StaticLocation');
-var ScrollHistory = require('./ScrollHistory');
-var createRoutesFromReactChildren = require('./createRoutesFromReactChildren');
-var isReactChildren = require('./isReactChildren');
-var Transition = require('./Transition');
-var PropTypes = require('./PropTypes');
-var Redirect = require('./Redirect');
-var History = require('./History');
-var Cancellation = require('./Cancellation');
-var Match = require('./Match');
-var Route = require('./Route');
-var supportsHistory = require('./supportsHistory');
-var PathUtils = require('./PathUtils');
-
-/**
- * The default location for new routers.
- */
-var DEFAULT_LOCATION = canUseDOM ? HashLocation : '/';
-
-/**
- * The default scroll behavior for new routers.
- */
-var DEFAULT_SCROLL_BEHAVIOR = canUseDOM ? ImitateBrowserBehavior : null;
-
-function hasProperties(object, properties) {
-  for (var propertyName in properties) if (properties.hasOwnProperty(propertyName) && object[propertyName] !== properties[propertyName]) {
-    return false;
-  }return true;
-}
-
-function hasMatch(routes, route, prevParams, nextParams, prevQuery, nextQuery) {
-  return routes.some(function (r) {
-    if (r !== route) return false;
-
-    var paramNames = route.paramNames;
-    var paramName;
->>>>>>> css change
 
       return data;
     }
@@ -14371,7 +8889,6 @@ function hasMatch(routes, route, prevParams, nextParams, prevQuery, nextQuery) {
       hasOwnProperty.call(result, key) ? ++result[key] : (result[key] = 1);
     });
 
-<<<<<<< HEAD
     /**
      * Checks if `predicate` returns truthy for **all** elements of `collection`.
      * The predicate is bound to `thisArg` and invoked with three arguments:
@@ -14430,13 +8947,6 @@ function hasMatch(routes, route, prevParams, nextParams, prevQuery, nextQuery) {
       }
       return func(collection, predicate);
     }
-=======
-module.exports = createRouter;
-}).call(this,require('_process'))
-},{"./Cancellation":100,"./History":101,"./Match":102,"./PathUtils":104,"./PropTypes":105,"./Redirect":106,"./Route":107,"./ScrollHistory":108,"./Transition":110,"./actions/LocationActions":111,"./behaviors/ImitateBrowserBehavior":112,"./createRoutesFromReactChildren":122,"./isReactChildren":125,"./locations/HashLocation":126,"./locations/HistoryLocation":127,"./locations/RefreshLocation":128,"./locations/StaticLocation":129,"./supportsHistory":132,"_process":36,"react":293,"react/lib/ExecutionEnvironment":158,"react/lib/invariant":273,"react/lib/warning":292}],122:[function(require,module,exports){
-/* jshint -W084 */
-'use strict';
->>>>>>> css change
 
     /**
      * Iterates over elements of `collection`, returning an array of all elements
@@ -14894,7 +9404,6 @@ module.exports = createRouter;
       return func(collection, iteratee);
     }
 
-<<<<<<< HEAD
     /**
      * Creates an array of elements split into two groups, the first of which
      * contains elements `predicate` returns truthy for, while the second of which
@@ -14957,11 +9466,6 @@ module.exports = createRouter;
     var partition = createAggregator(function(result, value, key) {
       result[key ? 0 : 1].push(value);
     }, function() { return [[], []]; });
-=======
-module.exports = createRoutesFromReactChildren;
-},{"./Route":107,"./components/DefaultRoute":115,"./components/NotFoundRoute":117,"./components/Redirect":118,"react":293,"react/lib/Object.assign":164,"react/lib/warning":292}],123:[function(require,module,exports){
-'use strict';
->>>>>>> css change
 
     /**
      * Gets the property value of `path` from all elements in `collection`.
@@ -15053,7 +9557,6 @@ module.exports = createRoutesFromReactChildren;
      */
     var reduceRight = createReduce(arrayReduceRight, baseEachRight);
 
-<<<<<<< HEAD
     /**
      * The opposite of `_.filter`; this method returns the elements of `collection`
      * that `predicate` does **not** return truthy for.
@@ -15097,11 +9600,6 @@ module.exports = createRoutesFromReactChildren;
         return !predicate(value, index, collection);
       });
     }
-=======
-module.exports = getWindowScrollPosition;
-},{"react/lib/ExecutionEnvironment":158,"react/lib/invariant":273}],124:[function(require,module,exports){
-'use strict';
->>>>>>> css change
 
     /**
      * Gets a random element or `n` random elements from a collection.
@@ -15305,18 +9803,11 @@ module.exports = getWindowScrollPosition;
       var index = -1;
       iteratee = getCallback(iteratee, thisArg, 3);
 
-<<<<<<< HEAD
       var result = baseMap(collection, function(value, key, collection) {
         return { 'criteria': iteratee(value, key, collection), 'index': ++index, 'value': value };
       });
       return baseSortBy(result, compareAscending);
     }
-=======
-exports.create = require('./createRouter');
-exports.run = require('./runRouter');
-},{"./History":101,"./Navigation":103,"./Route":107,"./State":109,"./behaviors/ImitateBrowserBehavior":112,"./behaviors/ScrollToTopBehavior":113,"./components/DefaultRoute":115,"./components/Link":116,"./components/NotFoundRoute":117,"./components/Redirect":118,"./components/Route":119,"./components/RouteHandler":120,"./createRouter":121,"./createRoutesFromReactChildren":122,"./locations/HashLocation":126,"./locations/HistoryLocation":127,"./locations/RefreshLocation":128,"./locations/StaticLocation":129,"./locations/TestLocation":130,"./runRouter":131}],125:[function(require,module,exports){
-'use strict';
->>>>>>> css change
 
     /**
      * This method is like `_.sortBy` except that it can sort by multiple iteratees
@@ -15447,13 +9938,7 @@ exports.run = require('./runRouter');
       return filter(collection, baseMatches(source));
     }
 
-<<<<<<< HEAD
     /*------------------------------------------------------------------------*/
-=======
-module.exports = isReactChildren;
-},{"react":293}],126:[function(require,module,exports){
-'use strict';
->>>>>>> css change
 
     /**
      * Gets the number of milliseconds that have elapsed since the Unix epoch
@@ -16011,7 +10496,6 @@ module.exports = isReactChildren;
       return baseDelay(func, wait, args);
     });
 
-<<<<<<< HEAD
     /**
      * Creates a function that returns the result of invoking the provided
      * functions with the `this` binding of the created function, where each
@@ -16033,11 +10517,6 @@ module.exports = isReactChildren;
      * // => 9
      */
     var flow = createFlow();
-=======
-module.exports = HashLocation;
-},{"../History":101,"../actions/LocationActions":111}],127:[function(require,module,exports){
-'use strict';
->>>>>>> css change
 
     /**
      * This method is like `_.flow` except that it creates a function that
@@ -16460,7 +10939,6 @@ module.exports = HashLocation;
       var leading = true,
           trailing = true;
 
-<<<<<<< HEAD
       if (typeof func != 'function') {
         throw new TypeError(FUNC_ERROR_TEXT);
       }
@@ -16472,11 +10950,6 @@ module.exports = HashLocation;
       }
       return debounce(func, wait, { 'leading': leading, 'maxWait': +wait, 'trailing': trailing });
     }
-=======
-module.exports = HistoryLocation;
-},{"../History":101,"../actions/LocationActions":111}],128:[function(require,module,exports){
-'use strict';
->>>>>>> css change
 
     /**
      * Creates a function that provides `value` to the wrapper function as its
@@ -16711,7 +11184,6 @@ module.exports = HistoryLocation;
       return isObjectLike(value) && isLength(value.length) && objToString.call(value) == arrayTag;
     };
 
-<<<<<<< HEAD
     /**
      * Checks if `value` is classified as a boolean primitive or object.
      *
@@ -16731,11 +11203,6 @@ module.exports = HistoryLocation;
     function isBoolean(value) {
       return value === true || value === false || (isObjectLike(value) && objToString.call(value) == boolTag);
     }
-=======
-module.exports = RefreshLocation;
-},{"../History":101,"./HistoryLocation":127}],129:[function(require,module,exports){
-'use strict';
->>>>>>> css change
 
     /**
      * Checks if `value` is classified as a `Date` object.
@@ -16940,7 +11407,6 @@ module.exports = RefreshLocation;
       return isObject(value) && objToString.call(value) == funcTag;
     }
 
-<<<<<<< HEAD
     /**
      * Checks if `value` is the [language type](https://es5.github.io/#x8) of `Object`.
      * (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
@@ -16967,11 +11433,6 @@ module.exports = RefreshLocation;
       var type = typeof value;
       return !!value && (type == 'object' || type == 'function');
     }
-=======
-module.exports = StaticLocation;
-},{"react/lib/invariant":273}],130:[function(require,module,exports){
-'use strict';
->>>>>>> css change
 
     /**
      * Performs a deep comparison between `object` and `source` to determine if
@@ -17352,13 +11813,7 @@ module.exports = StaticLocation;
       return baseCopy(value, keysIn(value));
     }
 
-<<<<<<< HEAD
     /*------------------------------------------------------------------------*/
-=======
-module.exports = TestLocation;
-},{"../History":101,"../actions/LocationActions":111,"react/lib/invariant":273}],131:[function(require,module,exports){
-'use strict';
->>>>>>> css change
 
     /**
      * Recursively merges own enumerable properties of the source object(s), that
@@ -17530,7 +11985,6 @@ module.exports = TestLocation;
      */
     var defaultsDeep = createDefaults(merge, mergeDefaults);
 
-<<<<<<< HEAD
     /**
      * This method is like `_.find` except that it returns the key of the first
      * element `predicate` returns truthy for instead of the element itself.
@@ -17580,11 +12034,6 @@ module.exports = TestLocation;
      * // => 'barney'
      */
     var findKey = createFindKey(baseForOwn);
-=======
-module.exports = runRouter;
-},{"./createRouter":121}],132:[function(require,module,exports){
-'use strict';
->>>>>>> css change
 
     /**
      * This method is like `_.findKey` except that it iterates over elements of
@@ -17636,7 +12085,6 @@ module.exports = runRouter;
      */
     var findLastKey = createFindKey(baseForOwnRight);
 
-<<<<<<< HEAD
     /**
      * Iterates over own and inherited enumerable properties of an object invoking
      * `iteratee` for each property. The `iteratee` is bound to `thisArg` and invoked
@@ -17665,11 +12113,6 @@ module.exports = runRouter;
      * // => logs 'a', 'b', and 'c' (iteration order is not guaranteed)
      */
     var forIn = createForIn(baseFor);
-=======
-module.exports = supportsHistory;
-},{}],133:[function(require,module,exports){
-'use strict';
->>>>>>> css change
 
     /**
      * This method is like `_.forIn` except that it iterates over properties of
@@ -17842,7 +12285,6 @@ module.exports = supportsHistory;
         (isArray(object) || isArguments(object)));
     }
 
-<<<<<<< HEAD
     /**
      * Creates an object composed of the inverted keys and values of `object`.
      * If `object` contains duplicate values, subsequent values overwrite property
@@ -17928,13 +12370,6 @@ module.exports = supportsHistory;
       }
       return isObject(object) ? nativeKeys(object) : [];
     };
-=======
-},{}],134:[function(require,module,exports){
-module.exports = require('./lib/');
-
-},{"./lib/":135}],135:[function(require,module,exports){
-// Load modules
->>>>>>> css change
 
     /**
      * Creates an array of the own and inherited enumerable property names of `object`.
@@ -18052,7 +12487,6 @@ module.exports = require('./lib/');
      */
     var mapValues = createObjectMapper();
 
-<<<<<<< HEAD
     /**
      * The opposite of `_.pick`; this method creates an object composed of the
      * own and inherited enumerable properties of `object` that are not omitted.
@@ -18089,30 +12523,6 @@ module.exports = require('./lib/');
         return !predicate(value, key, object);
       });
     });
-=======
-var internals = {};
-
-
-module.exports = {
-    stringify: Stringify,
-    parse: Parse
-};
-
-},{"./parse":136,"./stringify":137}],136:[function(require,module,exports){
-// Load modules
-
-var Utils = require('./utils');
-
-
-// Declare internals
-
-var internals = {
-    delimiter: '&',
-    depth: 5,
-    arrayLimit: 20,
-    parameterLimit: 1000
-};
->>>>>>> css change
 
     /**
      * Creates a two dimensional array of the key-value pairs for `object`,
@@ -18847,7 +13257,6 @@ var internals = {
       return result + (index ? '_' : '') + word.toLowerCase();
     });
 
-<<<<<<< HEAD
     /**
      * Converts `string` to [start case](https://en.wikipedia.org/wiki/Letter_case#Stylistic_or_specialised_usage).
      *
@@ -18870,10 +13279,6 @@ var internals = {
     var startCase = createCompounder(function(result, word, index) {
       return result + (index ? ' ' : '') + (word.charAt(0).toUpperCase() + word.slice(1));
     });
-=======
-},{"./utils":138}],137:[function(require,module,exports){
-// Load modules
->>>>>>> css change
 
     /**
      * Checks if `string` starts with the given target string.
@@ -19462,7 +13867,6 @@ var internals = {
       return value;
     }
 
-<<<<<<< HEAD
     /**
      * Creates a function that performs a deep comparison between a given object
      * and `source`, returning `true` if the given object has equivalent property
@@ -19491,13 +13895,6 @@ var internals = {
     function matches(source) {
       return baseMatches(baseClone(source, true));
     }
-=======
-    return keys.join(delimiter);
-};
-
-},{"./utils":138}],138:[function(require,module,exports){
-// Load modules
->>>>>>> css change
 
     /**
      * Creates a function that compares the property value of `path` on a given
@@ -20475,27 +14872,12 @@ var internals = {
       return this.filter(identity);
     };
 
-<<<<<<< HEAD
     LazyWrapper.prototype.reject = function(predicate, thisArg) {
       predicate = getCallback(predicate, thisArg, 1);
       return this.filter(function(value) {
         return !predicate(value);
       });
     };
-=======
-},{}],139:[function(require,module,exports){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule AutoFocusMixin
- * @typechecks static-only
- */
->>>>>>> css change
 
     LazyWrapper.prototype.slice = function(start, end) {
       start = start == null ? 0 : (+start || 0);
@@ -20524,26 +14906,11 @@ var internals = {
       return this.take(POSITIVE_INFINITY);
     };
 
-<<<<<<< HEAD
     // Add `LazyWrapper` methods to `lodash.prototype`.
     baseForOwn(LazyWrapper.prototype, function(func, methodName) {
       var checkIteratee = /^(?:filter|map|reject)|While$/.test(methodName),
           retUnwrapped = /^(?:first|last)$/.test(methodName),
           lodashFunc = lodash[retUnwrapped ? ('take' + (methodName == 'last' ? 'Right' : '')) : methodName];
-=======
-},{"./focusNode":257}],140:[function(require,module,exports){
-/**
- * Copyright 2013-2015 Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule BeforeInputEventPlugin
- * @typechecks static-only
- */
->>>>>>> css change
 
       if (!lodashFunc) {
         return;
@@ -20864,59 +15231,12 @@ var Alert = React.createClass({displayName: "Alert",
     dismissAfter: React.PropTypes.number
   },
 
-<<<<<<< HEAD
   getDefaultProps: function () {
     return {
       bsClass: 'alert',
       bsStyle: 'info'
     };
   },
-=======
-  /**
-   * @param {string} topLevelType Record from `EventConstants`.
-   * @param {DOMEventTarget} topLevelTarget The listening component root node.
-   * @param {string} topLevelTargetID ID of `topLevelTarget`.
-   * @param {object} nativeEvent Native browser event.
-   * @return {*} An accumulation of synthetic events.
-   * @see {EventPluginHub.extractEvents}
-   */
-  extractEvents: function(
-    topLevelType,
-    topLevelTarget,
-    topLevelTargetID,
-    nativeEvent
-  ) {
-    return [
-      extractCompositionEvent(
-        topLevelType,
-        topLevelTarget,
-        topLevelTargetID,
-        nativeEvent
-      ),
-      extractBeforeInputEvent(
-        topLevelType,
-        topLevelTarget,
-        topLevelTargetID,
-        nativeEvent
-      )
-    ];
-  }
-};
-
-module.exports = BeforeInputEventPlugin;
-
-},{"./EventConstants":152,"./EventPropagators":157,"./ExecutionEnvironment":158,"./FallbackCompositionState":159,"./SyntheticCompositionEvent":231,"./SyntheticInputEvent":235,"./keyOf":279}],141:[function(require,module,exports){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule CSSProperty
- */
->>>>>>> css change
 
   renderDismissButton: function () {
     return (
@@ -20994,28 +15314,12 @@ module.exports = Badge;
 var React = require('react');
 var constants = require('./constants');
 
-<<<<<<< HEAD
 var BootstrapMixin = {
   propTypes: {
     bsClass: React.PropTypes.oneOf(Object.keys(constants.CLASSES)),
     bsStyle: React.PropTypes.oneOf(Object.keys(constants.STYLES)),
     bsSize: React.PropTypes.oneOf(Object.keys(constants.SIZES))
   },
-=======
-},{}],142:[function(require,module,exports){
-(function (process){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule CSSPropertyOperations
- * @typechecks static-only
- */
->>>>>>> css change
 
   getBsClassSet: function () {
     var classes = {};
@@ -21138,24 +15442,8 @@ var classSet = require('./utils/classSet');
 var BootstrapMixin = require('./BootstrapMixin');
 var Button = require('./Button');
 
-<<<<<<< HEAD
 var ButtonGroup = React.createClass({displayName: "ButtonGroup",
   mixins: [BootstrapMixin],
-=======
-}).call(this,require('_process'))
-},{"./CSSProperty":141,"./ExecutionEnvironment":158,"./camelizeStyleName":246,"./dangerousStyleValue":251,"./hyphenateStyleName":271,"./memoizeStringOnly":281,"./warning":292,"_process":36}],143:[function(require,module,exports){
-(function (process){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule CallbackQueue
- */
->>>>>>> css change
 
   propTypes: {
     vertical:  React.PropTypes.bool,
@@ -21298,27 +15586,12 @@ var Carousel = React.createClass({displayName: "Carousel",
     var index = this.getActiveIndex() + 1;
     var count = ValidComponentChildren.numberOf(this.props.children);
 
-<<<<<<< HEAD
     if (index > count - 1) {
       if (!this.props.wrap) {
         return;
       }
       index = 0;
     }
-=======
-}).call(this,require('_process'))
-},{"./Object.assign":164,"./PooledClass":165,"./invariant":273,"_process":36}],144:[function(require,module,exports){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule ChangeEventPlugin
- */
->>>>>>> css change
 
     this.handleSelect(index, 'next');
   },
@@ -21579,26 +15852,11 @@ var CarouselItem = React.createClass({displayName: "CarouselItem",
       return;
     }
 
-<<<<<<< HEAD
     this.setState({
       direction: this.props.direction === 'prev' ?
         'right' : 'left'
     });
   },
-=======
-},{"./EventConstants":152,"./EventPluginHub":154,"./EventPropagators":157,"./ExecutionEnvironment":158,"./ReactUpdates":225,"./SyntheticEvent":233,"./isEventSupported":274,"./isTextInputElement":276,"./keyOf":279}],145:[function(require,module,exports){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule ClientReactRootIndex
- * @typechecks
- */
->>>>>>> css change
 
   render: function () {
     var classes = {
@@ -21629,28 +15887,12 @@ var CarouselItem = React.createClass({displayName: "CarouselItem",
   }
 });
 
-<<<<<<< HEAD
 module.exports = CarouselItem;
 },{"./utils/TransitionEvents":101,"./utils/classSet":103,"./utils/joinClasses":107,"react":328}],59:[function(require,module,exports){
 var React = require('react');
 var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var constants = require('./constants');
-=======
-},{}],146:[function(require,module,exports){
-(function (process){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule DOMChildrenOperations
- * @typechecks static-only
- */
->>>>>>> css change
 
 
 var Col = React.createClass({displayName: "Col",
@@ -21767,25 +16009,8 @@ var CollapsableMixin = {
     }
   },
 
-<<<<<<< HEAD
   _removeEndTransitionListener: function () {
     var node = this.getCollapsableDOMNode();
-=======
-}).call(this,require('_process'))
-},{"./Danger":149,"./ReactMultiChildUpdateTypes":210,"./invariant":273,"./setTextContent":287,"_process":36}],147:[function(require,module,exports){
-(function (process){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule DOMProperty
- * @typechecks static-only
- */
->>>>>>> css change
 
     if (node) {
       TransitionEvents.removeEndEventListener(
@@ -22038,12 +16263,6 @@ module.exports = DropdownMenu;
 var React = require('react');
 var EventListener = require('./utils/EventListener');
 
-<<<<<<< HEAD
-=======
-}).call(this,require('_process'))
-},{"./invariant":273,"_process":36}],148:[function(require,module,exports){
-(function (process){
->>>>>>> css change
 /**
  * Checks whether a node is within
  * a root nodes tree
@@ -22199,25 +16418,8 @@ var classSet = require('./utils/classSet');
 var BootstrapMixin = require('./BootstrapMixin');
 var constants = require('./constants');
 
-<<<<<<< HEAD
 var Glyphicon = React.createClass({displayName: "Glyphicon",
   mixins: [BootstrapMixin],
-=======
-}).call(this,require('_process'))
-},{"./DOMProperty":147,"./quoteAttributeValueForBrowser":285,"./warning":292,"_process":36}],149:[function(require,module,exports){
-(function (process){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule Danger
- * @typechecks static-only
- */
->>>>>>> css change
 
   propTypes: {
     glyph: React.PropTypes.oneOf(constants.GLYPHS).isRequired
@@ -22389,23 +16591,8 @@ var Input = React.createClass({displayName: "Input",
         input = React.createElement("input", React.__spread({},  this.props, {className: joinClasses(this.props.className, className), ref: "input", key: "input"}));
     }
 
-<<<<<<< HEAD
     return input;
   },
-=======
-}).call(this,require('_process'))
-},{"./ExecutionEnvironment":158,"./createNodesFromMarkup":250,"./emptyFunction":252,"./getMarkupWrap":265,"./invariant":273,"_process":36}],150:[function(require,module,exports){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule DefaultEventPluginOrder
- */
->>>>>>> css change
 
   renderInputGroup: function (children) {
     var addonBefore = this.props.addonBefore ? (
@@ -22443,7 +16630,6 @@ var Input = React.createClass({displayName: "Input",
     ) : children;
   },
 
-<<<<<<< HEAD
   renderIcon: function () {
     var classes = {
       'glyphicon': true,
@@ -22452,20 +16638,6 @@ var Input = React.createClass({displayName: "Input",
       'glyphicon-warning-sign': this.props.bsStyle === 'warning',
       'glyphicon-remove': this.props.bsStyle === 'error'
     };
-=======
-},{"./keyOf":279}],151:[function(require,module,exports){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule EnterLeaveEventPlugin
- * @typechecks static-only
- */
->>>>>>> css change
 
     return this.props.hasFeedback ? (
       React.createElement("span", {className: classSet(classes), key: "icon"})
@@ -22671,26 +16843,12 @@ var BootstrapMixin = require('./BootstrapMixin');
 var Label = React.createClass({displayName: "Label",
   mixins: [BootstrapMixin],
 
-<<<<<<< HEAD
   getDefaultProps: function () {
     return {
       bsClass: 'label',
       bsStyle: 'default'
     };
   },
-=======
-},{"./EventConstants":152,"./EventPropagators":157,"./ReactMount":208,"./SyntheticMouseEvent":237,"./keyOf":279}],152:[function(require,module,exports){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule EventConstants
- */
->>>>>>> css change
 
   render: function () {
     var classes = this.getBsClassSet();
@@ -22742,30 +16900,7 @@ var BootstrapMixin = require('./BootstrapMixin');
 var classSet = require('./utils/classSet');
 var cloneWithProps = require('./utils/cloneWithProps');
 
-<<<<<<< HEAD
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
-=======
-},{"./keyMirror":278}],153:[function(require,module,exports){
-(function (process){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * @providesModule EventListener
- * @typechecks
- */
->>>>>>> css change
 
 var ListGroupItem = React.createClass({displayName: "ListGroupItem",
   mixins: [BootstrapMixin],
@@ -22819,7 +16954,6 @@ var ListGroupItem = React.createClass({displayName: "ListGroupItem",
     );
   },
 
-<<<<<<< HEAD
   renderStructuredContent: function () {
     var header;
     if (React.isValidElement(this.props.header)) {
@@ -22833,21 +16967,6 @@ var ListGroupItem = React.createClass({displayName: "ListGroupItem",
         )
       );
     }
-=======
-}).call(this,require('_process'))
-},{"./emptyFunction":252,"_process":36}],154:[function(require,module,exports){
-(function (process){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule EventPluginHub
- */
->>>>>>> css change
 
     var content = (
       React.createElement("p", {className: "list-group-item-text"}, 
@@ -23140,7 +17259,6 @@ var ModalTrigger = React.createClass({displayName: "ModalTrigger",
       return React.createElement("span", null);
     }
 
-<<<<<<< HEAD
     return cloneWithProps(
       this.props.modal,
       {
@@ -23148,22 +17266,6 @@ var ModalTrigger = React.createClass({displayName: "ModalTrigger",
       }
     );
   },
-=======
-}).call(this,require('_process'))
-},{"./EventPluginRegistry":155,"./EventPluginUtils":156,"./accumulateInto":243,"./forEachAccumulated":258,"./invariant":273,"_process":36}],155:[function(require,module,exports){
-(function (process){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule EventPluginRegistry
- * @typechecks static-only
- */
->>>>>>> css change
 
   render: function () {
     var child = React.Children.only(this.props.children);
@@ -23297,24 +17399,8 @@ var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var BootstrapMixin = require('./BootstrapMixin');
 
-<<<<<<< HEAD
 var NavItem = React.createClass({displayName: "NavItem",
   mixins: [BootstrapMixin],
-=======
-}).call(this,require('_process'))
-},{"./invariant":273,"_process":36}],156:[function(require,module,exports){
-(function (process){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule EventPluginUtils
- */
->>>>>>> css change
 
   propTypes: {
     onSelect: React.PropTypes.func,
@@ -23666,27 +17752,11 @@ var OverlayTrigger = React.createClass({displayName: "OverlayTrigger",
     });
   },
 
-<<<<<<< HEAD
   hide: function () {
     this.setState({
       isOverlayShown: false
     });
   },
-=======
-}).call(this,require('_process'))
-},{"./EventConstants":152,"./invariant":273,"_process":36}],157:[function(require,module,exports){
-(function (process){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule EventPropagators
- */
->>>>>>> css change
 
   toggle: function () {
     this.state.isOverlayShown ?
@@ -23775,25 +17845,10 @@ var OverlayTrigger = React.createClass({displayName: "OverlayTrigger",
     var delay = this.props.delayHide != null ?
       this.props.delayHide : this.props.delay;
 
-<<<<<<< HEAD
     if (!delay) {
       this.hide();
       return;
     }
-=======
-}).call(this,require('_process'))
-},{"./EventConstants":152,"./EventPluginHub":154,"./accumulateInto":243,"./forEachAccumulated":258,"_process":36}],158:[function(require,module,exports){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule ExecutionEnvironment
- */
->>>>>>> css change
 
     this._hoverDelay = setTimeout(function() {
       this._hoverDelay = null;
@@ -23866,22 +17921,7 @@ module.exports = OverlayTrigger;
 var React = require('react');
 var joinClasses = require('./utils/joinClasses');
 
-<<<<<<< HEAD
 var PageHeader = React.createClass({displayName: "PageHeader",
-=======
-},{}],159:[function(require,module,exports){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule FallbackCompositionState
- * @typechecks static-only
- */
->>>>>>> css change
 
   render: function () {
     return (
@@ -24194,22 +18234,8 @@ var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var cloneWithProps = require('./utils/cloneWithProps');
 
-<<<<<<< HEAD
 var BootstrapMixin = require('./BootstrapMixin');
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
-=======
-},{"./Object.assign":164,"./PooledClass":165,"./getTextContentAccessor":268}],160:[function(require,module,exports){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule HTMLDOMPropertyConfig
- */
->>>>>>> css change
 
 var PanelGroup = React.createClass({displayName: "PanelGroup",
   mixins: [BootstrapMixin],
@@ -24295,22 +18321,6 @@ var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var BootstrapMixin = require('./BootstrapMixin');
 
-<<<<<<< HEAD
-=======
-},{"./DOMProperty":147,"./ExecutionEnvironment":158}],161:[function(require,module,exports){
-(function (process){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule LinkedValueUtils
- * @typechecks static-only
- */
->>>>>>> css change
 
 var Popover = React.createClass({displayName: "Popover",
   mixins: [BootstrapMixin],
@@ -24433,7 +18443,6 @@ var ProgressBar = React.createClass({displayName: "ProgressBar",
     }
   },
 
-<<<<<<< HEAD
   renderChildBar: function (child, index) {
     return cloneWithProps(child, {
       isChild: true,
@@ -24441,21 +18450,6 @@ var ProgressBar = React.createClass({displayName: "ProgressBar",
       ref: child.ref
     });
   },
-=======
-}).call(this,require('_process'))
-},{"./ReactPropTypes":216,"./invariant":273,"_process":36}],162:[function(require,module,exports){
-(function (process){
-/**
- * Copyright 2014-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule LocalEventTrapMixin
- */
->>>>>>> css change
 
   renderProgressBar: function () {
     var percentage = this.getPercentage(
@@ -24513,23 +18507,7 @@ var ProgressBar = React.createClass({displayName: "ProgressBar",
   }
 });
 
-<<<<<<< HEAD
 module.exports = ProgressBar;
-=======
-}).call(this,require('_process'))
-},{"./ReactBrowserEventEmitter":168,"./accumulateInto":243,"./forEachAccumulated":258,"./invariant":273,"_process":36}],163:[function(require,module,exports){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule MobileSafariClickEventPlugin
- * @typechecks static-only
- */
->>>>>>> css change
 
 },{"./BootstrapMixin":53,"./Interpolate":68,"./utils/ValidComponentChildren":102,"./utils/classSet":103,"./utils/cloneWithProps":104,"./utils/joinClasses":107,"react":328}],88:[function(require,module,exports){
 var React = require('react');
@@ -24588,25 +18566,11 @@ var SplitButton = React.createClass({displayName: "SplitButton",
     };
   },
 
-<<<<<<< HEAD
   render: function () {
     var groupClasses = {
         'open': this.state.open,
         'dropup': this.props.dropup
       };
-=======
-},{"./EventConstants":152,"./emptyFunction":252}],164:[function(require,module,exports){
-/**
- * Copyright 2014-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule Object.assign
- */
->>>>>>> css change
 
     var button = (
       React.createElement(Button, React.__spread({}, 
@@ -24685,24 +18649,9 @@ var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var cloneWithProps = require('./utils/cloneWithProps');
 
-<<<<<<< HEAD
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 var createChainedFunction = require('./utils/createChainedFunction');
 var BootstrapMixin = require('./BootstrapMixin');
-=======
-},{}],165:[function(require,module,exports){
-(function (process){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule PooledClass
- */
->>>>>>> css change
 
 
 var SubNav = React.createClass({displayName: "SubNav",
@@ -24754,7 +18703,6 @@ var SubNav = React.createClass({displayName: "SubNav",
     if (child.props.children) {
       var isActive = false;
 
-<<<<<<< HEAD
       ValidComponentChildren.forEach(
         child.props.children,
         function (child) {
@@ -24764,21 +18712,6 @@ var SubNav = React.createClass({displayName: "SubNav",
         },
         this
       );
-=======
-}).call(this,require('_process'))
-},{"./invariant":273,"_process":36}],166:[function(require,module,exports){
-(function (process){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule React
- */
->>>>>>> css change
 
       return isActive;
     }
@@ -25596,13 +19529,8 @@ function createMountableChecker() {
   return createChainableTypeChecker(validate);
 }
 
-<<<<<<< HEAD
 module.exports = CustomPropTypes;
 },{"react":328}],99:[function(require,module,exports){
-=======
-}).call(this,require('_process'))
-},{"./EventPluginUtils":156,"./ExecutionEnvironment":158,"./Object.assign":164,"./ReactChildren":170,"./ReactClass":171,"./ReactComponent":172,"./ReactContext":176,"./ReactCurrentOwner":177,"./ReactDOM":178,"./ReactDOMTextComponent":189,"./ReactDefaultInjection":192,"./ReactElement":195,"./ReactElementValidator":196,"./ReactInstanceHandles":204,"./ReactMount":208,"./ReactPerf":213,"./ReactPropTypes":216,"./ReactReconciler":219,"./ReactServerRendering":222,"./findDOMNode":255,"./onlyChild":282,"_process":36}],167:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2014 Facebook, Inc.
  *
@@ -25658,11 +19586,7 @@ var EventListener = {
 
 module.exports = EventListener;
 
-<<<<<<< HEAD
 },{}],100:[function(require,module,exports){
-=======
-},{"./findDOMNode":255}],168:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2014, Facebook, Inc.
  * All rights reserved.
@@ -26129,10 +20053,6 @@ function createChainedFunction(one, two) {
 module.exports = createChainedFunction;
 },{}],106:[function(require,module,exports){
 
-<<<<<<< HEAD
-=======
-},{"./EventConstants":152,"./EventPluginHub":154,"./EventPluginRegistry":155,"./Object.assign":164,"./ReactEventEmitterMixin":199,"./ViewportMetrics":242,"./isEventSupported":274}],169:[function(require,module,exports){
->>>>>>> css change
 /**
  * Shortcut to compute element style
  *
@@ -26217,11 +20137,6 @@ function getPosition(elem, offsetParent) {
   };
 }
 
-<<<<<<< HEAD
-=======
-},{"./ReactReconciler":219,"./flattenChildren":256,"./instantiateReactComponent":272,"./shouldUpdateReactComponent":289}],170:[function(require,module,exports){
-(function (process){
->>>>>>> css change
 /**
  * Get parent element
  *
@@ -26326,23 +20241,7 @@ var History = {
     window.history.back();
   }
 
-<<<<<<< HEAD
 };
-=======
-}).call(this,require('_process'))
-},{"./PooledClass":165,"./ReactFragment":201,"./traverseAllChildren":291,"./warning":292,"_process":36}],171:[function(require,module,exports){
-(function (process){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule ReactClass
- */
->>>>>>> css change
 
 module.exports = History;
 },{"react/lib/ExecutionEnvironment":177,"react/lib/invariant":306}],110:[function(require,module,exports){
@@ -27174,16 +21073,8 @@ var ImitateBrowserBehavior = {
 
 };
 
-<<<<<<< HEAD
 module.exports = ImitateBrowserBehavior;
 },{"../actions/LocationActions":119}],121:[function(require,module,exports){
-=======
-module.exports = ReactClass;
-
-}).call(this,require('_process'))
-},{"./Object.assign":164,"./ReactComponent":172,"./ReactCurrentOwner":177,"./ReactElement":195,"./ReactErrorUtils":198,"./ReactInstanceMap":205,"./ReactLifeCycle":206,"./ReactPropTypeLocationNames":214,"./ReactPropTypeLocations":215,"./ReactUpdateQueue":224,"./invariant":273,"./keyMirror":278,"./keyOf":279,"./warning":292,"_process":36}],172:[function(require,module,exports){
-(function (process){
->>>>>>> css change
 /**
  * A scroll behavior that always scrolls to the top of the page
  * after a transition.
@@ -27237,24 +21128,9 @@ var ContextWrapper = (function (_React$Component) {
   return ContextWrapper;
 })(React.Component);
 
-<<<<<<< HEAD
 module.exports = ContextWrapper;
 },{"react":328}],123:[function(require,module,exports){
 'use strict';
-=======
-}).call(this,require('_process'))
-},{"./ReactUpdateQueue":224,"./invariant":273,"./warning":292,"_process":36}],173:[function(require,module,exports){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule ReactComponentBrowserEnvironment
- */
->>>>>>> css change
 
 var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
 
@@ -27282,23 +21158,8 @@ var DefaultRoute = (function (_Route) {
 
   _inherits(DefaultRoute, _Route);
 
-<<<<<<< HEAD
   return DefaultRoute;
 })(Route);
-=======
-},{"./ReactDOMIDOperations":182,"./ReactMount":208}],174:[function(require,module,exports){
-(function (process){
-/**
- * Copyright 2014-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule ReactComponentEnvironment
- */
->>>>>>> css change
 
 // TODO: Include these in the above class definition
 // once we can use ES7 property initializers.
@@ -27337,12 +21198,6 @@ function isModifiedEvent(event) {
   return !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey);
 }
 
-<<<<<<< HEAD
-=======
-}).call(this,require('_process'))
-},{"./invariant":273,"_process":36}],175:[function(require,module,exports){
-(function (process){
->>>>>>> css change
 /**
  * <Link> components are used to create an <a> element that links to a route.
  * When that route is active, the link gets an "active" class name (or the
@@ -27848,12 +21703,6 @@ function queryIsActive(activeQuery, query) {
   }return true;
 }
 
-<<<<<<< HEAD
-=======
-}).call(this,require('_process'))
-},{"./Object.assign":164,"./ReactComponentEnvironment":174,"./ReactContext":176,"./ReactCurrentOwner":177,"./ReactElement":195,"./ReactElementValidator":196,"./ReactInstanceMap":205,"./ReactLifeCycle":206,"./ReactNativeComponent":211,"./ReactPerf":213,"./ReactPropTypeLocationNames":214,"./ReactPropTypeLocations":215,"./ReactReconciler":219,"./ReactUpdates":225,"./emptyObject":253,"./invariant":273,"./shouldUpdateReactComponent":289,"./warning":292,"_process":36}],176:[function(require,module,exports){
-(function (process){
->>>>>>> css change
 /**
  * Creates and returns a new router using the given options. A router
  * is a ReactComponent class that knows how to react to changes in the
@@ -27897,22 +21746,7 @@ function createRouter(options) {
   // browsers that don't support the HTML history API.
   if (location === HistoryLocation && !supportsHistory()) location = RefreshLocation;
 
-<<<<<<< HEAD
   var Router = React.createClass({
-=======
-}).call(this,require('_process'))
-},{"./Object.assign":164,"./emptyObject":253,"./warning":292,"_process":36}],177:[function(require,module,exports){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule ReactCurrentOwner
- */
->>>>>>> css change
 
     displayName: 'Router',
 
@@ -27927,31 +21761,11 @@ function createRouter(options) {
         }
       },
 
-<<<<<<< HEAD
       clearAllRoutes: function clearAllRoutes() {
         Router.cancelPendingTransition();
         Router.namedRoutes = {};
         Router.routes = [];
       },
-=======
-module.exports = ReactCurrentOwner;
-
-},{}],178:[function(require,module,exports){
-(function (process){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule ReactDOM
- * @typechecks static-only
- */
-
-'use strict';
->>>>>>> css change
 
       /**
        * Adds routes to this router from the given children object (see ReactChildren).
@@ -27995,23 +21809,8 @@ module.exports = ReactCurrentOwner;
 
           invariant(route instanceof Route, 'Cannot find a route named "%s"', to);
 
-<<<<<<< HEAD
           path = route.path;
         }
-=======
-}).call(this,require('_process'))
-},{"./ReactElement":195,"./ReactElementValidator":196,"./mapObject":280,"_process":36}],179:[function(require,module,exports){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule ReactDOMButton
- */
->>>>>>> css change
 
         return PathUtils.withQuery(PathUtils.injectParams(path, params), query);
       },
@@ -28087,25 +21886,9 @@ module.exports = ReactCurrentOwner;
         throw error; // This error probably originated in a transition hook.
       },
 
-<<<<<<< HEAD
       handleLocationChange: function handleLocationChange(change) {
         Router.dispatch(change.path, change.type);
       },
-=======
-},{"./AutoFocusMixin":139,"./ReactBrowserComponentMixin":167,"./ReactClass":171,"./ReactElement":195,"./keyMirror":278}],180:[function(require,module,exports){
-(function (process){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule ReactDOMComponent
- * @typechecks static-only
- */
->>>>>>> css change
 
       /**
        * Performs a transition to the given path and calls callback(error, abortReason)
@@ -28313,24 +22096,9 @@ module.exports = ReactCurrentOwner;
       };
     },
 
-<<<<<<< HEAD
     getInitialState: function getInitialState() {
       return state = nextState;
     },
-=======
-}).call(this,require('_process'))
-},{"./CSSPropertyOperations":142,"./DOMProperty":147,"./DOMPropertyOperations":148,"./Object.assign":164,"./ReactBrowserEventEmitter":168,"./ReactComponentBrowserEnvironment":173,"./ReactMount":208,"./ReactMultiChild":209,"./ReactPerf":213,"./escapeTextContentForBrowser":254,"./invariant":273,"./isEventSupported":274,"./keyOf":279,"./warning":292,"_process":36}],181:[function(require,module,exports){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule ReactDOMForm
- */
->>>>>>> css change
 
     componentWillReceiveProps: function componentWillReceiveProps() {
       this.setState(state = nextState);
@@ -28360,7 +22128,6 @@ module.exports = createRouter;
 /* jshint -W084 */
 'use strict';
 
-<<<<<<< HEAD
 var React = require('react');
 var assign = require('react/lib/Object.assign');
 var warning = require('react/lib/warning');
@@ -28368,46 +22135,6 @@ var DefaultRoute = require('./components/DefaultRoute');
 var NotFoundRoute = require('./components/NotFoundRoute');
 var Redirect = require('./components/Redirect');
 var Route = require('./Route');
-=======
-},{"./EventConstants":152,"./LocalEventTrapMixin":162,"./ReactBrowserComponentMixin":167,"./ReactClass":171,"./ReactElement":195}],182:[function(require,module,exports){
-(function (process){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule ReactDOMIDOperations
- * @typechecks static-only
- */
-
-/*jslint evil: true */
-
-'use strict';
-
-var CSSPropertyOperations = require("./CSSPropertyOperations");
-var DOMChildrenOperations = require("./DOMChildrenOperations");
-var DOMPropertyOperations = require("./DOMPropertyOperations");
-var ReactMount = require("./ReactMount");
-var ReactPerf = require("./ReactPerf");
-
-var invariant = require("./invariant");
-var setInnerHTML = require("./setInnerHTML");
-
-/**
- * Errors for properties that should not be updated with `updatePropertyById()`.
- *
- * @type {object}
- * @private
- */
-var INVALID_PROPERTY_ERRORS = {
-  dangerouslySetInnerHTML:
-    '`dangerouslySetInnerHTML` must be set using `updateInnerHTMLByID()`.',
-  style: '`style` must be set using `updateStylesByID()`.'
-};
->>>>>>> css change
 
 function checkPropTypes(componentName, propTypes, props) {
   componentName = componentName || 'UnknownComponent';
@@ -28452,11 +22179,6 @@ function createRouteFromReactElement(element) {
   });
 }
 
-<<<<<<< HEAD
-=======
-}).call(this,require('_process'))
-},{"./CSSPropertyOperations":142,"./DOMChildrenOperations":146,"./DOMPropertyOperations":148,"./ReactMount":208,"./ReactPerf":213,"./invariant":273,"./setInnerHTML":286,"_process":36}],183:[function(require,module,exports){
->>>>>>> css change
 /**
  * Creates and returns an array of routes created from the given
  * ReactChildren, all of which should be one of <Route>, <DefaultRoute>,
@@ -28514,25 +22236,11 @@ exports.Route = require('./components/Route');
 exports.ActiveHandler = require('./components/RouteHandler');
 exports.RouteHandler = exports.ActiveHandler;
 
-<<<<<<< HEAD
 exports.HashLocation = require('./locations/HashLocation');
 exports.HistoryLocation = require('./locations/HistoryLocation');
 exports.RefreshLocation = require('./locations/RefreshLocation');
 exports.StaticLocation = require('./locations/StaticLocation');
 exports.TestLocation = require('./locations/TestLocation');
-=======
-},{"./EventConstants":152,"./LocalEventTrapMixin":162,"./ReactBrowserComponentMixin":167,"./ReactClass":171,"./ReactElement":195}],184:[function(require,module,exports){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule ReactDOMImg
- */
->>>>>>> css change
 
 exports.ImitateBrowserBehavior = require('./behaviors/ImitateBrowserBehavior');
 exports.ScrollToTopBehavior = require('./behaviors/ScrollToTopBehavior');
@@ -28566,23 +22274,8 @@ module.exports = isReactChildren;
 },{"react":328}],134:[function(require,module,exports){
 'use strict';
 
-<<<<<<< HEAD
 var LocationActions = require('../actions/LocationActions');
 var History = require('../History');
-=======
-},{"./EventConstants":152,"./LocalEventTrapMixin":162,"./ReactBrowserComponentMixin":167,"./ReactClass":171,"./ReactElement":195}],185:[function(require,module,exports){
-(function (process){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule ReactDOMInput
- */
->>>>>>> css change
 
 var _listeners = [];
 var _isListening = false;
@@ -28718,12 +22411,6 @@ function onPopState(event) {
   notifyChange(LocationActions.POP);
 }
 
-<<<<<<< HEAD
-=======
-}).call(this,require('_process'))
-},{"./AutoFocusMixin":139,"./DOMPropertyOperations":148,"./LinkedValueUtils":161,"./Object.assign":164,"./ReactBrowserComponentMixin":167,"./ReactClass":171,"./ReactElement":195,"./ReactMount":208,"./ReactUpdates":225,"./invariant":273,"_process":36}],186:[function(require,module,exports){
-(function (process){
->>>>>>> css change
 /**
  * A Location that uses HTML5 history.
  */
@@ -28789,11 +22476,6 @@ module.exports = HistoryLocation;
 var HistoryLocation = require('./HistoryLocation');
 var History = require('../History');
 
-<<<<<<< HEAD
-=======
-}).call(this,require('_process'))
-},{"./ReactBrowserComponentMixin":167,"./ReactClass":171,"./ReactElement":195,"./warning":292,"_process":36}],187:[function(require,module,exports){
->>>>>>> css change
 /**
  * A Location that uses full page refreshes. This is used as
  * the fallback for HistoryLocation in browsers that do not
@@ -28961,22 +22643,8 @@ var TestLocation = (function () {
     }
   }]);
 
-<<<<<<< HEAD
   return TestLocation;
 })();
-=======
-},{"./AutoFocusMixin":139,"./LinkedValueUtils":161,"./Object.assign":164,"./ReactBrowserComponentMixin":167,"./ReactClass":171,"./ReactElement":195,"./ReactUpdates":225}],188:[function(require,module,exports){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule ReactDOMSelection
- */
->>>>>>> css change
 
 module.exports = TestLocation;
 },{"../History":109,"../actions/LocationActions":119,"react/lib/invariant":306}],139:[function(require,module,exports){
@@ -29111,22 +22779,7 @@ var internals = {
 };
 
 
-<<<<<<< HEAD
 internals.parseValues = function (str, options) {
-=======
-},{"./ExecutionEnvironment":158,"./getNodeForCharacterOffset":266,"./getTextContentAccessor":268}],189:[function(require,module,exports){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule ReactDOMTextComponent
- * @typechecks static-only
- */
->>>>>>> css change
 
     var obj = {};
     var parts = str.split(options.delimiter, options.parameterLimit === Infinity ? undefined : options.parameterLimit);
@@ -29196,24 +22849,9 @@ internals.parseObject = function (chain, val, options) {
 
 internals.parseKeys = function (key, val, options) {
 
-<<<<<<< HEAD
     if (!key) {
         return;
     }
-=======
-},{"./DOMPropertyOperations":148,"./Object.assign":164,"./ReactComponentBrowserEnvironment":173,"./ReactDOMComponent":180,"./escapeTextContentForBrowser":254}],190:[function(require,module,exports){
-(function (process){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule ReactDOMTextarea
- */
->>>>>>> css change
 
     // The regex chunks
 
@@ -29278,27 +22916,12 @@ module.exports = function (str, options) {
 
     // Iterate over the keys and setup the new object
 
-<<<<<<< HEAD
     var keys = Object.keys(tempObj);
     for (var i = 0, il = keys.length; i < il; ++i) {
         var key = keys[i];
         var newObj = internals.parseKeys(key, tempObj[key], options);
         obj = Utils.merge(obj, newObj);
     }
-=======
-}).call(this,require('_process'))
-},{"./AutoFocusMixin":139,"./DOMPropertyOperations":148,"./LinkedValueUtils":161,"./Object.assign":164,"./ReactBrowserComponentMixin":167,"./ReactClass":171,"./ReactElement":195,"./ReactUpdates":225,"./invariant":273,"./warning":292,"_process":36}],191:[function(require,module,exports){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule ReactDefaultBatchingStrategy
- */
->>>>>>> css change
 
     return Utils.compact(obj);
 };
@@ -29367,22 +22990,7 @@ internals.stringify = function (obj, prefix, generateArrayPrefix) {
 };
 
 
-<<<<<<< HEAD
 module.exports = function (obj, options) {
-=======
-},{"./Object.assign":164,"./ReactUpdates":225,"./Transaction":241,"./emptyFunction":252}],192:[function(require,module,exports){
-(function (process){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule ReactDefaultInjection
- */
->>>>>>> css change
 
     options = options || {};
     var delimiter = typeof options.delimiter === 'undefined' ? internals.delimiter : options.delimiter;
@@ -29446,7 +23054,6 @@ exports.merge = function (target, source) {
         return target;
     }
 
-<<<<<<< HEAD
     if (typeof source !== 'object') {
         if (Array.isArray(target)) {
             target.push(source);
@@ -29454,21 +23061,6 @@ exports.merge = function (target, source) {
         else {
             target[source] = true;
         }
-=======
-}).call(this,require('_process'))
-},{"./BeforeInputEventPlugin":140,"./ChangeEventPlugin":144,"./ClientReactRootIndex":145,"./DefaultEventPluginOrder":150,"./EnterLeaveEventPlugin":151,"./ExecutionEnvironment":158,"./HTMLDOMPropertyConfig":160,"./MobileSafariClickEventPlugin":163,"./ReactBrowserComponentMixin":167,"./ReactClass":171,"./ReactComponentBrowserEnvironment":173,"./ReactDOMButton":179,"./ReactDOMComponent":180,"./ReactDOMForm":181,"./ReactDOMIDOperations":182,"./ReactDOMIframe":183,"./ReactDOMImg":184,"./ReactDOMInput":185,"./ReactDOMOption":186,"./ReactDOMSelect":187,"./ReactDOMTextComponent":189,"./ReactDOMTextarea":190,"./ReactDefaultBatchingStrategy":191,"./ReactDefaultPerf":193,"./ReactElement":195,"./ReactEventListener":200,"./ReactInjection":202,"./ReactInstanceHandles":204,"./ReactMount":208,"./ReactReconcileTransaction":218,"./SVGDOMPropertyConfig":226,"./SelectEventPlugin":227,"./ServerReactRootIndex":228,"./SimpleEventPlugin":229,"./createFullPageComponent":249,"_process":36}],193:[function(require,module,exports){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule ReactDefaultPerf
- * @typechecks static-only
- */
->>>>>>> css change
 
         return target;
     }
@@ -29732,24 +23324,10 @@ function isTabNode(node) {
   return node.nodeName === 'LI' && node.getAttribute('role') === 'tab';
 }
 
-<<<<<<< HEAD
 // Determine if a tab node is disabled
 function isTabDisabled(node) {
   return node.getAttribute('aria-disabled') === 'true';
 }
-=======
-},{"./DOMProperty":147,"./ReactDefaultPerfAnalysis":194,"./ReactMount":208,"./ReactPerf":213,"./performanceNow":284}],194:[function(require,module,exports){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule ReactDefaultPerfAnalysis
- */
->>>>>>> css change
 
 module.exports = _reactAddons2['default'].createClass({
   displayName: 'Tabs',
@@ -29918,7 +23496,6 @@ module.exports = _reactAddons2['default'].createClass({
     return this.refs['panels-' + index];
   },
 
-<<<<<<< HEAD
   getChildren: function getChildren() {
     var index = 0;
     var count = 0;
@@ -29963,20 +23540,6 @@ module.exports = _reactAddons2['default'].createClass({
             });
           })
         });
-=======
-},{"./Object.assign":164}],195:[function(require,module,exports){
-(function (process){
-/**
- * Copyright 2014-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule ReactElement
- */
->>>>>>> css change
 
         // Reset index for panels
         index = 0;
@@ -30243,13 +23806,7 @@ var AutoFocusMixin = {
 
 module.exports = AutoFocusMixin;
 
-<<<<<<< HEAD
 },{"./focusNode":290}],158:[function(require,module,exports){
-=======
-}).call(this,require('_process'))
-},{"./Object.assign":164,"./ReactContext":176,"./ReactCurrentOwner":177,"./warning":292,"_process":36}],196:[function(require,module,exports){
-(function (process){
->>>>>>> css change
 /**
  * Copyright 2013-2015 Facebook, Inc.
  * All rights reserved.
@@ -30744,12 +24301,7 @@ var BeforeInputEventPlugin = {
 
 module.exports = BeforeInputEventPlugin;
 
-<<<<<<< HEAD
 },{"./EventConstants":171,"./EventPropagators":176,"./ExecutionEnvironment":177,"./FallbackCompositionState":178,"./SyntheticCompositionEvent":262,"./SyntheticInputEvent":266,"./keyOf":313}],159:[function(require,module,exports){
-=======
-}).call(this,require('_process'))
-},{"./ReactCurrentOwner":177,"./ReactElement":195,"./ReactFragment":201,"./ReactNativeComponent":211,"./ReactPropTypeLocationNames":214,"./ReactPropTypeLocations":215,"./getIteratorFn":264,"./invariant":273,"./warning":292,"_process":36}],197:[function(require,module,exports){
->>>>>>> css change
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -30861,11 +24413,7 @@ var CSSCore = {
 module.exports = CSSCore;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
 },{"./invariant":306,"_process":43}],160:[function(require,module,exports){
-=======
-},{"./ReactElement":195,"./ReactInstanceMap":205,"./invariant":273,"_process":36}],198:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -30879,27 +24427,6 @@ module.exports = CSSCore;
 
 'use strict';
 
-<<<<<<< HEAD
-=======
-var ReactErrorUtils = {
-  /**
-   * Creates a guarded version of a function. This is supposed to make debugging
-   * of event handlers easier. To aid debugging with the browser's debugger,
-   * this currently simply returns the original function.
-   *
-   * @param {function} func Function to be executed
-   * @param {string} name The name of the guard
-   * @return {function}
-   */
-  guard: function(func, name) {
-    return func;
-  }
-};
-
-module.exports = ReactErrorUtils;
-
-},{}],199:[function(require,module,exports){
->>>>>>> css change
 /**
  * CSS properties which accept numbers but are not in units of "px".
  */
@@ -31011,12 +24538,8 @@ var CSSProperty = {
 
 module.exports = CSSProperty;
 
-<<<<<<< HEAD
 },{}],161:[function(require,module,exports){
 (function (process){
-=======
-},{"./EventPluginHub":154}],200:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -31196,12 +24719,8 @@ var CSSPropertyOperations = {
 
 module.exports = CSSPropertyOperations;
 
-<<<<<<< HEAD
 }).call(this,require('_process'))
 },{"./CSSProperty":160,"./ExecutionEnvironment":177,"./camelizeStyleName":277,"./dangerousStyleValue":284,"./hyphenateStyleName":304,"./memoizeStringOnly":315,"./warning":327,"_process":43}],162:[function(require,module,exports){
-=======
-},{"./EventListener":153,"./ExecutionEnvironment":158,"./Object.assign":164,"./PooledClass":165,"./ReactInstanceHandles":204,"./ReactMount":208,"./ReactUpdates":225,"./getEventTarget":263,"./getUnboundedScrollPosition":269}],201:[function(require,module,exports){
->>>>>>> css change
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -31301,11 +24820,7 @@ PooledClass.addPoolingTo(CallbackQueue);
 module.exports = CallbackQueue;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
 },{"./Object.assign":184,"./PooledClass":185,"./invariant":306,"_process":43}],163:[function(require,module,exports){
-=======
-},{"./ReactElement":195,"./warning":292,"_process":36}],202:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -31351,10 +24866,6 @@ var eventTypes = {
   }
 };
 
-<<<<<<< HEAD
-=======
-},{"./DOMProperty":147,"./EventPluginHub":154,"./ReactBrowserEventEmitter":168,"./ReactClass":171,"./ReactComponentEnvironment":174,"./ReactDOMComponent":180,"./ReactEmptyComponent":197,"./ReactNativeComponent":211,"./ReactPerf":213,"./ReactRootIndex":221,"./ReactUpdates":225}],203:[function(require,module,exports){
->>>>>>> css change
 /**
  * For IE shims
  */
@@ -31473,13 +24984,6 @@ var newValueProp =  {
   }
 };
 
-<<<<<<< HEAD
-=======
-module.exports = ReactInputSelection;
-
-},{"./ReactDOMSelection":188,"./containsNode":247,"./focusNode":257,"./getActiveElement":259}],204:[function(require,module,exports){
-(function (process){
->>>>>>> css change
 /**
  * (For old IE.) Starts tracking propertychange events on the passed-in element
  * and override the value property so that we can distinguish user events from
@@ -31698,12 +25202,7 @@ var ChangeEventPlugin = {
 
 module.exports = ChangeEventPlugin;
 
-<<<<<<< HEAD
 },{"./EventConstants":171,"./EventPluginHub":173,"./EventPropagators":176,"./ExecutionEnvironment":177,"./ReactUpdates":255,"./SyntheticEvent":264,"./isEventSupported":307,"./isTextInputElement":309,"./keyOf":313}],164:[function(require,module,exports){
-=======
-}).call(this,require('_process'))
-},{"./ReactRootIndex":221,"./invariant":273,"_process":36}],205:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -31728,12 +25227,8 @@ var ClientReactRootIndex = {
 
 module.exports = ClientReactRootIndex;
 
-<<<<<<< HEAD
 },{}],165:[function(require,module,exports){
 (function (process){
-=======
-},{}],206:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -31754,10 +25249,6 @@ var ReactMultiChildUpdateTypes = require("./ReactMultiChildUpdateTypes");
 var setTextContent = require("./setTextContent");
 var invariant = require("./invariant");
 
-<<<<<<< HEAD
-=======
-},{}],207:[function(require,module,exports){
->>>>>>> css change
 /**
  * Inserts `childNode` as a child of `parentNode` at the `index`.
  *
@@ -31821,7 +25312,6 @@ var DOMChildrenOperations = {
           parentID
         ) : invariant(updatedChild));
 
-<<<<<<< HEAD
         initialChildren = initialChildren || {};
         initialChildren[parentID] = initialChildren[parentID] || [];
         initialChildren[parentID][updatedIndex] = updatedChild;
@@ -31876,9 +25366,6 @@ module.exports = DOMChildrenOperations;
 
 }).call(this,require('_process'))
 },{"./Danger":168,"./ReactMultiChildUpdateTypes":234,"./invariant":306,"./setTextContent":321,"_process":43}],166:[function(require,module,exports){
-=======
-},{"./adler32":244}],208:[function(require,module,exports){
->>>>>>> css change
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -43958,12 +37445,7 @@ var ReactMultiChild = {
 
 module.exports = ReactMultiChild;
 
-<<<<<<< HEAD
 },{"./ReactChildReconciler":191,"./ReactComponentEnvironment":196,"./ReactMultiChildUpdateTypes":234,"./ReactReconciler":244}],234:[function(require,module,exports){
-=======
-}).call(this,require('_process'))
-},{"./DOMProperty":147,"./ReactBrowserEventEmitter":168,"./ReactCurrentOwner":177,"./ReactElement":195,"./ReactElementValidator":196,"./ReactEmptyComponent":197,"./ReactInstanceHandles":204,"./ReactInstanceMap":205,"./ReactMarkupChecksum":207,"./ReactPerf":213,"./ReactReconciler":219,"./ReactUpdateQueue":224,"./ReactUpdates":225,"./containsNode":247,"./emptyObject":253,"./getReactRootElementInContainer":267,"./instantiateReactComponent":272,"./invariant":273,"./setInnerHTML":286,"./shouldUpdateReactComponent":289,"./warning":292,"_process":36}],209:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -44429,12 +37911,8 @@ var ReactPropTransferer = {
 
 module.exports = ReactPropTransferer;
 
-<<<<<<< HEAD
 },{"./Object.assign":184,"./emptyFunction":285,"./joinClasses":311}],239:[function(require,module,exports){
 (function (process){
-=======
-},{"./ReactChildReconciler":169,"./ReactComponentEnvironment":174,"./ReactMultiChildUpdateTypes":210,"./ReactReconciler":219}],210:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -44485,12 +37963,7 @@ var ReactPropTypeLocations = keyMirror({
 
 module.exports = ReactPropTypeLocations;
 
-<<<<<<< HEAD
 },{"./keyMirror":312}],241:[function(require,module,exports){
-=======
-},{"./keyMirror":278}],211:[function(require,module,exports){
-(function (process){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -44839,13 +38312,7 @@ function getPreciseType(propValue) {
 
 module.exports = ReactPropTypes;
 
-<<<<<<< HEAD
 },{"./ReactElement":218,"./ReactFragment":224,"./ReactPropTypeLocationNames":239,"./emptyFunction":285}],242:[function(require,module,exports){
-=======
-}).call(this,require('_process'))
-},{"./Object.assign":164,"./invariant":273,"_process":36}],212:[function(require,module,exports){
-(function (process){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -44901,13 +38368,7 @@ PooledClass.addPoolingTo(ReactPutListenerQueue);
 
 module.exports = ReactPutListenerQueue;
 
-<<<<<<< HEAD
 },{"./Object.assign":184,"./PooledClass":185,"./ReactBrowserEventEmitter":188}],243:[function(require,module,exports){
-=======
-}).call(this,require('_process'))
-},{"./invariant":273,"_process":36}],213:[function(require,module,exports){
-(function (process){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -45014,12 +38475,6 @@ var TRANSACTION_WRAPPERS = [
   ON_DOM_READY_QUEUEING
 ];
 
-<<<<<<< HEAD
-=======
-}).call(this,require('_process'))
-},{"_process":36}],214:[function(require,module,exports){
-(function (process){
->>>>>>> css change
 /**
  * Currently:
  * - The order that these are listed in the transaction is critical:
@@ -45077,25 +38532,10 @@ var Mixin = {
     CallbackQueue.release(this.reactMountReady);
     this.reactMountReady = null;
 
-<<<<<<< HEAD
     ReactPutListenerQueue.release(this.putListenerQueue);
     this.putListenerQueue = null;
   }
 };
-=======
-}).call(this,require('_process'))
-},{"_process":36}],215:[function(require,module,exports){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule ReactPropTypeLocations
- */
->>>>>>> css change
 
 
 assign(ReactReconcileTransaction.prototype, Transaction.Mixin, Mixin);
@@ -45104,12 +38544,8 @@ PooledClass.addPoolingTo(ReactReconcileTransaction);
 
 module.exports = ReactReconcileTransaction;
 
-<<<<<<< HEAD
 },{"./CallbackQueue":162,"./Object.assign":184,"./PooledClass":185,"./ReactBrowserEventEmitter":188,"./ReactInputSelection":226,"./ReactPutListenerQueue":242,"./Transaction":272}],244:[function(require,module,exports){
 (function (process){
-=======
-},{"./keyMirror":278}],216:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -45334,12 +38770,8 @@ var ReactRootIndex = {
 
 module.exports = ReactRootIndex;
 
-<<<<<<< HEAD
 },{}],247:[function(require,module,exports){
 (function (process){
-=======
-},{"./ReactElement":195,"./ReactFragment":201,"./ReactPropTypeLocationNames":214,"./emptyFunction":252}],217:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -45419,12 +38851,8 @@ module.exports = {
   renderToStaticMarkup: renderToStaticMarkup
 };
 
-<<<<<<< HEAD
 }).call(this,require('_process'))
 },{"./ReactElement":218,"./ReactInstanceHandles":227,"./ReactMarkupChecksum":231,"./ReactServerRenderingTransaction":248,"./emptyObject":286,"./instantiateReactComponent":305,"./invariant":306,"_process":43}],248:[function(require,module,exports){
-=======
-},{"./Object.assign":164,"./PooledClass":165,"./ReactBrowserEventEmitter":168}],218:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -45643,18 +39071,7 @@ ReactStateSetters.Mixin = {
 
 module.exports = ReactStateSetters;
 
-<<<<<<< HEAD
 },{}],250:[function(require,module,exports){
-=======
-assign(ReactReconcileTransaction.prototype, Transaction.Mixin, Mixin);
-
-PooledClass.addPoolingTo(ReactReconcileTransaction);
-
-module.exports = ReactReconcileTransaction;
-
-},{"./CallbackQueue":143,"./Object.assign":164,"./PooledClass":165,"./ReactBrowserEventEmitter":168,"./ReactInputSelection":203,"./ReactPutListenerQueue":217,"./Transaction":241}],219:[function(require,module,exports){
-(function (process){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -45971,11 +39388,6 @@ var ReactTestUtils = {
   SimulateNative: {}
 };
 
-<<<<<<< HEAD
-=======
-}).call(this,require('_process'))
-},{"./ReactElementValidator":196,"./ReactRef":220,"_process":36}],220:[function(require,module,exports){
->>>>>>> css change
 /**
  * @class ReactShallowRenderer
  */
@@ -46173,11 +39585,7 @@ for (eventType in topLevelTypes) {
 
 module.exports = ReactTestUtils;
 
-<<<<<<< HEAD
 },{"./EventConstants":171,"./EventPluginHub":173,"./EventPropagators":176,"./Object.assign":184,"./React":186,"./ReactBrowserEventEmitter":188,"./ReactCompositeComponent":198,"./ReactElement":218,"./ReactEmptyComponent":220,"./ReactInstanceHandles":227,"./ReactInstanceMap":228,"./ReactMount":232,"./ReactUpdates":255,"./SyntheticEvent":264,"./emptyObject":286}],251:[function(require,module,exports){
-=======
-},{"./ReactOwner":212}],221:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -46282,12 +39690,7 @@ var ReactTransitionChildMapping = {
 
 module.exports = ReactTransitionChildMapping;
 
-<<<<<<< HEAD
 },{"./ReactChildren":192,"./ReactFragment":224}],252:[function(require,module,exports){
-=======
-},{}],222:[function(require,module,exports){
-(function (process){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -46396,14 +39799,9 @@ var ReactTransitionEvents = {
   }
 };
 
-<<<<<<< HEAD
 module.exports = ReactTransitionEvents;
 
 },{"./ExecutionEnvironment":177}],253:[function(require,module,exports){
-=======
-}).call(this,require('_process'))
-},{"./ReactElement":195,"./ReactInstanceHandles":204,"./ReactMarkupChecksum":207,"./ReactServerRenderingTransaction":223,"./emptyObject":253,"./instantiateReactComponent":272,"./invariant":273,"_process":36}],223:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -46631,13 +40029,9 @@ var ReactTransitionGroup = React.createClass({
   }
 });
 
-<<<<<<< HEAD
 module.exports = ReactTransitionGroup;
 
 },{"./Object.assign":184,"./React":186,"./ReactTransitionChildMapping":251,"./cloneWithProps":278,"./emptyFunction":285}],254:[function(require,module,exports){
-=======
-},{"./CallbackQueue":143,"./Object.assign":164,"./PooledClass":165,"./ReactPutListenerQueue":217,"./Transaction":241,"./emptyFunction":252}],224:[function(require,module,exports){
->>>>>>> css change
 (function (process){
 /**
  * Copyright 2015, Facebook, Inc.
@@ -46936,11 +40330,7 @@ var ReactUpdateQueue = {
 module.exports = ReactUpdateQueue;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
 },{"./Object.assign":184,"./ReactCurrentOwner":200,"./ReactElement":218,"./ReactInstanceMap":228,"./ReactLifeCycle":229,"./ReactUpdates":255,"./invariant":306,"./warning":327,"_process":43}],255:[function(require,module,exports){
-=======
-},{"./Object.assign":164,"./ReactCurrentOwner":177,"./ReactElement":195,"./ReactInstanceMap":205,"./ReactLifeCycle":206,"./ReactUpdates":225,"./invariant":273,"./warning":292,"_process":36}],225:[function(require,module,exports){
->>>>>>> css change
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -47222,7 +40612,6 @@ var ReactUpdates = {
 module.exports = ReactUpdates;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
 },{"./CallbackQueue":162,"./Object.assign":184,"./PooledClass":185,"./ReactCurrentOwner":200,"./ReactPerf":237,"./ReactReconciler":244,"./Transaction":272,"./invariant":306,"./warning":327,"_process":43}],256:[function(require,module,exports){
 (function (process){
 /**
@@ -47280,9 +40669,6 @@ module.exports = React;
 
 }).call(this,require('_process'))
 },{"./LinkedStateMixin":180,"./React":186,"./ReactCSSTransitionGroup":189,"./ReactComponentWithPureRenderMixin":197,"./ReactDefaultPerf":216,"./ReactFragment":224,"./ReactTestUtils":250,"./ReactTransitionGroup":253,"./ReactUpdates":255,"./cloneWithProps":278,"./cx":283,"./update":326,"_process":43}],257:[function(require,module,exports){
-=======
-},{"./CallbackQueue":143,"./Object.assign":164,"./PooledClass":165,"./ReactCurrentOwner":177,"./ReactPerf":213,"./ReactReconciler":219,"./Transaction":241,"./invariant":273,"./warning":292,"_process":36}],226:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -47376,11 +40762,7 @@ var SVGDOMPropertyConfig = {
 
 module.exports = SVGDOMPropertyConfig;
 
-<<<<<<< HEAD
 },{"./DOMProperty":166}],258:[function(require,module,exports){
-=======
-},{"./DOMProperty":147}],227:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -47575,11 +40957,7 @@ var SelectEventPlugin = {
 
 module.exports = SelectEventPlugin;
 
-<<<<<<< HEAD
 },{"./EventConstants":171,"./EventPropagators":176,"./ReactInputSelection":226,"./SyntheticEvent":264,"./getActiveElement":292,"./isTextInputElement":309,"./keyOf":313,"./shallowEqual":322}],259:[function(require,module,exports){
-=======
-},{"./EventConstants":152,"./EventPropagators":157,"./ReactInputSelection":203,"./SyntheticEvent":233,"./getActiveElement":259,"./isTextInputElement":276,"./keyOf":279,"./shallowEqual":288}],228:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -47610,11 +40988,7 @@ var ServerReactRootIndex = {
 
 module.exports = ServerReactRootIndex;
 
-<<<<<<< HEAD
 },{}],260:[function(require,module,exports){
-=======
-},{}],229:[function(require,module,exports){
->>>>>>> css change
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -48042,11 +41416,7 @@ var SimpleEventPlugin = {
 module.exports = SimpleEventPlugin;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
 },{"./EventConstants":171,"./EventPluginUtils":175,"./EventPropagators":176,"./SyntheticClipboardEvent":261,"./SyntheticDragEvent":263,"./SyntheticEvent":264,"./SyntheticFocusEvent":265,"./SyntheticKeyboardEvent":267,"./SyntheticMouseEvent":268,"./SyntheticTouchEvent":269,"./SyntheticUIEvent":270,"./SyntheticWheelEvent":271,"./getEventCharCode":293,"./invariant":306,"./keyOf":313,"./warning":327,"_process":43}],261:[function(require,module,exports){
-=======
-},{"./EventConstants":152,"./EventPluginUtils":156,"./EventPropagators":157,"./SyntheticClipboardEvent":230,"./SyntheticDragEvent":232,"./SyntheticEvent":233,"./SyntheticFocusEvent":234,"./SyntheticKeyboardEvent":236,"./SyntheticMouseEvent":237,"./SyntheticTouchEvent":238,"./SyntheticUIEvent":239,"./SyntheticWheelEvent":240,"./getEventCharCode":260,"./invariant":273,"./keyOf":279,"./warning":292,"_process":36}],230:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -48091,11 +41461,7 @@ SyntheticEvent.augmentClass(SyntheticClipboardEvent, ClipboardEventInterface);
 
 module.exports = SyntheticClipboardEvent;
 
-<<<<<<< HEAD
 },{"./SyntheticEvent":264}],262:[function(require,module,exports){
-=======
-},{"./SyntheticEvent":233}],231:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -48140,11 +41506,7 @@ SyntheticEvent.augmentClass(
 
 module.exports = SyntheticCompositionEvent;
 
-<<<<<<< HEAD
 },{"./SyntheticEvent":264}],263:[function(require,module,exports){
-=======
-},{"./SyntheticEvent":233}],232:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -48183,11 +41545,7 @@ SyntheticMouseEvent.augmentClass(SyntheticDragEvent, DragEventInterface);
 
 module.exports = SyntheticDragEvent;
 
-<<<<<<< HEAD
 },{"./SyntheticMouseEvent":268}],264:[function(require,module,exports){
-=======
-},{"./SyntheticMouseEvent":237}],233:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -48353,11 +41711,7 @@ PooledClass.addPoolingTo(SyntheticEvent, PooledClass.threeArgumentPooler);
 
 module.exports = SyntheticEvent;
 
-<<<<<<< HEAD
 },{"./Object.assign":184,"./PooledClass":185,"./emptyFunction":285,"./getEventTarget":296}],265:[function(require,module,exports){
-=======
-},{"./Object.assign":164,"./PooledClass":165,"./emptyFunction":252,"./getEventTarget":263}],234:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -48396,11 +41750,7 @@ SyntheticUIEvent.augmentClass(SyntheticFocusEvent, FocusEventInterface);
 
 module.exports = SyntheticFocusEvent;
 
-<<<<<<< HEAD
 },{"./SyntheticUIEvent":270}],266:[function(require,module,exports){
-=======
-},{"./SyntheticUIEvent":239}],235:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -48446,11 +41796,7 @@ SyntheticEvent.augmentClass(
 
 module.exports = SyntheticInputEvent;
 
-<<<<<<< HEAD
 },{"./SyntheticEvent":264}],267:[function(require,module,exports){
-=======
-},{"./SyntheticEvent":233}],236:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -48537,11 +41883,7 @@ SyntheticUIEvent.augmentClass(SyntheticKeyboardEvent, KeyboardEventInterface);
 
 module.exports = SyntheticKeyboardEvent;
 
-<<<<<<< HEAD
 },{"./SyntheticUIEvent":270,"./getEventCharCode":293,"./getEventKey":294,"./getEventModifierState":295}],268:[function(require,module,exports){
-=======
-},{"./SyntheticUIEvent":239,"./getEventCharCode":260,"./getEventKey":261,"./getEventModifierState":262}],237:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -48622,11 +41964,7 @@ SyntheticUIEvent.augmentClass(SyntheticMouseEvent, MouseEventInterface);
 
 module.exports = SyntheticMouseEvent;
 
-<<<<<<< HEAD
 },{"./SyntheticUIEvent":270,"./ViewportMetrics":273,"./getEventModifierState":295}],269:[function(require,module,exports){
-=======
-},{"./SyntheticUIEvent":239,"./ViewportMetrics":242,"./getEventModifierState":262}],238:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -48674,11 +42012,7 @@ SyntheticUIEvent.augmentClass(SyntheticTouchEvent, TouchEventInterface);
 
 module.exports = SyntheticTouchEvent;
 
-<<<<<<< HEAD
 },{"./SyntheticUIEvent":270,"./getEventModifierState":295}],270:[function(require,module,exports){
-=======
-},{"./SyntheticUIEvent":239,"./getEventModifierState":262}],239:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -48740,11 +42074,7 @@ SyntheticEvent.augmentClass(SyntheticUIEvent, UIEventInterface);
 
 module.exports = SyntheticUIEvent;
 
-<<<<<<< HEAD
 },{"./SyntheticEvent":264,"./getEventTarget":296}],271:[function(require,module,exports){
-=======
-},{"./SyntheticEvent":233,"./getEventTarget":263}],240:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -48805,11 +42135,7 @@ SyntheticMouseEvent.augmentClass(SyntheticWheelEvent, WheelEventInterface);
 
 module.exports = SyntheticWheelEvent;
 
-<<<<<<< HEAD
 },{"./SyntheticMouseEvent":268}],272:[function(require,module,exports){
-=======
-},{"./SyntheticMouseEvent":237}],241:[function(require,module,exports){
->>>>>>> css change
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -49050,11 +42376,7 @@ var Transaction = {
 module.exports = Transaction;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
 },{"./invariant":306,"_process":43}],273:[function(require,module,exports){
-=======
-},{"./invariant":273,"_process":36}],242:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -49083,11 +42405,7 @@ var ViewportMetrics = {
 
 module.exports = ViewportMetrics;
 
-<<<<<<< HEAD
 },{}],274:[function(require,module,exports){
-=======
-},{}],243:[function(require,module,exports){
->>>>>>> css change
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -49153,11 +42471,7 @@ function accumulateInto(current, next) {
 module.exports = accumulateInto;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
 },{"./invariant":306,"_process":43}],275:[function(require,module,exports){
-=======
-},{"./invariant":273,"_process":36}],244:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -49191,11 +42505,7 @@ function adler32(data) {
 
 module.exports = adler32;
 
-<<<<<<< HEAD
 },{}],276:[function(require,module,exports){
-=======
-},{}],245:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -49227,11 +42537,7 @@ function camelize(string) {
 
 module.exports = camelize;
 
-<<<<<<< HEAD
 },{}],277:[function(require,module,exports){
-=======
-},{}],246:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -49273,7 +42579,6 @@ function camelizeStyleName(string) {
 
 module.exports = camelizeStyleName;
 
-<<<<<<< HEAD
 },{"./camelize":276}],278:[function(require,module,exports){
 (function (process){
 /**
@@ -49334,9 +42639,6 @@ module.exports = cloneWithProps;
 
 }).call(this,require('_process'))
 },{"./ReactElement":218,"./ReactPropTransferer":238,"./keyOf":313,"./warning":327,"_process":43}],279:[function(require,module,exports){
-=======
-},{"./camelize":245}],247:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -49380,11 +42682,7 @@ function containsNode(outerNode, innerNode) {
 
 module.exports = containsNode;
 
-<<<<<<< HEAD
 },{"./isTextNode":310}],280:[function(require,module,exports){
-=======
-},{"./isTextNode":277}],248:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -49470,11 +42768,7 @@ function createArrayFromMixed(obj) {
 
 module.exports = createArrayFromMixed;
 
-<<<<<<< HEAD
 },{"./toArray":324}],281:[function(require,module,exports){
-=======
-},{"./toArray":290}],249:[function(require,module,exports){
->>>>>>> css change
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -49536,11 +42830,7 @@ function createFullPageComponent(tag) {
 module.exports = createFullPageComponent;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
 },{"./ReactClass":193,"./ReactElement":218,"./invariant":306,"_process":43}],282:[function(require,module,exports){
-=======
-},{"./ReactClass":171,"./ReactElement":195,"./invariant":273,"_process":36}],250:[function(require,module,exports){
->>>>>>> css change
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -49630,7 +42920,6 @@ function createNodesFromMarkup(markup, handleScript) {
 module.exports = createNodesFromMarkup;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
 },{"./ExecutionEnvironment":177,"./createArrayFromMixed":280,"./getMarkupWrap":298,"./invariant":306,"_process":43}],283:[function(require,module,exports){
 (function (process){
 /**
@@ -49688,9 +42977,6 @@ module.exports = cx;
 
 }).call(this,require('_process'))
 },{"./warning":327,"_process":43}],284:[function(require,module,exports){
-=======
-},{"./ExecutionEnvironment":158,"./createArrayFromMixed":248,"./getMarkupWrap":265,"./invariant":273,"_process":36}],251:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -49748,11 +43034,7 @@ function dangerousStyleValue(name, value) {
 
 module.exports = dangerousStyleValue;
 
-<<<<<<< HEAD
 },{"./CSSProperty":160}],285:[function(require,module,exports){
-=======
-},{"./CSSProperty":141}],252:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -49786,11 +43068,7 @@ emptyFunction.thatReturnsArgument = function(arg) { return arg; };
 
 module.exports = emptyFunction;
 
-<<<<<<< HEAD
 },{}],286:[function(require,module,exports){
-=======
-},{}],253:[function(require,module,exports){
->>>>>>> css change
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -49814,11 +43092,7 @@ if ("production" !== process.env.NODE_ENV) {
 module.exports = emptyObject;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
 },{"_process":43}],287:[function(require,module,exports){
-=======
-},{"_process":36}],254:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -49858,11 +43132,7 @@ function escapeTextContentForBrowser(text) {
 
 module.exports = escapeTextContentForBrowser;
 
-<<<<<<< HEAD
 },{}],288:[function(require,module,exports){
-=======
-},{}],255:[function(require,module,exports){
->>>>>>> css change
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -49935,11 +43205,7 @@ function findDOMNode(componentOrElement) {
 module.exports = findDOMNode;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
 },{"./ReactCurrentOwner":200,"./ReactInstanceMap":228,"./ReactMount":232,"./invariant":306,"./isNode":308,"./warning":327,"_process":43}],289:[function(require,module,exports){
-=======
-},{"./ReactCurrentOwner":177,"./ReactInstanceMap":205,"./ReactMount":208,"./invariant":273,"./isNode":275,"./warning":292,"_process":36}],256:[function(require,module,exports){
->>>>>>> css change
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -49997,11 +43263,7 @@ function flattenChildren(children) {
 module.exports = flattenChildren;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
 },{"./traverseAllChildren":325,"./warning":327,"_process":43}],290:[function(require,module,exports){
-=======
-},{"./traverseAllChildren":291,"./warning":292,"_process":36}],257:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -50030,11 +43292,7 @@ function focusNode(node) {
 
 module.exports = focusNode;
 
-<<<<<<< HEAD
 },{}],291:[function(require,module,exports){
-=======
-},{}],258:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -50065,11 +43323,7 @@ var forEachAccumulated = function(arr, cb, scope) {
 
 module.exports = forEachAccumulated;
 
-<<<<<<< HEAD
 },{}],292:[function(require,module,exports){
-=======
-},{}],259:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -50098,11 +43352,7 @@ function getActiveElement() /*?DOMElement*/ {
 
 module.exports = getActiveElement;
 
-<<<<<<< HEAD
 },{}],293:[function(require,module,exports){
-=======
-},{}],260:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -50154,11 +43404,7 @@ function getEventCharCode(nativeEvent) {
 
 module.exports = getEventCharCode;
 
-<<<<<<< HEAD
 },{}],294:[function(require,module,exports){
-=======
-},{}],261:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -50263,11 +43509,7 @@ function getEventKey(nativeEvent) {
 
 module.exports = getEventKey;
 
-<<<<<<< HEAD
 },{"./getEventCharCode":293}],295:[function(require,module,exports){
-=======
-},{"./getEventCharCode":260}],262:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -50314,11 +43556,7 @@ function getEventModifierState(nativeEvent) {
 
 module.exports = getEventModifierState;
 
-<<<<<<< HEAD
 },{}],296:[function(require,module,exports){
-=======
-},{}],263:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -50349,11 +43587,7 @@ function getEventTarget(nativeEvent) {
 
 module.exports = getEventTarget;
 
-<<<<<<< HEAD
 },{}],297:[function(require,module,exports){
-=======
-},{}],264:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -50397,11 +43631,7 @@ function getIteratorFn(maybeIterable) {
 
 module.exports = getIteratorFn;
 
-<<<<<<< HEAD
 },{}],298:[function(require,module,exports){
-=======
-},{}],265:[function(require,module,exports){
->>>>>>> css change
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -50520,11 +43750,7 @@ function getMarkupWrap(nodeName) {
 module.exports = getMarkupWrap;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
 },{"./ExecutionEnvironment":177,"./invariant":306,"_process":43}],299:[function(require,module,exports){
-=======
-},{"./ExecutionEnvironment":158,"./invariant":273,"_process":36}],266:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -50599,11 +43825,7 @@ function getNodeForCharacterOffset(root, offset) {
 
 module.exports = getNodeForCharacterOffset;
 
-<<<<<<< HEAD
 },{}],300:[function(require,module,exports){
-=======
-},{}],267:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -50638,11 +43860,7 @@ function getReactRootElementInContainer(container) {
 
 module.exports = getReactRootElementInContainer;
 
-<<<<<<< HEAD
 },{}],301:[function(require,module,exports){
-=======
-},{}],268:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -50679,11 +43897,7 @@ function getTextContentAccessor() {
 
 module.exports = getTextContentAccessor;
 
-<<<<<<< HEAD
 },{"./ExecutionEnvironment":177}],302:[function(require,module,exports){
-=======
-},{"./ExecutionEnvironment":158}],269:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -50723,11 +43937,7 @@ function getUnboundedScrollPosition(scrollable) {
 
 module.exports = getUnboundedScrollPosition;
 
-<<<<<<< HEAD
 },{}],303:[function(require,module,exports){
-=======
-},{}],270:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -50760,11 +43970,7 @@ function hyphenate(string) {
 
 module.exports = hyphenate;
 
-<<<<<<< HEAD
 },{}],304:[function(require,module,exports){
-=======
-},{}],271:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -50805,11 +44011,7 @@ function hyphenateStyleName(string) {
 
 module.exports = hyphenateStyleName;
 
-<<<<<<< HEAD
 },{"./hyphenate":303}],305:[function(require,module,exports){
-=======
-},{"./hyphenate":270}],272:[function(require,module,exports){
->>>>>>> css change
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -50947,11 +44149,7 @@ function instantiateReactComponent(node, parentCompositeType) {
 module.exports = instantiateReactComponent;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
 },{"./Object.assign":184,"./ReactCompositeComponent":198,"./ReactEmptyComponent":220,"./ReactNativeComponent":235,"./invariant":306,"./warning":327,"_process":43}],306:[function(require,module,exports){
-=======
-},{"./Object.assign":164,"./ReactCompositeComponent":175,"./ReactEmptyComponent":197,"./ReactNativeComponent":211,"./invariant":273,"./warning":292,"_process":36}],273:[function(require,module,exports){
->>>>>>> css change
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -51008,11 +44206,7 @@ var invariant = function(condition, format, a, b, c, d, e, f) {
 module.exports = invariant;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
 },{"_process":43}],307:[function(require,module,exports){
-=======
-},{"_process":36}],274:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -51077,11 +44271,7 @@ function isEventSupported(eventNameSuffix, capture) {
 
 module.exports = isEventSupported;
 
-<<<<<<< HEAD
 },{"./ExecutionEnvironment":177}],308:[function(require,module,exports){
-=======
-},{"./ExecutionEnvironment":158}],275:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -51108,11 +44298,7 @@ function isNode(object) {
 
 module.exports = isNode;
 
-<<<<<<< HEAD
 },{}],309:[function(require,module,exports){
-=======
-},{}],276:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -51155,11 +44341,7 @@ function isTextInputElement(elem) {
 
 module.exports = isTextInputElement;
 
-<<<<<<< HEAD
 },{}],310:[function(require,module,exports){
-=======
-},{}],277:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -51184,7 +44366,6 @@ function isTextNode(object) {
 
 module.exports = isTextNode;
 
-<<<<<<< HEAD
 },{"./isNode":308}],311:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -51227,9 +44408,6 @@ function joinClasses(className/*, ... */) {
 module.exports = joinClasses;
 
 },{}],312:[function(require,module,exports){
-=======
-},{"./isNode":275}],278:[function(require,module,exports){
->>>>>>> css change
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -51284,11 +44462,7 @@ var keyMirror = function(obj) {
 module.exports = keyMirror;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
 },{"./invariant":306,"_process":43}],313:[function(require,module,exports){
-=======
-},{"./invariant":273,"_process":36}],279:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -51324,11 +44498,7 @@ var keyOf = function(oneKeyObj) {
 
 module.exports = keyOf;
 
-<<<<<<< HEAD
 },{}],314:[function(require,module,exports){
-=======
-},{}],280:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -51381,11 +44551,7 @@ function mapObject(object, callback, context) {
 
 module.exports = mapObject;
 
-<<<<<<< HEAD
 },{}],315:[function(require,module,exports){
-=======
-},{}],281:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -51418,11 +44584,7 @@ function memoizeStringOnly(callback) {
 
 module.exports = memoizeStringOnly;
 
-<<<<<<< HEAD
 },{}],316:[function(require,module,exports){
-=======
-},{}],282:[function(require,module,exports){
->>>>>>> css change
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -51462,11 +44624,7 @@ function onlyChild(children) {
 module.exports = onlyChild;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
 },{"./ReactElement":218,"./invariant":306,"_process":43}],317:[function(require,module,exports){
-=======
-},{"./ReactElement":195,"./invariant":273,"_process":36}],283:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -51494,11 +44652,7 @@ if (ExecutionEnvironment.canUseDOM) {
 
 module.exports = performance || {};
 
-<<<<<<< HEAD
 },{"./ExecutionEnvironment":177}],318:[function(require,module,exports){
-=======
-},{"./ExecutionEnvironment":158}],284:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -51526,11 +44680,7 @@ var performanceNow = performance.now.bind(performance);
 
 module.exports = performanceNow;
 
-<<<<<<< HEAD
 },{"./performance":317}],319:[function(require,module,exports){
-=======
-},{"./performance":283}],285:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -51558,11 +44708,7 @@ function quoteAttributeValueForBrowser(value) {
 
 module.exports = quoteAttributeValueForBrowser;
 
-<<<<<<< HEAD
 },{"./escapeTextContentForBrowser":287}],320:[function(require,module,exports){
-=======
-},{"./escapeTextContentForBrowser":254}],286:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -51651,11 +44797,7 @@ if (ExecutionEnvironment.canUseDOM) {
 
 module.exports = setInnerHTML;
 
-<<<<<<< HEAD
 },{"./ExecutionEnvironment":177}],321:[function(require,module,exports){
-=======
-},{"./ExecutionEnvironment":158}],287:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -51697,11 +44839,7 @@ if (ExecutionEnvironment.canUseDOM) {
 
 module.exports = setTextContent;
 
-<<<<<<< HEAD
 },{"./ExecutionEnvironment":177,"./escapeTextContentForBrowser":287,"./setInnerHTML":320}],322:[function(require,module,exports){
-=======
-},{"./ExecutionEnvironment":158,"./escapeTextContentForBrowser":254,"./setInnerHTML":286}],288:[function(require,module,exports){
->>>>>>> css change
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -51745,11 +44883,7 @@ function shallowEqual(objA, objB) {
 
 module.exports = shallowEqual;
 
-<<<<<<< HEAD
 },{}],323:[function(require,module,exports){
-=======
-},{}],289:[function(require,module,exports){
->>>>>>> css change
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -51853,11 +44987,7 @@ function shouldUpdateReactComponent(prevElement, nextElement) {
 module.exports = shouldUpdateReactComponent;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
 },{"./warning":327,"_process":43}],324:[function(require,module,exports){
-=======
-},{"./warning":292,"_process":36}],290:[function(require,module,exports){
->>>>>>> css change
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -51929,11 +45059,7 @@ function toArray(obj) {
 module.exports = toArray;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
 },{"./invariant":306,"_process":43}],325:[function(require,module,exports){
-=======
-},{"./invariant":273,"_process":36}],291:[function(require,module,exports){
->>>>>>> css change
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -52186,7 +45312,6 @@ function traverseAllChildren(children, callback, traverseContext) {
 module.exports = traverseAllChildren;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
 },{"./ReactElement":218,"./ReactFragment":224,"./ReactInstanceHandles":227,"./getIteratorFn":297,"./invariant":306,"./warning":327,"_process":43}],326:[function(require,module,exports){
 (function (process){
 /**
@@ -52359,9 +45484,6 @@ module.exports = update;
 
 }).call(this,require('_process'))
 },{"./Object.assign":184,"./invariant":306,"./keyOf":313,"_process":43}],327:[function(require,module,exports){
-=======
-},{"./ReactElement":195,"./ReactFragment":201,"./ReactInstanceHandles":204,"./getIteratorFn":264,"./invariant":273,"./warning":292,"_process":36}],292:[function(require,module,exports){
->>>>>>> css change
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -52424,17 +45546,10 @@ if ("production" !== process.env.NODE_ENV) {
 module.exports = warning;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
 },{"./emptyFunction":285,"_process":43}],328:[function(require,module,exports){
 module.exports = require('./lib/React');
 
 },{"./lib/React":186}],329:[function(require,module,exports){
-=======
-},{"./emptyFunction":252,"_process":36}],293:[function(require,module,exports){
-module.exports = require('./lib/React');
-
-},{"./lib/React":166}],294:[function(require,module,exports){
->>>>>>> css change
 //     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors

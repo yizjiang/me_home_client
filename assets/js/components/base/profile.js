@@ -1,3 +1,4 @@
+
 var React = require('react'),
   ServerActions = require('../../actions/server_action');
 
@@ -12,10 +13,12 @@ var Profile = React.createClass({
   },
 
   render: function(){
+    console.log(this.props.currentUser.email);
+    
     return (
       <div>
-         <p> welcome { this.props.currentUser.email } </p>
-        <button id='login' type="button" onClick={this.logout} >退出</button>
+        <p>Welcome</p>
+        <button id='login' type="button" onClick={this.logout} className='nobutton'>退 出</button>
       </div>
       )
   }

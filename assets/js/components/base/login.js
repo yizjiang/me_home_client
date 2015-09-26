@@ -30,7 +30,7 @@ var Login = React.createClass({
         <input id='username' value={this.state.username} onChange={this.handleFilterChange} placeholder='用户名'/>
         <input id='password' value={this.state.password} onChange={this.handleFilterChange} placeholder='密码'/>
       */}
-        <button id='login' type="button" onClick={this.login}>登陆</button>
+        <button id='login' type="button" onClick={this.login} className='nobutton'>登 陆</button>
       </div>
       )
   }

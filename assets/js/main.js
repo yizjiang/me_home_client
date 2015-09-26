@@ -19,6 +19,7 @@ var React = require('react'),
     UserPanel = require('./components/base/user_panel.js'),
     UserStore = require('./stores/user_store.js');
 
+
 ServerActions.fetchRegionRanking('');
 ServerActions.getCurrentUser().then(function(value){console.log(value)});
 
@@ -55,15 +56,22 @@ var App = React.createClass({
 
     return (
       <div>
+        <div id='MenuBox' className='menuDiv'> {/* This is the eventKey referenced */}
+          <ul className='nav navbar-nav'>
+            <li><a href='/#/main'>找房</a></li>
+            <li><a href='/#/money'>找钱</a></li>
+            <li><a href='/#/manage'>管理房产</a></li>
+            <li><a href='/#/agent'>经纪人入口</a></li>
+            <li><a href='/#/dashboard'>我的觅家</a></li>
+          </ul>
+        </div>
         <header>
-          <img className='logoImg' src="/img/logo.png" />
-          <nav className='mainNav'>
-            <Link to="home_main">找房</Link>
-            <Link to="money">找钱</Link>
-            <Link to="manage">管理房产</Link>
-            {linkComponent}
-          </nav>
+            <img className='logoImg' src="/img/logo.png" />
+            <div>
+              <a id="nav-toggle" className="nav_slide_button" href="#"><span></span></a>
+            </div>
         </header>
+
         <UserPanel/>
         <RouteHandler/>
       </div>
@@ -91,3 +99,8 @@ Router.run(routes, function (Handler, state) {
   React.render(<Handler params={params}/>, document.getElementById('app'));
 });
 
+
+$('#nav-toggle').click(function(){
+    console.log('clicked');
+    $(this).toggleClass('active');
+})
