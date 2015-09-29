@@ -70,14 +70,15 @@ var Dashboard = React.createClass({
   render: function() {
     return (
       <div className="commentBox">
-        <SavedSearchList list={this.state.saved_searches}/>
         <h3>红心房源</h3>
-        <HomeList list={this.state.favorite_list}/>
-        <hr/>
+        <HomeList custom_style={'favoredHouse'} list={this.state.favorite_list}/>
+        <hr />
+        <SavedSearchList list={this.state.saved_searches}/>
         <div className='searchResult'>
           <HomeList list={this.state.home_list}/>
         </div>
         <QuestionForm onCommentSubmit={this.handleQuestionSubmit} />
+        <hr />
         <QuestionList data={this.state.data} />
       </div>
       );

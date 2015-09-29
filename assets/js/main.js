@@ -58,17 +58,17 @@ var App = React.createClass({
       <div>
         <div className='menuDiv'>
           <ul id='MenuBox' className='nav navbar-nav'>
-            <li><a href='/#/main'>找房</a></li>
-            <li><a href='/#/money'>找钱</a></li>
-            <li><a href='/#/manage'>管理房产</a></li>
-            <li><a href='/#/agent'>经纪人入口</a></li>
-            <li><a href='/#/dashboard'>我的觅家</a></li>
+            <li><a href='/#/main' className='alinkClass'>找房</a></li>
+            <li><a href='/#/money' className='alinkClass'>找钱</a></li>
+            <li><a href='/#/manage' className='alinkClass'>管理房产</a></li>
+            <li><a href='/#/agent' className='alinkClass'>经纪人入口</a></li>
+            <li><a href='/#/dashboard' className='alinkClass'>我的觅家</a></li>
           </ul>
         </div>
         <header>
             <img className='logoImg' src="/img/logo.png" />
             <div>
-              <a id="nav-toggle" className="nav_slide_button" href="#"><span></span></a>
+              <a id="nav-toggle" className="nav_slide_button"><span></span></a>
             </div>
         </header>
 
@@ -100,8 +100,12 @@ Router.run(routes, function (Handler, state) {
 });
 
 
-$('#nav-toggle').click(function(){
+
+function closeMenubox(){
     console.log('clicked');
-    $(this).toggleClass('active');
+    $('#nav-toggle').toggleClass('active');
     $('#MenuBox').fadeToggle(300, 'linear');
-})
+};
+
+$('#nav-toggle').click(closeMenubox);
+$('a.alinkClass').click(closeMenubox);

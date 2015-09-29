@@ -12,11 +12,9 @@ var HomeList = React.createClass({
       this.scrollToList();
     }
     return (
-      <div className='homelistDiv' id='homelistAnchor'>
+      <div className={'homelistDiv ' + this.props.custom_style} id='homelistAnchor'>
          <ul>
          { this.props.list.map(function(value){
-           console.log(value);
-           console.log(value.images);
            var imgUrl;
            if(value.images != undefined && value.images.length > 0){
             imgUrl = SERVER_URL + value.images[0].image_url;
