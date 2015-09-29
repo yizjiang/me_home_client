@@ -27,8 +27,7 @@ var SelectItems = React.createClass({
           }
 
           return(
-            <li className={className} id={'li' + that.props.level + index} onClick={that.selectVariant.bind(that, value)}>
-              <img className="cityimg" src="../img/bay-area.jpg" />
+            <li className={'listitem ' + className} id={'li' + that.props.level + index} onClick={that.selectVariant.bind(that, value)}>
               {value}
             </li>
       )

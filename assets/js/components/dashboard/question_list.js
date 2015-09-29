@@ -20,9 +20,9 @@ var QuestionList = React.createClass({
     return (
       <div className="commentList">
       <h2>我的问题</h2>
-        <ul>
+        <ol>
         {questionNodes}
-        </ul>
+        </ol>
       </div>
       );
   }

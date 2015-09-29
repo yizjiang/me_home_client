@@ -80,7 +80,7 @@ var App = React.createClass({
             null,
             React.createElement(
               'a',
-              { href: '/#/main' },
+              { href: '/#/main', className: 'alinkClass' },
               '找房'
             )
           ),
@@ -89,7 +89,7 @@ var App = React.createClass({
             null,
             React.createElement(
               'a',
-              { href: '/#/money' },
+              { href: '/#/money', className: 'alinkClass' },
               '找钱'
             )
           ),
@@ -98,7 +98,7 @@ var App = React.createClass({
             null,
             React.createElement(
               'a',
-              { href: '/#/manage' },
+              { href: '/#/manage', className: 'alinkClass' },
               '管理房产'
             )
           ),
@@ -107,7 +107,7 @@ var App = React.createClass({
             null,
             React.createElement(
               'a',
-              { href: '/#/agent' },
+              { href: '/#/agent', className: 'alinkClass' },
               '经纪人入口'
             )
           ),
@@ -116,7 +116,7 @@ var App = React.createClass({
             null,
             React.createElement(
               'a',
-              { href: '/#/dashboard' },
+              { href: '/#/dashboard', className: 'alinkClass' },
               '我的觅家'
             )
           )
@@ -131,7 +131,7 @@ var App = React.createClass({
           null,
           React.createElement(
             'a',
-            { id: 'nav-toggle', className: 'nav_slide_button', href: '#' },
+            { id: 'nav-toggle', className: 'nav_slide_button' },
             React.createElement('span', null)
           )
         )
@@ -164,11 +164,14 @@ Router.run(routes, function (Handler, state) {
   React.render(React.createElement(Handler, { params: params }), document.getElementById('app'));
 });
 
-$('#nav-toggle').click(function () {
+function closeMenubox() {
   console.log('clicked');
-  $(this).toggleClass('active');
+  $('#nav-toggle').toggleClass('active');
   $('#MenuBox').fadeToggle(300, 'linear');
-});
+};
+
+$('#nav-toggle').click(closeMenubox);
+$('a.alinkClass').click(closeMenubox);
 
 },{"./actions/server_action":2,"./components/agent/main.js":5,"./components/base/user_panel.js":11,"./components/college/page.js":12,"./components/dashboard/main.js":15,"./components/home/home_detail.js":20,"./components/home/main.js":22,"./components/manage/component/main.js":28,"./components/money/component/main.js":29,"./stores/user_store.js":43,"./utils/api":44,"react":331,"react-router":135}],2:[function(require,module,exports){
 'use strict';
@@ -1048,12 +1051,13 @@ var Answer = React.createClass({
       { className: 'comment' },
       React.createElement(
         'p',
-        null,
+        { className: 'answerPara' },
         this.props.answer.body
       ),
       React.createElement(
         'button',
-        { type: 'button', onClick: this.likeThisAnswer.bind(this, this.props.answer.id) },
+        { type: 'button', id: 'likedbtn', onClick: this.likeThisAnswer.bind(this, this.props.answer.id) },
+        React.createElement('span', { className: 'glyphicon glyphicon-heart' }),
         '喜欢'
       ),
       React.createElement('img', { id: 'qrcode' + this.props.answer.id, src: SERVER_URL + '/' + this.props.answer.user.qr_code, height: '80', width: '80', style: style })
@@ -1146,20 +1150,21 @@ var Dashboard = React.createClass({
     return React.createElement(
       'div',
       { className: 'commentBox' },
-      React.createElement(SavedSearchList, { list: this.state.saved_searches }),
       React.createElement(
         'h3',
         null,
         '红心房源'
       ),
-      React.createElement(HomeList, { list: this.state.favorite_list }),
+      React.createElement(HomeList, { custom_style: 'favoredHouse', list: this.state.favorite_list }),
       React.createElement('hr', null),
+      React.createElement(SavedSearchList, { list: this.state.saved_searches }),
       React.createElement(
         'div',
         { className: 'searchResult' },
         React.createElement(HomeList, { list: this.state.home_list })
       ),
       React.createElement(QuestionForm, { onCommentSubmit: this.handleQuestionSubmit }),
+      React.createElement('hr', null),
       React.createElement(QuestionList, { data: this.state.data })
     );
   }
@@ -1184,7 +1189,7 @@ var Question = React.createClass({
       { className: "comment" },
       React.createElement(
         "p",
-        null,
+        { className: "questionPara" },
         this.props.text
       )
     );
@@ -1217,7 +1222,7 @@ var QuestionForm = React.createClass({
       React.createElement('input', { id: 'question', type: 'text', placeholder: 'Say something...' }),
       React.createElement(
         'button',
-        { id: 'search', type: 'button', onClick: this.handleSubmit },
+        { id: 'submitquestion', type: 'button', onClick: this.handleSubmit },
         '提交'
       )
     );
@@ -1258,7 +1263,7 @@ var QuestionList = React.createClass({
         '我的问题'
       ),
       React.createElement(
-        'ul',
+        'ol',
         null,
         questionNodes
       )
@@ -1359,7 +1364,7 @@ var HomeDetail = React.createClass({
     var self = this;
     if (_.isEmpty(currentHome)) {
       this.loadHomeFromServer(this.props.params.id);
-      currentHome = { images: [] };
+      currentHome = { images: [], public_schools: [], private_schools: [], assigned_school: [] };
     }
     return { currentHome: currentHome, currentFavorite: UserStore.getFavoriteHomes() };
   },
@@ -1381,8 +1386,12 @@ var HomeDetail = React.createClass({
   favoriteAction: function favoriteAction() {
     if (!this.isFavorite()) {
       ServerActions.addFavorite(this.state.currentHome.id, UserStore.getCurrentUser()); //Todo use then
+      $('#favoriteBtn').addClass('favored');
+      $('.glyphicon-heart').addClass('liked');
     } else {
       ServerActions.removeFavorite(this.state.currentHome.id, UserStore.getCurrentUser()); //Todo use then
+      $('.glyphicon-heart').removeClass('liked');
+      $('#favoriteBtn').removeClass('favored');
     }
   },
 
@@ -1399,7 +1408,6 @@ var HomeDetail = React.createClass({
 
   render: function render() {
     var home = this.state.currentHome;
-    var bgStyle = this.isFavorite() ? 'danger' : 'warning';
     var mapping = { addr1: '地址',
       addr2: '门牌',
       city: '城市',
@@ -1438,11 +1446,24 @@ var HomeDetail = React.createClass({
       home.stores = '';
       mapping.stores = '';
     }
+    console.log(home.assigned_school);
+    if (home.assigned_school == null) {
+      home['assigned_school'] = [];
+    }
 
+    if (home.public_schools == null) {
+      home['public_schools'] = [];
+    }
+
+    if (home.private_schools == null) {
+      home['private_schools'] = [];
+    }
+
+    console.log(home);
     //TODO go back
     return React.createElement(
       'div',
-      null,
+      { className: 'ccent' },
       React.createElement(
         Carousel,
         null,
@@ -1477,8 +1498,9 @@ var HomeDetail = React.createClass({
         ),
         React.createElement(
           Button,
-          { id: 'favoriteBtn', bsStyle: bgStyle, onClick: this.favoriteAction },
-          '红心'
+          { id: 'favoriteBtn', onClick: this.favoriteAction },
+          React.createElement('span', { className: 'glyphicon glyphicon-heart' }),
+          ' 喜欢'
         ),
         React.createElement(
           'h3',
@@ -1556,16 +1578,115 @@ var HomeDetail = React.createClass({
           ),
           React.createElement(
             Col,
-            { md: 6, className: 'detailPara ' },
+            { md: 12, className: 'detailPara detailother' },
             React.createElement(
               'h3',
               { className: 'detailh3' },
-              mapping['schools']
+              ' ',
+              mapping['schools'],
+              ' '
             ),
             React.createElement(
-              'p',
-              { className: 'detailp' },
-              home['schools']
+              'div',
+              null,
+              React.createElement(
+                'h4',
+                null,
+                '对口学校'
+              ),
+              home['assigned_school'].map(function (sch) {
+                return React.createElement(
+                  'div',
+                  { className: 'schoolDiv' },
+                  React.createElement(
+                    'p',
+                    { className: 'schoolp' },
+                    '年级：',
+                    sch['grade']
+                  ),
+                  React.createElement(
+                    'p',
+                    { className: 'schoolp' },
+                    '名称：',
+                    sch['name'],
+                    ' '
+                  ),
+                  React.createElement(
+                    'p',
+                    { className: 'schoolp' },
+                    '评分：',
+                    sch['rating']
+                  )
+                );
+              })
+            ),
+            React.createElement(
+              'div',
+              null,
+              React.createElement(
+                'h4',
+                null,
+                '公立学校'
+              ),
+              home['public_schools'].map(function (sch) {
+                return React.createElement(
+                  'div',
+                  { className: 'schoolDiv' },
+                  React.createElement(
+                    'p',
+                    { className: 'schoolp' },
+                    '年级：',
+                    sch['grade']
+                  ),
+                  React.createElement(
+                    'p',
+                    { className: 'schoolp' },
+                    '名称：',
+                    sch['name'],
+                    ' '
+                  ),
+                  React.createElement(
+                    'p',
+                    { className: 'schoolp' },
+                    '评分：',
+                    sch['rating']
+                  )
+                );
+              })
+            ),
+            React.createElement(
+              'div',
+              null,
+              React.createElement(
+                'h4',
+                null,
+                '私立学校'
+              ),
+              home['private_schools'].map(function (sch) {
+                return React.createElement(
+                  'div',
+                  { className: 'schoolDiv' },
+                  React.createElement(
+                    'p',
+                    { className: 'schoolp' },
+                    '年级：',
+                    sch['grade']
+                  ),
+                  React.createElement(
+                    'p',
+                    { className: 'schoolp' },
+                    '名称：',
+                    sch['name'],
+                    ' '
+                  ),
+                  React.createElement(
+                    'p',
+                    { className: 'schoolp' },
+                    '评分：',
+                    sch['rating']
+                  )
+                );
+              })
             )
           ),
           React.createElement(
@@ -1605,13 +1726,11 @@ var HomeList = React.createClass({
     }
     return React.createElement(
       'div',
-      { className: 'homelistDiv', id: 'homelistAnchor' },
+      { className: 'homelistDiv ' + this.props.custom_style, id: 'homelistAnchor' },
       React.createElement(
         'ul',
         null,
         this.props.list.map(function (value) {
-          console.log(value);
-          console.log(value.images);
           var imgUrl;
           if (value.images != undefined && value.images.length > 0) {
             imgUrl = SERVER_URL + value.images[0].image_url;
@@ -1767,7 +1886,11 @@ var SearchBox = React.createClass({
       React.createElement(
         'button',
         { id: 'search', type: 'button', onClick: this.homeSearch },
-        '觅 家'
+        React.createElement(
+          'a',
+          { href: '#homelistAnchor' },
+          '觅 家'
+        )
       ),
       React.createElement(
         'button',
@@ -1870,8 +1993,7 @@ var SelectItems = React.createClass({
 
           return React.createElement(
             'li',
-            { className: className, id: 'li' + that.props.level + index, onClick: that.selectVariant.bind(that, value) },
-            React.createElement('img', { className: 'cityimg', src: '../img/bay-area.jpg' }),
+            { className: 'listitem ' + className, id: 'li' + that.props.level + index, onClick: that.selectVariant.bind(that, value) },
             value
           );
         })

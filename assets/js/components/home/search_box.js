@@ -35,7 +35,7 @@ var SearchBox = React.createClass({
         <input id='regionValue' value={this.state.regionValue} onChange={this.handleFilterChange} placeholder="城市 邮编"/><br/>
         <input id='priceMin' className='pricebox' value={this.state.priceMin} onChange={this.handleFilterChange} placeholder="eg. 10万"/>
         <input id='priceMax' className='pricebox' value={this.state.priceMax} onChange={this.handleFilterChange} placeholder="eg. 10万"/>
-        <button id='search' type="button" onClick={this.homeSearch} >觅 家</button>
+        <button id='search' type="button" onClick={this.homeSearch} ><a href='#homelistAnchor'>觅 家</a></button>
         <button id='saveSearch' type="button" onClick={this.saveSearch} >保存</button>
       </div>
       );

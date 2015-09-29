@@ -10,7 +10,7 @@ var QuestionForm = React.createClass({
         <div>
           <h3>提问:</h3>
           <input id='question' type="text" placeholder="Say something..."/>
-          <button id='search' type="button" onClick={this.handleSubmit} >提交</button>
+          <button id='submitquestion' type="button" onClick={this.handleSubmit} >提交</button>
         </div>
       );
   }

@@ -52,13 +52,11 @@ var HomeList = React.createClass({
     }
     return React.createElement(
       'div',
-      { className: 'homelistDiv', id: 'homelistAnchor' },
+      { className: 'homelistDiv ' + this.props.custom_style, id: 'homelistAnchor' },
       React.createElement(
         'ul',
         null,
         this.props.list.map(function (value) {
-          console.log(value);
-          console.log(value.images);
           var imgUrl;
           if (value.images != undefined && value.images.length > 0) {
             imgUrl = SERVER_URL + value.images[0].image_url;

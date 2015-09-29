@@ -140,7 +140,9 @@ ul.nav.navbar-nav {
   width: 100%;
   height: 300px;
   background-color: #555;
-  z-index: 10;
+  z-index: 16;
+  margin: 0;
+  top: 0;
 }
 ul.nav.navbar-nav li {
   width: 100%;
@@ -168,6 +170,7 @@ ul.nav.navbar-nav li:last-child a {
 
 header {
   width: 100%;
+  z-index: 4;
 }
 header img.logoImg {
   width: 200px;
@@ -175,6 +178,7 @@ header img.logoImg {
   top: 25px;
   padding-right: 15px;
   position: absolute;
+  z-index: 4;
 }
 header #nav-toggle {
   cursor: pointer;
@@ -183,6 +187,7 @@ header #nav-toggle {
   right: 25px;
   top: 25px;
   tansition: all 0.5s;
+  z-index: 4;
 }
 header #nav-toggle span {
   transition: all 500ms;
@@ -190,7 +195,7 @@ header #nav-toggle span {
   border-radius: 1px;
   height: 5px;
   width: 35px;
-  background: #fff;
+  background: #555;
   position: absolute;
   display: block;
   content: '';
@@ -201,7 +206,7 @@ header #nav-toggle span:before, header #nav-toggle span:after {
   border-radius: 1px;
   height: 5px;
   width: 35px;
-  background: #fff;
+  background: #555;
   position: absolute;
   display: block;
   content: '';
@@ -213,7 +218,7 @@ header #nav-toggle span:after {
   bottom: -10px;
 }
 header #nav-toggle.active {
-  z-index: 11;
+  z-index: 17;
   top: 25px;
 }
 header #nav-toggle.active span {
@@ -221,6 +226,7 @@ header #nav-toggle.active span {
 }
 header #nav-toggle.active span:before, header #nav-toggle.active span:after {
   top: 0;
+  background-color: #fff;
 }
 header #nav-toggle.active span:before {
   transform: rotate(45deg);
@@ -232,6 +238,7 @@ header #nav-toggle.active span:after {
 
 div.content {
   background-image: url("../img/house1.jpg");
+  background-position: center;
   display: block;
   background-size: cover;
   width: 100%;
@@ -313,29 +320,16 @@ div.citylistDiv ul li {
   text-align: center;
   max-height: 150px;
   margin-bottom: 10px;
-}
-div.citylistDiv ul li img.cityimg {
-  width: 95px;
-  padding: 2.5px;
-  margin: 5px calc(50% - 50px);
-  box-shadow: 0 0 6px #333;
-  background-color: #fff;
-  border-radius: 100px;
-  clear: right;
-}
-div.citylistDiv ul li span {
-  line-height: 30px;
+  line-height: 40px;
   font-size: 16px;
   margin-bottom: 10px;
 }
 div.citylistDiv ul li.select {
   color: #fff;
-}
-div.citylistDiv ul li.select span {
   line-height: 30px;
   background-color: #74c005;
   border-radius: 30px;
-  padding: 10px;
+  padding: 8px;
 }
 
 button.btngroup {
@@ -366,7 +360,14 @@ button#choosebtn a {
   color: #fff;
 }
 
+button#search a {
+  text-decoration: none;
+  color: #fff;
+}
+
 div.homelistDiv {
+  top: 750px;
+  position: absolute;
   width: 80%;
   margin: 30px 10%;
 }
@@ -398,19 +399,62 @@ div.homelistDiv ul li a img {
 }
 div.homelistDiv ul li a div {
   display: inline-block;
+  width: calc(100% - 170px);
 }
 
+@media screen and (min-width: 641px) and (max-width: 1300px) {
+  div.homelistDiv {
+    width: 90%;
+    margin: 30px 5%;
+    position: relative;
+    top: 100px;
+  }
+  div.homelistDiv li {
+    width: 48% !important;
+    margin: 1 !important;
+    display: inline-block !important;
+  }
+  div.homelistDiv li a {
+    text-align: left;
+  }
+  div.homelistDiv li a img {
+    width: 150px;
+    margin: 20px;
+    margin-left: calc(50% - 75px);
+  }
+  div.homelistDiv li a div {
+    width: 100% !important;
+  }
+}
 @media screen and (max-width: 640px) {
   div.homelistDiv {
-    width: 80%;
-    margin: 30px 10%;
+    width: 90%;
+    margin: 30px 5%;
+    position: relative;
+    top: 100px;
   }
   div.homelistDiv li {
     width: 100% !important;
     margin: 0 !important;
     display: block !important;
   }
+  div.homelistDiv li a {
+    text-align: left;
+  }
+  div.homelistDiv li a img {
+    width: 150px;
+    margin: 20px;
+    margin-left: calc(50% - 75px);
+  }
+  div.homelistDiv li a div {
+    width: 100% !important;
+  }
 }
+div.ccent {
+  top: 100px;
+  position: relative;
+}
+
 .carousel-inner > .item > img,
 .carousel-inner > .item > a > img {
   width: 100%;
@@ -420,6 +464,30 @@ div.homelistDiv ul li a div {
 
 #myCarousel {
   min-height: 450px;
+}
+
+button#favoriteBtn {
+  background-color: transparent;
+  border: 1px solid #ccc;
+  outline: none;
+  font-size: 20px;
+  color: #555;
+}
+button#favoriteBtn span.glyphicon {
+  color: #ccc;
+  font-size: 20px;
+}
+button#favoriteBtn span.glyphicon.liked {
+  color: #f30;
+}
+
+button#favoriteBtn:hover {
+  box-shadow: 0 0 5px #555;
+}
+
+button#favoriteBtn.favored {
+  background-color: #555;
+  color: white;
 }
 
 div.detailDiv {
@@ -453,7 +521,40 @@ div.detailDiv .detailWrap .detailother {
   border-top: 1px solid #ccc;
   height: auto;
 }
+div.detailDiv .detailWrap .detailother div.schoolDiv {
+  width: 48%;
+  margin: 1%;
+  display: inline-block;
+  border-bottom: 1px solid #555;
+}
+div.detailDiv .detailWrap .detailother div.schoolDiv p.schoolp {
+  font-size: 14px;
+  line-height: 20px;
+}
+div.detailDiv .detailWrap .detailother div.schoolDiv:last-child {
+  border-bottom: none;
+}
 
+@media screen and (max-width: 1000px) {
+  .detailother div.schoolDiv {
+    width: 90% !important;
+    margin: 10px 0 !important;
+    display: block !important;
+    border-bottom: 1px solid #555;
+  }
+  .detailother div.schoolDiv p.schoolp {
+    font-size: 16px !important;
+    line-height: 20px;
+  }
+  .detailother div.schoolDiv:last-child {
+    border-bottom: none;
+  }
+}
+@media screen and (max-width: 640px) {
+  div.detailDiv {
+    padding: 30px 15px;
+  }
+}
 #homelistAnchor ul {
   text-align: left;
 }
@@ -464,10 +565,13 @@ div.detailDiv .detailWrap .detailother {
 div.commentBox {
   width: 100%;
   text-align: center;
+  position: relative;
+  top: 100px;
 }
 
 input#question, input#answer9 {
   width: 50%;
+  height: 200px;
   margin-left: 25%;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -481,48 +585,44 @@ div.react-tabs div#react-tabs-5 button#search {
 div.searchResult {
   border-bottom: 1px solid #ccc;
 }
+div.searchResult div.homelistDiv {
+  position: relative;
+  top: 0px;
+}
 
 li:last-child {
   border-bottom: none !important;
 }
 
-@media screen and (min-width: 768px) {
-  div.loginWrap {
-    position: absolute;
-    top: 30px;
-    right: 100px;
-    color: green;
-    font-size: 20px;
-    font-weight: 100;
-    line-height: 60px;
-  }
-  div.loginWrap p {
-    display: inline-block;
-    float: left;
-    margin-right: 10px;
-  }
-  div.loginWrap button.nobutton {
-    background: none;
-    border: none;
-    display: inline-block;
-    padding: 0 !important;
-  }
-  div.loginWrap button.nobutton:active, div.loginWrap button.nobutton:focus {
-    outline: 0;
-  }
+div.loginWrap {
+  position: absolute;
+  top: 25px;
+  right: 100px;
+  color: #555;
+  font-size: 20px;
+  font-weight: 100;
+  z-index: 4;
 }
-@media screen and (max-width: 767px) {
-  img.logoImg {
-    position: absolute;
-    top: 0px;
-    left: 0;
-  }
+div.loginWrap p {
+  display: inline-block;
+  float: left;
+  margin: 0 10px 0 0;
+}
+div.loginWrap button.nobutton {
+  background: none;
+  border: none;
+  display: inline-block;
+  padding: 0 !important;
+}
+div.loginWrap button.nobutton:active, div.loginWrap button.nobutton:focus {
+  outline: 0;
+}
 
+@media screen and (max-width: 767px) {
   div.loginWrap {
     position: absolute;
     top: 55px;
-    right: 10px;
-    color: green;
+    right: 25px;
     font-size: 16px;
     font-weight: 100;
     line-height: 30px;
@@ -543,14 +643,69 @@ li:last-child {
   }
 
   div.searchDiv {
-    padding-top: 40px;
+    padding-top: 90px;
   }
 
   div.content {
-    height: 510px;
+    height: auto;
+    max-height: 700px;
   }
 
   div.citylistDiv ul {
-    max-height: 270px;
+    max-height: 290px;
   }
+
+  button.btngroup {
+    margin-bottom: 30px;
+  }
+}
+div.homelistDiv.favoredHouse {
+  top: 0;
+  position: relative;
+  border-bottom: none;
+  border-bottom-color: transparent;
+}
+
+button#submitquestion {
+  color: #fff;
+  background-color: #74c005;
+  border: none;
+  font-size: 16px;
+  line-height: 30px;
+  width: 50%;
+  border-radius: 5px;
+}
+
+button#likedbtn {
+  background-color: transparent;
+  border: none;
+}
+
+div.commentList ol {
+  padding: 0;
+  width: 50%;
+  margin-left: 25%;
+}
+div.commentList ol li {
+  border-bottom: 1px solid #ccc;
+}
+div.commentList ol li:last-child {
+  border-bottom: none !important;
+}
+div.commentList div.comment {
+  text-align: left;
+}
+div.commentList div.comment p.questionPara {
+  font-size: 16px;
+  font-weight: 100;
+  line-height: 30px;
+}
+div.commentList div.comment p.answerPara {
+  display: inline-block;
+  font-size: 20px;
+  line-height: 30px;
+  font-weight: 500;
+}
+div.commentList div.comment img {
+  display: block;
 }

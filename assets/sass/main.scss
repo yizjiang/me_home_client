@@ -33,7 +33,9 @@ ul.nav.navbar-nav{
 	width: 100%;
 	height: 300px;
 	background-color: #555;
-	z-index: 10;
+	z-index: 16;
+	margin: 0;
+	top: 0;
 
 	li{
 		width: 100%;
@@ -68,6 +70,7 @@ ul.nav.navbar-nav{
 
 header{
 	width: 100%;
+	z-index: 4;
 
 	img.logoImg{
 		width: 200px;
@@ -75,6 +78,7 @@ header{
 		top:25px;
 		padding-right: 15px;
 		position: absolute;
+		z-index: 4;
 	}
 
 	#nav-toggle{
@@ -84,6 +88,7 @@ header{
 		right: 25px;
 		top: 25px;
 		tansition: all 0.5s;
+		z-index: 4;
 		
 		span{
 			transition: all 500ms;
@@ -91,7 +96,7 @@ header{
 			border-radius: 1px;
 			height: 5px;
 			width: 35px;
-			background: #fff;
+			background: #555;
 			position: absolute;
 			display: block;
 			content: '';
@@ -103,7 +108,7 @@ header{
 			border-radius: 1px;
 			height: 5px;
 			width: 35px;
-			background: #fff;
+			background: #555;
 			position: absolute;
 			display: block;
 			content: '';
@@ -120,7 +125,7 @@ header{
 	}
 
 	#nav-toggle.active{
-		z-index: 11;
+		z-index: 17;
 		top: 25px;
 
 		span{
@@ -129,6 +134,7 @@ header{
 
 		span:before, span:after{
 			top: 0;
+			background-color: #fff;
 		}
 			
 
@@ -146,6 +152,7 @@ header{
 
 div.content{
 	background-image: url('../img/house1.jpg');
+	background-position: center;
 	display: block;
 	background-size: cover;
 	width: 100%;
@@ -227,32 +234,16 @@ div.citylistDiv ul{
 		text-align:center;
 		max-height: 150px;
 		margin-bottom: 10px;
-
-		img.cityimg{
-			width: 95px;
-			padding: 2.5px;
-			margin: 5px calc(50% - 50px);
-			box-shadow: 0 0 6px #333;
-			background-color: #fff;
-			border-radius: 100px;
-			clear: right;	
-		}
-
-		span{
-			line-height: 30px;
-			font-size: 16px;
-			margin-bottom: 10px;
-		}
+		line-height: 40px;
+		font-size: 16px;
+		margin-bottom: 10px;
 	}
 	li.select{
 		color: #fff;
-		
-		span{
-			line-height: 30px;
-			background-color: $btn-color;
-			border-radius: 30px;
-			padding: 10px;
-		}
+		line-height: 30px;
+		background-color: $btn-color;
+		border-radius: 30px;
+		padding: 8px;
 	}
 }
 
@@ -284,7 +275,16 @@ button#choosebtn{
 	}
 }
 
+button#search{
+	a{
+		text-decoration: none;
+		color: #fff;
+	}
+}
+
 div.homelistDiv{
+	top: 750px;
+	position: absolute;
 	width: 80%;
 	margin: 30px 10%;
 
@@ -317,6 +317,7 @@ div.homelistDiv{
 				}
 				div{
 					display: inline-block;
+					width: calc(100% - 170px);
 				}
 			}
 		}
@@ -324,20 +325,75 @@ div.homelistDiv{
 	}
 }
 
+
+@media screen and (min-width: 641px) and (max-width: 1300px){
+	div.homelistDiv{
+		width: 90%;
+		margin: 30px 5%;
+		position: relative;
+		top: 100px;
+
+		li{
+			width: 48% !important;
+			margin: 1 !important;
+			display: inline-block !important;
+
+			a{
+				text-align: left;
+
+				img{
+					width: 150px;
+					margin: 20px;
+					margin-left: calc(50% - 75px);
+				}
+
+				div{
+					width: 100% !important;
+				}
+			}
+
+		}
+	}
+}
+
+
 @media screen and (max-width:640px){
 	div.homelistDiv{
-		width: 80%;
-		margin: 30px 10%;
+		width: 90%;
+		margin: 30px 5%;
+		position: relative;
+		top: 100px;
 
 		li{
 			width: 100% !important;
 			margin: 0 !important;
 			display: block !important;
+
+			a{
+				text-align: left;
+
+				img{
+					width: 150px;
+					margin: 20px;
+					margin-left: calc(50% - 75px);
+				}
+
+				div{
+					width: 100% !important;
+				}
+			}
+
 		}
 	}
 
 }
 
+
+
+div.ccent{
+	top: 100px;
+	position: relative;
+}
 
 .carousel-inner > .item > img,
 .carousel-inner > .item > a > img {
@@ -348,6 +404,31 @@ div.homelistDiv{
 
 #myCarousel{
 	min-height: 450px;
+}
+
+button#favoriteBtn{
+	background-color: transparent;
+	border: 1px solid #ccc;
+	outline: none;
+	font-size: 20px;
+	color: #555;
+
+	span.glyphicon{
+		color: #ccc;
+		font-size: 20px;
+	}
+	span.glyphicon.liked{
+		color: #f30;
+	}
+}
+
+button#favoriteBtn:hover{
+	box-shadow: 0 0 5px #555;
+}
+
+button#favoriteBtn.favored{
+	background-color: #555;
+	color: white;
 }
 
 div.detailDiv{
@@ -380,9 +461,52 @@ div.detailDiv{
 		.detailother{
 			border-top: 1px solid #ccc;
 			height: auto;
+			
+			div.schoolDiv{
+				width: 48%;
+				margin: 1%;
+				display: inline-block;
+				border-bottom: 1px solid #555;
+
+				p.schoolp{
+					font-size: 14px;
+					line-height: 20px;
+				}
+			}
+
+			div.schoolDiv:last-child{
+				border-bottom: none;
+			}
 		}
 	}	
 }
+
+@media screen and (max-width: 1000px){
+	.detailother{
+		div.schoolDiv{
+			width: 90% !important;
+			margin: 10px 0 !important;
+			display: block !important;
+			border-bottom: 1px solid #555;
+
+			p.schoolp{
+				font-size: 16px !important;
+				line-height: 20px;
+			}
+		}
+
+		div.schoolDiv:last-child{
+			border-bottom: none;
+		}
+	}
+}
+
+@media screen and (max-width: 640px){
+	div.detailDiv{
+		padding: 30px 15px;
+	}
+}
+
 
 #homelistAnchor{
 	ul{
@@ -396,10 +520,13 @@ div.detailDiv{
 div.commentBox{
 	width: 100%;
 	text-align: center;
+	position: relative;
+	top: 100px;
 }
 
 input#question, input#answer9{
 	width: 50%;
+	height: 200px;
 	margin-left: 25%;
 	border: 1px solid #ccc;
 	border-radius: 5px;
@@ -413,28 +540,31 @@ div.react-tabs div#react-tabs-5 button#search{
 
 div.searchResult{
 	border-bottom: 1px solid #ccc;
+	div.homelistDiv{
+		position: relative;
+		top: 0px;
+	}
 }
 
 li:last-child{
 	border-bottom: none !important;
 }
 
-
-@media screen and (min-width:768px){
 	div.loginWrap{
 		position: absolute;
-		top: 30px;
+		top: 25px;
 		right: 100px;
-		color: green;
+		color: #555;
 		font-size: 20px;
 		font-weight: 100;
-		line-height: 60px;
+		z-index: 4;
 
 		p{
 			display: inline-block;
 			float: left;
-			margin-right: 10px;
+			margin: 0 10px 0 0;
 		}
+
 		button.nobutton{
 			background: none;
 			border: none;
@@ -445,20 +575,13 @@ li:last-child{
 			outline: 0;
 		}
 	}
-}
 
 @media screen and (max-width: 767px){
-	img.logoImg{
-		position: absolute;
-		top: 0px;
-		left: 0;
-	}
 
 	div.loginWrap{
 		position: absolute;
 		top: 55px;
-		right: 10px;
-		color: green;
+		right: 25px;
 		font-size: 16px;
 		font-weight: 100;
 		line-height: 30px;
@@ -480,12 +603,73 @@ li:last-child{
 	}
 
 	div.searchDiv{
-		padding-top: 40px;
+		padding-top: 90px;
 	}
 	div.content{
-		height: 510px;
+		height: auto;
+		max-height: 700px;
 	}
 	div.citylistDiv ul{
-		max-height: 270px;
+		max-height: 290px;
+	}
+	button.btngroup{
+		margin-bottom: 30px;
+	}
+}
+
+
+div.homelistDiv.favoredHouse{
+	top: 0;
+	position: relative;
+	border-bottom: none;
+	border-bottom-color: transparent;
+}
+
+button#submitquestion{
+	color: #fff;
+    background-color: $btn-color;
+    border: none;
+    font-size: 16px;
+    line-height: 30px;
+    width: 50%;
+    border-radius: 5px;
+}
+
+button#likedbtn{
+	background-color: transparent;
+	border: none;
+}
+
+div.commentList{
+	ol{
+		padding: 0;
+		width: 50%;
+		margin-left: 25%;
+
+		li{
+			border-bottom: 1px solid #ccc;
+		}
+		li:last-child{
+			border-bottom: none !important;
+		}
+	}
+	
+	div.comment{
+		text-align: left;
+		
+		p.questionPara{
+			font-size: 16px;
+			font-weight: 100;
+			line-height: 30px;
+		}
+		p.answerPara{
+			display: inline-block;
+			font-size: 20px;
+			line-height: 30px;
+			font-weight: 500;
+		}
+		img{
+			display: block;
+		}
 	}
 }

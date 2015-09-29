@@ -30,7 +30,7 @@ var HomeDetail = React.createClass({
     var self = this;
     if(_.isEmpty(currentHome)) {
       this.loadHomeFromServer(this.props.params.id)
-      currentHome = {images: []};
+      currentHome = {images: [], public_schools:[], private_schools:[], assigned_school:[]};
     }
     return {currentHome: currentHome, currentFavorite: UserStore.getFavoriteHomes()}
   },
@@ -52,8 +52,12 @@ var HomeDetail = React.createClass({
   favoriteAction: function() {
     if(!this.isFavorite()) {
       ServerActions.addFavorite(this.state.currentHome.id, UserStore.getCurrentUser());      //Todo use then
+      $('#favoriteBtn').addClass('favored');
+      $('.glyphicon-heart').addClass('liked');
     }else {
       ServerActions.removeFavorite(this.state.currentHome.id, UserStore.getCurrentUser());      //Todo use then
+      $('.glyphicon-heart').removeClass('liked');
+      $('#favoriteBtn').removeClass('favored');
     }
   },
 
@@ -70,7 +74,6 @@ var HomeDetail = React.createClass({
 
   render: function () {
     var home = this.state.currentHome;
-    var bgStyle = this.isFavorite() ? 'danger' : 'warning';
     var mapping = {addr1: '地址', 
                    addr2: '门牌',
                    city: '城市',
@@ -95,7 +98,6 @@ var HomeDetail = React.createClass({
                    id: 'ID',
                    schools: '学校'
                   };
-   
     
     if(home.addr2 == null) {
       home.addr2 = '';
@@ -110,10 +112,23 @@ var HomeDetail = React.createClass({
       home.stores = '';
       mapping.stores = '';
     }
+    console.log(home.assigned_school);
+    if(home.assigned_school == null) {
+      home['assigned_school'] = [];
+    }
 
+    if(home.public_schools == null) {
+      home['public_schools'] = [];
+    }
+
+    if(home.private_schools == null) {
+      home['private_schools'] = [];
+    }
+
+    console.log(home);
     //TODO go back
     return (
-      <div>
+      <div className='ccent'>
         <Carousel>
             {
               home.images.map(function(img){
@@ -132,7 +147,9 @@ var HomeDetail = React.createClass({
 
         <div className='detailDiv'>
           <button className='btngroup'><a href='#'>后 退</a></button>
-          <Button id='favoriteBtn' bsStyle={bgStyle} onClick={this.favoriteAction}>红心</Button>
+          <Button id='favoriteBtn' onClick={this.favoriteAction}>
+            <span className='glyphicon glyphicon-heart'></span> 喜欢
+          </Button>
           <h3>房屋详情</h3>
           <div className='detailWrap'>
               
@@ -181,11 +198,44 @@ var HomeDetail = React.createClass({
                 <p className='detailp'>{home['description']}</p>
               </Col>
 
-              <Col md = {6} className='detailPara '>
-                <h3 className='detailh3'>
-                 {mapping['schools']}
-                </h3>
-                <p className='detailp'>{home['schools']}</p>
+              <Col md = {12} className='detailPara detailother'>
+                <h3 className='detailh3'> {mapping['schools']} </h3>
+                <div>
+                  <h4>对口学校</h4>
+                {home['assigned_school'].map(function(sch){
+                return (
+                    <div className='schoolDiv'>
+                      <p className='schoolp'>年级：{sch['grade']}</p>
+                      <p className='schoolp'>名称：{sch['name']} </p>
+                      <p className='schoolp'>评分：{sch['rating']}</p>
+                    </div>
+                  )
+                })}
+                </div>
+                <div>
+                  <h4>公立学校</h4>
+                  {home['public_schools'].map(function(sch){
+                  return (
+                    <div className='schoolDiv'>
+                      <p className='schoolp'>年级：{sch['grade']}</p>
+                      <p className='schoolp'>名称：{sch['name']} </p>
+                      <p className='schoolp'>评分：{sch['rating']}</p>
+                    </div>
+                    )
+                  })}
+                </div>
+                  <div>
+                    <h4>私立学校</h4>
+                    {home['private_schools'].map(function(sch){
+                      return (
+                        <div className='schoolDiv'>
+                          <p className='schoolp'>年级：{sch['grade']}</p>
+                          <p className='schoolp'>名称：{sch['name']} </p>
+                          <p className='schoolp'>评分：{sch['rating']}</p>
+                        </div>
+                      )
+                    })}
+                  </div>
               </Col>
               <Col md = {6} className='detailPara '>
                 <h3 className='detailh3'>
