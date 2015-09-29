@@ -13,7 +13,7 @@ var SearchBox = React.createClass({
 
   handleFilterChange: function(event) {
     var stateObject = function() {
-      returnObj = {};
+      var returnObj = {};
       returnObj[this.target.id] = this.target.value;
       return returnObj;
     }.bind(event)();

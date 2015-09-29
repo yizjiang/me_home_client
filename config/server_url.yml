@@ -1,0 +1,11 @@
+development:
+  server_url: http://localhost:3032
+
+test:
+  server_url: http://localhost:3032
+
+staging:
+  server_url: http://www.usreclub.com:3000
+
+production:
+  server_url: http://www.meejia.com:3000
