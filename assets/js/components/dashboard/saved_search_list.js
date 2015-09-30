@@ -13,7 +13,11 @@ var SavedSearchList = React.createClass({
      if(this.props.callback){ //TODO clever search
        this.props.callback(query);
      } else {
-       ServerActions.homeSearch(JSON.parse(query[0]));  //TODO search all
+       query = query.map(function(value){
+         return JSON.parse(value)
+       })
+
+       ServerActions.homeSearches(query);  //TODO search all
      }
   },
 

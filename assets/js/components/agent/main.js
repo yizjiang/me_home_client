@@ -30,6 +30,7 @@ var Agent = React.createClass({
     if(!_.isEmpty(UserStore.getCurrentUser()) && _.isEmpty(this.state.data)){
       ServerActions.getAgentPage(UserStore.getCurrentUser())
     }
+
     this.setState({data: UserStore.getAgentPublishedPage()});
   },
 

@@ -47,9 +47,9 @@ var App = React.createClass({
     console.log(this.state.isAgent);
     var linkComponent;
     if(this.state.isAgent == true){
-      linkComponent =  <Link to="agent">经纪人入口</Link>
+      linkComponent =  <li><a href='/#/agent' className='alinkClass'>经纪人入口</a></li>
     } else if (this.state.isAgent == false) {
-      linkComponent = <Link to="dashboard">我的觅家</Link>
+      linkComponent = <li><a href='/#/dashboard' className='alinkClass'>我的觅家</a></li>
     } else {
       linkComponent = ''
     }
@@ -61,8 +61,7 @@ var App = React.createClass({
             <li><a href='/#/main' className='alinkClass'>找房</a></li>
             <li><a href='/#/money' className='alinkClass'>找钱</a></li>
             <li><a href='/#/manage' className='alinkClass'>管理房产</a></li>
-            <li><a href='/#/agent' className='alinkClass'>经纪人入口</a></li>
-            <li><a href='/#/dashboard' className='alinkClass'>我的觅家</a></li>
+            {linkComponent}
           </ul>
         </div>
         <header>

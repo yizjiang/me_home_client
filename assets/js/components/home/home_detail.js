@@ -125,6 +125,10 @@ var HomeDetail = React.createClass({
       home['private_schools'] = [];
     }
 
+    if(home.images == undefined ){
+      home['images'] = [];
+
+    }
     console.log(home);
     //TODO go back
     return (
@@ -196,6 +200,7 @@ var HomeDetail = React.createClass({
                  {mapping['description']}
                 </h3>
                 <p className='detailp'>{home['description']}</p>
+                <p className='detailp'>{home['chinese_description']}</p>
               </Col>
 
               <Col md = {12} className='detailPara detailother'>

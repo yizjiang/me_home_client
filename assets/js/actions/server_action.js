@@ -156,7 +156,9 @@ var ServerActions = {
     });
   },
 
-  homeSearch: function(query) {
+  homeSearches: function(query){
+    console.log(query);
+
     $.ajax({
       url: '/homeSearch',
 
@@ -164,7 +166,8 @@ var ServerActions = {
 
       dataType: 'json',
 
-      data: query,              //TODO
+      data: query[0],              //TODO
+
 
       success: function(data) {
         AppDispatcher.handleAction({
@@ -176,7 +179,35 @@ var ServerActions = {
       error: function() {
         AppDispatcher.handleAction({
           actionType: HomeConstants.HOME_SEARCH,
-          data: query
+          data: []
+        })
+      }
+    });
+  },
+
+  homeSearch: function(query) {
+
+    $.ajax({
+      url: '/homeSearch',
+
+      type: 'GET',
+
+      dataType: 'json',
+
+      data: query,              //TODO
+
+
+      success: function(data) {
+        AppDispatcher.handleAction({
+          actionType: HomeConstants.HOME_SEARCH,
+          data: data
+        })
+      },
+
+      error: function() {
+        AppDispatcher.handleAction({
+          actionType: HomeConstants.HOME_SEARCH,
+          data: []
         })
       }
     });
