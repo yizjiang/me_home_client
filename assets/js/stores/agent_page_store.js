@@ -4,7 +4,7 @@ var AppDispatcher = require('../dispatcher/app_dispatcher'),
   _ = require('lodash');
 
 // Define initial data points
-var _page_data = {};
+var _page_data = {header:{}, home_list: []};
 
 function loadQuestions(data) {
   _page_data = data;

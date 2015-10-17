@@ -47,7 +47,7 @@ var Setting = React.createClass({
       <div>
         <h3>Settings:</h3>
         <Header callback={this.populateHeader} header={this.state.page_config.header}/>
-        <SavedSearch list={this.state.saved_searches} selected={this.state.page_config.search} callback={this.saveSelectedSearch}/>
+        <SavedSearch className='agent' list={this.state.saved_searches} selected={this.state.page_config.search} callback={this.saveSelectedSearch}/>
         <div>
           <button type="button" onClick={this.publish} >二维码</button>
           <img id={'qrcode'} src={'./img/' + UserStore.getCurrentUser().agent_identifier + '.png'} height="160" width="160" style={style}/>

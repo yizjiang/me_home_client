@@ -44,7 +44,6 @@ var App = React.createClass({
   },
 
   render: function () {
-    console.log(this.state.isAgent);
     var linkComponent;
     if(this.state.isAgent == true){
       linkComponent =  <li><a href='/#/agent' className='alinkClass'>经纪人入口</a></li>

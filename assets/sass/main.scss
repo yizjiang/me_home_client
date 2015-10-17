@@ -509,6 +509,7 @@ div.detailDiv{
 
 
 #homelistAnchor{
+    margin-top: 300px;
 	ul{
 		text-align: left;
 		li{
@@ -641,6 +642,7 @@ button#likedbtn{
 }
 
 div.commentList{
+
 	ol{
 		padding: 0;
 		width: 50%;
@@ -672,4 +674,18 @@ div.commentList{
 			display: block;
 		}
 	}
+}
+
+.selected {
+  color: greenyellow;
+}
+
+div.commentList.agent {
+  margin-top: 100px
+}
+
+.save_header {
+  margin-top: 108px;
+  margin-left: -1011px;
+  margin-bottom: -80px;
 }

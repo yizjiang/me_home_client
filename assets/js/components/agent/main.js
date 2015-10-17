@@ -50,6 +50,13 @@ var Agent = React.createClass({
   },
 
   render: function () {
+    var tabPanel = <TabPanel></TabPanel>;
+    var tab = <Tab>预览</Tab>;
+    if(!_.isEmpty(this.state.data.header)){
+      tabPanel = <TabPanel>
+        <HomePage data={this.state.data}/>
+      </TabPanel>
+    }
     return (
       <div>
       <h2>Agent</h2>
@@ -75,7 +82,7 @@ var Agent = React.createClass({
            The content of the <Tab/> (this.props.children) will be shown as the label.
            */}
 
-                <Tab>首页</Tab>
+                {tab}
                 <Tab>设置</Tab>
                 <Tab>答疑</Tab>
                 <Tab>我的客户</Tab>
@@ -94,9 +101,7 @@ var Agent = React.createClass({
          As with <Tab/> the content of <TabPanel/> will be shown as the content.
          */}
 
-              <TabPanel>
-                <HomePage data={this.state.data}/>
-              </TabPanel>
+              {tabPanel}
               <TabPanel>
                 <Setting/>
               </TabPanel>

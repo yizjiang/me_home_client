@@ -40,7 +40,6 @@ var HomeMain = React.createClass({
     return (
       <div className="content">
         <SearchBox/>
-        <SelectPanel/>
         <HomeList list={this.state.home_list}/>
         <RouteHandler/>
       </div>

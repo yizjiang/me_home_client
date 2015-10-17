@@ -5,7 +5,6 @@ module Routes
     get '/agent/:name' do
       response = Typhoeus.get("#{MEEHOME_SERVER_URL}/agent/#{params[:name]}")
       @data = response.body
-      p "xxx #{@data}"
       content_type :html
       erb :agent
     end

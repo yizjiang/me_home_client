@@ -19,9 +19,9 @@ var Header = React.createClass({
 
     return (
       <div>
-        <input id='name' type="text" value={value.name}/>
-        <input id='contact' type="text" value={value.contact}/>
-        <Button bsStyle='success' onClick={this.saveHeader.bind(this, '123')}>保存</Button>
+        <input id='name' type="text" value={value.name} placeholder="姓名"/>
+        <input id='contact' type="text" value={value.contact} placeholder="联系方式"/>
+        <Button bsStyle='success' className='save_header' onClick={this.saveHeader.bind(this, '123')}>保存联系方式</Button>
       </div>
       );
   }
