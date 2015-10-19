@@ -634,6 +634,8 @@ button#submitquestion{
     line-height: 30px;
     width: 50%;
     border-radius: 5px;
+    margin-left: 25%;
+    margin-top: 5px;
 }
 
 button#likedbtn{
@@ -676,16 +678,116 @@ div.commentList{
 	}
 }
 
-.selected {
-  color: greenyellow;
+div.agentDiv{
+	position: relative;
+	top: 100px;
+	padding: 0 25px;
+
+	div#react-tabs-3{
+		div{
+			div{
+				width: 100%;
+
+				input{
+					width: 40%;
+					margin: 5px calc(60% - 2px) 5px 0;
+					border: 1px solid #ccc;
+					border-radius: 5px;
+				}
+				button{
+					margin-top: 5px;
+				}
+			}
+		}
+	}
 }
 
-div.commentList.agent {
-  margin-top: 100px
+div.react-tabs{
+	top: 100px;
+    position: relative;
+
+    ul{
+    	width: 5%;
+    	min-width: 30px;
+    	margin-left: 25px !important;
+    	padding: 0;
+    	float: left;
+    	border-bottom: none !important;
+    	text-align: center;
+    	background-color: #888;
+
+    	li{
+    		display: block !important;
+    		height: 50px;
+    		padding: 0 !important;
+    		line-height: 50px;
+    	}
+    }
+    div#react-tabs-1, div#react-tabs-3, div#react-tabs-5{
+    	width: 90%;
+    	margin-left: 10% !important;
+    	ul{
+    		width: 100%;
+    		background-color: white;
+    		li{
+    			background-color: white;
+    		}
+    	}
+    }
 }
 
-.save_header {
-  margin-top: 108px;
-  margin-left: -1011px;
-  margin-bottom: -80px;
+.react-tabs [role=tab][aria-selected=true] {
+    color: white;
+    background-color: red;
+    border-color: transparent;
+    border-radius: 0;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+}
+
+@media screen and (max-width: 640px){
+	div.react-tabs{
+
+	    ul{
+	    	width: calc(100% - 50px);
+	    	margin-left: 25px !important;
+	    	float: none;
+	    	background-color: #888;
+
+	    	li{
+	    		display: inline-block !important;
+	    		width: 33.33%;
+	    		height: 50px;
+	    		padding: 0 !important;
+	    		margin: 0 !important;
+	    		line-height: 50px;
+	    		bottom: 0 !important;
+	    	}
+	    }
+	    div#react-tabs-1, div#react-tabs-3, div#react-tabs-5{
+	    	width: calc(100% - 50px);
+	    	margin-left: 25px !important;
+	    	ul{
+	    		width: 100%;
+	    		background-color: white;
+	    		li{
+	    			background-color: white;
+	    		}
+	    	}
+
+	    	#question, button#submitquestion, ol{
+	    		width: 90%;
+	    		margin-left: 5%;
+	    	}
+	    }
+	}
+
+	.react-tabs [role=tab][aria-selected=true] {
+	    color: white;
+	    background-color: red;
+	    border-color: transparent;
+	    border-radius: 0;
+	    -moz-border-radius: 0;
+	    -webkit-border-radius: 0;
+	}
 }

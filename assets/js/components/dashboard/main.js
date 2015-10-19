@@ -1,11 +1,17 @@
 var data = require('./data.js');
 var QuestionList = require('./question_list.js'),
-  QuestionForm = require('./question_form.js'),
-  UserStore = require('../../stores/user_store'),
-  ServerActions = require('../../actions/server_action'),
-  HomeList = require('../home/home_list'),
-  SavedSearchList = require('./saved_search_list.js'),
-  HomeListStore = require('../../stores/home_list_store');
+    QuestionForm = require('./question_form.js'),
+    UserStore = require('../../stores/user_store'),
+    ServerActions = require('../../actions/server_action'),
+    HomeList = require('../home/home_list'),
+    SavedSearchList = require('./saved_search_list.js'),
+    HomeListStore = require('../../stores/home_list_store'),
+    React = require('react'),
+    ReactTabs = require('react-tabs'),
+    Tab = ReactTabs.Tab,
+    Tabs = ReactTabs.Tabs,
+    TabList = ReactTabs.TabList,
+    TabPanel = ReactTabs.TabPanel;
 
 var Dashboard = React.createClass({
 
@@ -69,19 +75,33 @@ var Dashboard = React.createClass({
 
   render: function() {
     return (
-      <div className="commentBox">
-        <h3>红心房源</h3>
-        <HomeList custom_style={'favoredHouse'} list={this.state.favorite_list}/>
-        <hr />
-        <SavedSearchList list={this.state.saved_searches}/>
-        <div className='searchResult'>
-          <HomeList list={this.state.home_list}/>
-        </div>
-        <QuestionForm onCommentSubmit={this.handleQuestionSubmit} />
-        <hr />
-        <QuestionList data={this.state.data} />
-      </div>
-      );
+      <Tabs className='tabdiv' onSelect={this.handleSelected} selectedIndex={0}>
+        <TabList>
+          <Tab><span className='glyphicon glyphicon-heart'></span></Tab>
+          <Tab><span className='glyphicon glyphicon-bookmark'></span></Tab>
+          <Tab><span className='glyphicon glyphicon-question-sign'></span></Tab>
+        </TabList>
+
+        <TabPanel>
+          <h3>红心房源</h3>
+          <HomeList custom_style={'favoredHouse'} list={this.state.favorite_list}/>
+        </TabPanel>
+
+        <TabPanel>
+          <SavedSearchList list={this.state.saved_searches}/>
+          <div className='searchResult'>
+            <HomeList list={this.state.home_list}/>
+          </div>
+        </TabPanel>
+
+        <TabPanel>
+          <QuestionForm onCommentSubmit={this.handleQuestionSubmit} />
+          <hr />
+          <QuestionList data={this.state.data} />
+        </TabPanel>
+      </Tabs>
+    
+    );
   }
 });
 
