@@ -60,6 +60,7 @@ var Agent = React.createClass({
     }
     return (
       <div className='agentDiv'>
+      <h2>Agent</h2>
             <Tabs
             onSelect={this.handleSelected}
             selectedIndex={0}

@@ -75,8 +75,7 @@ var Dashboard = React.createClass({
 
   render: function() {
     return (
-      <div className='tabdiv'>
-      <Tabs onSelect={this.handleSelected} selectedIndex={0}>
+      <Tabs className='tabdiv' onSelect={this.handleSelected} selectedIndex={0}>
         <TabList>
           <Tab><span className='glyphicon glyphicon-heart'></span></Tab>
           <Tab><span className='glyphicon glyphicon-bookmark'></span></Tab>
@@ -101,8 +100,6 @@ var Dashboard = React.createClass({
           <QuestionList data={this.state.data} />
         </TabPanel>
       </Tabs>
-      </div>
-    
     );
   }
 });
