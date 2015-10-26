@@ -241,6 +241,58 @@ var ServerActions = {
     });
   },
 
+  connectCustomer: function (request_id, user){
+    $.ajax({
+      url: '/customers/connect',
+
+      headers: {
+        'USER_ID': user.id
+      },
+
+      type: 'post',
+
+      dataType: 'json',
+
+      data: JSON.stringify({rid: request_id}),
+
+      success: function(data) {
+        console.log(data)
+      },
+
+      error: function() {
+//        AppDispatcher.handleAction({
+//          actionType: QuestionConstants.REPLY_POST,
+//          data: []
+//        })
+      }
+    });
+  },
+
+  getAllCustomers: function (){
+    $.ajax({
+      url: '/customers',
+      type: 'GET',
+
+      dataType: 'json',
+
+      data: {},
+
+      success: function(data) {
+        AppDispatcher.handleAction({
+          actionType: 'ALL_CUSTOMERS',
+          data: data
+        })
+      },
+
+      error: function() {
+        AppDispatcher.handleAction({
+          actionType: QuestionConstants.RECEIVE_DATA,
+          data: []
+        })
+      }
+    });
+  },
+
   getAgentPage: function(user) {
     $.ajax({
       url: '/agent/' + user.agent_identifier + '/page',

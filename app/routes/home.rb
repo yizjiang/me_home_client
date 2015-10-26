@@ -90,6 +90,17 @@ module Routes
       response.body
     end
 
+    get '/customers' do
+      response = Typhoeus.get("#{MEEHOME_SERVER_URL}/customers")
+      response.body
+    end
+
+    post '/customers/connect' do
+      request_payload = JSON.parse request.body.read
+      response = Typhoeus.post("#{MEEHOME_SERVER_URL}/customers/connect", headers: {user_id: request.env['HTTP_USER_ID'] }, body: request_payload)
+      response.body
+    end
+
     def get_user_session
       response = Typhoeus.get("#{MEEHOME_SERVER_URL}/session", params: params)
       response.body

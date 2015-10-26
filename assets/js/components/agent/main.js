@@ -8,6 +8,7 @@ var React = require('react'),
   RouteHandler = Router.RouteHandler,
   HomePage = require('./home_page'),
   Questions = require('./questions'),
+  Customers = require('./customers'),
   UserStore = require('../../stores/user_store'),
   AgentStore = require('../../stores/agent_page_store'),
   ServerActions = require('../../actions/server_action'),
@@ -85,7 +86,7 @@ var Agent = React.createClass({
                 {tab}
                 <Tab>设置</Tab>
                 <Tab>答疑</Tab>
-                <Tab>我的客户</Tab>
+                <Tab>客户</Tab>
               </TabList>
 
         {/*
@@ -109,7 +110,7 @@ var Agent = React.createClass({
                 <Questions/>
               </TabPanel>
               <TabPanel>
-                <h2>客户</h2>
+                <Customers/>
               </TabPanel>
             </Tabs>
 
