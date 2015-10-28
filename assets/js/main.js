@@ -64,7 +64,7 @@ var App = React.createClass({
           </ul>
         </div>
         <header>
-            <img className='logoImg' src="/img/logo.png" />
+            <a href='/#/main'><img className='logoImg' src="/img/logo.png" /></a>
             <div>
               <a id="nav-toggle" className="nav_slide_button"><span></span></a>
             </div>

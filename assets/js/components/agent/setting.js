@@ -45,7 +45,6 @@ var Setting = React.createClass({
     style.display = 'none';
     return (
       <div>
-        <h3>Settings:</h3>
         <Header callback={this.populateHeader} header={this.state.page_config.header}/>
         <SavedSearch className='agent' list={this.state.saved_searches} selected={this.state.page_config.search} callback={this.saveSelectedSearch}/>
         <div>

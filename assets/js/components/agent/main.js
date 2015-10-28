@@ -60,10 +60,10 @@ var Agent = React.createClass({
     }
     return (
       <div className='agentDiv'>
-      <h2>Agent</h2>
             <Tabs
             onSelect={this.handleSelected}
-            selectedIndex={1}
+            selectedIndex={0}
+            id='agenttab'
             >
 
         {/*
@@ -83,8 +83,9 @@ var Agent = React.createClass({
            The content of the <Tab/> (this.props.children) will be shown as the label.
            */}
 
-                {tab}
+                
                 <Tab>设置</Tab>
+                {tab}
                 <Tab>答疑</Tab>
                 <Tab>客户</Tab>
               </TabList>
@@ -102,10 +103,10 @@ var Agent = React.createClass({
          As with <Tab/> the content of <TabPanel/> will be shown as the content.
          */}
 
-              {tabPanel}
               <TabPanel>
                 <Setting/>
               </TabPanel>
+              {tabPanel}
               <TabPanel>
                 <Questions/>
               </TabPanel>

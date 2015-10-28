@@ -14,7 +14,7 @@ var HomePage = React.createClass({
           <br></br>
           My List
         </h3>
-        <HomeList list={this.props.data.home_list}/>
+        <HomeList custom_style={'previewList'} list={this.props.data.home_list}/>
       </div>
       );
   }
