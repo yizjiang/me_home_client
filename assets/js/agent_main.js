@@ -5,6 +5,6 @@ var React = require('react'),
 
 React.render(
   <AgentMain data={meta_data}/>,
-  document.getElementById('content')
+  document.getElementById('agentcontent')
 );
 

@@ -31,7 +31,7 @@ ul.nav.navbar-nav{
 	display: none;
 	position: absolute;
 	width: 100%;
-	height: 300px;
+	height: 240px;
 	background-color: #555;
 	z-index: 16;
 	margin: 0;
@@ -156,7 +156,8 @@ div.content{
 	display: block;
 	background-size: cover;
 	width: 100%;
-	height: 768px;
+	height: 100%;
+	position: absolute;
 }
 
 li.hotArea{
@@ -165,8 +166,16 @@ li.hotArea{
 
 div.searchDiv{
 	width: 340px;
-	margin-left: calc(50% - 170px);
+	margin-left: calc(25% - 170px);
 	padding-top: 200px;
+	display: inline-block;
+
+	p{
+		display: inline-block;
+		width: 6%;
+		padding: 0;
+		text-align: center;
+	}
 }
 
 input#regionValue{
@@ -179,24 +188,24 @@ input#regionValue{
 
 input.pricebox{
 	height:$inputbox-height;
-	width: 48%;
+	width: 46%;
 	padding: 0;
 	margin: 0;
 	border: 0;
 }
 
 input#priceMin{
-	margin-right:2%;
+	margin-right:1%;
 }
 
 input#priceMax{
-	margin-left:2%;
+	margin-left:1%;
 }
 
 button#search, button#saveSearch{
 	height:$inputbox-height;
 	border: 0;
-	width: 60%;
+	width: 80%;
 	color: #fff;
 	background: $btn-color;
 	border-radius: 5px;
@@ -206,7 +215,7 @@ button#search, button#saveSearch{
 }
 
 button#saveSearch{
-	width: 38%;
+	width: 18%;
 	margin-left: 2%;
 	background-color: $yellow;
 }
@@ -283,10 +292,10 @@ button#search{
 }
 
 div.homelistDiv{
-	top: 750px;
-	position: absolute;
-	width: 80%;
-	margin: 30px 10%;
+	width: 40%;
+	margin: 30px 5%;
+	background-color: rgba(255,255,255,0.7);
+	float: right;
 
 	ul{
 		list-style: none;
@@ -295,10 +304,6 @@ div.homelistDiv{
 
 		li{
 			border-bottom: 1px solid #ccc;
-			width: 48%;
-			margin: 0 1%;
-			display: inline-block;
-			padding: 10px 0;
 
 			a{
 				text-decoration: none;
@@ -326,43 +331,14 @@ div.homelistDiv{
 }
 
 
-@media screen and (min-width: 641px) and (max-width: 1300px){
-	div.homelistDiv{
-		width: 90%;
-		margin: 30px 5%;
-		position: relative;
-		top: 100px;
-
-		li{
-			width: 48% !important;
-			margin: 1 !important;
-			display: inline-block !important;
-
-			a{
-				text-align: left;
-
-				img{
-					width: 150px;
-					margin: 20px;
-					margin-left: calc(50% - 75px);
-				}
-
-				div{
-					width: 100% !important;
-				}
-			}
-
-		}
-	}
-}
-
-
 @media screen and (max-width:640px){
+	div.searchDiv{
+		display: block;
+	}
 	div.homelistDiv{
-		width: 90%;
-		margin: 30px 5%;
+		width: calc(100% - 50px);
 		position: relative;
-		top: 100px;
+		top: 70px;
 
 		li{
 			width: 100% !important;
@@ -388,6 +364,39 @@ div.homelistDiv{
 
 }
 
+@media screen and (min-width: 641px) and (max-width: 1300px){
+	div.homelistDiv{
+		width: calc(50% - 25px);
+		margin: 30px 25px 30px 0;
+		position: relative;
+		top: 70px;
+		float: right;
+		height: calc(100% - 130px);
+		overflow-y: scroll;
+
+		li{
+			width: 98%;
+			margin: 1%;
+			display: inline-block !important;
+
+			a{
+				text-align: left;
+
+				img{
+					width: 150px;
+					margin: 20px;
+					margin-left: calc(50% - 75px);
+				}
+
+				div{
+					width: 80% !important;
+					margin-left: 10%;
+				}
+			}
+
+		}
+	}
+}
 
 
 div.ccent{
@@ -509,7 +518,6 @@ div.detailDiv{
 
 
 #homelistAnchor{
-    margin-top: 300px;
 	ul{
 		text-align: left;
 		li{
@@ -605,10 +613,12 @@ li:last-child{
 
 	div.searchDiv{
 		padding-top: 90px;
+		padding-bottom: 30px;
+		width: 340px;
+		margin-left: calc(50% - 170px);
 	}
 	div.content{
-		height: auto;
-		max-height: 700px;
+		max-height: 300px;
 	}
 	div.citylistDiv ul{
 		max-height: 290px;
@@ -634,6 +644,8 @@ button#submitquestion{
     line-height: 30px;
     width: 50%;
     border-radius: 5px;
+    margin-left: 25%;
+    margin-top: 5px;
 }
 
 button#likedbtn{
@@ -675,17 +687,310 @@ div.commentList{
 		}
 	}
 }
+div.tabdiv{
+	div.react-tabs{
+	top: 100px;
+    position: relative;
 
+	    ul{
+	    	width: 70px;
+	    	min-width: 30px;
+	    	margin-left: 25px !important;
+	    	padding: 0;
+	    	float: left;
+	    	border-bottom: none !important;
+	    	text-align: center;
+	    	background-color: #888;
+
+	    	li{
+	    		display: block !important;
+	    		height: 50px;
+	    		padding: 0 !important;
+	    		line-height: 50px;
+	    	}
+	    }
+	    div#react-tabs-1, div#react-tabs-3, div#react-tabs-5{
+	    	width: 90%;
+	    	margin-left: 10% !important;
+
+	    	div.homelistDiv.favoredHouse#homelistAnchor{
+		    		margin: 0 !important;
+		    		top: 0 !important;
+		    		width: 100%;
+
+		    		ul{
+		    			background-color: white;
+		    			width: 100%;
+
+		    			li{
+		    				height: auto;
+		    				float: left;
+		    			}
+		    		}
+		    	}
+
+	    	ul{
+	    		width: 100%;
+	    		background-color: white;
+	    		li{
+	    			background-color: white;
+	    		}
+	    	}
+	    }
+	}
+
+	.react-tabs [role=tab][aria-selected=true] {
+	    color: white;
+	    background-color: red;
+	    border-color: transparent;
+	    border-radius: 0;
+	    -moz-border-radius: 0;
+	    -webkit-border-radius: 0;
+	}
+<<<<<<< HEAD
+}
+=======
+}
+
+
+@media screen and (max-width: 640px){
+	div.tabdiv{
+		div.react-tabs{
+		    ul{
+		    	width: calc(100% - 50px);
+		    	margin-left: 25px !important;
+		    	float: none;
+		    	background-color: #888;
+
+		    	li{
+		    		display: inline-block !important;
+		    		width: 33.33%;
+		    		height: 50px;
+		    		padding: 0 !important;
+		    		margin: 0 !important;
+		    		line-height: 50px;
+		    		bottom: 0 !important;
+		    	}
+		    }
+
+		    div#react-tabs-1, div#react-tabs-3, div#react-tabs-5{
+		    	width: calc(100% - 50px);
+		    	margin-left: 25px !important;
+
+		    	#question, button#submitquestion, ol{
+		    		width: 90%;
+		    		margin-left: 5%;
+		    	}
+		    }
+		}
+
+		.react-tabs [role=tab][aria-selected=true] {
+		    color: white;
+		    background-color: red;
+		    border-color: transparent;
+		    border-radius: 0;
+		    -moz-border-radius: 0;
+		    -webkit-border-radius: 0;
+		}
+	}
+}
 .selected {
-  color: greenyellow;
+  color: $btn-color;
+}
+
+button.btn-success{
+	margin: 10px 0;
 }
 
 div.commentList.agent {
   margin-top: 100px
 }
 
-.save_header {
-  margin-top: 108px;
-  margin-left: -1011px;
-  margin-bottom: -80px;
+input#contact, input#name{
+	float: none;
+	font-size: 18px !important;
+	line-height: 40px !important;
+	font-weight: 400;
+	height: 40px;
 }
+
+label.agentlabel{
+	float: left;
+	font-size: 18px;
+	line-height: 40px;
+	margin: 0;
+}
+
+div.agentDiv{
+	position: relative;
+	top: 100px;
+	margin-left: 25px;
+
+	div.react-tabs{
+		margin: 0 !important;
+		padding: 0 !important;
+
+	    ul{
+	    	width: 70px;
+	    	min-width: 30px;
+	    	float: left;
+	    	border-bottom: none !important;
+	    	text-align: center;
+	    	background-color: #888;
+
+	    	li{
+	    		display: block !important;
+	    		height: 50px;
+	    		padding: 0 !important;
+	    		line-height: 50px;
+	    	}
+	    }
+	    div#react-tabs-1, div#react-tabs-3, div#react-tabs-5, div#react-tabs-7{
+		    width: calc(93% - 25px);
+		    margin-left: 7% !important;
+
+		    div{
+		    	div#homelistAnchor.homelistDiv.previewList{
+		    		margin: 0 !important;
+		    		top: 0 !important;
+		    		width: 100%;
+		    		overflow-y: hidden;
+
+		    		ul{
+		    			background-color: white;
+		    			width: 100%;
+
+		    			li{
+		    				width: 48%;
+		    				margin: 1%;
+		    				height: auto;
+		    				float: left;
+		    				display: inline-block;
+		    			}
+		    		}
+		    	}
+		    	ul{
+		    		width: 100%;
+		    	}
+		    }
+	    }
+
+	    div#react-tabs-5{
+    		ul{
+    			background-color: #fff;
+
+    			li{
+    				font-size: 30px;
+    				border-bottom: 1px solid #ccc;
+    				text-align: left;
+
+    				div{
+    					h3{
+    						font-size: 20px;
+    					}
+    					input{
+    						border: 1px solid #ccc;
+    						border-radius: 5px;
+    					}
+    					button#search{
+    						width: 100px;
+    						margin-left: 5px;
+    						padding: 0;
+    						font-size: 20px;
+    						line-height: 40px;
+    					}
+    				}
+    			}
+    		}
+	    }
+	}
+
+	.react-tabs [role=tab][aria-selected=true] {
+	    color: white;
+	    background-color: red;
+	    border-color: transparent;
+	    border-radius: 0;
+	    -moz-border-radius: 0;
+	    -webkit-border-radius: 0;
+	}
+}
+
+@media screen and (max-width: 640px){
+	div.agentDiv{
+		margin-left: 0;
+		div.react-tabs{
+		    ul{
+		    	width: calc(100% - 50px);
+		    	margin-left: 25px !important;
+		    	float: none;
+		    	
+		    	li{
+		    		display: inline-block !important;
+		    		width: 25%;
+		    		height: 50px;
+		    		padding: 0 !important;
+		    		margin: 0 !important;
+		    		line-height: 50px;
+		    		bottom: 0 !important;
+		    	}
+		    }
+
+		    div#react-tabs-1, div#react-tabs-3, div#react-tabs-5{
+		    	width: calc(100% - 50px);
+		    	margin-left: 25px !important;
+
+		    	#question, button#submitquestion, ol{
+		    		width: 90%;
+		    		margin-left: 5%;
+		    	}
+
+		    	div.previewList{
+		    		ul{
+		    			li{
+		    				width: 100% !important;
+		    			}
+		    		}
+		    	}
+		    }
+
+		    div#react-tabs-5{
+		    	div{
+		    		ul{
+		    			padding: 0;
+		    			margin: 0 !important;
+
+		    			li{
+		    				width: 100%;
+		    			}
+		    		}
+		    	}
+		    }
+		}
+	}
+}
+
+
+div#agentcontent{
+	div{
+		margin-left: 25px;
+
+		h3{
+			font-size: 20px;
+			line-height: 30px;
+		}
+
+		div#homelistAnchor{
+			margin: 0 !important;
+			width: 100%;
+			overflow: hidden;
+
+			ul{
+				li{
+					width: 48%;
+					margin: 1%;
+				}
+			}
+		}
+	}
+}
+>>>>>>> new client
