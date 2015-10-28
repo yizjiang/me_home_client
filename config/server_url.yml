@@ -1,5 +1,5 @@
 development:
-  server_url: http://81703363.ngrok.io
+  server_url: http://localhost:3032
 
 test:
   server_url: http://localhost:3032
