@@ -2,6 +2,7 @@
 var React = require('react'),
   CustomerStore = require('../../stores/customer_store'),
   UserStore = require('../../stores/user_store'),
+  Customer = require('./customer'),
   ServerActions = require('../../actions/server_action');
 
 var Customers = React.createClass({
@@ -11,14 +12,13 @@ var Customers = React.createClass({
   },
 
   _onChange: function() {
-    console.log(CustomerStore.getAll());
     this.setState({customers: CustomerStore.getAll()});
   },
 
   // Add change listeners to stores
   componentDidMount: function() {
     CustomerStore.addChangeListener(this._onChange);
-    ServerActions.getAllCustomers();
+    ServerActions.getAllCustomers(UserStore.getCurrentUser());
   },
 
   // Remove change listeners from stores
@@ -32,23 +32,14 @@ var Customers = React.createClass({
   },
 
   render: function () {
-
-    var self = this;
+    console.log(this.state.customers);
     return (
       <div>
-        <h2>客户</h2>
-        <ul>
-      {this.state.customers.map(function(c){
-        return (<li>
-                <p>{ c.open_id + ':' }</p>
-                <p> {c.region} </p>
-                <button id='connect' type="button" onClick={self.handleSubmit.bind(this, c.id)} >申请联系</button>
-        </li>)
-      })
-      }
-      </ul>
+        {this.state.customers.map(function(customer){
+          return <Customer customer={customer}/>
+        })}
       </div>
-    );
+      )
   }
 });
 

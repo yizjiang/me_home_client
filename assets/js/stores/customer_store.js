@@ -6,7 +6,8 @@ var AppDispatcher = require('../dispatcher/app_dispatcher'),
 // Define initial data points
 var _customers = [];                   //TODO redesign, same object, seperate agent and user
 
-function loadQuestions(data) {
+function setAllCustomers(data) {
+  console.log(data);
   _customers = data;
 }
 
@@ -43,7 +44,7 @@ AppDispatcher.register(function(payload) {
 
     // Respond to RECEIVE_DATA action
     case "ALL_CUSTOMERS":
-      loadQuestions(action.data);
+      setAllCustomers(action.data);
       break;
     default:
       return true;

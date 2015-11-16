@@ -12,11 +12,6 @@ var Header = React.createClass({
 
   render: function () {
 
-//    var value = {};
-//    if(this.props.header){
-//      value = this.props.header;
-//    }
-
     return (
       <div>
         <label className='agentlabel'>姓名</label>

@@ -13,7 +13,6 @@ var Profile = React.createClass({
   },
 
   render: function(){
-    console.log(this.props.currentUser.email);
     
     return (
       <div>

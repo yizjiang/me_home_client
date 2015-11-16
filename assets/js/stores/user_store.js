@@ -11,6 +11,8 @@ var _savedSearches = [];
 var _favoriteHomes = [];
 var _publishedPageConfig = {};
 var _publishedPage = {};
+var _qrImage = {};
+var _qrCode = '';
 
 function setCurrentUser(user) {
   _currentUser = user;
@@ -18,6 +20,8 @@ function setCurrentUser(user) {
   _savedSearches = user.saved_searches;
   _favoriteHomes = user.homes;
   _publishedPageConfig = user.published_page_config;
+  _qrImage = user.qr_image;
+  _qrCode = user.qr_code
 }
 
 function setSavedSearch(savedSearches) {
@@ -26,6 +30,10 @@ function setSavedSearch(savedSearches) {
 
 function setPublishedPageConfig(result) {
   _publishedPageConfig = result
+}
+
+function setQRImage(img) {
+  _qrImage = img
 }
 
 function setPublishedPage(result) {
@@ -49,6 +57,14 @@ var UserStore = _.extend({}, EventEmitter.prototype, {
 
   getAgentPublishedPageConfig: function() {
     return _publishedPageConfig;
+  },
+
+  getQRImage: function() {
+    return _qrImage;
+  },
+
+  getQRCode: function() {
+    return _qrCode;
   },
 
   getAgentPublishedPage: function() {
@@ -113,6 +129,7 @@ AppDispatcher.register(function(payload) {
       return true;
   }
 
+  console.log('emit');
   // If action was responded to, emit change event
   UserStore.emitChange();
 
