@@ -2,15 +2,8 @@
 var React = require('react');
 
 var HomeList = React.createClass({
-  
-  scrollToList: function() {
-
-  },
 
   render: function () {
-    if(this.props.list.length > 0){
-      this.scrollToList();
-    }
     return (
       <div className={'homelistDiv ' + this.props.custom_style} id='homelistAnchor'>
          <ul>

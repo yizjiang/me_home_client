@@ -23,10 +23,6 @@ body {
   overflow-x: hidden;
 }
 
-.select {
-  color: blue
-}
-
 ul.nav.navbar-nav{
 	display: none;
 	position: absolute;
@@ -792,7 +788,7 @@ div.tabdiv{
 		}
 	}
 }
-.selected {
+.selectedItem {
   color: $btn-color;
 }
 

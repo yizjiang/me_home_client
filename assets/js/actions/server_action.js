@@ -339,7 +339,7 @@ var ServerActions = {
   },
 
   savePageConfig: function(user, value) {
-    $.ajax({
+    return $.ajax({
       url: '/save_page_config',
 
       headers: {

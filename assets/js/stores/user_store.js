@@ -128,8 +128,6 @@ AppDispatcher.register(function(payload) {
     default:
       return true;
   }
-
-  console.log('emit');
   // If action was responded to, emit change event
   UserStore.emitChange();
 

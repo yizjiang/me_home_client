@@ -5,13 +5,13 @@ var Input = require('react-bootstrap').Input,
 
 var SavedSearchList = React.createClass({
 
-  runSearch: function(value){
+  runSearch: function(id){
      var query = [];
-     $('.selected').each(function() {
+     $('.selectedItem').each(function() {
          query.push($(this).attr('value'));
      });
      if(this.props.callback){ //TODO clever search
-       this.props.callback(query);
+       this.props.callback(query, id);
      } else {
        query = query.map(function(value){
          return JSON.parse(value)
@@ -22,7 +22,7 @@ var SavedSearchList = React.createClass({
   },
 
   selectVariant: function(value, index){
-    $('#' + index).toggleClass('selected');
+    $('#' + index).toggleClass('selectedItem');
   },
 
   render: function() {
@@ -48,7 +48,7 @@ var SavedSearchList = React.createClass({
               )
             })}
           </form>
-         <Button bsStyle='success' onClick={self.runSearch.bind(self, '123')}>执行搜索</Button>
+         <Button id='savedListBtn' bsStyle='success' onClick={self.runSearch.bind(self, 'savedListBtn')}>执行搜索</Button>
       </div>
       );
   }

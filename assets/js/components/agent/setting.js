@@ -44,13 +44,13 @@ var Setting = React.createClass({
     ServerActions.savePageConfig(UserStore.getCurrentUser(), {header: value})
   },
 
-  saveSelectedSearch: function(value) {
-    ServerActions.savePageConfig(UserStore.getCurrentUser(), {search: value})
+  saveSelectedSearch: function(value, id) {
+    $('#'+id).text('保存中')
+    ServerActions.savePageConfig(UserStore.getCurrentUser(), {search: value}).then(() => { $('#'+id).text('执行搜索')});
   },
 
 
   render: function () {
-    console.log(this.state);
     var content, file_drop;
     if(this.state.qr_img.is_followed == true){
        content = <p>请分享此二维码给您的客户</p>
