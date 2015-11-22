@@ -36,6 +36,7 @@ var HomeMain = React.createClass({
     this.setState(getSearchData());
   },
 
+
   render: function () {
     return (
       <div className="content">

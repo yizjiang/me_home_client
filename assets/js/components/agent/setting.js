@@ -46,7 +46,10 @@ var Setting = React.createClass({
 
   saveSelectedSearch: function(value, id) {
     $('#'+id).text('保存中')
-    ServerActions.savePageConfig(UserStore.getCurrentUser(), {search: value}).then(() => { $('#'+id).text('执行搜索')});
+    ServerActions.savePageConfig(UserStore.getCurrentUser(), {search: value}).then(() => {
+      $('#'+id).text('执行搜索');
+       $('#desc').show();
+      });
   },
 
 
@@ -73,6 +76,7 @@ var Setting = React.createClass({
       <div>
         <Header callback={this.populateHeader} header={this.state.page_config.header}/>
         <SavedSearch className='agent' list={this.state.saved_searches} selected={this.state.page_config.search} callback={this.saveSelectedSearch}/>
+        <p id='desc' style={{display: 'none'}} > 保存完毕，请点击预览查看 </p>
         <div>
           {content}
           <img id={'qrcode'} src={SERVER_URL + "/" + this.state.qr_img.img_url} height="160" width="160"/>

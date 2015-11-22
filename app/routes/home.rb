@@ -43,6 +43,11 @@ module Routes
       response.body
     end
 
+    delete '/removeSearch/:id' do
+      response = Typhoeus.delete("#{MEEHOME_SERVER_URL}/user/remove_search/#{params[:id]}" )
+      response.body
+    end
+
     post '/unfavoriteHome' do
       request_payload = JSON.parse request.body.read
       response = Typhoeus.post("#{MEEHOME_SERVER_URL}/user/unfavorite_home", headers: {user_id: request.env['HTTP_USER_ID'] }, body: request_payload )

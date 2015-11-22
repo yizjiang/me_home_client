@@ -100,6 +100,20 @@ var ServerActions = {
     });
   },
 
+  removeSearch: function(id, list) {
+    console.log(list);
+    $.ajax({
+      url: '/removeSearch/' + id,
+      type: 'DELETE',
+      success: function() {
+        AppDispatcher.handleAction({
+          actionType: UserConstants.SAVED_SEARCH,
+          data: {saved_searches: list}
+        })
+      }
+    });
+  },
+
   removeFavorite: function(home_id, user) {
     $.ajax({
       url: '/unfavoriteHome',
@@ -187,7 +201,12 @@ var ServerActions = {
 
   homeSearch: function(query) {
 
-    $.ajax({
+    AppDispatcher.handleAction({
+      actionType: HomeConstants.HOME_SEARCH,
+      data: []
+    });
+
+    return $.ajax({
       url: '/homeSearch',
 
       type: 'GET',
