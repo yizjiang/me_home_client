@@ -31,7 +31,6 @@ var SearchBox = React.createClass({
     if (this.state.regionValue != '') {
       $('.homelistDiv').addClass('loading');
       ServerActions.homeSearch(this.state).then(() => {
-        console.log($('.homelistDiv'));
         $('.homelistDiv').removeClass('loading');
         if(!_.isEmpty(UserStore.getCurrentUser())) {
           that.saveSearch();
