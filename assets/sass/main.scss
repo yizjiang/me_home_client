@@ -12,7 +12,27 @@ $dark-grey: #222;
 
 
 $inputbox-height: 40px;
-$box-placeholder-margin: 10px;
+$box--placeholdermargin: 10px;
+
+::-webkit-input-placeholder {
+   font-size: 12px;
+   padding-left: 2% !important;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   font-size: 12px;
+   padding-left: 2% !important;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   font-size: 12px;
+   padding-left: 2% !important;
+}
+
+:-ms-input-placeholder {  
+   font-size: 12px;
+   padding-left: 2% !important;
+}
 
 
 body {
@@ -165,10 +185,13 @@ li.hotArea{
 }
 
 div.searchDiv{
-	width: 340px;
-	margin-left: calc(25% - 170px);
-	padding-top: 200px;
+	width: 360px;
+	margin-left: calc(25% - 180px);
+	padding-top: 150px;
+	padding-bottom: 150px;
+	margin-top: 100px;
 	display: inline-block;
+	background-color: rgba(255,255,255,0.7);
 
 	p{
 		display: inline-block;
@@ -180,22 +203,26 @@ div.searchDiv{
 
 input#regionValue{
 	height: $inputbox-height;
-	width: 100%;
+	width: 70%;
 	border: 0;
 	padding: 0;
 	margin-bottom: 10px;
+	display: inline-block;
+	margin-left: 5%;
+	border: 1px solid $btn-color;
 }
 
 input.pricebox{
 	height:$inputbox-height;
-	width: 46%;
+	width: 41%;
 	padding: 0;
 	margin: 0;
-	border: 0;
+	border: 1px solid $btn-color;
 }
 
 input#priceMin{
 	margin-right:1%;
+	margin-left: 5%;
 }
 
 input#priceMax{
@@ -205,18 +232,16 @@ input#priceMax{
 button#search, button#saveSearch{
 	height:$inputbox-height;
 	border: 0;
-	width: 80%;
+	width: 10%;
 	color: #fff;
 	background: $btn-color;
-	border-radius: 5px;
-	margin-top: 10px;
-	font-size: 16px;
+	border-radius: 0px;
+	margin-top: 0px;
+	font-size: 15px;
 	padding: 0;
 }
 
 button#saveSearch{
-	width: 18%;
-	margin-left: 2%;
 	background-color: $yellow;
 }
 
@@ -294,7 +319,7 @@ button#search{
 div.homelistDiv{
 	width: 40%;
 	margin: 30px 5%;
-	background-color: rgba(255,255,255,0.7);
+	background-color: transparent;
 	float: right;
 
 	ul{
@@ -364,7 +389,7 @@ div.homelistDiv{
 
 }
 
-@media screen and (min-width: 641px) and (max-width: 1300px){
+@media screen and (min-width: 641px) and (max-width: 2500px){
 	div.homelistDiv{
 		width: calc(50% - 25px);
 		margin: 30px 25px 30px 0;
@@ -372,7 +397,7 @@ div.homelistDiv{
 		top: 70px;
 		float: right;
 		height: calc(100% - 130px);
-		overflow-y: scroll;
+		overflow-y: hidden;
 
 		li{
 			width: 98%;
@@ -395,6 +420,9 @@ div.homelistDiv{
 			}
 
 		}
+	}
+	div.homelistDiv:hover{
+		overflow-y: scroll;
 	}
 }
 
@@ -612,10 +640,12 @@ li:last-child{
 	}
 
 	div.searchDiv{
-		padding-top: 90px;
+		padding-top: 120px;
 		padding-bottom: 30px;
-		width: 340px;
-		margin-left: calc(50% - 170px);
+		width: 90%;
+		margin-left: 5%;
+		background-color: transparent;
+		margin-top: 0px;
 	}
 	div.content{
 		max-height: 300px;

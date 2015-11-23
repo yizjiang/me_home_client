@@ -23,6 +23,7 @@ var SearchBox = React.createClass({
 
   homeSearch: function() {
     ServerActions.homeSearch(this.state);
+    
   },
 
   saveSearch: function() {
@@ -32,12 +33,13 @@ var SearchBox = React.createClass({
   render: function() {
     return (
       <div className='searchDiv'>
-        <input id='regionValue' value={this.state.regionValue} onChange={this.handleFilterChange} placeholder="请输入想要搜索的城市或者邮编"/><br/>
+        <div className='btn_group'><input id='regionValue' value={this.state.regionValue} onChange={this.handleFilterChange} placeholder="请输入要搜索的城市或邮编，例如旧金山"/>
+        <button id='search' type="button" onClick={this.homeSearch} ><a href='#homelistAnchor'><span className='glyphicon glyphicon-search'></span></a></button>
+        <button id='saveSearch' type="button" onClick={this.saveSearch} ><span className='glyphicon glyphicon-star'></span></button>
+        </div><br/>
         <input id='priceMin' className='pricebox' value={this.state.priceMin} onChange={this.handleFilterChange} placeholder="例如10万"/>
         <p>到</p>
         <input id='priceMax' className='pricebox' value={this.state.priceMax} onChange={this.handleFilterChange} placeholder="例如10万"/>
-        <button id='search' type="button" onClick={this.homeSearch} ><a href='#homelistAnchor'>觅 家</a></button>
-        <button id='saveSearch' type="button" onClick={this.saveSearch} >保存</button>
       </div>
       );
   }
