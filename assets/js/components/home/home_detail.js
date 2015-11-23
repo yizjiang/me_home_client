@@ -6,6 +6,7 @@ var React = require('react'),
     Button = require('react-bootstrap').Button,
     Col = require('react-bootstrap').Col,
     Carousel = require('react-bootstrap').Carousel,
+    _ = require('lodash'),
     CarouselItem = require('react-bootstrap').CarouselItem;
 
 
@@ -50,14 +51,15 @@ var HomeDetail = React.createClass({
   },
 
   favoriteAction: function() {
-    if(!this.isFavorite()) {
-      ServerActions.addFavorite(this.state.currentHome.id, UserStore.getCurrentUser());      //Todo use then
-      $('#favoriteBtn').addClass('favored');
-      $('.glyphicon-heart').addClass('liked');
-    }else {
-      ServerActions.removeFavorite(this.state.currentHome.id, UserStore.getCurrentUser());      //Todo use then
-      $('.glyphicon-heart').removeClass('liked');
-      $('#favoriteBtn').removeClass('favored');
+    if(_.isEmpty(UserStore.getCurrentUser())) {
+      var currentUrl = encodeURIComponent(CLIENT_URL + '/#/home_detail/' + this.state.currentHome.id);
+      window.location.href = SERVER_URL + '/users/login?redirect_url=' + currentUrl;
+    } else{
+      if(!this.isFavorite()) {
+        ServerActions.addFavorite(this.state.currentHome.id, UserStore.getCurrentUser());
+      }else {
+        ServerActions.removeFavorite(this.state.currentHome.id, UserStore.getCurrentUser());
+      }
     }
   },
 
@@ -112,7 +114,6 @@ var HomeDetail = React.createClass({
       home.stores = '';
       mapping.stores = '';
     }
-    console.log(home.assigned_school);
     if(home.assigned_school == null) {
       home['assigned_school'] = [];
     }
@@ -129,8 +130,13 @@ var HomeDetail = React.createClass({
       home['images'] = [];
 
     }
-    console.log(home);
-    //TODO go back
+
+    var favButtonClass, heartClass;
+    if(this.isFavorite()){
+      favButtonClass = 'favored';
+      heartClass = 'liked';
+    }
+
     return (
       <div className='ccent'>
         <Carousel>
@@ -151,8 +157,8 @@ var HomeDetail = React.createClass({
 
         <div className='detailDiv'>
           <button className='btngroup'><a href='#'>后 退</a></button>
-          <Button id='favoriteBtn' onClick={this.favoriteAction}>
-            <span className='glyphicon glyphicon-heart'></span> 喜欢
+          <Button id='favoriteBtn' className={favButtonClass} onClick={this.favoriteAction}>
+            <span className={'glyphicon glyphicon-heart ' + heartClass}></span> 喜欢
           </Button>
           <h3>房屋详情</h3>
           <div className='detailWrap'>

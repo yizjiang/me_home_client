@@ -100,6 +100,20 @@ var ServerActions = {
     });
   },
 
+  removeSearch: function(id, list) {
+    console.log(list);
+    $.ajax({
+      url: '/removeSearch/' + id,
+      type: 'DELETE',
+      success: function() {
+        AppDispatcher.handleAction({
+          actionType: UserConstants.SAVED_SEARCH,
+          data: {saved_searches: list}
+        })
+      }
+    });
+  },
+
   removeFavorite: function(home_id, user) {
     $.ajax({
       url: '/unfavoriteHome',
@@ -187,7 +201,12 @@ var ServerActions = {
 
   homeSearch: function(query) {
 
-    $.ajax({
+    AppDispatcher.handleAction({
+      actionType: HomeConstants.HOME_SEARCH,
+      data: []
+    });
+
+    return $.ajax({
       url: '/homeSearch',
 
       type: 'GET',
@@ -268,16 +287,39 @@ var ServerActions = {
     });
   },
 
-  getAllCustomers: function (){
+  saveCustomerSearch: function (value){
     $.ajax({
-      url: '/customers',
+      url: '/agent/save_customer_search',
+
+      type: 'post',
+
+      dataType: 'json',
+
+      data: JSON.stringify(value),
+
+      success: function(data) {
+        console.log(data)
+      },
+
+      error: function() {
+//        AppDispatcher.handleAction({
+//          actionType: QuestionConstants.REPLY_POST,
+//          data: []
+//        })
+      }
+    });
+  },
+
+  getAllCustomers: function (user){
+    console.log('here');
+    $.ajax({
+      url: '/agent/' + user.id + '/customers',
       type: 'GET',
 
       dataType: 'json',
 
-      data: {},
-
       success: function(data) {
+        console.log(data);
         AppDispatcher.handleAction({
           actionType: 'ALL_CUSTOMERS',
           data: data
@@ -316,7 +358,7 @@ var ServerActions = {
   },
 
   savePageConfig: function(user, value) {
-    $.ajax({
+    return $.ajax({
       url: '/save_page_config',
 
       headers: {
@@ -424,8 +466,37 @@ var ServerActions = {
         console.log('error when getting user');
       }
     });
-  }
+  },
 
+  uploadFile: function(file, user) {
+    console.log(file);
+    var data = new FormData();
+    data.append( 'file', file);
+
+    console.log(data);
+    var self = this;
+    return $.ajax({
+      url: '/agent/upload_qrcode',
+
+      type: 'post',
+
+      headers: {
+        'USER_ID': user.id
+      },
+      data: data,
+      enctype: 'multipart/form-data',
+      processData: false,  // tell jQuery not to process the data
+      contentType: false,   // tell jQuery not to set contentType
+
+      success: function(data) {
+        console.log(data);
+      },
+
+      error: function() {
+        console.log('error when getting user');
+      }
+    });
+  }
 
 };
 

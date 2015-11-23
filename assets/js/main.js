@@ -20,7 +20,7 @@ var React = require('react'),
     UserStore = require('./stores/user_store.js');
 
 
-ServerActions.fetchRegionRanking('');
+//ServerActions.fetchRegionRanking('');
 ServerActions.getCurrentUser().then(function(value){console.log(value)});
 
 var App = React.createClass({

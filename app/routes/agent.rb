@@ -20,5 +20,28 @@ module Routes
       response.body
     end
 
+    post '/agent/upload_qrcode' do
+      filename = params[:file][:filename]
+      tempfile = params[:file][:tempfile]
+      target = "./#{filename}"
+
+      #File.open(target, 'wb') {|f| f.write tempfile.read }
+
+      response = Typhoeus.post("#{MEEHOME_SERVER_URL}/agent/upload_qrcode",
+                               headers: {'Content-Type' => 'multipart/form-data', user_id: request.env['HTTP_USER_ID'] },
+                               body: {:file => File.open(tempfile,'r')})
+      response.body
+    end
+
+    get '/agent/:uid/customers' do
+      response = Typhoeus.get("#{MEEHOME_SERVER_URL}/agent/#{params[:uid]}/customers")
+      response.body
+    end
+
+    post '/agent/save_customer_search' do
+      request_payload = JSON.parse request.body.read
+      response = Typhoeus.post("#{MEEHOME_SERVER_URL}/agent/save_customer_search", headers: {user_id: request.env['HTTP_USER_ID'] }, body: request_payload )
+      response.body
+    end
   end
 end
