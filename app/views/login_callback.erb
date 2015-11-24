@@ -9,12 +9,8 @@
   <script>
     (function () {
       'use strict';
+      window.opener.auth_callback(<%= params[:ticket] %>);
 
-      window.opener.auth_callback();
-
-      $("#closeButton").button().click(function() {
-        window.close();
-      });
     })();
   </script>
 </head>

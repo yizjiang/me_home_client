@@ -52,8 +52,9 @@ var HomeDetail = React.createClass({
 
   favoriteAction: function() {
     if(_.isEmpty(UserStore.getCurrentUser())) {
-      var currentUrl = encodeURIComponent(CLIENT_URL + '/#/home_detail/' + this.state.currentHome.id);
-      window.location.href = SERVER_URL + '/users/login?redirect_url=' + currentUrl;
+      var auth_window = window.open(SERVER_URL + '/users/login', null, "width=400,height=250");
+      window.auth_window = auth_window;
+      window.auth_callback = this.auth_back;
     } else{
       if(!this.isFavorite()) {
         ServerActions.addFavorite(this.state.currentHome.id, UserStore.getCurrentUser());
@@ -63,6 +64,10 @@ var HomeDetail = React.createClass({
     }
   },
 
+  auth_back: function(ticket) {
+    ServerActions.getCurrentUser(ticket);
+    window.auth_window.close();
+  },
 
   isFavorite: function() {
     var self = this;

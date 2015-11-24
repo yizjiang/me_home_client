@@ -18,12 +18,8 @@ var HomeList = React.createClass({
            return <li>
                     <a href={'#/home_detail/' + value.id}>
                       <div style={divStyle}>
-                        <p>地址：{value.addr1}</p>
-                        <p>城市：{value.city}</p>
-                        <p>房型：{value.bed_num + " 房 " + value.bath_num + " 卫"}</p>
-                        <p>房屋种类：{value.home_type}</p>
-                        <p>价格：{'$' + value.price}</p>
-                        <p>面积：{value.indoor_size + '000平方英尺'}</p>
+                        <p>地址：{value.addr1 + ' ' + value.city}</p>
+                        <p>{value.short_desc}</p>
                       </div> 
                     </a>
                   </li>

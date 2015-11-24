@@ -418,36 +418,17 @@ var ServerActions = {
     });
   },
 
-  logout: function() {
-    $.ajax({
-      url: '/clear',
-
-      type: 'GET',
-
-      dataType: 'json',
-
-      data: {},
-
-      success: function() {
-        AppDispatcher.handleAction({
-          actionType: 'USER_LOGIN',
-          data: {}
-        })
-      },
-
-      error: function() {
-        AppDispatcher.handleAction({
-          actionType: 'USER_LOGIN',
-          data: {}
-        })
-      }
-    });
-  },
-
-  getCurrentUser: function() {
+  getCurrentUser: function(ticket) {
     var self = this;
+
+    var url;
+    if(ticket){
+      url = '/user?' + 'ticket=' + ticket
+    } else {
+      url = '/user'
+    }
     return $.ajax({
-      url: '/user',
+      url: url,
 
       type: 'GET',
 
@@ -463,7 +444,10 @@ var ServerActions = {
       },
 
       error: function() {
-        console.log('error when getting user');
+        AppDispatcher.handleAction({
+          actionType: 'USER_LOGIN',
+          data: {}
+        })
       }
     });
   },

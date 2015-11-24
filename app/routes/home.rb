@@ -18,7 +18,6 @@ module Routes
 
     get '/' do
       @wid = params['wid'] || ''
-      session[:uid] = get_user_session if session[:uid].to_s == ''  #TODO
       content_type :html
       erb :index
     end
@@ -79,6 +78,9 @@ module Routes
     end
 
     get '/user' do
+      if (params[:ticket] != nil && params[:ticket] != '') && session[:uid] == ''
+        session[:uid] =  get_user_session
+      end
       if session[:uid] != ''
         response = Typhoeus.get("#{MEEHOME_SERVER_URL}/user", params: {uid: session[:uid]})
         response.body

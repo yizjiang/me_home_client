@@ -1,4 +1,5 @@
-var React = require('react')
+var React = require('react'),
+  ServerActions = require('../../actions/server_action');
 
 var Login = React.createClass({
   getInitialState: function() {
@@ -19,14 +20,16 @@ var Login = React.createClass({
   },
 
   login: function() {
-    window.location.href = SERVER_URL + '/users/login';
-//    var auth_window = window.open(SERVER_URL + '/users/login', null, "width=400,height=250");
-//    window.auth_window = auth_window;
-//    window.auth_callback = this.auth_back;
+    //window.location.href = SERVER_URL + '/users/login';
+    var auth_window = window.open(SERVER_URL + '/users/login', null, "width=400,height=250");
+    window.auth_window = auth_window;
+    window.auth_callback = this.auth_back;
   },
 
-  auth_back: function() {
-    console.log('here')
+  auth_back: function(ticket) {
+    console.log('login');
+    ServerActions.getCurrentUser(ticket);
+    window.auth_window.close();
   },
 
   render: function(){
