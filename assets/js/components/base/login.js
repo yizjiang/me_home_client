@@ -20,16 +20,18 @@ var Login = React.createClass({
 
   login: function() {
     window.location.href = SERVER_URL + '/users/login';
+//    var auth_window = window.open(SERVER_URL + '/users/login', null, "width=400,height=250");
+//    window.auth_window = auth_window;
+//    window.auth_callback = this.auth_back;
+  },
+
+  auth_back: function() {
+    console.log('here')
   },
 
   render: function(){
     return (
       <div>
-      {/*
-        <a href={SERVER_URL + '/users/auth/facebook'}><img src={'/img/facebook.jpeg'} height='30' width='30'></img></a>
-        <input id='username' value={this.state.username} onChange={this.handleFilterChange} placeholder='用户名'/>
-        <input id='password' value={this.state.password} onChange={this.handleFilterChange} placeholder='密码'/>
-      */}
         <button id='login' type="button" onClick={this.login} className='nobutton'>登 陆</button>
       </div>
       )

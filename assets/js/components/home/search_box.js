@@ -56,7 +56,7 @@ var SearchBox = React.createClass({
     return (
       <div className='searchDiv'>
         <div className='btn_group'><input id='regionValue' value={this.state.regionValue} onChange={this.handleFilterChange} placeholder="请输入要搜索的城市或邮编，例如旧金山"/>
- <button id='more' type="button" onClick={this.moreOptions} >更多</button>
+        <button id='more' type="button" onClick={this.moreOptions} >更多</button>
         <SearchOptions options={this.state} callback={this.handleFilterChange} show={this.state.moreOptions}/>
         <button id='search' type="button" onClick={this.homeSearch} ><a href='#homelistAnchor'><span className='glyphicon glyphicon-search'></span></a></button>
         </div><br/>

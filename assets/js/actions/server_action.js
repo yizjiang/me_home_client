@@ -288,7 +288,7 @@ var ServerActions = {
   },
 
   saveCustomerSearch: function (value){
-    $.ajax({
+    return $.ajax({
       url: '/agent/save_customer_search',
 
       type: 'post',

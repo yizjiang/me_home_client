@@ -17,8 +17,8 @@ module Routes
     end
 
     get '/' do
+      @wid = params['wid'] || ''
       session[:uid] = get_user_session if session[:uid].to_s == ''  #TODO
-      p "root #{session[:uid]}"
       content_type :html
       erb :index
     end
@@ -74,7 +74,7 @@ module Routes
     end
 
     get '/home/show' do
-      response = Typhoeus.get("#{MEEHOME_SERVER_URL}/home/#{params[:home_id]}")
+      response = Typhoeus.get("#{MEEHOME_SERVER_URL}/home/#{params[:home_id]}", params: {wid: params[:wechat_id]})
       response.body
     end
 

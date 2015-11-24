@@ -16,7 +16,7 @@ var HomeDetail = React.createClass({
     $.ajax({
       url: 'home/show',
       dataType: 'json',
-      data: {home_id: id},
+      data: {home_id: id, wechat_id: wid},
       success: function(data) {
         this.setState({currentHome: data});
       }.bind(this),

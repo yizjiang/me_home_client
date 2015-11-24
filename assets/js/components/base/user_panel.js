@@ -28,6 +28,10 @@ var UserPanel = React.createClass({
   },
 
   render: function(){
+    if(!_.isEmpty(this.state.currentUser)){
+      delete window.auth_window;
+    }
+
     return (
       <div className='loginWrap'>
         { _.isEmpty(this.state.currentUser) ? <Login/> : <Profile currentUser= {this.state.currentUser}/>}
