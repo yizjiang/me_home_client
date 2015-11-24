@@ -1,7 +1,6 @@
 development:
-#  server_url: http://localhost:3032
-   server_url: http://api.meejia.com
-   client_url: http://client.meejia.com
+   server_url: http://localhost:3032
+   client_url: http://localhost:3031
 
 test:
   server_url: http://localhost:3032
