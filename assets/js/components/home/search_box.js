@@ -55,10 +55,13 @@ var SearchBox = React.createClass({
   render: function() {
     return (
       <div className='searchDiv'>
+        <h3 className='home_h3'>觅 家 Find a Home</h3>
         <div className='btn_group'><input id='regionValue' value={this.state.regionValue} onChange={this.handleFilterChange} placeholder="请输入要搜索的城市或邮编，例如旧金山"/>
- <button id='more' type="button" onClick={this.moreOptions} >更多</button>
-        <SearchOptions options={this.state} callback={this.handleFilterChange} show={this.state.moreOptions}/>
         <button id='search' type="button" onClick={this.homeSearch} ><a href='#homelistAnchor'><span className='glyphicon glyphicon-search'></span></a></button>
+        <button id='more' type="button" onClick={this.moreOptions} ><span className='glyphicon glyphicon-filter'></span></button>
+        <SearchOptions options={this.state} callback={this.handleFilterChange} show={this.state.moreOptions}/>
+        <div className='slogan_div'><p>觅家为尊贵的您寻觅美国最美的家</p></div>
+        
         </div><br/>
       </div>
       );

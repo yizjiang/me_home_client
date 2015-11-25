@@ -8,7 +8,7 @@ var SearchOptions = React.createClass({
       style.display = 'none'
     }
     return (
-      <div style={style}>
+      <div className='filter' style={style}>
         <label>
           <input type='checkbox' checked={this.props.options.single_family} value='single_family' onChange={this.props.callback}/>
           <span>独栋别墅</span>
@@ -20,11 +20,11 @@ var SearchOptions = React.createClass({
         <label>
           <input type='checkbox' checked={this.props.options.condo} value='condo'  onChange={this.props.callback}/>
           <span>联排别墅/公寓</span>
-        </label>
+        </label><br/>
         <label>
           <span>房间数</span>
           <input id='bedNum' value={this.props.options.bedNum} onChange={this.props.callback}/>
-        </label>
+        </label><br/>
         <label>
           <span>最低价</span>
           <input id='priceMin' value={this.props.options.priceMin} onChange={this.props.callback}/>

@@ -87,11 +87,12 @@ ul.nav.navbar-nav{
 header{
 	width: 100%;
 	z-index: 4;
+	height: 60px;
 
 	img.logoImg{
-		width: 200px;
+		height: 30px;
 		left: 25px;
-		top:25px;
+		top:15px;
 		padding-right: 15px;
 		position: absolute;
 		z-index: 4;
@@ -102,7 +103,7 @@ header{
 		padding: 10px 35px 16px 0px;
 		position: absolute;
 		right: 25px;
-		top: 25px;
+		top: 20px;
 		tansition: all 0.5s;
 		z-index: 4;
 		
@@ -142,7 +143,7 @@ header{
 
 	#nav-toggle.active{
 		z-index: 17;
-		top: 25px;
+		top: 20px;
 
 		span{
 			background-color: transparent;
@@ -172,7 +173,7 @@ div.content{
 	display: block;
 	background-size: cover;
 	width: 100%;
-	height: 100%;
+	height: calc(100% - 60px);
 	position: absolute;
 }
 
@@ -181,19 +182,78 @@ li.hotArea{
 }
 
 div.searchDiv{
-	width: 360px;
-	margin-left: calc(25% - 180px);
-	padding-top: 150px;
-	padding-bottom: 150px;
-	margin-top: 100px;
+	width: 480px;
+	height: 100%;
+	margin-left: 0;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	margin-top: 0px;
 	display: inline-block;
 	background-color: rgba(255,255,255,0.7);
+
+	h3.home_h3{
+		font-size: 24px;
+		font-weight: 600;
+		margin-left: 5%;
+		margin-top: 100px;
+		margin-bottom: 30px;
+	}
+
+	h3.home_h3:after{
+		content:'';
+		border-bottom: 3px solid #000;
+		width: 200px;
+    	display: block;
+    	padding-top: 5px;
+	}
 
 	p{
 		display: inline-block;
 		width: 6%;
 		padding: 0;
 		text-align: center;
+	}
+	div.slogan_div{
+		width: 90%;
+		margin-left: 5%;
+		margin-top: 50px;
+
+		p{
+			width: 90%;
+		    margin-left: 5%;
+		    font-size: 34px;
+		    line-height: 51px;
+		    text-align: center;
+		    font-weight: 100;
+		    color: #555;
+		}
+	}
+
+	div.filter{
+		width: 90%;
+		margin-left: 5%;
+
+		label{
+			margin-right: 5px;
+			font-size: 14px;
+			line-height: 30px;
+			font-weight: 100;
+
+			span{
+				padding: 0 5px;
+			}
+
+			input{
+				border-radius: 5px;
+			    outline: none;
+			    border: 1px solid #ccc;
+			    height: 25px;
+			    padding: 0px;
+			    font-size: 14px;
+			    line-height: 25px;
+			    margin-top: 2.5px;
+			}
+		}
 	}
 }
 
@@ -217,27 +277,29 @@ input.pricebox{
 }
 
 input#priceMin{
-	margin-right:1%;
-	margin-left: 5%;
+	margin-right:0px;
+	margin-left: 0px;
 }
 
 input#priceMax{
-	margin-left:1%;
+	margin-left:0px;
 }
 
-button#search, button#saveSearch{
+button#search, button#more{
 	height:$inputbox-height;
 	border: 0;
 	width: 10%;
 	color: #fff;
 	background: $btn-color;
 	border-radius: 0px;
-	margin-top: 0px;
+	top: -1px;
 	font-size: 15px;
 	padding: 0;
+	position: relative;
+	outline: none;
 }
 
-button#saveSearch{
+button#more{
 	background-color: $yellow;
 }
 
@@ -359,7 +421,7 @@ div.homelistDiv{
 	div.homelistDiv{
 		width: calc(100% - 50px);
 		position: relative;
-		top: 70px;
+		top: 200px;
 
 		li{
 			width: 100% !important;
@@ -585,12 +647,13 @@ li:last-child{
 
 	div.loginWrap{
 		position: absolute;
-		top: 25px;
+		top: 15px;
 		right: 100px;
 		color: #555;
 		font-size: 20px;
 		font-weight: 100;
 		z-index: 4;
+		line-height: 30px;
 
 		p{
 			display: inline-block;
@@ -613,8 +676,7 @@ li:last-child{
 
 	div.loginWrap{
 		position: absolute;
-		top: 55px;
-		right: 25px;
+		right: 75px;
 		font-size: 16px;
 		font-weight: 100;
 		line-height: 30px;
@@ -636,15 +698,42 @@ li:last-child{
 	}
 
 	div.searchDiv{
-		padding-top: 120px;
+		padding-top: 30px;
 		padding-bottom: 30px;
-		width: 90%;
-		margin-left: 5%;
-		background-color: transparent;
-		margin-top: 0px;
+		width: 100%;
+		margin-left: 0;
+		background-color: rgba(200,200,200,0.3);
+		height: 140px;
+		margin-top: -140px;
+		
+		h3.home_h3{
+			margin-top: 0px;
+			margin-bottom: 10px;
+		}
+
+		div.filter{
+			background-color: rgba(255,255,255,0.6);
+		    width: 100%;
+		    margin-left: 0;
+		    padding-left: 5%;
+		    height: 200px;
+		    padding-top: 15px;
+	        margin-top: 16px;
+		}
+
+		div.slogan_div{
+			margin-top: 0px;
+			top: 50px;
+			position: relative;
+
+			p{
+				color: #333;
+			}
+		}
 	}
 	div.content{
-		max-height: 300px;
+		max-height: 200px;
+		top: 200px;
 	}
 	div.citylistDiv ul{
 		max-height: 290px;
@@ -1021,5 +1110,7 @@ div#agentcontent{
 
 .loading{
   background-image: url('../img/loading.gif');
-  no-repeat: center;
+  background-position: center;
+  background-size: cover;
+  height: 300px;
 }
