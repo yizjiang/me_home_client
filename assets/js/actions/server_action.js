@@ -48,7 +48,7 @@ var ServerActions = {
     $.ajax({
       url: '/submitQuestion',
       headers: {
-        'USER_ID': user.id
+        'uid': user.id
       },
       type: 'POST',
 
@@ -76,7 +76,7 @@ var ServerActions = {
     $.ajax({
       url: '/saveSearch',
       headers: {
-       'USER_ID': user.id
+       'uid': user.id
       },
       type: 'POST',
 
@@ -118,7 +118,7 @@ var ServerActions = {
     $.ajax({
       url: '/unfavoriteHome',
       headers: {
-        'USER_ID': user.id
+        'uid': user.id
       },
       type: 'POST',
 
@@ -146,7 +146,7 @@ var ServerActions = {
     $.ajax({
       url: '/favoriteHome',
       headers: {
-        'USER_ID': user.id
+        'uid': user.id
       },
       type: 'POST',
 
@@ -236,7 +236,7 @@ var ServerActions = {
     $.ajax({
       url: '/questions',
       headers: {
-        'USER_ID': user.id
+        'uid': user.id
       },
       type: 'GET',
 
@@ -265,7 +265,7 @@ var ServerActions = {
       url: '/customers/connect',
 
       headers: {
-        'USER_ID': user.id
+        'uid': user.id
       },
 
       type: 'post',
@@ -362,7 +362,7 @@ var ServerActions = {
       url: '/save_page_config',
 
       headers: {
-        'USER_ID': user.id
+        'uid': user.id
       },
 
       type: 'post',
@@ -392,7 +392,7 @@ var ServerActions = {
       url: '/post_answer',
 
       headers: {
-        'USER_ID': user.id
+        'uid': user.id
       },
 
       type: 'post',
@@ -465,7 +465,7 @@ var ServerActions = {
       type: 'post',
 
       headers: {
-        'USER_ID': user.id
+        'uid': user.id
       },
       data: data,
       enctype: 'multipart/form-data',

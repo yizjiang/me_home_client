@@ -16,7 +16,7 @@ module Routes
 
     post '/save_page_config' do
       request_payload = JSON.parse request.body.read
-      response = Typhoeus.post("#{MEEHOME_SERVER_URL}/agent/save_page_config", headers: {user_id: request.env['HTTP_USER_ID'] }, body: request_payload )
+      response = Typhoeus.post("#{MEEHOME_SERVER_URL}/agent/save_page_config", headers: {user_id: request.env['HTTP_UID'] }, body: request_payload )
       response.body
     end
 
@@ -28,7 +28,7 @@ module Routes
       #File.open(target, 'wb') {|f| f.write tempfile.read }
 
       response = Typhoeus.post("#{MEEHOME_SERVER_URL}/agent/upload_qrcode",
-                               headers: {'Content-Type' => 'multipart/form-data', user_id: request.env['HTTP_USER_ID'] },
+                               headers: {'Content-Type' => 'multipart/form-data', user_id: request.env['HTTP_UID'] },
                                body: {:file => File.open(tempfile,'r')})
       response.body
     end
@@ -40,7 +40,7 @@ module Routes
 
     post '/agent/save_customer_search' do
       request_payload = JSON.parse request.body.read
-      response = Typhoeus.post("#{MEEHOME_SERVER_URL}/agent/save_customer_search", headers: {user_id: request.env['HTTP_USER_ID'] }, body: request_payload )
+      response = Typhoeus.post("#{MEEHOME_SERVER_URL}/agent/save_customer_search", headers: {user_id: request.env['HTTP_UID'] }, body: request_payload )
       response.body
     end
   end
