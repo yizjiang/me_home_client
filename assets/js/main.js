@@ -21,7 +21,7 @@ var React = require('react'),
 
 
 //ServerActions.fetchRegionRanking('');
-ServerActions.getCurrentUser().then(function(value){console.log(value)});
+ServerActions.getCurrentUser(undefined).then(function(value){console.log(value)});
 
 var App = React.createClass({
 

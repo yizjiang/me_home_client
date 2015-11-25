@@ -4,5 +4,8 @@ preload_app true
 
 timeout 60
 
-listen "/tmp/unicorn_client.sock", :backlog => 64
-pid "/tmp/unicorn_client.pid"
+listen "/var/run/unicorn/meejia/client.sock", :backlog => 64
+pid "/var/run/unicorn/meejia/client.pid"
+
+stderr_path "/tmp/unicorn/meejia/log/client.stderr.log"
+stdout_path "/tmp/unicorn/meejia/log/client.stdout.log"

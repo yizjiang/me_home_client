@@ -9,14 +9,23 @@ var Profile = React.createClass({
   },
 
   logout: function() {
-    window.location.href = '/clear'
+    //window.location.href = SERVER_URL + '/users/login';
+    var auth_window = window.open( '/clear', null, "width=400,height=250");
+    window.auth_window = auth_window;
+    window.auth_callback = this.auth_back;
+  },
+
+  auth_back: function(ticket) {
+    console.log('logout');
+    ServerActions.getCurrentUser(ticket);
+    window.auth_window.close();
   },
 
   render: function(){
     
     return (
       <div>
-        <p>Welcome</p>
+        <p>Welcome {this.props.currentUser.username}</p>
         <button id='login' type="button" onClick={this.logout} className='nobutton'>退 出</button>
       </div>
       )

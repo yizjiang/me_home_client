@@ -17,8 +17,7 @@ module Routes
     end
 
     get '/' do
-      session[:uid] = get_user_session if session[:uid].to_s == ''  #TODO
-      p "root #{session[:uid]}"
+      @wid = params['wid'] || ''
       content_type :html
       erb :index
     end
@@ -74,11 +73,14 @@ module Routes
     end
 
     get '/home/show' do
-      response = Typhoeus.get("#{MEEHOME_SERVER_URL}/home/#{params[:home_id]}")
+      response = Typhoeus.get("#{MEEHOME_SERVER_URL}/home/#{params[:home_id]}", params: {wid: params[:wechat_id]})
       response.body
     end
 
     get '/user' do
+      if (params[:ticket] != nil && params[:ticket] != '') && session[:uid] == ''
+        session[:uid] =  get_user_session
+      end
       if session[:uid] != ''
         response = Typhoeus.get("#{MEEHOME_SERVER_URL}/user", params: {uid: session[:uid]})
         response.body

@@ -27,7 +27,6 @@ var Customers = React.createClass({
   },
 
   handleSubmit: function(rid) {
-    console.log('connecting');
     ServerActions.connectCustomer(rid, UserStore.getCurrentUser());
   },
 

@@ -44,6 +44,10 @@ module Routes
       @json_body ||= JSON.parse(request.body.read) rescue {}
     end
 
+    get '/auth_callback' do
+      erb :login_callback, layout: false
+    end
+
     private
 
   end

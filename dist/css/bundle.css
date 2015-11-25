@@ -674,6 +674,8 @@ button#submitquestion {
   line-height: 30px;
   width: 50%;
   border-radius: 5px;
+  margin-left: 25%;
+  margin-top: 5px;
 }
 
 button#likedbtn {
@@ -708,4 +710,105 @@ div.commentList div.comment p.answerPara {
 }
 div.commentList div.comment img {
   display: block;
+}
+
+div.agentDiv {
+  position: relative;
+  top: 100px;
+  padding: 0 25px;
+}
+div.agentDiv div#react-tabs-3 div div {
+  width: 100%;
+}
+div.agentDiv div#react-tabs-3 div div input {
+  width: 40%;
+  margin: 5px calc(60% - 2px) 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+div.agentDiv div#react-tabs-3 div div button {
+  margin-top: 5px;
+}
+
+div.react-tabs {
+  top: 100px;
+  position: relative;
+}
+div.react-tabs ul {
+  width: 5%;
+  min-width: 30px;
+  margin-left: 25px !important;
+  padding: 0;
+  float: left;
+  border-bottom: none !important;
+  text-align: center;
+  background-color: #888;
+}
+div.react-tabs ul li {
+  display: block !important;
+  height: 50px;
+  padding: 0 !important;
+  line-height: 50px;
+}
+div.react-tabs div#react-tabs-1, div.react-tabs div#react-tabs-3, div.react-tabs div#react-tabs-5 {
+  width: 90%;
+  margin-left: 10% !important;
+}
+div.react-tabs div#react-tabs-1 ul, div.react-tabs div#react-tabs-3 ul, div.react-tabs div#react-tabs-5 ul {
+  width: 100%;
+  background-color: white;
+}
+div.react-tabs div#react-tabs-1 ul li, div.react-tabs div#react-tabs-3 ul li, div.react-tabs div#react-tabs-5 ul li {
+  background-color: white;
+}
+
+.react-tabs [role=tab][aria-selected=true] {
+  color: white;
+  background-color: red;
+  border-color: transparent;
+  border-radius: 0;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+}
+
+@media screen and (max-width: 640px) {
+  div.react-tabs ul {
+    width: calc(100% - 50px);
+    margin-left: 25px !important;
+    float: none;
+    background-color: #888;
+  }
+  div.react-tabs ul li {
+    display: inline-block !important;
+    width: 33.33%;
+    height: 50px;
+    padding: 0 !important;
+    margin: 0 !important;
+    line-height: 50px;
+    bottom: 0 !important;
+  }
+  div.react-tabs div#react-tabs-1, div.react-tabs div#react-tabs-3, div.react-tabs div#react-tabs-5 {
+    width: calc(100% - 50px);
+    margin-left: 25px !important;
+  }
+  div.react-tabs div#react-tabs-1 ul, div.react-tabs div#react-tabs-3 ul, div.react-tabs div#react-tabs-5 ul {
+    width: 100%;
+    background-color: white;
+  }
+  div.react-tabs div#react-tabs-1 ul li, div.react-tabs div#react-tabs-3 ul li, div.react-tabs div#react-tabs-5 ul li {
+    background-color: white;
+  }
+  div.react-tabs div#react-tabs-1 #question, div.react-tabs div#react-tabs-1 button#submitquestion, div.react-tabs div#react-tabs-1 ol, div.react-tabs div#react-tabs-3 #question, div.react-tabs div#react-tabs-3 button#submitquestion, div.react-tabs div#react-tabs-3 ol, div.react-tabs div#react-tabs-5 #question, div.react-tabs div#react-tabs-5 button#submitquestion, div.react-tabs div#react-tabs-5 ol {
+    width: 90%;
+    margin-left: 5%;
+  }
+
+  .react-tabs [role=tab][aria-selected=true] {
+    color: white;
+    background-color: red;
+    border-color: transparent;
+    border-radius: 0;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+  }
 }
