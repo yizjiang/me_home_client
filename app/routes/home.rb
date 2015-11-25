@@ -38,8 +38,7 @@ module Routes
 
     post '/saveSearch' do
       request_payload = JSON.parse request.body.read
-      p env['uid']
-      response = Typhoeus.post("#{MEEHOME_SERVER_URL}/user/save_search", headers: {user_id: request.env['HTTP_UID'] }, body: request_payload )
+      response = Typhoeus.post("#{MEEHOME_SERVER_URL}/user/save_search", headers: {uid: request.env['HTTP_UID'] }, body: request_payload )
       response.body
     end
 
@@ -50,26 +49,26 @@ module Routes
 
     post '/unfavoriteHome' do
       request_payload = JSON.parse request.body.read
-      response = Typhoeus.post("#{MEEHOME_SERVER_URL}/user/unfavorite_home", headers: {user_id: request.env['HTTP_UID'] }, body: request_payload )
+      response = Typhoeus.post("#{MEEHOME_SERVER_URL}/user/unfavorite_home", headers: {uid: request.env['HTTP_UID'] }, body: request_payload )
       response.body
     end
 
     post '/favoriteHome' do
       request_payload = JSON.parse request.body.read
-      response = Typhoeus.post("#{MEEHOME_SERVER_URL}/user/favorite_home", headers: {user_id: request.env['HTTP_UID'] }, body: request_payload )
+      response = Typhoeus.post("#{MEEHOME_SERVER_URL}/user/favorite_home", headers: {uid: request.env['HTTP_UID'] }, body: request_payload )
       response.body
     end
 
 
     post '/submitQuestion' do
       request_payload = JSON.parse request.body.read
-      response = Typhoeus.post("#{MEEHOME_SERVER_URL}/user/submit_question", headers: {user_id: request.env['HTTP_UID'] }, body: request_payload )
+      response = Typhoeus.post("#{MEEHOME_SERVER_URL}/user/submit_question", headers: {uid: request.env['HTTP_UID'] }, body: request_payload )
       response.body
     end
 
     post '/post_answer' do
       request_payload = JSON.parse request.body.read
-      response = Typhoeus.post("#{MEEHOME_SERVER_URL}/question/post_answer", headers: {user_id: request.env['HTTP_UID'] }, body: request_payload )
+      response = Typhoeus.post("#{MEEHOME_SERVER_URL}/question/post_answer", headers: {uid: request.env['HTTP_UID'] }, body: request_payload )
       response.body
     end
 
@@ -89,12 +88,12 @@ module Routes
     end
 
     get '/questions' do
-      response = Typhoeus.get("#{MEEHOME_SERVER_URL}/question",  headers: {user_id: request.env['HTTP_UID'] })
+      response = Typhoeus.get("#{MEEHOME_SERVER_URL}/question",  headers: {uid: request.env['HTTP_UID'] })
       response.body
     end
 
     get '/user/questions' do
-      response = Typhoeus.get("#{MEEHOME_SERVER_URL}/user/questions",  headers: {user_id: request.env['HTTP_UID'] })
+      response = Typhoeus.get("#{MEEHOME_SERVER_URL}/user/questions",  headers: {uid: request.env['HTTP_UID'] })
       response.body
     end
 
@@ -105,7 +104,7 @@ module Routes
 
     post '/customers/connect' do
       request_payload = JSON.parse request.body.read
-      response = Typhoeus.post("#{MEEHOME_SERVER_URL}/customers/connect", headers: {user_id: request.env['HTTP_UID'] }, body: request_payload)
+      response = Typhoeus.post("#{MEEHOME_SERVER_URL}/customers/connect", headers: {uid: request.env['HTTP_UID'] }, body: request_payload)
       response.body
     end
 
