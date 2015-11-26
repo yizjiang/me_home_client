@@ -39,7 +39,7 @@ var SavedSearchList = React.createClass({
     //TODO why not work first time go to dashboard page
     return (
       <div className={"commentList " + this.props.className}>
-         <h3>保存的记录</h3>
+         <h3>我的查询记录</h3>
          <form>
          {this.props.list.map(function(value){
             var searchOption = JSON.parse(value.search_query);

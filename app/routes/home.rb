@@ -81,7 +81,7 @@ module Routes
       if (params[:ticket] != nil && params[:ticket] != '') && session[:uid] == ''
         session[:uid] =  get_user_session
       end
-      if session[:uid] != ''
+      if session[:uid] && session[:uid] != ''
         response = Typhoeus.get("#{MEEHOME_SERVER_URL}/user", params: {uid: session[:uid]})
         response.body
       end
