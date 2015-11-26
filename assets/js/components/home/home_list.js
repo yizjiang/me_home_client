@@ -4,9 +4,21 @@ var React = require('react');
 var HomeList = React.createClass({
 
   render: function () {
+    var tableheader = null;
+
+    if(this.props.list != undefined && this.props.list.length > 0){
+      tableheader = (          
+          <tr>
+            <th className = 'thadd'><p>地址</p></th>
+            <th className = 'thdes'><p>详情</p></th>
+          </tr>) 
+    }
+
     return (
       <div className={'homelistDiv ' + this.props.custom_style} id='homelistAnchor'>
-         <ul>
+        <table>
+          {tableheader}
+
          { this.props.list.map(function(value){
            var imgUrl;
            if(value.images != undefined && value.images.length > 0){
@@ -14,18 +26,18 @@ var HomeList = React.createClass({
            }else{
             imgUrl = '../img/bay-area.jpg';
            };
-           var divStyle = {backgroundImage: 'url(' + imgUrl + ')'};
-           return <li>
-                    <a href={'#/home_detail/' + value.id}>
-                      <div style={divStyle}>
-                        <p>地址：{value.addr1 + ' ' + value.city}</p>
-                        <p>{value.short_desc}</p>
-                      </div> 
-                    </a>
-                  </li>
+
+           return <tr>
+                    <td className = 'thadd'>
+                      <a href={'#/home_detail/' + value.id}><p>{value.addr1 + ' ' + value.city}</p></a>
+                    </td>
+                    <td className = 'thdes'>
+                      <a href={'#/home_detail/' + value.id}><p>{value.short_desc}</p></a>
+                    </td>
+                  </tr>
            })
          }
-         </ul>
+        </table>
       </div>
       );
   }

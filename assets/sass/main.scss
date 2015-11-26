@@ -5,6 +5,7 @@
 $font-family: Roboto, sans-serif;
 $btn-color: #74c005;
 $yellow: #fbc03d;
+$bg-color: #fffdf7;
 $chinese-font-family: Arial, sans-serif;
 
 $border-radius: 5px;
@@ -88,6 +89,7 @@ header{
 	width: 100%;
 	z-index: 4;
 	height: 60px;
+	box-shadow: 0 0 10px #888;
 
 	img.logoImg{
 		height: 30px;
@@ -168,7 +170,7 @@ header{
 }
 
 div.content{
-	background-image: url('../img/house1.jpg');
+	background-image: url('../img/house11.jpg');
 	background-position: center;
 	display: block;
 	background-size: cover;
@@ -182,7 +184,7 @@ li.hotArea{
 }
 
 div.searchDiv{
-	width: 480px;
+	width: 400px;
 	height: 100%;
 	margin-left: 0;
 	padding-top: 0px;
@@ -266,6 +268,7 @@ input#regionValue{
 	display: inline-block;
 	margin-left: 5%;
 	border: 1px solid $btn-color;
+	outline: none;
 }
 
 input.pricebox{
@@ -375,44 +378,65 @@ button#search{
 }
 
 div.homelistDiv{
-	width: 40%;
-	margin: 30px 5%;
+	width: calc(100% - 400px);
+	margin: 0;
 	background-color: transparent;
 	float: right;
+	height: 100%;
+	overflow-y: scroll;
 
-	ul{
-		list-style: none;
+	table{
 		padding: 0px;
 		width: 100%;
+		margin: 0;
+		max-height: 100%;
+		overflow-y: scroll;
 
-		li{
+		tr{
 			border-bottom: 1px solid #ccc;
+			font-size: 16px;
+			font-weight: 400;
 
-			a{
-				text-decoration: none;
-				color: $dark-grey;
-				font-size: 16px;
-				line-height: 25px;
+			th{
+				top: 0;
+				position: relative;
+				padding: 0 !important;
+				width: 40%;
 
-
-				img{
-					height: 150px;
-					width: 150px;
-					border-radius: 150px;
-					margin-right: 20px;
-					display: inline-block;
-					vertical-align: bottom;
+				p{
+					line-height: 50px;
+					background-color: $bg-color;
+					margin: 0;
 				}
-				div{
-					display: inline-block;
-					width: calc(100% - 170px);
+			}
+
+			td{
+				width: 40%;
+				background-color: $bg-color;
+				vertical-align: top;
+					
+				a{
+					text-decoration: none;
+					color: $dark-grey;
+					width: 100%;
+
+					p{
+						font-size: 15px;
+						font-weight: 300;
+						line-height: 30px;
+						margin: 0;
+						padding: 25px 0;
+					}
 				}
+			}
+
+			.thdes{
+				width: 60%;
 			}
 		}
 		
 	}
 }
-
 
 @media screen and (max-width:640px){
 	div.searchDiv{
@@ -447,91 +471,128 @@ div.homelistDiv{
 
 }
 
-@media screen and (min-width: 641px) and (max-width: 2500px){
-	div.homelistDiv{
-		width: calc(50% - 25px);
-		margin: 30px 25px 30px 0;
-		position: relative;
-		top: 70px;
-		float: right;
-		height: calc(100% - 130px);
-		overflow-y: hidden;
+div.ccent{
+	top: 0px;
+	position: relative;
 
-		li{
-			width: 98%;
-			margin: 1%;
-			display: inline-block !important;
+	div.headerinfo_div{
+		padding: 20px 0;
+		width: 100%;
+		padding-left: 10%;
+		background-color: #eee;
 
-			a{
-				text-align: left;
+		div.address_imgdiv{
+			width: 400px;
+			margin-right: 10%;
+			display: inline-block;
+			
+			img{
+				width: 40px;
+				padding: 5px;
+				display: inline-block;
+				vertical-align: top;
+			}
+			div{
+				width: calc(100% - 40px);
+				display: inline-block;
 
-				img{
-					width: 150px;
-					margin: 20px;
-					margin-left: calc(50% - 75px);
+				h3{
+					font-size: 16px;
+					line-height: 25px;
+					margin: 0;
 				}
+			}
+		}
 
-				div{
-					width: 80% !important;
-					margin-left: 10%;
+		div.rightdes_div{
+			display: inline-block;
+			width: calc(90% - 400px);
+
+			div{
+				display: inline-block;
+				margin-right: 2%;
+				padding-right: 2%;
+				border-right: 1px solid #888;
+				text-align: center;
+
+				h3{
+					font-size: 16px;
+					line-height: 25px;
+					margin: 0;
 				}
 			}
 
+			button#favoriteBtn{
+				background-color: #fff;
+				border: 1px solid #888;
+				outline: none;
+				font-size: 16px;
+				color: #555;
+				vertical-align: text-bottom;
+
+				span.glyphicon{
+					color: #ccc;
+					font-size: 20px;
+				}
+				span.glyphicon.liked{
+					color: #f30;
+				}
+			}
+
+			button#favoriteBtn.favored{
+				background-color: #555;
+				color: white;
+			}
 		}
-	}
-	div.homelistDiv:hover{
-		overflow-y: scroll;
 	}
 }
 
-
-div.ccent{
-	top: 100px;
-	position: relative;
+.carousel{
+	width: 623px;
+	height: 414px;
+	display: inline-block;
 }
 
 .carousel-inner > .item > img,
 .carousel-inner > .item > a > img {
 	width: 100%;
 	margin: auto;
-	max-height: 800px;
+	max-height: 414px;
 }
 
 #myCarousel{
 	min-height: 450px;
 }
 
-button#favoriteBtn{
-	background-color: transparent;
-	border: 1px solid #ccc;
-	outline: none;
-	font-size: 20px;
-	color: #555;
+div.description_div{
+	width: calc(100% - 623px);
+	display: inline-block;
+	padding: 20px;
+	vertical-align: top;
 
-	span.glyphicon{
-		color: #ccc;
-		font-size: 20px;
+	h3{
+		margin: 0;
+		font-size: 18px;
+		padding-bottom: 5px;
 	}
-	span.glyphicon.liked{
-		color: #f30;
+	
+	p{
+		font-size: 14px;
+		line-height: 21px;
+		font-weight: 100;
 	}
 }
 
-button#favoriteBtn:hover{
-	box-shadow: 0 0 5px #555;
-}
-
-button#favoriteBtn.favored{
-	background-color: #555;
-	color: white;
-}
 
 div.detailDiv{
 	width: 100%;
 	padding: 30px 15%;
 	height: auto;
 	margin-bottom: 20px;
-	
+	h3{
+		font-size: 20px;
+	}
+
 	button.btngroup{
 		display: none;
 	}
@@ -541,21 +602,33 @@ div.detailDiv{
 
 		.detailPara{
 			padding-top: 15px;
-			font-size: 20px;
-			line-height: 35px;
+			font-size: 15px;
+			line-height: 20px;
 			font-weight: 100;
 			word-wrap: break-word;
 			border-bottom: 1px solid #ccc;
 			display: block;
-			height: 180px;
+			height: auto;
+			h3{
+				font-size: 18px;
+				margin-top: 0;
+			}
 		}
 		.singledetail{
 			border: none;
-			height: 120px;
+			height: auto;
+
+			h3{
+				margin-top: 0;
+			}
 		}
 		.detailother{
 			border-top: 1px solid #ccc;
 			height: auto;
+
+			h3{
+				margin-top: 0;
+			}
 			
 			div.schoolDiv{
 				width: 48%;
@@ -599,16 +672,6 @@ div.detailDiv{
 @media screen and (max-width: 640px){
 	div.detailDiv{
 		padding: 30px 15px;
-	}
-}
-
-
-#homelistAnchor{
-	ul{
-		text-align: left;
-		li{
-			padding-left: 20px;
-		}
 	}
 }
 
@@ -1109,7 +1172,7 @@ div#agentcontent{
 }
 
 .loading{
-  background-image: url('../img/loading.gif');
+  background-image: url('../img/loading1.gif');
   background-position: center;
   background-size: cover;
   height: 300px;

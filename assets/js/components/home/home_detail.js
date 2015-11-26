@@ -144,15 +144,44 @@ var HomeDetail = React.createClass({
 
     return (
       <div className='ccent'>
+        <div className='headerinfo_div'>
+          <div className='address_imgdiv'>
+            <img src="../img/default.png" />
+            <div>
+              <h3>{home['addr1']}</h3>
+              <p>{home['city'] + ', ' + home['state'] + ' ' + home['zipcode']}</p>
+            </div>
+          </div>
+
+          <div className='rightdes_div'>
+            <div>
+              <h3>{home['price']}</h3>
+              <p>总价</p>
+            </div>
+            <div>
+              <h3>{home['bed_num']}</h3>
+              <p>卧室</p>
+            </div>
+            <div>
+              <h3>{home['bath_num']}</h3>
+              <p>厕所</p>
+            </div>
+            <div>
+              <h3>{home['indoor_size']}</h3>
+              <p>千平方英尺</p>
+            </div>
+            <Button id='favoriteBtn' className={favButtonClass} onClick={this.favoriteAction}>
+              <span className={'glyphicon glyphicon-heart ' + heartClass}></span> 喜欢
+            </Button>
+          </div>
+        </div>
+
         <Carousel>
             {
               home.images.map(function(img){
                 return (
                   <CarouselItem>
                     <img src={SERVER_URL + img.image_url}/>
-                    <div className='carousel-caption'>
-                      <h3>{address}</h3>
-                    </div>
                   </CarouselItem>
                 )
               }
@@ -160,11 +189,15 @@ var HomeDetail = React.createClass({
             }
         </Carousel>
 
+        <div className='description_div'>
+          <h3>
+           {mapping['description']}
+          </h3>
+          <p className='detailp'>{home['description']}</p>
+          <p className='detailp'>{home['chinese_description']}</p>
+        </div>
+
         <div className='detailDiv'>
-          <button className='btngroup'><a href='#'>后 退</a></button>
-          <Button id='favoriteBtn' className={favButtonClass} onClick={this.favoriteAction}>
-            <span className={'glyphicon glyphicon-heart ' + heartClass}></span> 喜欢
-          </Button>
           <h3>房屋详情</h3>
           <div className='detailWrap'>
               
@@ -204,14 +237,6 @@ var HomeDetail = React.createClass({
                  {mapping['price'] + ': ' + home['price']}
                 </h3>
                 <p className='detailp'>{mapping['unit_price'] + ': ' + home['unit_price'] + '美金/平方英尺'}</p>
-              </Col>
-
-              <Col md = {12} className='detailPara detailother'>
-                <h3 className='detailh3'>
-                 {mapping['description']}
-                </h3>
-                <p className='detailp'>{home['description']}</p>
-                <p className='detailp'>{home['chinese_description']}</p>
               </Col>
 
               <Col md = {12} className='detailPara detailother'>
