@@ -78,7 +78,7 @@ module Routes
     end
 
     get '/user' do
-      if (params[:ticket] != nil && params[:ticket] != '') && (session[:uid].nil? && session[:uid] == '')
+      if (params[:ticket] != nil && params[:ticket] != '') && (session[:uid].nil? || session[:uid] == '')
         session[:uid] =  get_user_session
       end
       if session[:uid] && session[:uid] != ''
