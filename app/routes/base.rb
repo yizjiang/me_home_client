@@ -7,6 +7,7 @@ module Routes
     set :root, File.expand_path('../../..', __FILE__)
     set :views, 'app/views'
     enable :sessions
+    set :session_secret, 'meejia_client'
     set :redis, Redis.new
     set :show_exceptions, :after_handler
     set :raise_errors, :after_handler
