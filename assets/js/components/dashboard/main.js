@@ -55,11 +55,13 @@ var Dashboard = React.createClass({
 
   // Remove change listeners from stores
   componentWillUnmount: function() {
+    console.log('unmount dashboad');
     UserStore.removeChangeListener(this._onChange);
     HomeListStore.removeChangeListener(this._onChange);
   },
 
   _onChange: function() {
+    console.log(HomeListStore.getProduct());
     this.setState({data: UserStore.getQuestions(),
       saved_searches: UserStore.getSavedSearches(),
       current_user: UserStore.getCurrentUser(),
@@ -68,15 +70,18 @@ var Dashboard = React.createClass({
   },
 
   componentDidMount: function() {
+    console.log('mount dashboad');
     UserStore.addChangeListener(this._onChange);
     HomeListStore.addChangeListener(this._onChange);
+    $('#nav-toggle').removeClass('active');
+    $('#MenuBox').fadeOut(300, 'linear');
     //setInterval(this.loadCommentsFromServer, this.props.pollInterval);
   },
 
   render: function() {
     return (
       <div className='tabdiv'>
-      <Tabs onSelect={this.handleSelected} selectedIndex={0}>
+      <Tabs onSelect={this.handleSelected} selectedIndex={1}>
         <TabList>
           <Tab><span className='glyphicon glyphicon-heart'></span></Tab>
           <Tab><span className='glyphicon glyphicon-bookmark'></span></Tab>

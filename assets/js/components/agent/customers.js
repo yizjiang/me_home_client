@@ -31,7 +31,6 @@ var Customers = React.createClass({
   },
 
   render: function () {
-    console.log(this.state.customers);
     return (
       <div>
         {this.state.customers.map(function(customer){

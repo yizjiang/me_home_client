@@ -17,7 +17,7 @@ module Routes
     end
 
     get '/' do
-      @wid = params['wid'] || ''
+      @ticket = params['ticket'] || ''
       content_type :html
       erb :index
     end
@@ -73,13 +73,13 @@ module Routes
     end
 
     get '/home/show' do
-      response = Typhoeus.get("#{MEEHOME_SERVER_URL}/home/#{params[:home_id]}", params: {wid: params[:wechat_id]})
+      response = Typhoeus.get("#{MEEHOME_SERVER_URL}/home/#{params[:home_id]}", params: params[:user_id])
       response.body
     end
 
     get '/user' do
       if (params[:ticket] != nil && params[:ticket] != '') && (session[:uid].nil? || session[:uid] == '')
-        session[:uid] =  get_user_session
+        session[:uid] = get_user_session
       end
       if session[:uid] && session[:uid] != ''
         response = Typhoeus.get("#{MEEHOME_SERVER_URL}/user", params: {uid: session[:uid]})

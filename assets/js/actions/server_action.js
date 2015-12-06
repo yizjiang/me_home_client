@@ -7,6 +7,28 @@ var AgentConstants = require('../constants/agent_constants');
 // Define action methods
 var ServerActions = {
 
+  metricTracking: function(user, metric) {
+    $.ajax({
+      url: '/metric_tracking',
+      headers: {
+        'uid': user.id
+      },
+      type: 'POST',
+
+      dataType: 'json',
+
+      data: JSON.stringify(metric),
+
+      success: function(data) {
+        // Do nothing
+      },
+
+      error: function() {
+        console.log('error');
+      }
+    });
+  },
+
   fetchRegionRanking: function(data) {
     AppDispatcher.handleAction({
       actionType: HomeConstants.SELECT_REGION,
@@ -171,8 +193,6 @@ var ServerActions = {
   },
 
   homeSearches: function(query){
-    console.log(query);
-
     $.ajax({
       url: '/homeSearch',
 
@@ -180,7 +200,7 @@ var ServerActions = {
 
       dataType: 'json',
 
-      data: query[0],              //TODO
+      data: query,              //TODO
 
 
       success: function(data) {
@@ -419,10 +439,8 @@ var ServerActions = {
   },
 
   getCurrentUser: function(ticket) {
-    var self = this;
-
     var url;
-    if(ticket){
+    if(ticket != ''){
       url = '/user?' + 'ticket=' + ticket
     } else {
       url = '/user'

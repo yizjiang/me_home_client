@@ -14,15 +14,21 @@ var SavedSearchList = React.createClass({
        this.props.callback(query, id);
      } else {
        query = query.map(function(value){
-         return JSON.parse(value)
+         var search = JSON.parse(value);
+         search['single_family'] = _.includes(search.home_type, 'Single Family Home');
+         search['multi_family'] = _.includes(search.home_type, "Multi-Family Home");
+         search['condo'] = _.includes(search.home_type, "Condo/Townhome/Row Home/Co-Op");
+         return search
        })
-
-       ServerActions.homeSearches(query);  //TODO search all
+       ServerActions.homeSearches(query[0]);  //TODO search all
      }
   },
 
   selectVariant: function(value, index){
-    $('#' + index).toggleClass('selectedItem');
+    $('.listitem').each(function() {
+      $(this).removeClass('selectedItem');
+    });
+    $('#' + index).addClass('selectedItem');
   },
 
   removeSearch: function(value){

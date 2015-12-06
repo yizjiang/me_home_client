@@ -27,7 +27,6 @@ var Login = React.createClass({
   },
 
   auth_back: function(ticket) {
-    console.log('login');
     ServerActions.getCurrentUser(ticket);
     window.auth_window.close();
   },

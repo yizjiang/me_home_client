@@ -21,7 +21,9 @@ var React = require('react'),
 
 
 //ServerActions.fetchRegionRanking('');
-ServerActions.getCurrentUser(undefined).then(function(value){console.log(value)});
+
+console.log(TICKET);
+ServerActions.getCurrentUser(TICKET).then(function(value){console.log(value)});
 
 var App = React.createClass({
 
@@ -100,7 +102,6 @@ Router.run(routes, function (Handler, state) {
 
 
 function closeMenubox(){
-    console.log('clicked');
     $('#nav-toggle').toggleClass('active');
     $('#MenuBox').fadeToggle(300, 'linear');
 };

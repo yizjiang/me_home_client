@@ -13,10 +13,12 @@ var React = require('react'),
 var HomeDetail = React.createClass({
 
   loadHomeFromServer: function(id) {
+    var data = {home_id: id};
+
     $.ajax({
       url: 'home/show',
       dataType: 'json',
-      data: {home_id: id, wechat_id: wid},
+      data: data,
       success: function(data) {
         this.setState({currentHome: data});
       }.bind(this),
@@ -38,6 +40,7 @@ var HomeDetail = React.createClass({
 
   _onChange: function() {
     this.setState({currentFavorite: UserStore.getFavoriteHomes()});
+    ServerActions.metricTracking(UserStore.getCurrentUser(), {home_id: this.props.params.id})
   },
 
   // Add change listeners to stores
@@ -236,7 +239,7 @@ var HomeDetail = React.createClass({
                 <h3 className='detailh3'>
                  {mapping['price'] + ': ' + home['price']}
                 </h3>
-                <p className='detailp'>{mapping['unit_price'] + ': ' + home['unit_price'] + '美金/平方英尺'}</p>
+                <p className='detailp'>{mapping['unit_price'] + ': ' + home['unit_price']}</p>
               </Col>
 
               <Col md = {12} className='detailPara detailother'>

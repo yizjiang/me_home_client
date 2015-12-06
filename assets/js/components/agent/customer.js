@@ -57,8 +57,11 @@ var Customer = React.createClass({
           <input id={"priceMax" + this.props.customer.id} type="text" value={this.state.priceMax || ''} onChange={this.onPriceMaxChange}/>
 
           {
-            this.props.customer.wechat_trackings.map((value) => { return <p>感兴趣的房源: {value.item}</p>})
+            this.props.customer.interest.map((value) => { return <p>浏览过的房源: <a href={CLIENT_URL + "/#/home_detail/" + value.id} >{value.addr1 + ", " + value.city}</a> </p>})
 
+          }
+          {
+            this.props.customer.favorites.map((value) => { return <p>红心的房源: <a href={CLIENT_URL + "/#/home_detail/" + value.id} >{value.addr1 + ", " + value.city}</a> </p>})
           }
          <Button id={'saveBtn' + this.props.customer.id} bsStyle='success' className='save_header' onClick={this.saveSearch.bind(this, this.props.customer.id)}>保存</Button>
        </div>

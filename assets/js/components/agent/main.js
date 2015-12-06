@@ -51,6 +51,8 @@ var Agent = React.createClass({
   },
 
   render: function () {
+    $('#nav-toggle').removeClass('active');
+    $('#MenuBox').fadeOut(300, 'linear');
     var tabPanel = <TabPanel></TabPanel>;
     var tab = <Tab>预览</Tab>;
     if(!_.isEmpty(this.state.data.header)){
