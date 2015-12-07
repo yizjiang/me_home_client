@@ -63,7 +63,7 @@ var Setting = React.createClass({
     }
 
     if(this.state.qr_code){
-      file_drop = <div>
+      file_drop = <div className='shareDiv'>
             <p>这是您的二维码联系方式</p>
             <img src={this.state.qr_code} height="160" width="160"/>
         </div>
@@ -77,11 +77,13 @@ var Setting = React.createClass({
         <Header callback={this.populateHeader}/>
         <SavedSearch className='agent' list={this.state.saved_searches} selected={this.state.page_config.search} callback={this.saveSelectedSearch}/>
         <p id='desc' style={{display: 'none'}} > 保存完毕，请点击预览查看 </p>
-        <div>
-          {content}
-          <img id={'qrcode'} src={SERVER_URL + "/" + this.state.qr_img.img_url} height="160" width="160"/>
+        <div className='shareGroup'>
+          <div className='shareDiv'>
+            {content}
+            <img id={'qrcode'} src={SERVER_URL + "/" + this.state.qr_img.img_url} height="160" width="160"/>
+          </div>
+          {file_drop}
         </div>
-        {file_drop}
       </div>
       );
   }

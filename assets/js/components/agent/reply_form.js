@@ -10,8 +10,8 @@ var ReplyForm = React.createClass({
   render: function() {
     return (
       <div>
-        <h3>回答:</h3>
-        <input id={'answer' + this.props.qid} type="text" placeholder="Answer question.."/>
+        <h3>您的回答:</h3>
+        <input id={'answer' + this.props.qid} className='answer-inputbox' type="text" placeholder="Answer question.."/>
         <button id='search' type="button" onClick={this.handleSubmit.bind(this, this.props.qid)} >提交</button>
       </div>
       );

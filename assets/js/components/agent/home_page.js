@@ -6,13 +6,11 @@ var HomePage = React.createClass({
   render: function () {
     return (
       <div>
-        <h3>
-          Name: {this.props.data.header.name}
-          <br></br>
-          Contact: {this.props.data.header.contact}
-          <br></br>
-          My List
-        </h3>
+        <div>
+          <p>姓名: {this.props.data.header.name}</p>
+          <p>联系电话: {this.props.data.header.contact}</p>
+          <h3 className='previewH3'>优质房源</h3>
+        </div>
         <HomeList custom_style={'previewList'} list={this.props.data.home_list}/>
       </div>
       );

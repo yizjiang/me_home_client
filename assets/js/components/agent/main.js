@@ -105,7 +105,7 @@ var Agent = React.createClass({
          As with <Tab/> the content of <TabPanel/> will be shown as the content.
          */}
 
-              <TabPanel>
+              <TabPanel id='react-tabs-1'>
                 <Setting/>
               </TabPanel>
               {tabPanel}

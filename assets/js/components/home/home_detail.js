@@ -169,7 +169,7 @@ var HomeDetail = React.createClass({
               <h3>{home['bath_num']}</h3>
               <p>厕所</p>
             </div>
-            <div>
+            <div className='last_div_child'>
               <h3>{home['indoor_size']}</h3>
               <p>千平方英尺</p>
             </div>

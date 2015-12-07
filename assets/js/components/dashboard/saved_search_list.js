@@ -77,13 +77,14 @@ var SavedSearchList = React.createClass({
                    <div>
                    <li className={'listitem'} id={index} value={value.search_query} onClick={self.selectVariant.bind(self, value.search_query, index)}>
                       {label}
-                   </li>
-                    <button onClick={self.removeSearch.bind(self, value)} >删除</button>
+                    </li>
+                    <button className='delete_btn' onClick={self.removeSearch.bind(self, value)} >删除</button>
+                    
                    </div>
               )
             })}
           </form>
-         <Button id='savedListBtn' bsStyle='success' onClick={self.runSearch.bind(self, 'savedListBtn')}>执行搜索</Button>
+         <Button id='savedListBtn' bsStyle='success' onClick={self.runSearch.bind(self, 'savedListBtn')}>选中记录，执行搜索</Button>
       </div>
       );
   }

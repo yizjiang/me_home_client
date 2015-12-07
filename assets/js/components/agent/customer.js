@@ -44,17 +44,23 @@ var Customer = React.createClass({
 
     render: function () {
       return (
-        <div>
-          <p>{this.props.customer.nickname}</p>
-          <img src={this.props.customer.head_img_url} height="100" width="100"></img>
-          <label>地区</label>
-          <input id="regionValue" type="text" value={this.state.regionValue || ''} onChange={this.onRegionChange}/>
-          <label>最低价</label>
-          <input id={"priceMin" + this.props.customer.id} type="text" value={this.state.priceMin || ''} onChange={this.onPriceMinChange}/>
-          <label>最高价</label>
+        <div className='each-customer'>
+          <p className='customer-name'>{this.props.customer.nickname}</p>
+          <img src={this.props.customer.head_img_url} height="90" width="90"></img>
+          <div className='customer-input'>
+            <label>地区</label>
+            <input id="regionValue" type="text" value={this.state.regionValue || ''} onChange={this.onRegionChange}/><br/>
+          </div>
+          <div className='customer-input'>
+            <label>最低价</label>
+            <input id={"priceMin" + this.props.customer.id} type="text" value={this.state.priceMin || ''} onChange={this.onPriceMinChange}/>万<br/>
+          </div>
+          <div className='customer-input'>
+            <label>最高价</label>
+            <input id={"priceMax" + this.props.customer.id} type="text" value={this.state.priceMax || ''} onChange={this.onPriceMaxChange}/>万<br/>
+          </div>
           <p>最近搜索: {this.props.customer.last_search}</p>
           <p>搜索次数: {this.props.customer.search_count}</p>
-          <input id={"priceMax" + this.props.customer.id} type="text" value={this.state.priceMax || ''} onChange={this.onPriceMaxChange}/>
 
           {
             this.props.customer.interest.map((value) => { return <p>浏览过的房源: <a href={CLIENT_URL + "/#/home_detail/" + value.id} >{value.addr1 + ", " + value.city}</a> </p>})

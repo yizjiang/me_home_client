@@ -27,11 +27,11 @@ var SearchOptions = React.createClass({
         </label><br/>
         <label>
           <span>最低价</span>
-          <input id='priceMin' value={this.props.options.priceMin} onChange={this.props.callback}/>
+          <input id='priceMin' value={this.props.options.priceMin} onChange={this.props.callback}/>万
         </label>
         <label>
           <span>最高价</span>
-          <input id='priceMax' value={this.props.options.priceMax} onChange={this.props.callback}/>
+          <input id='priceMax' value={this.props.options.priceMax} onChange={this.props.callback}/>万
         </label>
       </div>
       );

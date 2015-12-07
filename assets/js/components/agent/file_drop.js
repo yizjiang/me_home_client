@@ -30,15 +30,15 @@ var FileDrop = React.createClass({
         <div>{this.state.files.map((file) => <img src={file.preview} /> )}</div>
       </div>
     } else {
-      content = (<div><Dropzone ref="dropzone" onDrop={this.onDrop}>
-        <div>Try dropping some files here, or click to select files to upload.</div>
+      content = (<div className='drop-area'><Dropzone ref="dropzone" onDrop={this.onDrop}>
+        <div>请上传您的微信二维码图片</div>
       </Dropzone>
-        <Button bsStyle='success' onClick={this.onOpenClick}>Open Dropzone</Button></div>)
+        <Button bsStyle='success' onClick={this.onOpenClick}>选择图片</Button></div>)
     }
 
 
   return (
-    <div>
+    <div className='shareDiv'>
       {content}
     </div>
     );

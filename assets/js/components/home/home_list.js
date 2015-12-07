@@ -1,5 +1,7 @@
 'use strict';
-var React = require('react');
+var React = require('react'),
+    Carousel = require('react-bootstrap').Carousel,
+    CarouselItem = require('react-bootstrap').CarouselItem;
 
 var HomeList = React.createClass({
 
@@ -10,7 +12,7 @@ var HomeList = React.createClass({
     if(this.props.list != undefined && this.props.list.length > 0){
       tableheader = (          
           <tr>
-            <th className = 'thadd'><p>地址</p></th>
+            <th className = 'thpic'></th>
             <th className = 'thdes'><p>详情</p></th>
           </tr>)
 
@@ -22,10 +24,22 @@ var HomeList = React.createClass({
           imgUrl = '../img/bay-area.jpg';
         };
         return (<tr>
+          <td className='picture_td'>
+            <Carousel>
+              {
+                value.images.map(function(img){
+                  return (
+                    <CarouselItem>
+                      <img src={SERVER_URL + img.image_url}/>
+                    </CarouselItem>
+                  )
+                }
+                )
+              }
+            </Carousel>
+          </td>
           <td className = 'thadd'>
             <a href={'#/home_detail/' + value.id}><p>{value.addr1 + ' ' + value.city}</p></a>
-          </td>
-          <td className = 'thdes'>
             <a href={'#/home_detail/' + value.id}><p>{value.short_desc}</p></a>
           </td>
         </tr>
