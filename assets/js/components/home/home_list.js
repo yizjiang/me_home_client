@@ -23,11 +23,10 @@ var HomeList = React.createClass({
         }else{
           imgUrl = '../img/bay-area.jpg';
         };
-        return (<tr>
-          <td className='picture_td'>
-            <Carousel>
-              {
-                value.images.map(function(img){
+
+        var imageItems = null;
+        if(value.images != undefined) {
+          imageItems = value.images.map(function(img){
                   return (
                     <CarouselItem>
                       <img src={SERVER_URL + img.image_url}/>
@@ -35,6 +34,12 @@ var HomeList = React.createClass({
                   )
                 }
                 )
+        }
+        return (<tr>
+          <td className='picture_td'>
+            <Carousel>
+              {
+                imageItems
               }
             </Carousel>
           </td>
