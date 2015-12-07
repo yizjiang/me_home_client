@@ -74,7 +74,7 @@ var Setting = React.createClass({
 
     return (
       <div>
-        <Header callback={this.populateHeader} header={this.state.page_config.header}/>
+        <Header callback={this.populateHeader}/>
         <SavedSearch className='agent' list={this.state.saved_searches} selected={this.state.page_config.search} callback={this.saveSelectedSearch}/>
         <p id='desc' style={{display: 'none'}} > 保存完毕，请点击预览查看 </p>
         <div>

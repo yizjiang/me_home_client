@@ -393,7 +393,7 @@ var ServerActions = {
 
       success: function(data) {
         AppDispatcher.handleAction({
-          actionType: UserConstants.PUBLISH_PAGE,
+          actionType: UserConstants.PUBLISH_PAGE_CONFIG,
           data: data
         })
       },
