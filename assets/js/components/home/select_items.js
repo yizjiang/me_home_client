@@ -3,38 +3,32 @@ var React = require('react'),
 
 var SelectItems = React.createClass({
 
-  getInitialState: function() {
-    return {
-      filterValue: '',
-      sortBy: 'name'
-    };
-  },
+  selectRegion: function(data){
 
-  selectVariant: function(value){
-    ServerActions.fetchRegionRanking({region: value});
+    console.log(data);
+    this.props.callback(data)
   },
 
   render: function() {
     var that = this;
-    console.log(this.props.selected_list);
     return (
+      <div className="panelDiv">
       <div className='citylistDiv'>
         <ul>
-        { this.props.search_options.map(function(value, index){
+        { this.props.list.map(function(value, index){
           var className = '';
-          if(_.include(that.props.selected_list, value)){
-            className = 'select'
-          }
-
           return(
-            <li className={'listitem ' + className} id={'li' + that.props.level + index} onClick={that.selectVariant.bind(that, value)}>
-              {value}
-            </li>
-      )
-      })
-      }
-      </ul>
-        </div>
+                <div>
+                <li className={'listitem ' + className} id={'li' + index}  onClick={that.selectRegion.bind(that, value)}>
+                  {value}
+                </li>
+                </div>
+               )
+          })
+        }
+        </ul>
+      </div>
+      </div>
     );
   }
 });

@@ -29,6 +29,32 @@ var ServerActions = {
     });
   },
 
+  getAllCity: function(data) {
+    $.ajax({
+      url: '/all_city',
+
+      type: 'GET',
+
+      dataType: 'json',
+
+      data: {area: data},
+
+      success: function(data) {
+        AppDispatcher.handleAction({
+          actionType: 'LOAD_AREA',
+          data: data
+        })
+      },
+
+      error: function() {
+        AppDispatcher.handleAction({
+          actionType: 'LOAD_AREA',
+          data: []
+        })
+      }
+    });
+  },
+
   fetchRegionRanking: function(data) {
     AppDispatcher.handleAction({
       actionType: HomeConstants.SELECT_REGION,

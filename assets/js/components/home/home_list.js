@@ -1,5 +1,6 @@
 'use strict';
 var React = require('react'),
+    StatusBar = require('./status_bar'),
     Carousel = require('react-bootstrap').Carousel,
     CarouselItem = require('react-bootstrap').CarouselItem;
 
@@ -8,8 +9,11 @@ var HomeList = React.createClass({
   render: function () {
     var tableheader = null;
     var tablebody = [];
+    var statusHeader = null;
+    var noResult = null;
 
     if(this.props.list != undefined && this.props.list.length > 0){
+      statusHeader = <StatusBar count={this.props.count}/> ;
       tableheader = (          
           <tr>
             <th className = 'thpic'></th>
@@ -51,14 +55,19 @@ var HomeList = React.createClass({
           )
       })
 
+    } else if(this.props.searched == true) {
+      statusHeader = <p>对不起，该地区没有您理想的家</p>
     }
 
     return (
-      <div className={'homelistDiv ' + this.props.custom_style} id='homelistAnchor'>
-        <table>
-          <thead>{tableheader}</thead>
-          <tbody>{tablebody}</tbody>
-        </table>
+      <div>
+        {statusHeader}
+        <div className={'homelistDiv ' + this.props.custom_style} id='homelistAnchor'>
+          <table>
+            <thead>{tableheader}</thead>
+            <tbody>{tablebody}</tbody>
+          </table>
+        </div>
       </div>
       );
   }

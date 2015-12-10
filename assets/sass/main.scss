@@ -260,7 +260,7 @@ div.searchDiv{
 	}
 }
 
-input#regionValue{
+.input-region{
 	height: $inputbox-height;
 	width: 70%;
 	border: 0;
@@ -794,7 +794,7 @@ input#question, input#answer9{
 	border-radius: 5px;
 }
 
-div.react-tabs div#react-tabs-5 button#search{
+div.react-tabs div[id^='react-tabs'] button#search{
 	width: 50%;
 	margin-left: 25%;
 }
@@ -992,7 +992,7 @@ div.tabdiv{
 	    		line-height: 50px;
 	    	}
 	    }
-	    div#react-tabs-1, div#react-tabs-3, div#react-tabs-5{
+	    div[id^='react-tabs']{
 	    	width: 90%;
 	    	margin-left: 10% !important;
 
@@ -1032,7 +1032,7 @@ div.tabdiv{
 	}
 }
 
-div#react-tabs-3{
+div[id^='react-tabs']{
 	p{
 		font-size: 16px;
 		line-height: 23px;
@@ -1067,7 +1067,7 @@ div#react-tabs-3{
 		    	}
 		    }
 
-		    div#react-tabs-1, div#react-tabs-3, div#react-tabs-5{
+		    div[id^='react-tabs']{
 		    	width: calc(100% - 50px);
 		    	margin-left: 25px !important;
 
@@ -1156,7 +1156,7 @@ div.agentDiv{
 	    		color: #666;
 	    	}
 	    }
-	    div#react-tabs-1, div#react-tabs-3, div#react-tabs-5, div#react-tabs-7{
+	    div[id^='react-tabs']{
 		    width: calc(100% - 115px);
 		    margin-left: 90px !important;
 
@@ -1186,7 +1186,7 @@ div.agentDiv{
 		    }
 	    }
 
-	    div#react-tabs-5{
+	    div[id^='react-tabs']{
 	    	div.question_div{
 	    		ul{
 	    			background-color: #fff;
@@ -1231,7 +1231,7 @@ div.agentDiv{
 	    	}
 	    }
 
-	    div#react-tabs-7{
+	    div[id^='react-tabs']{
 	    	div.each-customer{
 	    		text-align: left;
 	    		border-bottom: 1px solid #ccc; 
@@ -1326,7 +1326,7 @@ div.shareGroup{
 		    	}
 		    }
 
-		    div#react-tabs-1, div#react-tabs-3, div#react-tabs-5{
+		    div[id^='react-tabs']{
 		    	width: calc(100% - 50px);
 		    	margin-left: 25px !important;
 

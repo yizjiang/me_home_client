@@ -11,7 +11,7 @@ var HomePage = React.createClass({
           <p>联系电话: {this.props.data.header.contact}</p>
           <h3 className='previewH3'>优质房源</h3>
         </div>
-        <HomeList custom_style={'previewList'} list={this.props.data.home_list}/>
+        <HomeList custom_style={'previewList'} count={this.props.data.home_list.length} list={this.props.data.home_list}/>
       </div>
       );
   }

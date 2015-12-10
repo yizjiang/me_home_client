@@ -2,6 +2,12 @@ var React = require('react'),
   ServerActions = require('../../actions/server_action');
 
 var SearchOptions = React.createClass({
+
+  selectChange: function() {
+    console.log(event.target.id);
+    console.log(event.target.value);
+  },
+
   render: function() {
     var style = {};
     if(!this.props.show) {
@@ -23,15 +29,49 @@ var SearchOptions = React.createClass({
         </label><br/>
         <label>
           <span>房间数</span>
-          <input id='bedNum' value={this.props.options.bedNum} onChange={this.props.callback}/>
+          <select id='bedNum' onChange={this.props.callback}>
+            <option value="1">1+</option>
+            <option value="2" selected>2+</option>
+            <option value="3">3+</option>
+            <option value="4">4+</option>
+            <option value="5">5+</option>
+          </select>
+        </label><br/>
+        <label>
+          <span>室内面积</span>
+          <select id='indoor_size' onChange={this.props.callback}>
+            <option value="538">50平方米以上</option>
+            <option value="968" selected>90平方米以上</option>
+            <option value="1291">120平方米以上</option>
+            <option value="1614">150平方米以上</option>
+            <option value="2153">200平方米以上</option>
+            <option value="2690">250平方米以上</option>
+            <option value="3229">350平方米以上</option>
+          </select>
+        </label><br/>
+        <label>
+          <span>房龄</span>
+          <select id='home_age' onChange={this.props.callback}>
+            <option value="200" selected>不限</option>
+            <option value="5">5年内</option>
+            <option value="10" >10年内</option>
+            <option value="20">20年内</option>
+            <option value="30">30年内</option>
+            <option value="50">50年内</option>
+            <option value="80">80年内</option>
+          </select>
         </label><br/>
         <label>
           <span>最低价</span>
-          <input id='priceMin' value={this.props.options.priceMin} onChange={this.props.callback}/>万
+          <input id='priceMin' value={this.props.options.priceMin} placeholder='不限' onChange={this.props.callback}/>万
         </label>
         <label>
           <span>最高价</span>
-          <input id='priceMax' value={this.props.options.priceMax} onChange={this.props.callback}/>万
+          <input id='priceMax' value={this.props.options.priceMax} placeholder='不限' onChange={this.props.callback}/>万
+        </label>
+        <label>
+          <span>小学评分</span>
+          <Rcslider min={0} max={10}/>
         </label>
       </div>
       );

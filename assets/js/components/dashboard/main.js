@@ -11,7 +11,8 @@ var QuestionList = require('./question_list.js'),
     Tab = ReactTabs.Tab,
     Tabs = ReactTabs.Tabs,
     TabList = ReactTabs.TabList,
-    TabPanel = ReactTabs.TabPanel;
+    TabPanel = ReactTabs.TabPanel,
+    Paginator = require('react-pagify');
 
 var Dashboard = React.createClass({
 
@@ -50,7 +51,11 @@ var Dashboard = React.createClass({
       saved_searches: UserStore.getSavedSearches(),
       current_user: UserStore.getCurrentUser(),
       home_list: HomeListStore.getProduct(),
-      favorite_list: UserStore.getFavoriteHomes()};       //TODO re-design
+      favorite_list: UserStore.getFavoriteHomes(),
+      pagination: {
+        page: 0,
+        perPage: 5
+      }};       //TODO re-design
   },
 
   // Remove change listeners from stores
@@ -70,7 +75,6 @@ var Dashboard = React.createClass({
   },
 
   componentDidMount: function() {
-    console.log('mount dashboad');
     UserStore.addChangeListener(this._onChange);
     HomeListStore.addChangeListener(this._onChange);
     $('#nav-toggle').removeClass('active');
@@ -79,6 +83,30 @@ var Dashboard = React.createClass({
   },
 
   render: function() {
+    var pagination = this.state.pagination || {};
+    var paginated = Paginator.paginate( this.state.home_list, pagination);
+    var begin = this.state.pagination.page * this.state.pagination.perPage;
+    var end = begin + this.state.pagination.perPage;
+    var list = this.state.home_list.slice(begin, end) ;
+
+    var paginateComp = null;
+    if(this.state.home_list.length > 5) {
+      paginateComp = <Paginator
+        className='pagify-pagination'
+        ellipsesClassName='pagify-ellipsis'
+        activeClassName='selected'
+        inactiveClassName='inactive'
+        page={paginated.page}
+        pages={paginated.amount}
+        beginPages={3}
+        endPages={3}
+        showPrevNext={true}
+        alwaysShowPrevNext={true}
+        prevButton={'Previous one'}
+        nextButton={'Next one'}
+        onSelect={this.onSelect}>
+        </Paginator>
+    }
     return (
       <div className='tabdiv'>
       <Tabs onSelect={this.handleSelected} selectedIndex={1}>
@@ -90,13 +118,14 @@ var Dashboard = React.createClass({
 
         <TabPanel>
           <h3>红心房源</h3>
-          <HomeList custom_style={'favoredHouse'} list={this.state.favorite_list}/>
+          <HomeList custom_style={'favoredHouse'} count={this.state.favorite_list.length} list={this.state.favorite_list}/>
         </TabPanel>
 
         <TabPanel>
           <SavedSearchList list={this.state.saved_searches}/>
           <div className='searchResult'>
-            <HomeList list={this.state.home_list}/>
+            <HomeList count={this.state.home_list.length} list={list}/>
+            {paginateComp}
           </div>
         </TabPanel>
 
@@ -109,7 +138,28 @@ var Dashboard = React.createClass({
       </div>
     
     );
-  }
+  },
+
+  onSelect(page) {
+  var pagination = this.state.pagination || {};
+
+  pagination.page = page;
+
+  this.setState({
+    pagination: pagination
+  });
+},
+
+onPerPage(e) {
+  var pagination = this.state.pagination || {};
+
+  pagination.perPage = parseInt(event.target.value, 10);
+
+  this.setState({
+    pagination: pagination
+  });
+}
+
 });
 
 //React.render(
