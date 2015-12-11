@@ -1,21 +1,20 @@
-var AppDispatcher = require('../dispatcher/app_dispatcher'),
-  EventEmitter = require('events').EventEmitter,
-  AgentConstants = require('../constants/agent_constants'),
-  _ = require('lodash');
+var AppDispatcher = require('../dispatcher/app_dispatcher');
+var EventEmitter = require('events').EventEmitter;
+var _ = require('lodash');
 
 // Define initial data points
-var _page_data = {header:{}, home_list: [], qr_image: '', head_image: ''};
+var _filter = {elementary: 0, middle: 0, high: 0};
 
-function loadQuestions(data) {
-  _page_data = data;
+// Method to load product data from mock API
+function setFilter(data) {
+  _filter = _.merge(_filter, data);
 }
 
 // Extend ProductStore with EventEmitter to add eventing capabilities
-var AgentPageStore = _.extend({}, EventEmitter.prototype, {
+var FilterStore = _.extend({}, EventEmitter.prototype, {
 
-  // Return Product data
-  getAgentPublishedPage: function() {
-    return _page_data;
+  getFilter :function() {
+    return _filter;
   },
 
   // Emit Change event
@@ -41,20 +40,19 @@ AppDispatcher.register(function(payload) {
 
   switch(action.actionType) {
 
-    // Respond to RECEIVE_DATA action
-    case AgentConstants.AGENT_DATA:
-      console.log('agent receive data');
-      loadQuestions(action.data);
+    case 'FILTER_CONDITION':
+      setFilter(action.data);
       break;
+
     default:
       return true;
   }
 
   // If action was responded to, emit change event
-  AgentPageStore.emitChange();
+  FilterStore.emitChange();
 
   return true;
 
 });
 
-module.exports = AgentPageStore;
+module.exports = FilterStore;

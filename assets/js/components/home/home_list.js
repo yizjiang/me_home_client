@@ -2,7 +2,8 @@
 var React = require('react'),
     StatusBar = require('./status_bar'),
     Carousel = require('react-bootstrap').Carousel,
-    CarouselItem = require('react-bootstrap').CarouselItem;
+    CarouselItem = require('react-bootstrap').CarouselItem,
+    _ = require('lodash');
 
 var HomeList = React.createClass({
 
@@ -11,8 +12,9 @@ var HomeList = React.createClass({
     var tablebody = [];
     var statusHeader = null;
     var noResult = null;
+    var list = this.props.list;
 
-    if(this.props.list != undefined && this.props.list.length > 0){
+    if(list != undefined && list.length > 0){
       statusHeader = <StatusBar count={this.props.count}/> ;
       tableheader = (          
           <tr>
@@ -20,7 +22,7 @@ var HomeList = React.createClass({
             <th className = 'thdes'><p>详情</p></th>
           </tr>)
 
-      tablebody = this.props.list.map(function(value){
+      tablebody = list.map(function(value){
         var imgUrl;
         if(value.images != undefined && value.images.length > 0){
           imgUrl = SERVER_URL + value.images[0].image_url;

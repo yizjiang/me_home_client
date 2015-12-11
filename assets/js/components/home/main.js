@@ -13,6 +13,7 @@ var SearchBox = require('./search_box.js'),
     HomeList = require('./home_list.js'),
     SelectItems = require('./select_items'),
     AreaStore = require('../../stores/area_store'),
+    FilterStore = require('../../stores/filter_store'),
     ServerActions = require('../../actions/server_action'),
     HomeListStore = require('../../stores/home_list_store');
 
@@ -24,7 +25,8 @@ function getSearchData() {
       page: 0,
       perPage: 5
     },
-    areas: AreaStore.getArea()
+    areas: AreaStore.getArea(),
+    filter: FilterStore.getFilter()
   };
 }
 
@@ -38,12 +40,14 @@ var HomeMain = React.createClass({
     HomeListStore.addChangeListener(this._onChange);
     ServerActions.getAllCity('SF');
     AreaStore.addChangeListener(this.loadArea);
+    FilterStore.addChangeListener(this.changeFilter);
   },
 
   // Remove change listeners from stores
   componentWillUnmount: function() {
     HomeListStore.removeChangeListener(this._onChange);
     AreaStore.removeChangeListener(this.loadArea);
+    FilterStore.removeChangeListener(this.changeFilter);
   },
 
   _onChange: function() {
@@ -54,18 +58,40 @@ var HomeMain = React.createClass({
     this.setState({areas: AreaStore.getArea()});
   },
 
+  changeFilter: function() {
+    this.setState({filter: FilterStore.getFilter()})
+  },
+
   performedSearch: function(flag) {
     this.setState({searched: flag});
   },
 
+  filterHomes: function(home_list) {
+    var filter = this.state.filter;
+    if(_.isEqual(filter, {elementary: 0, middle: 0, high: 0})) {
+      return home_list
+    } else{
+      _.filter(home_list, (home) => {
+        return (home.assigned_school.length == 3
+          && home.assigned_school[0].rating > filter.elementary
+          && home.assigned_school[1].rating > filter.middle
+          && home.assigned_school[2].rating > filter.high
+          )
+      })
+    }
+  },
+
   render: function () {
+    var home_list = this.state.home_list
+    home_list = this.filterHomes(home_list);
+
     var pagination = this.state.pagination || {};
-    var paginated = Paginator.paginate( this.state.home_list, pagination);
+    var paginated = Paginator.paginate( home_list, pagination);
     var begin = this.state.pagination.page * this.state.pagination.perPage;
     var end = begin + this.state.pagination.perPage;
-    var list = this.state.home_list.slice(begin, end) ;
+    var list = home_list.slice(begin, end) ;
     var paginateComp = null;
-    if(this.state.home_list.length > 5) {
+    if(home_list.length > 5) {
       paginateComp = <Paginator
       className='pagify-pagination'
       ellipsesClassName='pagify-ellipsis'
@@ -82,11 +108,11 @@ var HomeMain = React.createClass({
       onSelect={this.onSelect}>
       </Paginator>
     }
-
     return (
       <div className="content">
         <SearchBox areas={this.state.areas}  callback={this.performedSearch}/>
-        <HomeList searched={this.state.searched} count={this.state.home_list.length} list={list}/>
+
+        <HomeList searched={this.state.searched} count={home_list.length} list={list}/>
         {paginateComp}
 
         <RouteHandler/>

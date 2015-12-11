@@ -8,10 +8,13 @@ var ServerActions = require('../../actions/server_action'),
 var _selectRgion = [];
 
 function addRegion(data){
+
+  data = data.split(',')[0];
   _selectRgion.push(data)
 }
 
 function removeRegion(data){
+  data = data.split(',')[0];
   _.remove(_selectRgion, function(n) {
     return n == data;
   });

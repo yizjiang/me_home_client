@@ -1,11 +1,22 @@
 var React = require('react'),
+  Slider = require('rc-slider'),
+  FilterStore = require('../../stores/filter_store'),
   ServerActions = require('../../actions/server_action');
+
+const marks = [1,2,3,4,5,6,7,8,9,10];
 
 var SearchOptions = React.createClass({
 
-  selectChange: function() {
-    console.log(event.target.id);
-    console.log(event.target.value);
+  elementaryRatingChange: function(value){
+    ServerActions.filterChange({elementary: value})
+  },
+
+  middleRatingChange: function(value){
+    ServerActions.filterChange({middle: value})
+  },
+
+  highRatingChange: function(value){
+    ServerActions.filterChange({high: value})
   },
 
   render: function() {
@@ -69,10 +80,13 @@ var SearchOptions = React.createClass({
           <span>最高价</span>
           <input id='priceMax' value={this.props.options.priceMax} placeholder='不限' onChange={this.props.callback}/>万
         </label>
-        <label>
-          <span>小学评分</span>
-          <Rcslider min={0} max={10}/>
-        </label>
+        <br/>
+        <label>小学评分</label>
+        <Slider marks={marks} step={null} onChange={this.elementaryRatingChange} defaultValue={30}/>
+        <label>初中评分</label>
+        <Slider marks={marks} step={null} onChange={this.middleRatingChange}/>
+        <label>高中评分</label>
+        <Slider marks={marks} step={null} onChange={this.highRatingChange}/>
       </div>
       );
   }

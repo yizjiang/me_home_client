@@ -7,6 +7,13 @@ var AgentConstants = require('../constants/agent_constants');
 // Define action methods
 var ServerActions = {
 
+  filterChange: function(condition) {
+    AppDispatcher.handleAction({
+      actionType: 'FILTER_CONDITION',
+      data: condition
+    })
+  },
+
   metricTracking: function(user, metric) {
     $.ajax({
       url: '/metric_tracking',
