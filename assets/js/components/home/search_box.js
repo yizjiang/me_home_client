@@ -28,7 +28,7 @@ var SearchBox = React.createClass({
 
   getInitialState: function() {
     return {
-      moreOptions: false,
+      moreOptions: this.props.searched,
       regionValue: [],
       priceMin: '',
       priceMax: '',
@@ -77,7 +77,6 @@ var SearchBox = React.createClass({
     }
   },
 
-
   moreOptions: function() {
     this.setState({moreOptions: !this.state.moreOptions});
   },
@@ -101,7 +100,7 @@ var SearchBox = React.createClass({
         />
         <button id='search' type="button" onClick={this.homeSearch} ><a href='#homelistAnchor'><span className='glyphicon glyphicon-search'></span></a></button>
         <button id='more' type="button" onClick={this.moreOptions} ><span className='glyphicon glyphicon-filter'></span></button>
-        <SearchOptions options={this.state} callback={this.handleFilterChange} show={this.state.moreOptions}/>
+        <SearchOptions options={this.state} callback={this.handleFilterChange} show={this.props.searched || this.state.moreOptions}/>
         <div className='slogan_div'><p>觅家为尊贵的您寻觅<br/>美国最美的家</p></div>
 
         <br/>

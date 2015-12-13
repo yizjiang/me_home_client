@@ -61,13 +61,14 @@ var Customer = React.createClass({
           </div>
           <p>最近搜索: {this.props.customer.last_search}</p>
           <p>搜索次数: {this.props.customer.search_count}</p>
-
+          <p>浏览过的房源: </p>
           {
-            this.props.customer.interest.map((value) => { return <p>浏览过的房源: <a href={CLIENT_URL + "/#/home_detail/" + value.id} >{value.addr1 + ", " + value.city}</a> </p>})
+            this.props.customer.interest.map((value) => { return <p><a href={CLIENT_URL + "/#/home_detail/" + value.id} >{value.addr1 + ", " + value.city}</a> </p>})
 
           }
+          <p>红心的房源: </p>
           {
-            this.props.customer.favorites.map((value) => { return <p>红心的房源: <a href={CLIENT_URL + "/#/home_detail/" + value.id} >{value.addr1 + ", " + value.city}</a> </p>})
+            this.props.customer.favorites.map((value) => { return <p><a href={CLIENT_URL + "/#/home_detail/" + value.id} >{value.addr1 + ", " + value.city}</a> </p>})
           }
          <Button id={'saveBtn' + this.props.customer.id} bsStyle='success' className='save_header' onClick={this.saveSearch.bind(this, this.props.customer.id)}>保存</Button>
        </div>

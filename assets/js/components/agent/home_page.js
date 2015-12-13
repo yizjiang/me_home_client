@@ -4,7 +4,6 @@ var React = require('react'),
 
 var HomePage = React.createClass({
   render: function () {
-    console.log(this.props.data);
     return (
       <div>
         <div>

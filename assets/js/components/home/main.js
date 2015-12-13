@@ -71,7 +71,7 @@ var HomeMain = React.createClass({
     if(_.isEqual(filter, {elementary: 0, middle: 0, high: 0})) {
       return home_list
     } else{
-      _.filter(home_list, (home) => {
+      return _.filter(home_list, (home) => {
         return (home.assigned_school.length == 3
           && home.assigned_school[0].rating > filter.elementary
           && home.assigned_school[1].rating > filter.middle
@@ -83,8 +83,9 @@ var HomeMain = React.createClass({
 
   render: function () {
     var home_list = this.state.home_list
+    console.log(home_list.length);
     home_list = this.filterHomes(home_list);
-
+    console.log(home_list.length);
     var pagination = this.state.pagination || {};
     var paginated = Paginator.paginate( home_list, pagination);
     var begin = this.state.pagination.page * this.state.pagination.perPage;
@@ -110,7 +111,7 @@ var HomeMain = React.createClass({
     }
     return (
       <div className="content">
-        <SearchBox areas={this.state.areas}  callback={this.performedSearch}/>
+        <SearchBox areas={this.state.areas} searched={this.state.searched} callback={this.performedSearch}/>
 
         <HomeList searched={this.state.searched} count={home_list.length} list={list}/>
         {paginateComp}

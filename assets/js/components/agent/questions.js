@@ -35,6 +35,7 @@ var Questions = React.createClass({
     var self = this;
     return (
       <div className='question_div'>
+        <h3>客户问题</h3>
         <ul>
       {this.state.questions.map(function(q){
         return (<li>
