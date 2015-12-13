@@ -62,7 +62,7 @@ var HomeList = React.createClass({
     }
 
     return (
-      <div>
+      <div className='searchresult_div'>
         {statusHeader}
         <div className={'homelistDiv ' + this.props.custom_style} id='homelistAnchor'>
           <table>
