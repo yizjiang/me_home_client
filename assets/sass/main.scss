@@ -7,6 +7,7 @@ $font-family: Roboto, sans-serif;
 $btn-color: #74c005;
 $yellow: #fbc03d;
 $bg-color: #fffdf7;
+$red: #D9534F;
 $chinese-font-family: Arial, sans-serif;
 
 $border-radius: 5px;
@@ -178,6 +179,46 @@ div.content{
 	width: 100%;
 	height: calc(100% - 60px);
 	position: absolute;
+
+	p.Search_count{
+		font-size: 18px;
+		padding: 10px 15px;
+		font-weight: 500;
+		background-color: #fffdf7;
+		margin: 0;
+		text-align: center;
+		span:nth-of-type(1){
+			margin-left: 15px;
+		}
+	}
+	.pagify-pagination{
+		list-style: none;
+	    text-align: center;
+	    padding: 15px 20px;
+	    margin: 0;
+	    vertical-align: bottom;
+	    position: fixed;
+	    bottom: 0;
+	    width: calc(100% - 400px);
+	    float: right;
+	    right: 0;
+
+		li{
+			display: inline-block;
+			padding: 10px;
+			border: 1px solid #ccc !important;
+			margin: 0 5px;
+			background-color: $bg-color;
+			a{
+				color: #333;
+				font-weight: 400;
+			}
+			a:hover, a:active, a:focus, a:visited{
+				text-decoration: none;
+				color: #333;
+			}
+		}
+	}
 }
 
 li.hotArea{
@@ -185,7 +226,7 @@ li.hotArea{
 }
 
 div.searchDiv{
-	width: 600px;
+	width: 400px;
 	height: 100%;
 	margin-left: 0;
 	padding-top: 0px;
@@ -212,15 +253,70 @@ div.searchDiv{
 	}
 
     div.typeahead-tokenizer{
-      margin-left: 5%;
-      display: inline-block;
-      width: calc(500px - 10%);
-      div.typeahead-token{
-        width: 50%;
-        padding: 10px;
-        margin-bottom: 10px;
-        background-color: rgba(0,0,0,0.2);
-      }
+    	vertical-align: top;
+    	margin-left: 5%;
+      	display: inline-block;
+      	width: calc(90% - 100px);
+
+      	div.typeahead-token{
+        	width: 350px;
+        	padding: 5px 10px;
+        	margin-bottom: 10px;
+        	background-color: rgba(0,0,0,0.2);
+        	position: absolute;
+        	top: 210px;
+        	
+        	a.typeahead-token-close{
+        		float: right;
+        		display: inline-block;
+        		color: $red;
+        		background-color: white;
+        		font-size: 15px;
+        		text-align: center;
+        		width: 20px;
+        		line-height: 20px;
+        		border-radius: 20px;
+        	}
+        	a.typeahead-token-close:active, a.typeahead-token-close:hover, a.typeahead-token-close:focus, a.typeahead-token-close:visited{
+        		text-decoration: none;
+        		outline: none;
+        	}
+      	}
+
+      	div.typeahead-token:nth-of-type(2){
+      		top: 245px;
+      	}
+
+      	div.typeahead-token:nth-of-type(3){
+      		top: 280px;
+      	}
+
+      	ul.typeahead-selector{
+    		background-color: white;
+		    padding: 15px 20px;
+		    list-style: none;
+		    font-size: 14px;
+		    font-weight: 500;
+		    line-height: 1.5em;
+		    position: relative;
+		    top: -10px;
+		    color: #333;
+		    margin: 0;
+		    box-shadow: 0 1px 5px #888;
+    		border-radius: 0px 0px 5px 5px;
+
+		    li{
+		    	width: 100%;
+		    	border-bottom: 1px solid #ccc;
+		    	padding: 5px 0;
+		    	a{
+		    		color: #333;
+		    	}
+		    	a:hover, a:active, a:focus, a.visited{
+		    		text-decoration: none;
+		    	}
+		    }
+    	}
     }
 
 	p{
@@ -229,25 +325,13 @@ div.searchDiv{
 		padding: 0;
 		text-align: center;
 	}
-	div.slogan_div{
-		width: 90%;
-		margin-left: 5%;
-		margin-top: 50px;
-
-		p{
-			width: 90%;
-		    margin-left: 5%;
-		    font-size: 28px;
-		    line-height: 51px;
-		    text-align: center;
-		    font-weight: 100;
-		    color: #555;
-		}
-	}
 
 	div.filter{
 		width: 90%;
 		margin-left: 5%;
+		position: relative;
+		top: 100px;
+		background-color: transparent;
 
 		label{
 			margin-right: 5px;
@@ -270,13 +354,16 @@ div.searchDiv{
 			    margin-top: 2.5px;
 			}
 		}
+
+		.rc-slider{
+			margin-bottom: 30px;
+		}
 	}
 }
 
 .input-region{
 	height: $inputbox-height;
 	width: 100%;
-	border: 0;
 	padding: 0;
 	margin-bottom: 10px;
 	display: inline-block;
@@ -303,16 +390,15 @@ input#priceMax{
 
 button#search, button#more{
     display: inline-block;
+    vertical-align: top;
 	height:$inputbox-height;
 	border: 0;
 	width: 50px;
 	color: #fff;
 	background: $btn-color;
 	border-radius: 0px;
-	top: -1px;
 	font-size: 15px;
 	padding: 0;
-	position: relative;
 	outline: none;
 }
 
@@ -332,8 +418,6 @@ div.citylistDiv ul{
 	max-height: 320px;
 	display: block;
 	width: 100%;
-	overflow-y: scroll;
-	overflow-x: hidden;
 	margin: 10px 0;
 	background-color: rgba(255,255,255,0.5);
 	
@@ -391,19 +475,29 @@ button#search{
 	}
 }
 
-div.homelistDiv{
-	width: calc(100% - 600px);
+div.searchresult_div{
+	width: calc(100% - 400px);
+	float: right;
 	margin: 0;
-	background-color: transparent;
+	height: calc(100% - 80px);
 	height: 100%;
-	overflow-y: scroll;
+    background-color: $bg-color;
+}
+
+div.homelistDiv{
+	width: 100%;
+	margin: 0;
+	height: calc(100% - 80px);
+	background-color: transparent;
+	overflow-y: hidden;
 
 	table{
+		border-top: 1px solid #ccc;
 		padding: 0px;
 		width: 100%;
 		margin: 0;
 		max-height: 100%;
-		overflow-y: scroll;
+		overflow-y: hidden;
 
 		tr{
 			border-bottom: 1px solid #ccc;
@@ -814,10 +908,19 @@ div.react-tabs div[id^='react-tabs'] button#search{
 
 
 div.searchResult{
-	border-bottom: 1px solid #ccc;
+	border-top: 1px solid #ccc;
+	width: calc(100% - 30px);
 	div.homelistDiv{
 		position: relative;
 		top: 0px;
+		width: 100%;
+		overflow-y: auto;
+		table{
+			overflow-y: hidden;
+			tr{
+				height: 30px;
+			}
+		}
 	}
 }
 
@@ -908,6 +1011,7 @@ li:last-child{
 
 			p{
 				color: #333;
+				font-size: 20px;
 			}
 		}
 	}
@@ -929,6 +1033,10 @@ div.homelistDiv.favoredHouse{
 	position: relative;
 	border-bottom: none;
 	border-bottom-color: transparent;
+	overflow-y: hidden;
+	table{
+		overflow-y:hidden;
+	}
 }
 
 button#submitquestion{
@@ -1390,4 +1498,18 @@ div#agentcontent{
   background-position: center;
   background-size: cover;
   height: 300px;
+}
+
+@media screen and (min-width: 1025px){
+	div.searchDiv{
+		margin-left: calc(50% - 512px);
+	}
+	div.searchresult_div{
+		max-width: 624px;
+		margin-right: calc(50% - 512px) !important;
+	}
+	pagify-pagination{
+		max-width: 624px;
+		margin-right: calc(50% - 512px) !important;
+	}
 }
