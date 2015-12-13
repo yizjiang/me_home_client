@@ -814,10 +814,19 @@ div.react-tabs div[id^='react-tabs'] button#search{
 
 
 div.searchResult{
-	border-bottom: 1px solid #ccc;
+	border-top: 1px solid #ccc;
+	width: calc(100% - 30px);
 	div.homelistDiv{
 		position: relative;
 		top: 0px;
+		width: 100%;
+		overflow-y: auto;
+		table{
+			overflow-y: auto;
+			tr{
+				height: 30px;
+			}
+		}
 	}
 }
 
@@ -929,6 +938,10 @@ div.homelistDiv.favoredHouse{
 	position: relative;
 	border-bottom: none;
 	border-bottom-color: transparent;
+	overflow-y: auto;
+	table{
+		overflow-y:auto;
+	}
 }
 
 button#submitquestion{
