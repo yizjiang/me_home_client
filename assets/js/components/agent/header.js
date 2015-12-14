@@ -47,7 +47,7 @@ saveHeader: function () {
 
 render: function () {
   return (
-    <div>
+    <div className='setting_header'>
       <label className='agentlabel'>姓名</label>
       <input id='name' type="text" value={this.state.name} onChange={this.handleFilterChange}/>
       <label className='agentlabel'>联系方式</label>
