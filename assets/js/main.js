@@ -22,7 +22,6 @@ var React = require('react'),
 
 //ServerActions.fetchRegionRanking('');
 
-console.log(TICKET);
 ServerActions.getCurrentUser(TICKET).then(function(value){console.log(value)});
 
 var App = React.createClass({
