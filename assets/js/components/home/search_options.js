@@ -47,7 +47,7 @@ var SearchOptions = React.createClass({
             <option value="4">4+</option>
             <option value="5">5+</option>
           </select>
-        </label><br/>
+        </label>
         <label>
           <span>室内面积</span>
           <select id='indoor_size' onChange={this.props.callback}>
@@ -59,7 +59,7 @@ var SearchOptions = React.createClass({
             <option value="2690">250平方米以上</option>
             <option value="3229">350平方米以上</option>
           </select>
-        </label><br/>
+        </label>
         <label>
           <span>房龄</span>
           <select id='home_age' onChange={this.props.callback}>

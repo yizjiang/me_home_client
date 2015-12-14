@@ -334,10 +334,11 @@ div.searchDiv{
 		background-color: transparent;
 
 		label{
-			margin-right: 5px;
+			margin-right: 10px;
 			font-size: 14px;
 			line-height: 30px;
 			font-weight: 100;
+			display: inline-block;
 
 			span{
 				padding: 0 5px;
@@ -353,10 +354,26 @@ div.searchDiv{
 			    line-height: 25px;
 			    margin-top: 2.5px;
 			}
+
+			input#priceMin, input#priceMax{
+				width: 60px;
+			}
 		}
 
 		.rc-slider{
 			margin-bottom: 30px;
+
+			.rc-slider-step{
+				background-color: $btn-color;
+				.rc-slider-dot-active{
+					border-color: $red;
+				}
+			}
+
+			.rc-slider-handle{
+				background-color: $red;
+				border-color: white;
+			}
 		}
 	}
 }
@@ -481,7 +498,7 @@ div.searchresult_div{
 	margin: 0;
 	height: calc(100% - 80px);
 	height: 100%;
-    background-color: $bg-color;
+    background-color: transparent;
 }
 
 div.homelistDiv{
@@ -1215,7 +1232,9 @@ div[id^='react-tabs']{
 }
 
 button.btn-success{
-	margin: 10px 0;
+	margin: 0 5px;
+	vertical-align: top;
+	height: 40px;
 }
 
 div.commentList.agent, div.commentList.undefined {
@@ -1233,23 +1252,27 @@ div.commentList.agent, div.commentList.undefined {
 	}
 	li{
 		display: inline-block;
-		width: 600px;
+		width: 700px;
 	}
 }
 
-input#contact, input#name{
-	float: none;
-	font-size: 16px !important;
-	line-height: 40px !important;
-	font-weight: 400;
-	height: 40px;
-}
-
-label.agentlabel{
-	float: left;
-	font-size: 16px;
-	line-height: 40px;
-	margin: 0;
+div.setting_header{
+	label.agentlabel{
+		font-size: 16px;
+		line-height: 40px;
+		margin: 0;
+		margin-right: 5px;
+		display: inline-block;
+	}
+	input#contact, input#name{
+		font-size: 16px !important;
+		line-height: 40px !important;
+		font-weight: 400;
+		height: 40px;
+		margin: 0 15px 0px 5px;
+		vertical-align: top;
+		display: inline-block;
+	}
 }
 
 div.agentDiv{
@@ -1511,5 +1534,41 @@ div#agentcontent{
 	pagify-pagination{
 		max-width: 624px;
 		margin-right: calc(50% - 512px) !important;
+	}
+}
+
+.agent_home_div{
+	display: inline-block;
+	width: 200px;
+	img{
+		width: 150px;
+		height: 150px;
+		border-radius: 80px;
+		margin: 0 10px 10px 0;
+	}
+}
+
+.preview_list_div{
+	width: calc(100% - 200px);
+	display: inline-block;
+	vertical-align: top;
+	h3{
+		max-width: 900px;
+	}
+	.searchresult_div{
+		width: 100%;
+		max-width: 900px;
+		float: left;
+		tr{
+			width: 50%;
+			display: inline-block;
+		}
+		table{
+			thead{
+				tr{
+					width: 100%;
+				}
+			}
+		}
 	}
 }
