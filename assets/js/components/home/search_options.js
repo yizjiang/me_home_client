@@ -30,13 +30,21 @@ var SearchOptions = React.createClass({
           <input type='checkbox' checked={this.props.options.single_family} value='single_family' onChange={this.props.callback}/>
           <span>独栋别墅</span>
         </label>
-        <label>
+        <label >
           <input type='checkbox' checked={this.props.options.multi_family} value='multi_family' onChange={this.props.callback}/>
           <span>复合别墅</span>
         </label>
         <label>
+          <input type='checkbox' checked={this.props.options.townhouse} value='townhouse'  onChange={this.props.callback}/>
+          <span>联排别墅</span>
+        </label>
+        <label>
           <input type='checkbox' checked={this.props.options.condo} value='condo'  onChange={this.props.callback}/>
-          <span>联排别墅/公寓</span>
+          <span>公寓</span>
+        </label>
+        <label >
+          <input type='checkbox' checked={this.props.options.land} value='land' onChange={this.props.callback}/>
+          <span>土地</span>
         </label><br/>
         <label>
           <span>房间数</span>

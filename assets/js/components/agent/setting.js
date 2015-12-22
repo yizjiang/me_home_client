@@ -56,7 +56,7 @@ var Setting = React.createClass({
   render: function () {
     var content, file_drop;
     if(this.state.qr_img.is_followed == true){
-       content = <p>请分享此二维码给您的客户</p>
+       content = <p>请分享此二维码给您的客户，以便了解客户在觅家服务上的活动</p>
     }
     else {
       content = <p>您还未关注觅家公众号，请扫描此二维码后刷新</p>

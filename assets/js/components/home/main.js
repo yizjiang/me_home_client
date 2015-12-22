@@ -83,9 +83,7 @@ var HomeMain = React.createClass({
 
   render: function () {
     var home_list = this.state.home_list
-    console.log(home_list.length);
     home_list = this.filterHomes(home_list);
-    console.log(home_list.length);
     var pagination = this.state.pagination || {};
     var paginated = Paginator.paginate( home_list, pagination);
     var begin = this.state.pagination.page * this.state.pagination.perPage;

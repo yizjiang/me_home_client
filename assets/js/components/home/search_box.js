@@ -35,7 +35,9 @@ var SearchBox = React.createClass({
       bedNum: '',
       single_family: true,
       condo: true,
-      multi_family: true
+      townhouse: true,
+      multi_family: true,
+      land: false
     }
   },
 
