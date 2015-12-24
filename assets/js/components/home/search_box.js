@@ -37,7 +37,9 @@ var SearchBox = React.createClass({
       condo: true,
       townhouse: true,
       multi_family: true,
-      land: false
+      business: true,
+      land: false,
+      farm: false
     }
   },
 

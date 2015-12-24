@@ -252,6 +252,7 @@ var HomeDetail = React.createClass({
                       <p className='schoolp'>年级：{sch['grade']}</p>
                       <p className='schoolp'>名称：{sch['name']} </p>
                       <p className='schoolp'>评分：{sch['rating']}</p>
+                      <p className='schoolp'>距离：{sch['distance']}</p>
                     </div>
                   )
                 })}
@@ -264,6 +265,7 @@ var HomeDetail = React.createClass({
                       <p className='schoolp'>年级：{sch['grade']}</p>
                       <p className='schoolp'>名称：{sch['name']} </p>
                       <p className='schoolp'>评分：{sch['rating']}</p>
+                      <p className='schoolp'>距离：{sch['distance']}</p>
                     </div>
                     )
                   })}
@@ -276,6 +278,7 @@ var HomeDetail = React.createClass({
                           <p className='schoolp'>年级：{sch['grade']}</p>
                           <p className='schoolp'>名称：{sch['name']} </p>
                           <p className='schoolp'>评分：{sch['rating']}</p>
+                          <p className='schoolp'>距离：{sch['distance']}</p>
                         </div>
                       )
                     })}

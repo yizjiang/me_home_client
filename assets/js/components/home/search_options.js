@@ -42,9 +42,17 @@ var SearchOptions = React.createClass({
           <input type='checkbox' checked={this.props.options.condo} value='condo'  onChange={this.props.callback}/>
           <span>公寓</span>
         </label>
+        <label>
+          <input type='checkbox' checked={this.props.options.business} value='business'  onChange={this.props.callback}/>
+          <span>商住两用</span>
+        </label>
         <label >
           <input type='checkbox' checked={this.props.options.land} value='land' onChange={this.props.callback}/>
           <span>土地</span>
+        </label>
+        <label>
+          <input type='checkbox' checked={this.props.options.farm} value='farm'  onChange={this.props.callback}/>
+          <span>农场</span>
         </label><br/>
         <label>
           <span>房间数</span>
