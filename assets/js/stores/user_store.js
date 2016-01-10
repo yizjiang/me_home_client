@@ -13,6 +13,7 @@ var _publishedPageConfig = {};
 var _publishedPage = {};
 var _qrImage = {};
 var _qrCode = '';
+var _wechatUser = {};
 
 function setCurrentUser(user) {
   _currentUser = user;
@@ -21,7 +22,8 @@ function setCurrentUser(user) {
   _favoriteHomes = user.homes;
   _publishedPageConfig = user.published_page_config;
   _qrImage = user.qr_image;
-  _qrCode = user.qr_code
+  _qrCode = user.qr_code;
+  _wechatUser = user.wechat_user
 }
 
 function setSavedSearch(savedSearches) {
@@ -57,6 +59,10 @@ var UserStore = _.extend({}, EventEmitter.prototype, {
 
   getAgentPublishedPageConfig: function() {
     return _publishedPageConfig;
+  },
+
+  getWechatUser: function() {
+    return _wechatUser;
   },
 
   getQRImage: function() {
@@ -103,7 +109,6 @@ var UserStore = _.extend({}, EventEmitter.prototype, {
 // Register callback with AppDispatcher
 AppDispatcher.register(function(payload) {
   var action = payload.action;
-
   switch(action.actionType) {
 
     // Respond to RECEIVE_DATA action

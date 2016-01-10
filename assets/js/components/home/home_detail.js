@@ -1,5 +1,7 @@
 'use strict';
 var React = require('react'),
+    BingMap = require('./bing_map'),
+    AgentInfo = require('./agent_info'),
     HomeListStore = require('../../stores/home_list_store'),
     ServerActions = require('../../actions/server_action'),
     UserStore = require('../../stores/user_store'),
@@ -16,7 +18,7 @@ var HomeDetail = React.createClass({
     var data = {home_id: id};
 
     $.ajax({
-      url: 'home/show',
+      url: '/home/show',
       dataType: 'json',
       data: data,
       success: function(data) {
@@ -35,12 +37,14 @@ var HomeDetail = React.createClass({
       this.loadHomeFromServer(this.props.params.id)
       currentHome = {images: [], public_schools:[], private_schools:[], assigned_school:[]};
     }
-    return {currentHome: currentHome, currentFavorite: UserStore.getFavoriteHomes()}
+    return {currentHome: currentHome, currentFavorite: UserStore.getFavoriteHomes()}              //TODO get user in mobile version
   },
 
   _onChange: function() {
     this.setState({currentFavorite: UserStore.getFavoriteHomes()});
-    ServerActions.metricTracking(UserStore.getCurrentUser(), {home_id: this.props.params.id})
+    if(!_.isEmpty(UserStore.getCurrentUser())){
+      ServerActions.metricTracking(UserStore.getCurrentUser(), {home_id: this.props.params.id})
+    }
   },
 
   // Add change listeners to stores
@@ -84,15 +88,15 @@ var HomeDetail = React.createClass({
 
   render: function () {
     var home = this.state.currentHome;
-    var mapping = {addr1: '地址', 
+    var mapping = {addr1: '地址',
                    addr2: '门牌',
                    city: '城市',
                    state: '州',
                    zipcode: '邮编',
-                   county: '国家', 
+                   county: '国家',
                    home_type: '房型',
-                   bed_num: '卧', 
-                   bath_num: '卫', 
+                   bed_num: '卧',
+                   bath_num: '卫',
                    created_at: '发布日',
                    description: '详情',
                    indoor_size: '室内面积',
@@ -108,14 +112,13 @@ var HomeDetail = React.createClass({
                    id: 'ID',
                    schools: '学校'
                   };
-    
+
     if(home.addr2 == null) {
       home.addr2 = '';
     }else{
       home.addr2 = home.addr2 + ',';
     };
-    var address = home.addr1 + ', ' + home.addr2 + ' ' + home.city + ', ' + home.state + ', ' + home.county;
-    
+
     if (home.stores >= 0) {
       home.stores = home.stores + 1;
     }else{
@@ -143,6 +146,21 @@ var HomeDetail = React.createClass({
     if(this.isFavorite()){
       favButtonClass = 'favored';
       heartClass = 'liked';
+    }
+
+    var address = home.addr1 + ', ' + home.addr2 + ', ' + home.city + ', ' + home.state + ', ' + home.zipcode;
+
+    var mapComponent = null;
+    if(home.geo_point){
+      var points = home.geo_point.split(',');
+      mapComponent= <BingMap home_info={{lat: points[0], long: points[1],
+        address: address, description: home.chinese_description, home_id: home.id}} show_details={false}/>
+    }
+
+    var agentInfoComponent = null;
+
+    if(!_.isEmpty(UserStore.getCurrentUser())){
+      agentInfoComponent = <AgentInfo userID={UserStore.getCurrentUser().id}/>
     }
 
     return (
@@ -200,23 +218,26 @@ var HomeDetail = React.createClass({
           <p className='detailp'>{home['chinese_description']}</p>
         </div>
 
+        {mapComponent}
+        {agentInfoComponent}
+
         <div className='detailDiv'>
           <h3>房屋详情</h3>
           <div className='detailWrap'>
-              
-              <Col md={6} className='detailPara'>  
+
+              <Col md={6} className='detailPara'>
                  <h3 className='detailh3'>{mapping['addr1']}</h3>
-                 <p className='detailp'>{address + ' ' +home['zipcode']}</p>
+                 <p className='detailp'>{address}</p>
                  <p className='detailp'>{mapping['neighborhood'] + ' ' + home['neighborhood']}</p>
               </Col>
 
               <Col md={6} className='detailPara'>
                   <h3 className='detailh3'>{mapping['home_type']}</h3>
-                  <p className='detailp'>{home['home_type'] 
-                                          + ': ' 
-                                          + home['bed_num'] 
-                                          + mapping['bed_num'] 
-                                          + home['bath_num'] 
+                  <p className='detailp'>{home['home_type']
+                                          + ': '
+                                          + home['bed_num']
+                                          + mapping['bed_num']
+                                          + home['bath_num']
                                           + mapping['bath_num']
                                          }
                   </p>
@@ -229,7 +250,7 @@ var HomeDetail = React.createClass({
                                           + ': '
                                           + home['lot_size']
                                           + '千平方英尺, '
-                                          + home['stores'] 
+                                          + home['stores']
                                           + mapping['stores']
                                          }
                   </p>

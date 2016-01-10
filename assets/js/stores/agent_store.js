@@ -1,21 +1,20 @@
-var AppDispatcher = require('../dispatcher/app_dispatcher'),
-  EventEmitter = require('events').EventEmitter,
-  //CustomerConstants = require('../constants/question_constants'),
-  _ = require('lodash');
+var AppDispatcher = require('../dispatcher/app_dispatcher');
+var EventEmitter = require('events').EventEmitter;
+var _ = require('lodash');
 
 // Define initial data points
-var _customers = [];                   //TODO redesign, same object, seperate agent and user
+var _agents = [];
 
-function setAllCustomers(data) {
-  _customers = data;
+// Method to load product data from mock API
+function loadAgentsData(data) {
+  _agents = data
 }
 
 // Extend ProductStore with EventEmitter to add eventing capabilities
-var CustomerStore = _.extend({}, EventEmitter.prototype, {
+var AgentStore = _.extend({}, EventEmitter.prototype, {
 
-  // Return Product data
-  getAll: function() {
-    return _customers;
+  getAgents :function() {
+    return _agents;
   },
 
   // Emit Change event
@@ -40,20 +39,19 @@ AppDispatcher.register(function(payload) {
   var action = payload.action;
 
   switch(action.actionType) {
-
-    // Respond to RECEIVE_DATA action
-    case "ALL_CUSTOMERS":
-      setAllCustomers(action.data);
+    case 'LOAD_AGENTS':
+      loadAgentsData(action.data);
       break;
+
     default:
       return true;
   }
 
   // If action was responded to, emit change event
-  CustomerStore.emitChange();
+  AgentStore.emitChange();
 
   return true;
 
 });
 
-module.exports = CustomerStore;
+module.exports = AgentStore;

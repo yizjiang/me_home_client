@@ -2,6 +2,11 @@ require 'typhoeus'
 
 module Routes
   class Agent < Base
+    get '/agents' do
+      response = Typhoeus.get("#{MEEHOME_SERVER_URL}/agents", headers: {uid: request.env['HTTP_UID'] })
+      response.body
+    end
+
     get '/agent/:name' do
       response = Typhoeus.get("#{MEEHOME_SERVER_URL}/agent/#{params[:name]}")
       @data = response.body

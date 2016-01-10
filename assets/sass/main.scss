@@ -330,7 +330,6 @@ div.searchDiv{
 		width: 90%;
 		margin-left: 5%;
 		position: relative;
-		top: 100px;
 		background-color: transparent;
 
 		label{
@@ -972,6 +971,9 @@ li:last-child{
 		}
 	}
 
+.typeahead-token{
+  margin-top: -200px;
+}
 @media screen and (max-width: 767px){
 
 	div.loginWrap{

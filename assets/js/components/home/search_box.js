@@ -39,7 +39,8 @@ var SearchBox = React.createClass({
       multi_family: true,
       business: true,
       land: false,
-      farm: false
+      farm: false,
+      other: false
     }
   },
 
@@ -93,7 +94,7 @@ var SearchBox = React.createClass({
         <Tokenizer
           customClasses={{input: 'input-region'}}
           options={this.props.areas}
-          defaultSelected={this.props.select_region}
+          defaultSelected={[]}
           placeholder='城市或邮编（最多三个）'
           onTokenAdd={function(token) {
             addRegion(token);
@@ -105,7 +106,7 @@ var SearchBox = React.createClass({
 
         <button id='search' type="button" onClick={this.homeSearch} ><a href='#homelistAnchor'><span className='glyphicon glyphicon-search'></span></a></button>
         <button id='more' type="button" onClick={this.moreOptions} ><span className='glyphicon glyphicon-filter'></span></button>
-        <SearchOptions options={this.state} callback={this.handleFilterChange} show={this.props.searched || this.state.moreOptions}/>
+        <SearchOptions showSchoolFilter={true} options={this.state} callback={this.handleFilterChange} show={this.props.searched || this.state.moreOptions}/>
 
         <br/>
       </div>

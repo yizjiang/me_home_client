@@ -15,9 +15,6 @@ var SavedSearchList = React.createClass({
      } else {
        query = query.map(function(value){
          var search = JSON.parse(value);
-         search['single_family'] = _.includes(search.home_type, 'Single Family Home');
-         search['multi_family'] = _.includes(search.home_type, "Multi-Family Home");
-         search['condo'] = _.includes(search.home_type, "Condo/Townhome/Row Home/Co-Op");
          return search
        })
        ServerActions.homeSearches(query[0]);  //TODO search all
@@ -49,7 +46,7 @@ var SavedSearchList = React.createClass({
          <form>
          {this.props.list.map(function(value){
             var searchOption = JSON.parse(value.search_query);
-            var label = '地区: ' + searchOption.regionValue + ' 最低价: ' + searchOption.priceMin + ' 最高价: ' + searchOption.priceMax;
+            var label = '地区: ' + searchOption.regionValue + ' 最低价: ' + searchOption.priceMin + '万 最高价: ' + searchOption.priceMax + '万';
             if(searchOption.bedNum != undefined){
               label += ' 房间数: ' + searchOption.bedNum
             }
@@ -58,15 +55,32 @@ var SavedSearchList = React.createClass({
               homeType = searchOption.home_type.map((value) => {
                 if(value == 'Single Family Home'){
                    return '独栋别墅'
-                }else if(value == 'Multi-Family Home'){
-                   return '复合别墅'
+                }else if(value == 'Townhouse'){
+                   return '联排别墅'
                 }
+                else if(value == 'Duplex' || value == 'Triplex' || value == 'Fourplex'){
+                                   return '复合别墅'
+                                }
+                else if(value == 'Apartment' || value == 'Condominium'){
+                                  return '公寓'
+                               }
+                else if(value == 'Residential Land' || value == 'Residential Lot' || value == 'Land'){
+                                  return '土地'
+                               }
                 else {
-                   return '联排别墅/公寓'
+                   return '其他'
                 }
 
               })
               label += ' 房型: ' +  homeType.join();
+            }
+
+            if(searchOption.home_age != undefined){
+              label += ' 建造于: ' + searchOption.home_age + '年以内 '
+            }
+
+            if(searchOption.indoor_size != undefined){
+              label += ' 室内面积大于: ' + parseInt(parseInt(searchOption.indoor_size) * 0.093) + '平方米'
             }
 
             var checked = _.findIndex(self.props.selected, function(search){

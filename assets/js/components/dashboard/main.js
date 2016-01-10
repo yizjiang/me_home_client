@@ -4,8 +4,11 @@ var QuestionList = require('./question_list.js'),
     UserStore = require('../../stores/user_store'),
     ServerActions = require('../../actions/server_action'),
     HomeList = require('../home/home_list'),
+    HomeMap = require('../home/home_map.js'),
     SavedSearchList = require('./saved_search_list.js'),
     HomeListStore = require('../../stores/home_list_store'),
+    AreaStore = require('../../stores/area_store'),
+    QuickSearch = require('./quick_search.js'),
     React = require('react'),
     ReactTabs = require('react-tabs'),
     Tab = ReactTabs.Tab,
@@ -46,35 +49,57 @@ var Dashboard = React.createClass({
 //    });
   },
 
-  getInitialState: function() {
+  stateObject: function() {
     return {data: UserStore.getQuestions(),
       saved_searches: UserStore.getSavedSearches(),
       current_user: UserStore.getCurrentUser(),
       home_list: HomeListStore.getProduct(),
       favorite_list: UserStore.getFavoriteHomes(),
+      listView: true,
+      areas: AreaStore.getArea(),
+      wechatUser: UserStore.getWechatUser(),
       pagination: {
         page: 0,
         perPage: 5
-      }};       //TODO re-design
+      }}
   },
+
+  getInitialState: function() {
+    return this.stateObject();       //TODO re-design
+  },
+
+  showMode: function(mode) {
+    var listView;
+    if(mode == 'list'){
+      listView = true;
+    } else {
+      listView = false;
+    }
+    this.setState({listView: listView})
+  },
+
 
   // Remove change listeners from stores
   componentWillUnmount: function() {
     console.log('unmount dashboad');
+    AreaStore.removeChangeListener(this.loadArea);
     UserStore.removeChangeListener(this._onChange);
     HomeListStore.removeChangeListener(this._onChange);
   },
 
   _onChange: function() {
-    console.log(HomeListStore.getProduct());
     this.setState({data: UserStore.getQuestions(),
       saved_searches: UserStore.getSavedSearches(),
       current_user: UserStore.getCurrentUser(),
       home_list: HomeListStore.getProduct(),
+      areas: AreaStore.getArea(),
+      wechatUser: UserStore.getWechatUser(),
       favorite_list: UserStore.getFavoriteHomes()});
   },
 
   componentDidMount: function() {
+    ServerActions.getAllCity('SF');
+    AreaStore.addChangeListener(this.loadArea);
     UserStore.addChangeListener(this._onChange);
     HomeListStore.addChangeListener(this._onChange);
     $('#nav-toggle').removeClass('active');
@@ -82,16 +107,26 @@ var Dashboard = React.createClass({
     //setInterval(this.loadCommentsFromServer, this.props.pollInterval);
   },
 
+  loadArea: function() {
+    this.setState({areas: AreaStore.getArea()});
+  },
+
   render: function() {
+    var home_list =  this.state.home_list;
+    var favorite_list = this.state.favorite_list
     var pagination = this.state.pagination || {};
     var paginated = Paginator.paginate( this.state.home_list, pagination);
     var begin = this.state.pagination.page * this.state.pagination.perPage;
     var end = begin + this.state.pagination.perPage;
     var list = this.state.home_list.slice(begin, end) ;
-
     var paginateComp = null;
-    if(this.state.home_list.length > 5) {
-      paginateComp = <Paginator
+
+    var homesComp = null;
+    var favoriteHomesComp = null;
+
+    if(this.state.listView){
+      if(this.state.home_list.length > 5) {
+        paginateComp = <Paginator
         className='pagify-pagination'
         ellipsesClassName='pagify-ellipsis'
         activeClassName='selected'
@@ -106,7 +141,28 @@ var Dashboard = React.createClass({
         nextButton={'Next one'}
         onSelect={this.onSelect}>
         </Paginator>
+      }
+      homesComp = <HomeList callback={this.showMode} searched={this.state.searched} count={home_list.length} list={list}/>
+      favoriteHomesComp =  <HomeList callback={this.showMode} custom_style={'favoredHouse'} count={favorite_list.length} list={favorite_list}/>
+    } else {
+      var home_infos = home_list.map((home) => {
+        var points = home.geo_point.split(',');
+      return {lat: points[0],long: points[1], home_id: home.id, description: home.short_desc, title: home.addr1}
+    });
+      var favoriate_infos = favorite_list.map((home) => {
+      var points = home.geo_point.split(',');
+    return {lat: points[0],long: points[1], home_id: home.id, description: home.short_desc, title: home.addr1}
+  });
+
+      homesComp = <HomeMap callback={this.showMode} searched={this.state.searched} count={home_list.length} home_infos={home_infos}/>
+      favoriteHomesComp = <HomeMap callback={this.showMode} searched={this.state.searched} count={favorite_list.length} home_infos={favoriate_infos}/>
     }
+
+    var quickSearchComp = null;
+    if(!_.isEmpty(this.state.wechatUser) && !_.isEmpty(this.state.areas)) {
+      quickSearchComp =  <QuickSearch wechat_user={this.state.wechatUser} areas={this.state.areas}/>
+    }
+
     return (
       <div className='tabdiv'>
       <Tabs onSelect={this.handleSelected} selectedIndex={1}>
@@ -118,13 +174,14 @@ var Dashboard = React.createClass({
 
         <TabPanel>
           <h3>红心房源</h3>
-          <HomeList custom_style={'favoredHouse'} count={this.state.favorite_list.length} list={this.state.favorite_list}/>
+          {favoriteHomesComp}
         </TabPanel>
 
         <TabPanel>
+          {quickSearchComp}
           <SavedSearchList list={this.state.saved_searches}/>
           <div className='searchResult'>
-            <HomeList count={this.state.home_list.length} list={list}/>
+            {homesComp}
             {paginateComp}
           </div>
         </TabPanel>

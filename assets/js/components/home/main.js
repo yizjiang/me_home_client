@@ -11,6 +11,7 @@ var SearchBox = require('./search_box.js'),
     SearchPanel = require('./search_panel.js'),
     SelectPanel = require('./select_panel.js'),
     HomeList = require('./home_list.js'),
+    HomeMap = require('./home_map.js'),
     SelectItems = require('./select_items'),
     AreaStore = require('../../stores/area_store'),
     FilterStore = require('../../stores/filter_store'),
@@ -20,6 +21,7 @@ var SearchBox = require('./search_box.js'),
 function getSearchData() {
   return {
     home_list: HomeListStore.getProduct(),
+    listView: true,
     searched: false,
     pagination: {
       page: 0,
@@ -31,6 +33,18 @@ function getSearchData() {
 }
 
 var HomeMain = React.createClass({
+
+  showMode: function(mode) {
+    var listView;
+    if(mode == 'list'){
+      listView = true;
+    } else {
+      listView = false;
+    }
+    this.setState({listView: listView})
+  },
+
+
   getInitialState: function() {
     return getSearchData();
   },
@@ -90,28 +104,40 @@ var HomeMain = React.createClass({
     var end = begin + this.state.pagination.perPage;
     var list = home_list.slice(begin, end) ;
     var paginateComp = null;
-    if(home_list.length > 5) {
-      paginateComp = <Paginator
-      className='pagify-pagination'
-      ellipsesClassName='pagify-ellipsis'
-      activeClassName='selected'
-      inactiveClassName='inactive'
-      page={paginated.page}
-      pages={paginated.amount}
-      beginPages={3}
-      endPages={3}
-      showPrevNext={true}
-      alwaysShowPrevNext={true}
-      prevButton={'Previous one'}
-      nextButton={'Next one'}
-      onSelect={this.onSelect}>
-      </Paginator>
+    var homesComp = null;
+
+    if(this.state.listView){
+      if(home_list.length > 5) {
+        paginateComp = <Paginator
+        className='pagify-pagination'
+        ellipsesClassName='pagify-ellipsis'
+        activeClassName='selected'
+        inactiveClassName='inactive'
+        page={paginated.page}
+        pages={paginated.amount}
+        beginPages={3}
+        endPages={3}
+        showPrevNext={true}
+        alwaysShowPrevNext={true}
+        prevButton={'Previous one'}
+        nextButton={'Next one'}
+        onSelect={this.onSelect}>
+        </Paginator>
+      }
+      homesComp = <HomeList callback={this.showMode} searched={this.state.searched} count={home_list.length} list={list}/>
+    } else {
+      var home_infos = home_list.map((home) => {
+        var points = home.geo_point.split(',');
+        return {lat: points[0],long: points[1], home_id: home.id, description: home.short_desc, title: home.addr1}
+      });
+      homesComp = <HomeMap callback={this.showMode} searched={this.state.searched} count={home_list.length} home_infos={home_infos}/>
     }
+
     return (
       <div className="content">
         <SearchBox areas={this.state.areas} searched={this.state.searched} callback={this.performedSearch}/>
 
-        <HomeList searched={this.state.searched} count={home_list.length} list={list}/>
+        {homesComp}
         {paginateComp}
 
         <RouteHandler/>

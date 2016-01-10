@@ -15,8 +15,8 @@ var HomeList = React.createClass({
     var list = this.props.list;
 
     if(list != undefined && list.length > 0){
-      statusHeader = <StatusBar count={this.props.count}/> ;
-      tableheader = (          
+      statusHeader = <StatusBar count={this.props.count} callback={this.props.callback}/> ;
+      tableheader = (
           <tr>
             <th className = 'thpic'></th>
             <th className = 'thdes'><p>详情</p></th>

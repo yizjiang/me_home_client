@@ -363,8 +363,30 @@ var ServerActions = {
     });
   },
 
+  getAgents: function (userID) {
+    $.ajax({
+      url: '/agents/',
+      headers: {
+        'uid': userID
+      },
+      type: 'GET',
+
+      dataType: 'json',
+
+      success: function(data) {
+        AppDispatcher.handleAction({
+          actionType: 'LOAD_AGENTS',
+          data: data
+        })
+      },
+
+      error: function() {
+        console.error('load agents error');
+      }
+    });
+  },
+
   getAllCustomers: function (user){
-    console.log('here');
     $.ajax({
       url: '/agent/' + user.id + '/customers',
       type: 'GET',
@@ -372,7 +394,6 @@ var ServerActions = {
       dataType: 'json',
 
       success: function(data) {
-        console.log(data);
         AppDispatcher.handleAction({
           actionType: 'ALL_CUSTOMERS',
           data: data
@@ -495,10 +516,7 @@ var ServerActions = {
       },
 
       error: function() {
-        AppDispatcher.handleAction({
-          actionType: 'USER_LOGIN',
-          data: {}
-        })
+        console.log('no user')
       }
     });
   },

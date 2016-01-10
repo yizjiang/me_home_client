@@ -7,7 +7,6 @@ var Answer = React.createClass({
   render: function() {
     var style = {};
     style.display = 'none'
-    console.log(this.props.answer);
     return (
       <div className="comment">
         <p className='answerPara'>{this.props.answer.body}</p>

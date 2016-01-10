@@ -2,6 +2,7 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     babelify = require('babelify'),
     compass = require('gulp-compass'),
+    buffer = require('vinyl-buffer'),
     dir_path = require('path'),
     uglify = require('gulp-uglify'),
     rename = require('gulp-rename'),
@@ -19,6 +20,8 @@ var path = {
   app: {
     js: './assets/js/main.js',
     agent: './assets/js/agent_main.js',
+    home_detail: './assets/js/home_detail_main.js',
+    set_search: './assets/js/set_search_main.js',
     image: './assets/img/*',
     sass: './assets/sass/main.scss',
     fonts: [
@@ -50,7 +53,7 @@ var map = {
 };
 
 gulp.task('watch', function(){
-  gulp.watch(path.js, ['build', 'agent']);
+  gulp.watch(path.js, ['build', 'agent', 'set_search']);
   gulp.watch(path.vendor.js, ['vendor']);
   gulp.watch(path.sass, ['sass']);
 });
@@ -90,6 +93,44 @@ gulp.task('agent', function() {
     .bundle()
     .pipe(source('agent.js'))
     .pipe(gulp.dest(path.dist.js));
+})
+
+gulp.task('home_detail', function() {
+  return browserify(path.app.home_detail)
+    .transform(babelify)
+    .bundle()
+    .pipe(source('home_detail.js'))
+    .pipe(gulp.dest(path.dist.js));
+})
+
+gulp.task('set_search', function() {
+  return browserify(path.app.set_search)
+    .transform(babelify)
+    .bundle()
+    .pipe(source('set_search.js'))
+    .pipe(gulp.dest(path.dist.js));
+})
+
+gulp.task('build:production', function() {
+  return browserify(path.app.js)
+    .transform(babelify)
+    .bundle()
+    .pipe(source('bundle.js'))
+    .pipe(buffer())
+    .pipe(uglify())
+    .pipe(gulp.dest(path.dist.js));
+
+})
+
+gulp.task('agent:production', function(){
+   return browserify(path.app.agent)
+    .transform(babelify)
+    .bundle()
+    .pipe(source('agent.js'))
+    .pipe(buffer())
+    .pipe(uglify())
+    .pipe(gulp.dest(path.dist.js));
+
 })
 
 gulp.task('vendor', function() {
