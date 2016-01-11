@@ -159,9 +159,7 @@ var HomeDetail = React.createClass({
 
     var agentInfoComponent = null;
 
-    if(!_.isEmpty(UserStore.getCurrentUser())){
-      agentInfoComponent = <AgentInfo userID={UserStore.getCurrentUser().id}/>
-    }
+    agentInfoComponent = <AgentInfo userID={UserStore.getCurrentUser().id}/>
 
     return (
       <div className='ccent'>
