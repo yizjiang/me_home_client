@@ -17,6 +17,7 @@ var React = require('react'),
     Agent = require('./components/agent/main.js'),
     College = require('./components/college/page.js'),
     UserPanel = require('./components/base/user_panel.js'),
+    HelpPanel = require('./components/base/help_panel.js'),
     UserStore = require('./stores/user_store.js');
 
 
@@ -70,7 +71,7 @@ var App = React.createClass({
               <a id="nav-toggle" className="nav_slide_button"><span></span></a>
             </div>
         </header>
-
+        <HelpPanel/>
         <UserPanel/>
         <RouteHandler/>
       </div>

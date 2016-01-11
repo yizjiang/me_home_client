@@ -53,6 +53,18 @@ module Routes
       erb :login_callback, layout: false
     end
 
+    get '/get_home' do
+      redirect '/static/get_home.html'
+    end
+
+    get '/get_agent' do
+      redirect '/static/get_agent.html'
+    end
+
+    get '/get_money' do
+      redirect '/static/get_money.html'
+    end
+
     post '/metric_tracking' do
       request_payload = JSON.parse request.body.read
       response = Typhoeus.post("#{MEEHOME_SERVER_URL}/user/metric_tracking", headers: {uid: request.env['HTTP_UID'] }, body: request_payload )

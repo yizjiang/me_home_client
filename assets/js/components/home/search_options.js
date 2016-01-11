@@ -90,7 +90,7 @@ var SearchOptions = React.createClass({
         </label>
         <label>
           <input type='checkbox' checked={this.props.options.other} value='other'  onChange={this.props.callback}/>
-          <span>农场</span>
+          <span>其他</span>
         </label><br/>
         <label>
           <span>房间数</span>

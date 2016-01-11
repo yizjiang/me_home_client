@@ -39,6 +39,7 @@ var SavedSearchList = React.createClass({
   render: function() {
     var self = this;
     var index = 0;
+
     //TODO why not work first time go to dashboard page
     return (
       <div className={"commentList " + this.props.className}>
@@ -46,10 +47,29 @@ var SavedSearchList = React.createClass({
          <form>
          {this.props.list.map(function(value){
             var searchOption = JSON.parse(value.search_query);
-            var label = '地区: ' + searchOption.regionValue + ' 最低价: ' + searchOption.priceMin + '万 最高价: ' + searchOption.priceMax + '万';
+
+            for (var k in searchOption) {
+              if (!searchOption.hasOwnProperty(k)) continue;
+              if (searchOption[k] == undefined) {
+                searchOption[k] = '';
+              }
+            }
+
+            console.log(searchOption);
+            var label = '地区: ' + searchOption.regionValue;
+
+            if(searchOption.priceMin != undefined){
+              label += ' 最低价: ' + searchOption.priceMax + '万 '
+            }
+
+            if(searchOption.priceMin != undefined){
+              label += '最高价: ' + searchOption.priceMin + '万 '
+            }
+
             if(searchOption.bedNum != undefined){
               label += ' 房间数: ' + searchOption.bedNum
             }
+
             if(searchOption.home_type != undefined){
               var homeType;
               homeType = searchOption.home_type.map((value) => {
