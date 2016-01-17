@@ -2,6 +2,8 @@
 var React = require('react'),
     BingMap = require('./bing_map'),
     AgentInfo = require('./agent_info'),
+    CityInfo = require('./city_info'),
+    SchoolInfo = require('./school_info'),
     HomeListStore = require('../../stores/home_list_store'),
     ServerActions = require('../../actions/server_action'),
     UserStore = require('../../stores/user_store'),
@@ -157,9 +159,14 @@ var HomeDetail = React.createClass({
         address: address, description: home.chinese_description, home_id: home.id}} show_details={false}/>
     }
 
-    var agentInfoComponent = null;
+    var agentInfoComponent = <AgentInfo userID={UserStore.getCurrentUser().id}/>;
 
-    agentInfoComponent = <AgentInfo userID={UserStore.getCurrentUser().id}/>
+    var cityInfoComponent = null;
+    if(home.city_info){
+      cityInfoComponent = <CityInfo data={home.city_info} />
+    }
+
+    var schoolInfoCompoent = <SchoolInfo assigned_schools= {home.assigned_school} public_schools= {home.public_schools} private_schools= {home.private_schools}/>
 
     return (
       <div className='ccent'>
@@ -200,7 +207,7 @@ var HomeDetail = React.createClass({
               home.images.map(function(img){
                 return (
                   <CarouselItem>
-                    <img src={SERVER_URL + img.image_url}/>
+                    <img src={CDN_URL + img.image_url}/>
                   </CarouselItem>
                 )
               }
@@ -218,6 +225,7 @@ var HomeDetail = React.createClass({
 
         {mapComponent}
         {agentInfoComponent}
+        {cityInfoComponent}
 
         <div className='detailDiv'>
           <h3>房屋详情</h3>
@@ -260,57 +268,10 @@ var HomeDetail = React.createClass({
                 </h3>
                 <p className='detailp'>{mapping['unit_price'] + ': ' + home['unit_price']}</p>
               </Col>
-
-              <Col md = {12} className='detailPara detailother'>
-                <h3 className='detailh3'> {mapping['schools']} </h3>
-                <div>
-                  <h4>对口学校</h4>
-                {home['assigned_school'].map(function(sch){
-                return (
-                    <div className='schoolDiv'>
-                      <p className='schoolp'>年级：{sch['grade']}</p>
-                      <p className='schoolp'>名称：{sch['name']} </p>
-                      <p className='schoolp'>评分：{sch['rating']}</p>
-                      <p className='schoolp'>距离：{sch['distance']}</p>
-                    </div>
-                  )
-                })}
-                </div>
-                <div>
-                  <h4>公立学校</h4>
-                  {home['public_schools'].map(function(sch){
-                  return (
-                    <div className='schoolDiv'>
-                      <p className='schoolp'>年级：{sch['grade']}</p>
-                      <p className='schoolp'>名称：{sch['name']} </p>
-                      <p className='schoolp'>评分：{sch['rating']}</p>
-                      <p className='schoolp'>距离：{sch['distance']}</p>
-                    </div>
-                    )
-                  })}
-                </div>
-                  <div>
-                    <h4>私立学校</h4>
-                    {home['private_schools'].map(function(sch){
-                      return (
-                        <div className='schoolDiv'>
-                          <p className='schoolp'>年级：{sch['grade']}</p>
-                          <p className='schoolp'>名称：{sch['name']} </p>
-                          <p className='schoolp'>评分：{sch['rating']}</p>
-                          <p className='schoolp'>距离：{sch['distance']}</p>
-                        </div>
-                      )
-                    })}
-                  </div>
-              </Col>
-              <Col md = {6} className='detailPara '>
-                <h3 className='detailh3'>
-                 其他
-                </h3>
-                <p className='detailp'> </p>
-              </Col>
           </div>
         </div>
+
+        {schoolInfoCompoent}
       </div>
   );
   }

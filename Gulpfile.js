@@ -1,4 +1,5 @@
 var gulp = require('gulp'),
+    sass = require('gulp-sass'),
     concat = require('gulp-concat'),
     babelify = require('babelify'),
     compass = require('gulp-compass'),
@@ -66,17 +67,25 @@ gulp.task('images', function() {
 
 gulp.task('sass', function() {
   var stream = gulp.src(path.app.sass)
-    .pipe(compass({
-      bundle_exec: true,
-      css: 'tmp/sass',
-      image: 'img',
-      relative: false,
-      generated_images_path: '../dist/img',
-      project: dir_path.join(__dirname, 'assets'),
-      http_path: '/'
+    .pipe(sass({
+      includePaths: ['./node_modules/react-select/dist']
     }))
-    .pipe(rename('bundle.css'));
-  return stream.pipe(gulp.dest('dist/css'));
+    .pipe(rename('bundle.css'))
+    .pipe(sourcemaps.write('./'))
+    .pipe(gulp.dest('dist/css'));
+
+  return stream
+//    .pipe(compass({
+//      bundle_exec: true,
+//      css: 'tmp/sass',
+//      image: 'img',
+//      relative: false,
+//      generated_images_path: '../dist/img',
+//      project: dir_path.join(__dirname, 'assets'),
+//      http_path: '/'
+//    }))
+//    .pipe(rename('bundle.css'));
+//  return stream.pipe(gulp.dest('dist/css'));
 });
 
 gulp.task('build', function() {
@@ -84,6 +93,9 @@ gulp.task('build', function() {
     .transform(babelify)
     .bundle()
     .pipe(source('bundle.js'))
+    .pipe(buffer())
+    .pipe(sourcemaps.init({ loadMaps: true })) // loads map from browserify file
+    .pipe(sourcemaps.write('./')) // writes .map file
     .pipe(gulp.dest(path.dist.js));
 })
 

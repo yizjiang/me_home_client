@@ -1,6 +1,7 @@
 development:
    server_url: http://localhost:3032
    client_url: http://localhost:3031
+   cdn_url: <%= ENV['SERVER_URL'] || 'http://localhost:3032' %>
 
 test:
   server_url: http://localhost:3032
@@ -9,7 +10,9 @@ test:
 staging:
   client_url: <%= ENV['CLIENT_URL'] || 'http://client.usreclub.com' %>
   server_url: <%= ENV['SERVER_URL'] || 'http://api.usreclub.com' %>
+  cdn_url: <%= ENV['CDN_URL'] || 'http://api.usreclub.co' %>
 
 production:
   client_url: <%= ENV['CLIENT_URL'] || 'http://client.meejia.com' %>
   server_url: <%= ENV['SERVER_URL'] || 'http://api.meejia.com' %>
+  cdn_url: <%= ENV['CDN_URL'] || 'http://api.meejia.com' %>

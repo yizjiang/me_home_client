@@ -21,7 +21,7 @@ var HomeListStore = _.extend({}, EventEmitter.prototype, {
   },
 
   getHomeById: function(id) {
-    return _homes.filter(function(v){return v.id==id})[0];
+    return _homes.filter(function(v){return v.id == id})[0];
   },
 
   // Emit Change event

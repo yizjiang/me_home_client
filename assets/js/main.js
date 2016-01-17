@@ -13,7 +13,7 @@ var React = require('react'),
     Money = require('./components/money/component/main.js'),
     HomeMain = require('./components/home/main.js'),
     HomeDetail = require('./components/home/home_detail.js'),
-    Manage = require('./components/manage/component/main.js'),
+    SchoolFinder = require('./components/school/component/main.js'),
     Agent = require('./components/agent/main.js'),
     College = require('./components/college/page.js'),
     UserPanel = require('./components/base/user_panel.js'),
@@ -61,7 +61,7 @@ var App = React.createClass({
           <ul id='MenuBox' className='nav navbar-nav'>
             <li><a href='/#/main' className='alinkClass'>找房</a></li>
             <li><a href='/#/money' className='alinkClass'>找钱</a></li>
-            <li><a href='/#/manage' className='alinkClass'>管理房产</a></li>
+            <li><a href='/#/school' className='alinkClass'>找学校</a></li>
             {linkComponent}
           </ul>
         </div>
@@ -85,7 +85,7 @@ var routes = (
       <Route name="home_compare" path=":query" handler={HomeDetail}/>
     </Route>
     <Route name="money" handler={Money}/>
-    <Route name="manage" handler={Manage}/>
+    <Route name="school" handler={SchoolFinder}/>
     <Route name="agent" handler={Agent}/>
     <Route name="dashboard" handler={Dashboard}/>
     <Route name="home_detail/:id" handler={HomeDetail}/>

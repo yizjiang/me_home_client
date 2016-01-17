@@ -4,6 +4,7 @@ var ServerActions = require('../../actions/server_action'),
   Tokenizer = require('react-typeahead').Tokenizer,
   _ = require('lodash'),
   UserStore = require('../../stores/user_store');
+var Select = require('./select');
 
 var _selectRgion = [];
 
@@ -91,6 +92,8 @@ var SearchBox = React.createClass({
     return (
       <div className='searchDiv'>
         <h3 className='home_h3'>觅 家 Find a Home</h3>
+        <Select options={this.props.areas}/>
+
         <Tokenizer
           customClasses={{input: 'input-region'}}
           options={this.props.areas}
