@@ -71,8 +71,8 @@ var BingMap = React.createClass({
 
   render: function () {
     return (
-      <div>
-        <div id='myMap' style={{position:'relative', width:'800px',height:'600px'}}></div>
+      <div className='map-canvas'>
+        <div id='myMap'></div>
         <div id="output"></div>
       </div>
       );

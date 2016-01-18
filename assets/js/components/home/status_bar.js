@@ -8,10 +8,12 @@ var StatusBar = React.createClass({
 
   render: function() {
     return (
-      <div>
+      <div className='statusbar_div'>
         <p className='Search_count'>我们为您搜索了{this.props.count}处理想的家</p>
-        <button type="button" value='list' onClick={this.changeViewType}>列表模式</button>
-        <button type="button" value='map' onClick={this.changeViewType}>地图模式</button>
+        <div className='status_wrap'>
+          <button type="button" className='' value='list' onClick={this.changeViewType}><span className='glyphicon glyphicon-th-list'></span></button>
+          <button type="button" className='btn-active' value='map' onClick={this.changeViewType}><span className='glyphicon glyphicon-map-marker'></span></button>
+        </div>
       </div>
     );
   }

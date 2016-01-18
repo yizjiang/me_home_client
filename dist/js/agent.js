@@ -156,8 +156,8 @@ var BingMap = React.createClass({
   render: function render() {
     return React.createElement(
       'div',
-      null,
-      React.createElement('div', { id: 'myMap', style: { position: 'relative', width: '800px', height: '600px' } }),
+      { className: 'map-canvas' },
+      React.createElement('div', { id: 'myMap' }),
       React.createElement('div', { id: 'output' })
     );
   }
@@ -304,7 +304,7 @@ var HomeMap = React.createClass({
     return React.createElement(
       'div',
       null,
-      React.createElement(StatusBar, { callback: this.props.callback }),
+      React.createElement(StatusBar, { count: this.props.count, callback: this.props.callback }),
       React.createElement(BingMap, { home_info: this.props.home_infos, show_details: true })
     );
   }
@@ -327,7 +327,7 @@ var StatusBar = React.createClass({
   render: function render() {
     return React.createElement(
       'div',
-      null,
+      { className: 'statusbar_div' },
       React.createElement(
         'p',
         { className: 'Search_count' },
@@ -336,14 +336,18 @@ var StatusBar = React.createClass({
         '处理想的家'
       ),
       React.createElement(
-        'button',
-        { type: 'button', value: 'list', onClick: this.changeViewType },
-        '列表模式'
-      ),
-      React.createElement(
-        'button',
-        { type: 'button', value: 'map', onClick: this.changeViewType },
-        '地图模式'
+        'div',
+        { className: 'status_wrap' },
+        React.createElement(
+          'button',
+          { type: 'button', className: '', value: 'list', onClick: this.changeViewType },
+          React.createElement('span', { className: 'glyphicon glyphicon-th-list' })
+        ),
+        React.createElement(
+          'button',
+          { type: 'button', className: 'btn-active', value: 'map', onClick: this.changeViewType },
+          React.createElement('span', { className: 'glyphicon glyphicon-map-marker' })
+        )
       )
     );
   }
