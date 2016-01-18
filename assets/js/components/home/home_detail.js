@@ -207,7 +207,7 @@ var HomeDetail = React.createClass({
               home.images.map(function(img){
                 return (
                   <CarouselItem>
-                    <img src={CDN_URL + img.image_url}/>
+                    <img src={CDN_URL + '/photo/' + img.image_url}/>
                   </CarouselItem>
                 )
               }
@@ -267,6 +267,8 @@ var HomeDetail = React.createClass({
                  {mapping['price'] + ': ' + home['price']}
                 </h3>
                 <p className='detailp'>{mapping['unit_price'] + ': ' + home['unit_price']}</p>
+                <p className='detailp'>{'月租金: 约' + home['monthly_rent']}</p>
+                <p className='detailp'>{'年房产税: 约' + home['property_tax']}</p>
               </Col>
           </div>
         </div>

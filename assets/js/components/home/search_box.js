@@ -8,19 +8,6 @@ var Select = require('./select');
 
 var _selectRgion = [];
 
-function addRegion(data){
-
-  data = data.split(',')[0];
-  _selectRgion.push(data)
-}
-
-function removeRegion(data){
-  data = data.split(',')[0];
-  _.remove(_selectRgion, function(n) {
-    return n == data;
-  });
-}
-
 function getSelectRegion(){
   return _selectRgion
 }
@@ -53,6 +40,13 @@ var SearchBox = React.createClass({
       this.setState({[event.target.value]: !temp});
     };
   },
+
+  changeRegionValue: function(regions) {
+    _selectRgion = regions.map((region) => {
+      return region.value
+    })
+  },
+
 
   homeSearch: function() {
     var region, search;
@@ -92,20 +86,7 @@ var SearchBox = React.createClass({
     return (
       <div className='searchDiv'>
         <h3 className='home_h3'>觅 家 Find a Home</h3>
-        <Select options={this.props.areas}/>
-
-        <Tokenizer
-          customClasses={{input: 'input-region'}}
-          options={this.props.areas}
-          defaultSelected={[]}
-          placeholder='城市或邮编（最多三个）'
-          onTokenAdd={function(token) {
-            addRegion(token);
-          }}
-          onTokenRemove={function(token) {
-            removeRegion(token);
-          }}
-        />
+        <Select options={this.props.areas} change={this.changeRegionValue}/>
 
         <button id='search' type="button" onClick={this.homeSearch} ><a href='#homelistAnchor'><span className='glyphicon glyphicon-search'></span></a></button>
         <button id='more' type="button" onClick={this.moreOptions} ><span className='glyphicon glyphicon-filter'></span></button>

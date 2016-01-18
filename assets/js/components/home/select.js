@@ -8,16 +8,14 @@ var Select = React.createClass({
 
   handleChange: function(_, options) {
     console.log(options);
+    this.props.change(options);
   },
 
   render: function() {
-//    var { optionMapper, options, value, multi } = this.props;
-
-      var options = this.props.options.map((tag) => {return {value: tag, label: tag}}  );
-//    value = value.map(optionMapper).toArray();
-
+    var options = this.props.options.map((tag) => {return {value: tag.split(',')[0], label: tag}} );
     return (
       <RawSelect
+      placeholder='城市或邮编'
       options={options}
       onChange={this.handleChange}
       multi={true}
