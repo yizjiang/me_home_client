@@ -102,8 +102,8 @@ var Dashboard = React.createClass({
     AreaStore.addChangeListener(this.loadArea);
     UserStore.addChangeListener(this._onChange);
     HomeListStore.addChangeListener(this._onChange);
-    $('#nav-toggle').removeClass('active');
-    $('#MenuBox').fadeOut(300, 'linear');
+//    $('#nav-toggle').removeClass('active');
+//    $('#MenuBox').fadeOut(300, 'linear');
     //setInterval(this.loadCommentsFromServer, this.props.pollInterval);
   },
 

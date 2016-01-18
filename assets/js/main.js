@@ -106,10 +106,10 @@ Router.run(routes, function (Handler, state) {
   React.render(<Handler params={params}/>, document.getElementById('app'));
 });
 
-function closeMenubox(){
-    $('#nav-toggle').toggleClass('active');
-    $('#MenuBox').fadeToggle(300, 'linear');
-};
-
-$('#nav-toggle').click(closeMenubox);
-$('a.alinkClass').click(closeMenubox);
+//function closeMenubox(){
+//    $('#nav-toggle').toggleClass('active');
+//    $('#MenuBox').fadeToggle(300, 'linear');
+//};
+//
+//$('#nav-toggle').click(closeMenubox);
+//$('a.alinkClass').click(closeMenubox);
