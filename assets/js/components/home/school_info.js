@@ -13,31 +13,28 @@ var SchoolInfo = React.createClass({
 
   render: function () {
     return (
-       <div>
+       <div className='school-info-wrap'>
          <Tabs selectedIndex={0}>
            <TabList>
-             <Tab><span className='glyphicon glyphicon-heart'></span></Tab>
-             <Tab><span className='glyphicon glyphicon-bookmark'></span></Tab>
-             <Tab><span className='glyphicon glyphicon-question-sign'></span></Tab>
+             <Tab>指定学校</Tab>
+             <Tab>公立学校</Tab>
+             <Tab>私立学校</Tab>
            </TabList>
 
            <TabPanel>
-             <h3>指定学校</h3>
              {this.props.assigned_schools.map((school) => {
                return <School {...school}/>
              })}
            </TabPanel>
 
            <TabPanel>
-             <h3>公立学校</h3>
              {this.props.public_schools.map((school) => {
                     return <School {...school}/>
            })}
            </TabPanel>
 
            <TabPanel>
-             <h3>私立学校</h3>
-                  {this.props.private_schools.map((school) => {
+              {this.props.private_schools.map((school) => {
                     return <School {...school}/>
            })}
            </TabPanel>

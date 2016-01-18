@@ -27,15 +27,18 @@ var AgentInfo = React.createClass({
 
   render: function() {
     return (
-      <div>
+      <div className='agent_info_wrap'>
         {this.state.agents.map((agent) => {
            return (
              <div className='agent_home_div'>
                <h3>在线经纪人</h3>
-               <p>姓名: <a href={CLIENT_URL + '/agent/' + agent.agent_extention.agent_identifier}>{agent.wechat_user.nickname}</a></p>
-               <img src={agent.wechat_user.head_img_url}></img>
-               <p>二维码联系方式</p>
-               <img src={agent.qr_code}></img>
+               <div className='agent-list'>
+                 <img className='profile_img' src={agent.wechat_user.head_img_url} />
+                 <div className='agent-detail-info'>
+                   <a className='agent-link' href={CLIENT_URL + '/agent/' + agent.agent_extention.agent_identifier}>{agent.wechat_user.nickname}</a>
+                   <img src={agent.qr_code} />
+                 </div>
+               </div>
              </div>
            )
          }

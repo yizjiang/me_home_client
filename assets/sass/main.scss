@@ -10,7 +10,7 @@ $yellow: #fbc03d;
 $bg-color: #fffdf7;
 $red: #D9534F;
 $chinese-font-family: Arial, sans-serif;
-
+$border: 1px solid #ccc;
 $border-radius: 5px;
 $dark-grey: #222;
 
@@ -718,27 +718,7 @@ div.ccent{
 	min-height: 450px;
 }
 
-div.description_div{
-	width: calc(100% - 623px);
-	display: inline-block;
-	padding: 20px;
-	vertical-align: top;
-
-	h3{
-		margin: 0;
-		font-size: 18px;
-		padding-bottom: 5px;
-	}
-	
-	p{
-		font-size: 16px;
-		line-height: 23px;
-		font-weight: 100;
-	}
-}
-
-
-div.detailDiv{
+.detailDiv, .description_div, .cityinfo-wrap, .school-info-wrap{
 	width: 100%;
 	padding: 30px 15%;
 	height: auto;
@@ -746,7 +726,11 @@ div.detailDiv{
 	h3{
 		font-size: 20px;
 	}
-
+	.detailp{
+		font-size: 16px;
+		font-weight: 300;
+		line-height: 24px;
+	}
 	button.btngroup{
 		display: none;
 	}
@@ -801,6 +785,12 @@ div.detailDiv{
 			}
 		}
 	}	
+}
+
+.city-detail-wrap{
+	width: 33.33%;
+	display: inline-block;
+	vertical-align: top;
 }
 
 @media screen and (max-width: 1000px){
@@ -1492,6 +1482,11 @@ div.shareGroup{
 		    }
 		}
 	}
+	.city-detail-wrap{
+		width: 100%;
+		display: block;
+		vertical-align: top;
+	}
 }
 
 
@@ -1540,15 +1535,40 @@ div#agentcontent{
 	}
 }
 
-.agent_home_div{
+.agent_info_wrap{
 	display: inline-block;
-	width: 200px;
-	img{
-		width: 150px;
-		height: 150px;
-		border-radius: 80px;
-		margin: 0 10px 10px 0;
-	}
+	max-width: calc(100% -623px);
+	vertical-align: top;
+	.agent_home_div{
+		margin: 0 0 0 30px;
+		padding: 20px;
+		h3{
+			font-size: 24px;
+			text-align: center;
+		}
+		img{
+			width: 150px;
+			height: 150px;
+			display: inline-block;
+		}
+		img.profile_img{
+			width: 80px;
+			height: 80px;
+			border-radius: 80px;
+			margin: 0 20px;
+		}
+		.agent-detail-info{
+			width: calc(100% - 120px);
+			display: inline-block;
+			vertical-align: top;
+			.agent-link{
+				display: block;
+				width: 100%;
+				font-size: 18px;
+				text-decoration: none;
+			}
+		}
+	}	
 }
 
 .preview_list_div{

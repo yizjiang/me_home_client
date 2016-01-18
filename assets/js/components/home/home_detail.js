@@ -215,6 +215,8 @@ var HomeDetail = React.createClass({
             }
         </Carousel>
 
+        {agentInfoComponent}
+        
         <div className='description_div'>
           <h3>
            {mapping['description']}
@@ -223,8 +225,6 @@ var HomeDetail = React.createClass({
           <p className='detailp'>{home['chinese_description']}</p>
         </div>
 
-        {mapComponent}
-        {agentInfoComponent}
         {cityInfoComponent}
 
         <div className='detailDiv'>
@@ -272,6 +272,7 @@ var HomeDetail = React.createClass({
         </div>
 
         {schoolInfoCompoent}
+        {mapComponent}
       </div>
   );
   }

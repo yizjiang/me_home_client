@@ -1,5 +1,5 @@
 development:
-   server_url: http://localhost:3032
+   server_url: http://a8a07864.ngrok.io
    client_url: http://localhost:3031
    cdn_url: <%= ENV['SERVER_URL'] || 'http://localhost:3032' %>
 
