@@ -67,7 +67,15 @@ var App = React.createClass({
         </div>
         <header>
             <a href='/#/main'><img className='logoImg' src="/img/logo.png" /></a>
-            <div>
+            <div className='nav-wrap'>
+              <ul className='nav-list'>
+                <li><a href='/#/main' className='alinkClass'>找房</a></li>
+                <li><a href='/#/money' className='alinkClass'>找钱</a></li>
+                <li><a href='/#/school' className='alinkClass'>找学校</a></li>
+                {linkComponent}
+              </ul>
+            </div>
+            <div className='nav-triger'>
               <a id="nav-toggle" className="nav_slide_button"><span></span></a>
             </div>
         </header>

@@ -67,10 +67,16 @@ var CityInfo = React.createClass({
           <div className='city-detail'>
             <h4>平均家庭年收入</h4>
             <p>{data.income}</p>
+          </div>
+          <div className='city-detail'>
             <h4>人口</h4>
             <p>{data.population}</p>
+          </div>
+          <div className='city-detail'>
             <h4>环境指数</h4>
             <p>{data.PMI}</p>
+          </div>
+          <div className='city-detail'>
             <h4>大学及以上教育</h4>
             <p>{data.above_bachelor}</p>
           </div>
@@ -81,24 +87,30 @@ var CityInfo = React.createClass({
           <div className='city-detail'>
             <h4>州失业率</h4>
             <p>{data.state_unemploy}</p>
+          </div>
+          <div className='city-detail'>
             <h4>本市失业率</h4>
             <p>{data.unemploy}</p>
+          </div>
+          <div className='city-detail'>
             <h4>全美犯罪指数</h4>
             <p>{data.us_crime}</p>
+          </div>
+          <div className='city-detail'>
             <h4>本市犯罪指数</h4>
             <p>{data.crime}</p>
           </div>
         </div>
 
-        <div className='city-detail-wrap'>
+        <div className='city-racism-wrap'>
           <h3>族裔比例</h3>
-          <PieChart data={this.buildPieChartData(data)} options={this.chartOptions()} width="600" height="250"/>
-          <ul>
-            <li><span className='color-sq'></span>白人</li>
-            <li><span className='color-sq'></span>亚裔</li>
-            <li><span className='color-sq'></span>非洲裔</li>
-            <li><span className='color-sq'></span>西班牙裔</li>
-            <li><span className='color-sq'></span>其他</li>
+          <PieChart data={this.buildPieChartData(data)} options={this.chartOptions()} width="250" height="250"/>
+          <ul className='racism-list'>
+            <li><span className='color-sq sq-red'></span>白人: <span className='data-span'>{parseInt(data.caucasion)}%</span></li>
+            <li><span className='color-sq sq-blue'></span>亚裔: <span className='data-span'>{parseInt(data.asian)}%</span></li>
+            <li><span className='color-sq sq-yellow'></span>非洲裔: <span className='data-span'>{parseInt(data.black)}%</span></li>
+            <li><span className='color-sq sq-dark'></span>西班牙裔: <span className='data-span'>{parseInt(data.hispanics)}%</span></li>
+            <li><span className='color-sq sq-grey'></span>其他: <span className='data-span'>{100 - parseInt(data.asian) - parseInt(data.black) - parseInt(data.caucasion) -  parseInt(data.hispanics)}%</span></li>
           </ul>
         </div>
 

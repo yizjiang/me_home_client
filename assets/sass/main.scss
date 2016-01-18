@@ -103,6 +103,26 @@ header{
 		z-index: 4;
 	}
 
+	.nav-triger{
+		display: none;
+	}
+
+	.nav-wrap{
+		.nav-list{
+			list-style: none;
+			padding-top: 15px;
+    		margin-left: 12%;
+			li{
+				display: inline-block;
+				font-size: 20px;
+				margin: 0 15px;
+				a{
+					text-decoration: none;
+				}
+			}
+		}
+	}
+
 	#nav-toggle{
 		cursor: pointer;
 		padding: 10px 35px 16px 0px;
@@ -202,7 +222,7 @@ div.content{
 	button{
 		background: white;
 		color: $red;
-		border: 1px solid #ccc;
+		border: $border;
 		border-radius: 5px;
 		width: 50px;
 		height: 30px;
@@ -255,12 +275,22 @@ div.searchDiv{
 	background-color: rgba(255,255,255,0.7);
 	float: left;
 
+	.Select{
+		width: calc(90% - 100px);
+		margin-left: 5%;
+		display: inline-block;
+		.Select-control{
+			min-height: 40px;
+			border-radius: 0;
+		}
+	}
+
 	h3.home_h3{
 		font-size: 24px;
 		font-weight: 600;
 		margin-left: 5%;
-		margin-top: 100px;
-		margin-bottom: 150px;
+		margin-top: 80px;
+		margin-bottom: 100px;
 	}
 
 	h3.home_h3:after{
@@ -326,7 +356,7 @@ div.searchDiv{
 
 		    li{
 		    	width: 100%;
-		    	border-bottom: 1px solid #ccc;
+		    	border-bottom: $border;
 		    	padding: 5px 0;
 		    	a{
 		    		color: #333;
@@ -365,7 +395,7 @@ div.searchDiv{
 			input{
 				border-radius: 5px;
 			    outline: none;
-			    border: 1px solid #ccc;
+			    border: $border;
 			    height: 25px;
 			    padding: 0px;
 			    font-size: 14px;
@@ -527,7 +557,7 @@ div.homelistDiv{
 	overflow-y: hidden;
 
 	table{
-		border-top: 1px solid #ccc;
+		border-top: $border;
 		padding: 0px;
 		width: 100%;
 		margin: 0;
@@ -535,7 +565,7 @@ div.homelistDiv{
 		overflow-y: hidden;
 
 		tr{
-			border-bottom: 1px solid #ccc;
+			border-bottom: $border;
 			font-size: 16px;
 			font-weight: 400;
 
@@ -705,11 +735,14 @@ div.ccent{
 	min-height: 450px;
 }
 
+.description_div{
+	border-bottom: $border;
+}
+
 .detailDiv, .description_div, .cityinfo-wrap, .school-info-wrap{
 	width: 100%;
-	padding: 30px 15%;
+	padding: 15px 15%;
 	height: auto;
-	margin-bottom: 20px;
 	h3{
 		font-size: 20px;
 	}
@@ -726,14 +759,14 @@ div.ccent{
 		display: inline-block;
 
 		.detailPara{
-			padding-top: 15px;
+			padding: 15px;
 			font-size: 15px;
 			line-height: 20px;
 			font-weight: 100;
 			word-wrap: break-word;
-			border-bottom: 1px solid #ccc;
+			border-bottom: $border;
 			display: block;
-			height: 120px;
+			height: 150px;
 			h3{
 				font-size: 18px;
 				margin-top: 0;
@@ -748,7 +781,7 @@ div.ccent{
 			}
 		}
 		.detailother{
-			border-top: 1px solid #ccc;
+			border-top: $border;
 			height: auto;
 
 			h3{
@@ -775,9 +808,36 @@ div.ccent{
 }
 
 .city-detail-wrap{
-	width: 33.33%;
+	width: 48%;
+	margin: 0 1%;
 	display: inline-block;
 	vertical-align: top;
+	.city-detail{
+		display: inline-block;
+		width: 50%;
+		border: $border;
+		padding: 10px;
+	}
+}
+
+.city-racism-wrap{
+	canvas{
+		display: inline-block;
+	}
+}
+
+ul.racism-list{
+	list-style: none;
+	display: inline-block;
+	vertical-align: bottom;
+	li{
+		font-size: 14px;
+		line-height: 35px;
+		span{
+			display: inline-block;
+			vertical-align: top;
+		}
+	}
 }
 
 .color-sq{
@@ -785,7 +845,78 @@ div.ccent{
 	width: 30px;
 	height: 30px;
 	border-radius: 30px;
+	margin-right: 10px;
 }
+
+.color-sq.sq-red{
+	background-color: #F54549;
+}
+.color-sq.sq-blue{
+	background-color: #45bdbc;
+}
+.color-sq.sq-yellow{
+	background-color: #FDB45C;
+}
+.color-sq.sq-grey{
+	background-color: #949FB1;
+}
+.color-sq.sq-dark{
+	background-color: #4D5360;
+}
+
+.data-span{
+	margin-left: 10px;
+}
+
+
+.school-info-wrap{
+	.react-tabs{
+		ul{
+			li{
+				font-size: 24px;
+				line-height: 36px;
+				font-weight: 300;
+				width: 33.33%;
+				text-align: center;
+			}
+		}
+	}
+	.school-wrap{
+		padding: 0 20px 20px 20px;
+		border-bottom: $border;
+		.school-detail-wrap{
+			display: inline-block;
+			vertical-align: top;
+			width: 100px;
+			p{
+				margin-bottom: 0;
+			}
+		}
+		.school-detail-wrap-name{
+			p{
+				margin-bottom: 0;
+			}
+		}
+	}
+	.react-tabs [role=tab]{
+		border: none;
+	}
+	.react-tabs [role=tab][aria-selected=true]{
+		border-bottom: 3px solid $yellow !important;
+	}
+}
+
+.home-map-wrap{
+	width: 100%;
+	padding: 15px 15%;
+	.map-canvas{
+		width: 50%;
+		height: 500px;
+		position: relative;
+		left: 0;
+	}
+}
+
 
 @media screen and (max-width: 1000px){
 	.detailother{
@@ -851,7 +982,7 @@ input#question, input#answer9{
 	width: 50%;
 	height: 200px;
 	margin-left: 25%;
-	border: 1px solid #ccc;
+	border: $border;
 	border-radius: 5px;
 }
 
@@ -862,7 +993,7 @@ div.react-tabs div[id^='react-tabs'] button#search{
 
 
 div.searchResult{
-	border-top: 1px solid #ccc;
+	border-top: $border;
 	width: calc(100% - 30px);
 	div.homelistDiv{
 		position: relative;
@@ -933,6 +1064,14 @@ li:last-child{
   margin-top: -70px;
 }
 @media screen and (max-width: 767px){
+
+	header .nav-triger{
+		display: block;
+	}
+
+	.nav-wrap{
+		display: none;
+	}
 
 	div.loginWrap{
 		position: absolute;
@@ -1041,7 +1180,7 @@ div.commentList{
 		margin-left: 25%;
 
 		li{
-			border-bottom: 1px solid #ccc;
+			border-bottom: $border;
 		}
 		li:last-child{
 			border-bottom: none !important;
@@ -1266,7 +1405,7 @@ div.agentDiv{
 
 	    			li{
 	    				font-size: 18px;
-	    				border-bottom: 1px solid #ccc;
+	    				border-bottom: $border;
 	    				text-align: left;
 	    				width: 100%;
 	    				height: 200px;
@@ -1276,7 +1415,7 @@ div.agentDiv{
 	    						font-size: 18px;
 	    					}
 	    					input.answer-inputbox{
-	    						border: 1px solid #ccc;
+	    						border: $border;
 	    						border-radius: 5px;
 	    						font-size: 15px;
 	    						line-height: 20px;
@@ -1306,7 +1445,7 @@ div.agentDiv{
 	    div[id^='react-tabs']{
 	    	div.each-customer{
 	    		text-align: left;
-	    		border-bottom: 1px solid #ccc; 
+	    		border-bottom: $border; 
 	    		padding: 15px 0;
 	    		p{
 	    			font-size: 14px;
@@ -1336,7 +1475,7 @@ div.agentDiv{
 		    			width: 100px;
 		    			height: 40px;
 		    			border-radius: 5px !important;
-		    			border: 1px solid #ccc;
+		    			border: $border;
 		    			margin: 0;
 		    			display: inline-block;
 		    			float: none;
@@ -1373,7 +1512,7 @@ div.shareGroup{
 		vertical-align: top;
 	}
 	div.shareDiv:last-child{
-		border-left: 1px solid #ccc;
+		border-left: $border;
 	}
 
 }
@@ -1585,7 +1724,7 @@ div#agentcontent{
 	li{
 		display: inline-block !important;
 		padding: 10px !important;
-		border: 1px solid #ccc !important;
+		border: $border !important;
 		margin: 0 5px;
 		background-color: $bg-color !important;
 		a{
@@ -1752,7 +1891,7 @@ div#agentcontent{
 		form{
 			div{
 				padding: 5px 0;
-				border-bottom: 1px solid #ccc;
+				border-bottom: $border;
 				li{
 					width: calc(80% - 10px);
 					margin-right: 10px;
