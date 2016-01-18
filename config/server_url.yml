@@ -1,5 +1,5 @@
 development:
-   server_url: http://e32d428d.ngrok.io
+   server_url: http://a8a07864.ngrok.io
    client_url: http://localhost:3031
    cdn_url: <%= ENV['SERVER_URL'] || 'http://localhost:3031' %>
 
@@ -15,4 +15,4 @@ staging:
 production:
   client_url: <%= ENV['CLIENT_URL'] || 'http://client.meejia.com' %>
   server_url: <%= ENV['SERVER_URL'] || 'http://api.meejia.com' %>
-  cdn_url: <%= ENV['CDN_URL'] || 'http://image.meejia.com/photo' %>
+  cdn_url: <%= ENV['CDN_URL'] || 'http://image.meejia.com/' %>
