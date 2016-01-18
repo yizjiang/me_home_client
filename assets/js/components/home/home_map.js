@@ -6,7 +6,7 @@ var HomeMap = React.createClass({
   render: function () {
     return (
       <div>
-        <StatusBar count={this.props.count} callback={this.props.callback}/>
+        <StatusBar {...this.props} />
         <BingMap home_info={this.props.home_infos} show_details={true}/>
       </div>
     );

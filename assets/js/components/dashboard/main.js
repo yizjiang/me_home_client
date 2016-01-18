@@ -142,8 +142,8 @@ var Dashboard = React.createClass({
         onSelect={this.onSelect}>
         </Paginator>
       }
-      homesComp = <HomeList callback={this.showMode} searched={this.state.searched} count={home_list.length} list={list}/>
-      favoriteHomesComp =  <HomeList callback={this.showMode} custom_style={'favoredHouse'} count={favorite_list.length} list={favorite_list}/>
+      homesComp = <HomeList listView={true} callback={this.showMode} searched={this.state.searched} count={home_list.length} list={list}/>
+      favoriteHomesComp =  <HomeList listView={true} callback={this.showMode} custom_style={'favoredHouse'} count={favorite_list.length} list={favorite_list}/>
     } else {
       var home_infos = home_list.map((home) => {
         var points = home.geo_point.split(',');
@@ -154,8 +154,8 @@ var Dashboard = React.createClass({
     return {lat: points[0],long: points[1], home_id: home.id, description: home.short_desc, title: home.addr1}
   });
 
-      homesComp = <HomeMap callback={this.showMode} searched={this.state.searched} count={home_list.length} home_infos={home_infos}/>
-      favoriteHomesComp = <HomeMap callback={this.showMode} searched={this.state.searched} count={favorite_list.length} home_infos={favoriate_infos}/>
+      homesComp = <HomeMap listView={false} callback={this.showMode} searched={this.state.searched} count={home_list.length} home_infos={home_infos}/>
+      favoriteHomesComp = <HomeMap listView={false} callback={this.showMode} searched={this.state.searched} count={favorite_list.length} home_infos={favoriate_infos}/>
     }
 
     var quickSearchComp = null;

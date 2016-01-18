@@ -1,7 +1,6 @@
 var ServerActions = require('../../actions/server_action'),
   SearchOptions = require('./search_options'),
   SelectItems = require('./select_items'),
-  Tokenizer = require('react-typeahead').Tokenizer,
   _ = require('lodash'),
   UserStore = require('../../stores/user_store');
 var Select = require('./select');
@@ -46,7 +45,6 @@ var SearchBox = React.createClass({
       return region.value
     })
   },
-
 
   homeSearch: function() {
     var region, search;

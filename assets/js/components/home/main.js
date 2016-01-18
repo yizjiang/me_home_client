@@ -124,13 +124,13 @@ var HomeMain = React.createClass({
         onSelect={this.onSelect}>
         </Paginator>
       }
-      homesComp = <HomeList callback={this.showMode} searched={this.state.searched} count={home_list.length} list={list}/>
+      homesComp = <HomeList listView={true} callback={this.showMode} searched={this.state.searched} count={home_list.length} list={list}/>
     } else {
       var home_infos = home_list.map((home) => {
         var points = home.geo_point.split(',');
         return {lat: points[0],long: points[1], home_id: home.id, description: home.short_desc, title: home.addr1}
       });
-      homesComp = <HomeMap callback={this.showMode} searched={this.state.searched} count={home_list.length} home_infos={home_infos}/>
+      homesComp = <HomeMap listView={false} callback={this.showMode} searched={this.state.searched} count={home_list.length} home_infos={home_infos}/>
     }
 
     return (

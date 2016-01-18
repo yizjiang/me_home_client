@@ -12,9 +12,21 @@ var Select = React.createClass({
   },
 
   render: function() {
-    var options = this.props.options.map((tag) => {return {value: tag.split(',')[0], label: tag}} );
+    var {options, selected} = this.props;
+
+    if(options == undefined){
+      options = []
+    }
+    if(selected == undefined) {
+      selected = [];
+    }
+
+    var options = options.map((tag) => {return {value: tag.split(',')[0], label: tag}} );
+    var selected = selected.map((tag) => {return {value: tag.split(',')[0], label: tag}} );
+
     return (
       <RawSelect
+      value={selected}
       placeholder='城市或邮编'
       options={options}
       onChange={this.handleChange}

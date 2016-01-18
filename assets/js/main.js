@@ -71,7 +71,6 @@ var App = React.createClass({
               <a id="nav-toggle" className="nav_slide_button"><span></span></a>
             </div>
         </header>
-        <HelpPanel/>
         <UserPanel/>
         <RouteHandler/>
       </div>

@@ -1,6 +1,6 @@
 var ServerActions = require('../../actions/server_action'),
   SearchOptions = require('../home/search_options'),
-  Tokenizer = require('react-typeahead').Tokenizer,
+  Select = require('../home/select'),
   _ = require('lodash'),
   AreaStore = require('../../stores/area_store'),
   UserStore = require('../../stores/user_store');
@@ -120,6 +120,12 @@ var QuickSearch = React.createClass({
     };
   },
 
+  changeRegionValue: function(regions) {
+    _selectRgion = regions.map((region) => {
+      return region.value
+    })
+  },
+
   saveSearch: function(id) {
     var region, search;
     region = getSelectRegion();
@@ -130,7 +136,6 @@ var QuickSearch = React.createClass({
       search['regionValue'] = search.regionValue.join(',');
       search['customer_id'] = this.props.wechat_user.id;
       search['api'] = true;
-      console.log(search);
       $('#saveBtn' + id).text('保存中..');
 
       ServerActions.saveCustomerSearch(search).then(() => { $('#saveBtn' + id).text('保存');});
@@ -148,18 +153,7 @@ var QuickSearch = React.createClass({
 
         <div className='searchDiv'>
           <h3>微信快速搜索设置</h3>
-          <Tokenizer
-          customClasses={{input: 'input-region'}}
-          options={this.props.areas}
-          defaultSelected={this.state.regionValue}
-          placeholder='城市或邮编（最多三个）'
-          onTokenAdd={function(token) {
-            addRegion(token);
-          }}
-          onTokenRemove={function(token) {
-            removeRegion(token);
-          }}
-          />
+          <Select options={this.props.areas} change={this.changeRegionValue} selected={this.state.regionValue}/>
           <SearchOptions options={this.state} callback={this.handleFilterChange} show={true}/>
           <button id={'saveBtn' + this.props.wechat_user.id} className='btn btn-success' type="button" onClick={this.saveSearch.bind(this, this.props.wechat_user.id)} >保存</button>
           <hr />

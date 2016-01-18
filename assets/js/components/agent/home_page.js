@@ -23,13 +23,13 @@ var HomePage = React.createClass({
     var homesComp = null;
     var home_list = this.props.data.home_list;
     if(this.state.listView){
-      homesComp = <HomeList callback={this.showMode} custom_style={'previewList'} count={home_list.length} list={home_list}/>
+      homesComp = <HomeList listView={true} callback={this.showMode} custom_style={'previewList'} count={home_list.length} list={home_list}/>
     } else {
       var home_infos = home_list.map((home) => {
         var points = home.geo_point.split(',');
       return {lat: points[0],long: points[1], home_id: home.id, description: home.short_desc, title: home.addr1}
     });
-    homesComp = <HomeMap callback={this.showMode} count={home_list.length} home_infos={home_infos}/>
+    homesComp = <HomeMap listView={false} callback={this.showMode} count={home_list.length} home_infos={home_infos}/>
   }
 
     return (
