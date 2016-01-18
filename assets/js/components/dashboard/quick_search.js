@@ -140,12 +140,14 @@ var QuickSearch = React.createClass({
   render: function() {
     var that = this;
     return (
-      <div className='each-customer'>
-        <p className='customer-name'>{this.props.wechat_user.nickname}</p>
-        <img src={this.props.wechat_user.head_img_url} height="90" width="90"></img>
+      <div className='wechat_search'>
+        <div className='wechat_wrap'>
+          <img className='customer-avator' src={this.props.wechat_user.head_img_url} />
+          <p className='customer-name'>微信用户：{this.props.wechat_user.nickname}</p>
+        </div>
 
         <div className='searchDiv'>
-          <h3>微信快速搜索</h3>
+          <h3>微信快速搜索设置</h3>
           <Tokenizer
           customClasses={{input: 'input-region'}}
           options={this.props.areas}
@@ -159,9 +161,8 @@ var QuickSearch = React.createClass({
           }}
           />
           <SearchOptions options={this.state} callback={this.handleFilterChange} show={true}/>
-          <button id={'saveBtn' + this.props.wechat_user.id} type="button" onClick={this.saveSearch.bind(this, this.props.wechat_user.id)} >保存</button>
-
-          <br/>
+          <button id={'saveBtn' + this.props.wechat_user.id} className='btn btn-success' type="button" onClick={this.saveSearch.bind(this, this.props.wechat_user.id)} >保存</button>
+          <hr />
         </div>
       </div>
     );
