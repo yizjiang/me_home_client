@@ -69,9 +69,9 @@ var App = React.createClass({
             <a href='/#/main'><img className='logoImg' src="/img/logo.png" /></a>
             <div className='nav-wrap'>
               <ul className='nav-list'>
-                <li><a href='/#/main' className='alinkClass'>找房</a></li>
-                <li><a href='/#/money' className='alinkClass'>找钱</a></li>
-                <li><a href='/#/school' className='alinkClass'>找学校</a></li>
+                <li><a href='/#/main'>找房</a></li>
+                <li><a href='/#/money'>找钱</a></li>
+                <li><a href='/#/school'>找学校</a></li>
                 {linkComponent}
               </ul>
             </div>
@@ -106,10 +106,10 @@ Router.run(routes, function (Handler, state) {
   React.render(<Handler params={params}/>, document.getElementById('app'));
 });
 
-//function closeMenubox(){
-//    $('#nav-toggle').toggleClass('active');
-//    $('#MenuBox').fadeToggle(300, 'linear');
-//};
-//
-//$('#nav-toggle').click(closeMenubox);
-//$('a.alinkClass').click(closeMenubox);
+function closeMenubox(){
+   $('#nav-toggle').toggleClass('active');
+   $('#MenuBox').fadeToggle(300, 'linear');
+};
+
+$('#nav-toggle').click(closeMenubox);
+$('a.alinkClass').click(closeMenubox);
