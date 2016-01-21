@@ -31,16 +31,7 @@ var FilterableProductTable = React.createClass({
   render: function() {
     return (
       <div>
-        <SearchBar
-        filterText={this.state.filterText}
-        inStockOnly={this.state.inStockOnly}
-        onUserInput={this.handleUserInput}
-        />
-        <ProductTable
-        products={this.state.products}
-        filterText={this.state.filterText}
-        inStockOnly={this.state.inStockOnly}
-        />
+        <h3>努力开发中，敬请期待</h3>
       </div>
       );
   }

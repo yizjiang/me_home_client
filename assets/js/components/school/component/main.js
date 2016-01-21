@@ -3,7 +3,7 @@ var React = require('react');
 
 var SchoolFinder = React.createClass({
   render: function () {
-    return <h2>SchoolFinder</h2>;
+    return <h3>努力开发中，敬请期待</h3>;
   }
 });
 
