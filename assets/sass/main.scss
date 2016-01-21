@@ -129,7 +129,7 @@ header{
 		position: absolute;
 		right: 25px;
 		top: 20px;
-		tansition: all 0.5s;
+		transition: all 0.5s;
 		z-index: 4;
 		
 		span{
@@ -290,7 +290,8 @@ div.searchDiv{
 		font-weight: 600;
 		margin-left: 5%;
 		margin-top: 80px;
-		margin-bottom: 100px;
+		margin-bottom: 40px;
+		transition: all 0.5s;
 	}
 
 	h3.home_h3:after{
@@ -409,7 +410,7 @@ div.searchDiv{
 		}
 
 		.rc-slider{
-			margin-bottom: 30px;
+			margin-bottom: 15px;
 
 			.rc-slider-step{
 				background-color: $btn-color;
@@ -552,7 +553,7 @@ div.searchresult_div{
 div.homelistDiv{
 	width: 100%;
 	margin: 0;
-	height: calc(100% - 80px);
+	height: calc(100% - 100px);
 	background-color: transparent;
 	overflow-y: hidden;
 
@@ -561,7 +562,6 @@ div.homelistDiv{
 		padding: 0px;
 		width: 100%;
 		margin: 0;
-		max-height: 100%;
 		overflow-y: hidden;
 
 		tr{
@@ -637,7 +637,9 @@ div.homelistDiv{
 	}
 }
 
-
+.homelistDiv.undefined.loading{
+	height: 100%;
+}
 
 div.ccent{
 	top: 0px;
@@ -1063,86 +1065,6 @@ li:last-child{
 .typeahead-token{
   margin-top: -70px;
 }
-@media screen and (max-width: 767px){
-
-	header .nav-triger{
-		display: block;
-	}
-
-	.nav-wrap{
-		display: none;
-	}
-
-	div.loginWrap{
-		position: absolute;
-		right: 75px;
-		font-size: 16px;
-		font-weight: 100;
-		line-height: 30px;
-
-		p{
-			display: inline-block;
-			float: left;
-			margin-right: 10px;
-		}
-		button.nobutton{
-			background: none;
-			border: none;
-			display: inline-block;
-			padding: 0 !important;
-		}
-		button.nobutton:active, button.nobutton:focus{
-			outline: 0;
-		}
-	}
-
-	div.searchDiv{
-		padding-top: 30px;
-		padding-bottom: 30px;
-		width: 100%;
-		margin-left: 0;
-		background-color: rgba(200,200,200,0.3);
-		height: 140px;
-		margin-top: -140px;
-		
-		h3.home_h3{
-			margin-top: 0px;
-			margin-bottom: 10px;
-		}
-
-		div.filter{
-			background-color: rgba(255,255,255,0.6);
-		    width: 100%;
-		    margin-left: 0;
-		    padding-left: 5%;
-		    height: 200px;
-		    padding-top: 15px;
-	        margin-top: 16px;
-		}
-
-		div.slogan_div{
-			margin-top: 0px;
-			top: 50px;
-			position: relative;
-
-			p{
-				color: #333;
-				font-size: 20px;
-			}
-		}
-	}
-	div.content{
-		max-height: 200px;
-		top: 200px;
-	}
-	div.citylistDiv ul{
-		max-height: 290px;
-	}
-	button.btngroup{
-		margin-bottom: 30px;
-	}
-}
-
 
 div.homelistDiv.favoredHouse{
 	top: 0;
@@ -1517,53 +1439,6 @@ div.shareGroup{
 
 }
 
-@media screen and (max-width: 640px){
-	div.agentDiv{
-		margin-left: 0;
-		div.react-tabs{
-		    ul{
-		    	width: calc(100% - 50px);
-		    	margin-left: 25px !important;
-		    	float: none;
-		    	
-		    	li{
-		    		display: inline-block !important;
-		    		width: 25%;
-		    		height: 50px;
-		    		padding: 0 !important;
-		    		margin: 0 !important;
-		    		line-height: 50px;
-		    		bottom: 0 !important;
-		    	}
-		    }
-
-		    div[id^='react-tabs']{
-		    	width: calc(100% - 50px);
-		    	margin-left: 25px !important;
-
-		    	#question, button#submitquestion, ol{
-		    		width: 90%;
-		    		margin-left: 5%;
-		    	}
-
-		    	div.previewList{
-		    		ul{
-		    			li{
-		    				width: 100% !important;
-		    			}
-		    		}
-		    	}
-		    }
-		}
-	}
-	.city-detail-wrap{
-		width: 100%;
-		display: block;
-		vertical-align: top;
-	}
-}
-
-
 div#agentcontent{
 	div{
 		margin-left: 25px;
@@ -1595,19 +1470,6 @@ div#agentcontent{
   height: 300px;
 }
 
-@media screen and (min-width: 1025px){
-	div.searchDiv{
-		margin-left: calc(50% - 512px);
-	}
-	div.searchresult_div{
-		max-width: 624px;
-		margin-right: calc(50% - 512px);
-	}
-	.pagify-pagination{
-		max-width: 624px;
-		margin-right: calc(50% - 512px);
-	}
-}
 
 .agent_info_wrap{
 	display: inline-block;
@@ -1721,6 +1583,7 @@ div#agentcontent{
     width: 624px;
 	float: right;
 	right: calc(50% - 512px);
+	top: -65px;
 	li{
 		display: inline-block !important;
 		padding: 10px !important;
@@ -1735,6 +1598,198 @@ div#agentcontent{
 			text-decoration: none;
 			color: #333;
 		}
+	}
+}
+
+.landing-wrap{
+	width: 100%;
+	.landing-icon{
+		display: inline-block;
+		width: 33.33%;
+		text-align: center;
+		margin: 40px 0;
+		color: #333;
+		span{
+			font-size: 40px;
+			width: 110px;
+			line-height: 104px;
+			display: block;
+			color: $btn-color;
+			border: 3px solid $btn-color;
+			margin: auto;
+			border-radius: 100px;
+			padding: 0;
+		}
+		h3,p{
+			text-decoration: none;
+			color: #333;
+		}
+	}
+	.landing-icon:hover{
+		a{
+			text-decoration: none;
+		}
+		span{
+			text-decoration: none;
+			font-size: 50px;
+			width: 120px;
+			line-height: 114px;
+			display: block;
+			color: $yellow;
+			border: 3px solid $yellow;
+			margin: auto;
+			border-radius: 100px;
+			padding: 0;
+		}
+		h3,p{
+			text-decoration: none;
+			color: #333;
+		}
+	}
+}
+
+@media screen and (max-width: 767px){
+	header .nav-triger{
+		display: block;
+	}
+
+	.nav-wrap{
+		display: none;
+	}
+
+	div.loginWrap{
+		position: absolute;
+		right: 75px;
+		font-size: 16px;
+		font-weight: 100;
+		line-height: 30px;
+
+		p{
+			display: inline-block;
+			float: left;
+			margin-right: 10px;
+		}
+		button.nobutton{
+			background: none;
+			border: none;
+			display: inline-block;
+			padding: 0 !important;
+		}
+		button.nobutton:active, button.nobutton:focus{
+			outline: 0;
+		}
+	}
+	div.searchDiv{
+		padding-top: 30px;
+		padding-bottom: 30px;
+		width: 100%;
+		margin-left: 0;
+		background-color: rgba(200,200,200,0.3);
+		height: 140px;
+		margin-top: -140px;
+		
+		h3.home_h3{
+			margin-top: 0px;
+			margin-bottom: 10px;
+		}
+
+		div.filter{
+			background-color: rgba(255,255,255,0.6);
+		    width: 100%;
+		    margin-left: 0;
+		    padding-left: 5%;
+		    height: 200px;
+		    padding-top: 15px;
+	        margin-top: 16px;
+		}
+
+		div.slogan_div{
+			margin-top: 0px;
+			top: 50px;
+			position: relative;
+
+			p{
+				color: #333;
+				font-size: 20px;
+			}
+		}
+	}
+	div.content{
+		max-height: 200px;
+		top: 200px;
+	}
+	div.citylistDiv ul{
+		max-height: 290px;
+	}
+	button.btngroup{
+		margin-bottom: 30px;
+	}
+	.landing-wrap{
+		margin-top: 220px;
+		.landing-icon{
+			width: 100%;
+			margin: 20px 0;
+		}
+	}
+}
+
+@media screen and (max-width: 640px){
+	div.agentDiv{
+		margin-left: 0;
+		div.react-tabs{
+		    ul{
+		    	width: calc(100% - 50px);
+		    	margin-left: 25px !important;
+		    	float: none;
+		    	
+		    	li{
+		    		display: inline-block !important;
+		    		width: 25%;
+		    		height: 50px;
+		    		padding: 0 !important;
+		    		margin: 0 !important;
+		    		line-height: 50px;
+		    		bottom: 0 !important;
+		    	}
+		    }
+
+		    div[id^='react-tabs']{
+		    	width: calc(100% - 50px);
+		    	margin-left: 25px !important;
+
+		    	#question, button#submitquestion, ol{
+		    		width: 90%;
+		    		margin-left: 5%;
+		    	}
+
+		    	div.previewList{
+		    		ul{
+		    			li{
+		    				width: 100% !important;
+		    			}
+		    		}
+		    	}
+		    }
+		}
+	}
+	.city-detail-wrap{
+		width: 100%;
+		display: block;
+		vertical-align: top;
+	}
+}
+
+@media screen and (min-width: 1025px){
+	div.searchDiv{
+		margin-left: calc(50% - 512px);
+	}
+	div.searchresult_div{
+		max-width: 624px;
+		margin-right: calc(50% - 512px);
+	}
+	.pagify-pagination{
+		max-width: 624px;
+		margin-right: calc(50% - 512px);
 	}
 }
 
