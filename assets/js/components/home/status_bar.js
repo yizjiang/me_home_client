@@ -13,10 +13,6 @@ var StatusBar = React.createClass({
     } else {
       mapView = 'btn-active'
     }
-
-    console.log(this.props);
-    console.log(listView);
-    console.log(mapView);
     return (
       <div className='statusbar_div'>
         <p className='Search_count'>我们为您搜索了{this.props.count}处理想的家</p>

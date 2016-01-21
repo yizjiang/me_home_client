@@ -19,7 +19,7 @@ var SearchBox = React.createClass({
       regionValue: [],
       priceMin: '',
       priceMax: '',
-      bedNum: '',
+      bedNum: '2',
       single_family: true,
       condo: true,
       townhouse: true,
@@ -84,7 +84,7 @@ var SearchBox = React.createClass({
     return (
       <div className='searchDiv'>
         <h3 className='home_h3'>觅 家 Find a Home</h3>
-        <Select options={this.props.areas} change={this.changeRegionValue}/>
+        <Select options={this.props.areas} change={this.changeRegionValue} selected={_selectRgion}/>
 
         <button id='search' type="button" onClick={this.homeSearch} ><a href='#homelistAnchor'><span className='glyphicon glyphicon-search'></span></a></button>
         <button id='more' type="button" onClick={this.moreOptions} ><span className='glyphicon glyphicon-filter'></span></button>

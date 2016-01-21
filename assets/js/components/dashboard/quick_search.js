@@ -103,7 +103,6 @@ var QuickSearch = React.createClass({
       stateObject['priceMin'] = search.priceMin
     }
 
-    console.log(stateObject);
     return stateObject;
   },
 

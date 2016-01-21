@@ -55,7 +55,6 @@ var CityInfo = React.createClass({
   },
 
   render: function () {
-    console.log(this.props.data)
     var data = this.props.data;
     if (data == undefined ){
       data = {};
@@ -73,7 +72,7 @@ var CityInfo = React.createClass({
             <p>{data.population}</p>
           </div>
           <div className='city-detail'>
-            <h4>环境指数</h4>
+            <h4>PM2.5</h4>
             <p>{data.PMI}</p>
           </div>
           <div className='city-detail'>

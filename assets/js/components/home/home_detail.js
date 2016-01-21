@@ -4,6 +4,7 @@ var React = require('react'),
     AgentInfo = require('./agent_info'),
     CityInfo = require('./city_info'),
     SchoolInfo = require('./school_info'),
+    PublicRecord = require('./public_record'),
     HomeListStore = require('../../stores/home_list_store'),
     ServerActions = require('../../actions/server_action'),
     UserStore = require('../../stores/user_store'),
@@ -37,7 +38,7 @@ var HomeDetail = React.createClass({
     var self = this;
     if(_.isEmpty(currentHome)) {
       this.loadHomeFromServer(this.props.params.id)
-      currentHome = {images: [], public_schools:[], private_schools:[], assigned_school:[]};
+      currentHome = {images: [], public_schools:[], private_schools:[], assigned_school:[], public_record: {}};
     }
     return {currentHome: currentHome, currentFavorite: UserStore.getFavoriteHomes()}              //TODO get user in mobile version
   },
@@ -85,6 +86,24 @@ var HomeDetail = React.createClass({
 
     }else{
       return false
+    }
+  },
+
+  calculateDiff: function(home) {
+    if(!_.isEmpty(home) && !_.isEmpty(home.public_record)){
+      var recordDate = new Date(home.public_record.record_date);
+      var currentDate = new Date();
+      var yearDiff = currentDate.getUTCFullYear() - recordDate.getUTCFullYear()
+      var monthDiff = currentDate.getMonth() - recordDate.getMonth()
+      var diff = yearDiff + monthDiff/12
+      if(diff !== 0){
+        return (home.origin_price - home.public_record.price) / home.public_record.price / diff * 100
+      } else{
+        return 0;
+      }
+    }
+    else {
+      return 0;
     }
   },
 
@@ -167,6 +186,11 @@ var HomeDetail = React.createClass({
     }
 
     var schoolInfoCompoent = <SchoolInfo assigned_schools= {home.assigned_school} public_schools= {home.public_schools} private_schools= {home.private_schools}/>
+
+    var publicRecordComponent = null;
+    if(!_.isEmpty(home) && !_.isEmpty(home.public_record)){
+      publicRecordComponent = <PublicRecord record={home.public_record} diff={this.calculateDiff(home)}/>
+    }
 
     return (
       <div className='ccent'>
@@ -274,6 +298,7 @@ var HomeDetail = React.createClass({
         </div>
 
         {schoolInfoCompoent}
+        {publicRecordComponent}
         <div className='home-map-wrap'>{mapComponent}</div>
       </div>
   );

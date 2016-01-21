@@ -55,7 +55,6 @@ var SavedSearchList = React.createClass({
               }
             }
 
-            console.log(searchOption);
             var label = '地区: ' + searchOption.regionValue;
 
             if(searchOption.priceMin != undefined){
