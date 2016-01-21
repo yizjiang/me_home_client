@@ -822,6 +822,7 @@ div.ccent{
 	}
 }
 
+
 .city-racism-wrap{
 	canvas{
 		display: inline-block;
@@ -840,6 +841,19 @@ ul.racism-list{
 			vertical-align: top;
 		}
 	}
+}
+
+.public-record-wrap{
+  width: 80%;
+  margin: 0 1% 0 15%;
+  display: inline-block;
+  vertical-align: top;
+  .public-record-detail{
+    display: inline-block;
+    width: 20%;
+    border: $border;
+    padding: 10px;
+  }
 }
 
 .color-sq{
@@ -1507,6 +1521,27 @@ div#agentcontent{
 	}	
 }
 
+
+.agent_home_div{
+  margin: 0 0 0 30px;
+  padding: 20px;
+  h3{
+    font-size: 24px;
+    text-align: center;
+  }
+  img{
+    width: 150px;
+    height: 150px;
+    display: inline-block;
+  }
+  img.profile_img{
+    width: 80px;
+    height: 80px;
+    border-radius: 80px;
+    margin: 0 20px;
+  }
+}
+
 .preview_list_div{
 	width: calc(100% - 200px);
 	display: inline-block;
@@ -1600,6 +1635,7 @@ div#agentcontent{
 		}
 	}
 }
+
 
 .landing-wrap{
 	width: 100%;
