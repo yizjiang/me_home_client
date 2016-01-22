@@ -200,7 +200,9 @@ div.content{
 	width: 100%;
 	height: calc(100% - 60px);
 	position: absolute;
-
+	.statusbar_div{
+		width: 624px;
+	}
 	p.Search_count{
 		font-size: 18px;
 		padding: 10px 15px;
@@ -822,7 +824,6 @@ div.ccent{
 	}
 }
 
-
 .city-racism-wrap{
 	canvas{
 		display: inline-block;
@@ -841,19 +842,6 @@ ul.racism-list{
 			vertical-align: top;
 		}
 	}
-}
-
-.public-record-wrap{
-  width: 80%;
-  margin: 0 1% 0 15%;
-  display: inline-block;
-  vertical-align: top;
-  .public-record-detail{
-    display: inline-block;
-    width: 20%;
-    border: $border;
-    padding: 10px;
-  }
 }
 
 .color-sq{
@@ -1521,27 +1509,6 @@ div#agentcontent{
 	}	
 }
 
-
-.agent_home_div{
-  margin: 0 0 0 30px;
-  padding: 20px;
-  h3{
-    font-size: 24px;
-    text-align: center;
-  }
-  img{
-    width: 150px;
-    height: 150px;
-    display: inline-block;
-  }
-  img.profile_img{
-    width: 80px;
-    height: 80px;
-    border-radius: 80px;
-    margin: 0 20px;
-  }
-}
-
 .preview_list_div{
 	width: calc(100% - 200px);
 	display: inline-block;
@@ -1611,7 +1578,7 @@ div#agentcontent{
 .pagify-pagination{
 	list-style: none;
     text-align: center;
-    padding: 15px 20px !important;
+    padding: 15px 20px 0!important;
     margin: 0;
     vertical-align: bottom;
     position: relative;
@@ -1636,12 +1603,14 @@ div#agentcontent{
 	}
 }
 
-
 .landing-wrap{
 	width: 100%;
+	height: 300px;
+    position: absolute;
+    top: 100%;
 	.landing-icon{
 		display: inline-block;
-		width: 33.33%;
+		width: 32%;
 		text-align: center;
 		margin: 40px 0;
 		color: #333;
@@ -1661,7 +1630,7 @@ div#agentcontent{
 			color: #333;
 		}
 	}
-	.landing-icon:hover{
+	.landing-icon:hover, .landing-icon:focus, .landing-icon:visited, .landing-icon:active{
 		a{
 			text-decoration: none;
 		}
@@ -1825,7 +1794,6 @@ div#agentcontent{
 	}
 	.pagify-pagination{
 		max-width: 624px;
-		margin-right: calc(50% - 512px);
 	}
 }
 
