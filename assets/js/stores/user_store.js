@@ -17,13 +17,13 @@ var _wechatUser = {};
 
 function setCurrentUser(user) {
   _currentUser = user;
-  _questions = user.questions;
-  _savedSearches = user.saved_searches;
-  _favoriteHomes = user.homes;
-  _publishedPageConfig = user.published_page_config;
-  _qrImage = user.qr_image;
-  _qrCode = user.qr_code;
-  _wechatUser = user.wechat_user
+  _questions = user.questions || [];
+  _savedSearches = user.saved_searches || [];
+  _favoriteHomes = user.homes || [];
+  _publishedPageConfig = user.published_page_config || {};
+  _qrImage = user.qr_image || {};
+  _qrCode = user.qr_code || '';
+  _wechatUser = user.wechat_user|| {}
 }
 
 function setSavedSearch(savedSearches) {

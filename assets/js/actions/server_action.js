@@ -492,6 +492,13 @@ var ServerActions = {
     });
   },
 
+  userLogout: function() {
+    AppDispatcher.handleAction({
+      actionType: 'USER_LOGIN',
+      data: {}
+    })
+  },
+
   getCurrentUser: function(ticket) {
     var url;
     if(ticket != ''){

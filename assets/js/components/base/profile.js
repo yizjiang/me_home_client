@@ -15,9 +15,9 @@ var Profile = React.createClass({
     window.auth_callback = this.auth_back;
   },
 
-  auth_back: function(ticket) {
+  auth_back: function() {
     console.log('logout');
-    ServerActions.getCurrentUser(ticket);
+    ServerActions.userLogout();
     window.auth_window.close();
   },
 
