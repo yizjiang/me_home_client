@@ -5,7 +5,7 @@ var React = require('react'),
 var HomeMap = React.createClass({
   render: function () {
     return (
-      <div>
+      <div className='searchresult_div'>
         <StatusBar {...this.props} />
         <BingMap home_info={this.props.home_infos} show_details={true}/>
       </div>

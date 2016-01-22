@@ -201,6 +201,9 @@ div.content{
 	height: calc(100% - 60px);
 	position: absolute;
 
+   .statusbar_div{
+  		width: 624px;
+  	}
 	p.Search_count{
 		font-size: 18px;
 		padding: 10px 15px;
@@ -253,7 +256,7 @@ div.content{
 	width: 624px;
 	position: absolute;
 	right: calc(50% - 512px);
-	height: 100%;
+	height: 85%;
 	#myMap{
 		width: 100%;
 		height: auto;
@@ -1611,7 +1614,7 @@ div#agentcontent{
 .pagify-pagination{
 	list-style: none;
     text-align: center;
-    padding: 15px 20px !important;
+    padding: 15px 20px 0!important;
     margin: 0;
     vertical-align: bottom;
     position: relative;
@@ -1639,9 +1642,12 @@ div#agentcontent{
 
 .landing-wrap{
 	width: 100%;
+    height: 300px;
+    position: absolute;
+    top: 100%;
 	.landing-icon{
 		display: inline-block;
-		width: 33.33%;
+		width: 32%;
 		text-align: center;
 		margin: 40px 0;
 		color: #333;
@@ -1661,7 +1667,7 @@ div#agentcontent{
 			color: #333;
 		}
 	}
-	.landing-icon:hover{
+	.landing-icon:hover, .landing-icon:focus, .landing-icon:visited, .landing-icon:active{
 		a{
 			text-decoration: none;
 		}
@@ -1825,7 +1831,6 @@ div#agentcontent{
 	}
 	.pagify-pagination{
 		max-width: 624px;
-		margin-right: calc(50% - 512px);
 	}
 }
 
