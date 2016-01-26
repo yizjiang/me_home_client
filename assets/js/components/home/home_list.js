@@ -43,13 +43,9 @@ var HomeList = React.createClass({
         }
         return (<tr>
           <td className='picture_td'>
-            <Carousel>
-              {
-                imageItems
-              }
-            </Carousel>
+            <img src={imgUrl}/>
           </td>
-          <td className = 'thadd'>
+          <td className='thadd'>
             <a href={'#/home_detail/' + value.id}><p>{value.addr1 + ' ' + value.city}</p></a>
             <a href={'#/home_detail/' + value.id}><p>{value.short_desc}</p></a>
           </td>

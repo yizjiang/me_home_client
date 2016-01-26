@@ -25,7 +25,7 @@ var Profile = React.createClass({
     
     return (
       <div>
-        <p>Welcome {this.props.currentUser.username}</p>
+        <p className='welcome-p'>{this.props.currentUser.username}</p>
         <button id='login' type="button" onClick={this.logout} className='nobutton'>退 出</button>
       </div>
       )

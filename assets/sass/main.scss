@@ -7,12 +7,12 @@
 $font-family: Roboto, sans-serif;
 $btn-color: #74c005;
 $yellow: #fbc03d;
-$bg-color: #fffdf7;
+$bg-color: #fff;
 $red: #D9534F;
 $chinese-font-family: Arial, sans-serif;
 $border: 1px solid #ccc;
 $border-radius: 5px;
-$dark-grey: #222;
+$dark-grey: #333;
 
 
 $inputbox-height: 40px;
@@ -93,6 +93,7 @@ header{
 	z-index: 4;
 	height: 60px;
 	box-shadow: 0 0 10px #888;
+	border-bottom: 3px solid #8bc34a;
 
 	img.logoImg{
 		height: 30px;
@@ -103,6 +104,33 @@ header{
 		z-index: 4;
 	}
 
+	.location-usa{
+		display: inline-block;
+		width: 100px;
+		position: absolute;
+		left: 150px;
+		top: 15px;
+		text-align: center;
+		p{
+			font-size: 14px;
+			line-height: 16px;
+			padding: 0;
+			margin: 0;
+		}
+		p.location-country{
+			color: $yellow;
+		}
+	}
+
+	.location-usa:before{
+		content:'';
+		display: inline-block;
+		height: 32px;
+		border-left: 1px solid $btn-color;
+		float: left;
+		margin-right: 5px;
+	}
+
 	.nav-triger{
 		display: none;
 	}
@@ -110,14 +138,18 @@ header{
 	.nav-wrap{
 		.nav-list{
 			list-style: none;
-			padding-top: 15px;
-    		margin-left: 12%;
+			padding-top: 20px;
+    		margin-left: 24%;
 			li{
 				display: inline-block;
-				font-size: 20px;
+				font-size: 16px;
 				margin: 0 15px;
-				a{
+				a,a:visited{
 					text-decoration: none;
+					color: $dark-grey;
+				}
+				a:hover,a:focus,a:active{
+					color: $yellow;
 				}
 			}
 		}
@@ -256,7 +288,7 @@ div.content{
 	width: 624px;
 	position: absolute;
 	right: calc(50% - 512px);
-	height: 85%;
+	height: calc(100% - 45px);
 	#myMap{
 		width: 100%;
 		height: auto;
@@ -285,6 +317,10 @@ div.searchDiv{
 		.Select-control{
 			min-height: 40px;
 			border-radius: 0;
+			padding: 2px 40px 2px 3px
+		}
+		.Select-item-label{
+			font-size: 10px;
 		}
 	}
 
@@ -551,6 +587,11 @@ div.searchresult_div{
 	height: calc(100% - 80px);
 	height: 100%;
     background-color: transparent;
+    transition: background-color 0.5s;
+}
+
+div.searchresult_div.has_search_value{
+	background-color: rgba(255,255,255,0.7);
 }
 
 div.homelistDiv{
@@ -577,10 +618,10 @@ div.homelistDiv{
 				position: relative;
 				padding: 0 !important;
 				width: calc(100% - 100px);
-				background-color: $bg-color;
+				background-color: transparent;
 
 				p{
-					line-height: 50px;
+					line-height: 25px;
 					margin: 0;
 					padding: 0 25px;			
 				}
@@ -592,7 +633,7 @@ div.homelistDiv{
 
 			td{
 				width: calc(100% - 100px);
-				background-color: $bg-color;
+				background-color: transparent;
 				vertical-align: top;
 				padding: 20px;
 					
@@ -847,15 +888,17 @@ ul.racism-list{
 }
 
 .public-record-wrap{
-  width: 80%;
-  margin: 0 1% 0 15%;
+  width: 70%;
+  margin-left: 15%;
   display: inline-block;
   vertical-align: top;
   .public-record-detail{
     display: inline-block;
+    vertical-align: top;
     width: 20%;
     border: $border;
     padding: 10px;
+    height: 100px;
   }
 }
 
@@ -929,64 +972,10 @@ ul.racism-list{
 	width: 100%;
 	padding: 15px 15%;
 	.map-canvas{
-		width: 50%;
+		width: 100%;
 		height: 500px;
 		position: relative;
 		left: 0;
-	}
-}
-
-
-@media screen and (max-width: 1000px){
-	.detailother{
-		div.schoolDiv{
-			width: 90% !important;
-			margin: 10px 0 !important;
-			display: block !important;
-			border-bottom: 1px solid #888;
-
-			p.schoolp{
-				font-size: 16px !important;
-				line-height: 20px;
-			}
-		}
-
-		div.schoolDiv:last-child{
-			border-bottom: none;
-		}
-	}
-}
-
-@media screen and (min-width: 641px) and (max-width: 1023px){
-	div.ccent{
-		div.headerinfo_div{
-			padding-left: 15px;
-			
-			div.address_imgdiv{
-				width: 250px;
-			}
-			div.rightdes_div{
-				width: calc(95% - 250px);
-			}
-		}
-
-		div.carousel{
-			width: 100%;
-			height: auto;
-			display: block;
-		}
-
-		div.description_div{
-			width: 100%;
-		}
-
-		div.detailDiv{
-			padding: 0 20px;
-
-			div.detailWrap{
-				width: 100%;
-			}
-		}
 	}
 }
 
@@ -1052,32 +1041,32 @@ li:last-child{
 	border-bottom: none !important;
 }
 
-	div.loginWrap{
-		position: absolute;
-		top: 15px;
-		right: 100px;
-		color: #555;
-		font-size: 20px;
-		font-weight: 100;
-		z-index: 4;
-		line-height: 30px;
+div.loginWrap{
+	position: absolute;
+	top: 15px;
+	right: 100px;
+	color: #555;
+	font-size: 20px;
+	font-weight: 100;
+	z-index: 4;
+	line-height: 30px;
 
-		p{
-			display: inline-block;
-			float: left;
-			margin: 0 10px 0 0;
-		}
-
-		button.nobutton{
-			background: none;
-			border: none;
-			display: inline-block;
-			padding: 0 !important;
-		}
-		button.nobutton:active, button.nobutton:focus{
-			outline: 0;
-		}
+	p{
+		display: inline-block;
+		float: left;
+		margin: 0 10px 0 0;
 	}
+
+	button.nobutton{
+		background: none;
+		border: none;
+		display: inline-block;
+		padding: 0 !important;
+	}
+	button.nobutton:active, button.nobutton:focus{
+		outline: 0;
+	}
+}
 
 .typeahead-token{
   margin-top: -70px;
@@ -1588,6 +1577,10 @@ div#agentcontent{
 		margin-left: 30px;
 		width: calc(100% - 200px);
 		float: none;
+		.Select{
+			width: 80%;
+			margin: 0;
+		}
 		.typeahead-tokenizer{
 			width: 80%;
 			margin-top: 15px;
@@ -1623,11 +1616,11 @@ div#agentcontent{
 	right: calc(50% - 512px);
 	top: -65px;
 	li{
-		display: inline-block !important;
+		display: inline-block;
 		padding: 10px !important;
-		border: $border !important;
+		border: 0;
 		margin: 0 5px;
-		background-color: $bg-color !important;
+		background-color: transparent;
 		a{
 			color: #333;
 			font-weight: 400;
@@ -1636,6 +1629,11 @@ div#agentcontent{
 			text-decoration: none;
 			color: #333;
 		}
+	}
+	li.pagify-prev,li.pagify-next{
+		border: $border !important;
+		border-radius:$border-radius;
+
 	}
 }
 
@@ -1690,6 +1688,72 @@ div#agentcontent{
 	}
 }
 
+@media screen and (min-width: 1025px){
+	div.searchDiv{
+		margin-left: calc(50% - 512px);
+	}
+	div.searchresult_div{
+		max-width: 624px;
+		margin-right: calc(50% - 512px);
+	}
+	.pagify-pagination{
+		max-width: 624px;
+	}
+}
+
+@media screen and (max-width: 1000px){
+	.detailother{
+		div.schoolDiv{
+			width: 90% !important;
+			margin: 10px 0 !important;
+			display: block !important;
+			border-bottom: 1px solid #888;
+
+			p.schoolp{
+				font-size: 16px !important;
+				line-height: 20px;
+			}
+		}
+
+		div.schoolDiv:last-child{
+			border-bottom: none;
+		}
+	}
+}
+
+@media screen and (min-width: 641px) and (max-width: 1023px){
+	div.ccent{
+		div.headerinfo_div{
+			padding-left: 15px;
+			
+			div.address_imgdiv{
+				width: 250px;
+			}
+			div.rightdes_div{
+				width: calc(95% - 250px);
+			}
+		}
+
+		div.carousel{
+			width: 100%;
+			height: auto;
+			display: block;
+		}
+
+		div.description_div{
+			width: 100%;
+		}
+
+		div.detailDiv{
+			padding: 0 20px;
+
+			div.detailWrap{
+				width: 100%;
+			}
+		}
+	}
+}
+
 @media screen and (max-width: 767px){
 	header .nav-triger{
 		display: block;
@@ -1727,22 +1791,24 @@ div#agentcontent{
 		width: 100%;
 		margin-left: 0;
 		background-color: rgba(200,200,200,0.3);
-		height: 140px;
+		height: auto;
 		margin-top: -140px;
 		
 		h3.home_h3{
-			margin-top: 0px;
-			margin-bottom: 10px;
+			margin-top: 0px !important;
+			margin-bottom: 10px !important;
+		}
+
+		.Select{
+			padding-bottom: 20px;
 		}
 
 		div.filter{
-			background-color: rgba(255,255,255,0.6);
+			background-color: white;
 		    width: 100%;
-		    margin-left: 0;
-		    padding-left: 5%;
-		    height: 200px;
-		    padding-top: 15px;
-	        margin-top: 16px;
+		    padding: 10px 25px;
+		    margin: 0;
+		    z-index: 11;
 		}
 
 		div.slogan_div{
@@ -1757,8 +1823,15 @@ div#agentcontent{
 		}
 	}
 	div.content{
-		max-height: 200px;
 		top: 200px;
+		background-image: none;
+		.pagify-pagination{
+			top: 0;
+		    left: 0;
+		    right: 0;
+		    bottom: 0;
+		    width: 100%;
+		}
 	}
 	div.citylistDiv ul{
 		max-height: 290px;
@@ -1767,11 +1840,24 @@ div#agentcontent{
 		margin-bottom: 30px;
 	}
 	.landing-wrap{
-		margin-top: 220px;
+		position: relative;
+		top: 20px;
 		.landing-icon{
 			width: 100%;
 			margin: 20px 0;
 		}
+	}
+	div.searchresult_div{
+	    width: 100%;
+    	float: none;
+    	height: auto;
+    	background-color: white;
+    	div.statusbar_div{
+    		width: 100%;
+    		.status_wrap{
+    			display: none;
+    		}
+    	}
 	}
 }
 
@@ -1821,28 +1907,11 @@ div#agentcontent{
 	}
 }
 
-@media screen and (min-width: 1025px){
-	div.searchDiv{
-		margin-left: calc(50% - 512px);
-	}
-	div.searchresult_div{
-		max-width: 624px;
-		margin-right: calc(50% - 512px);
-	}
-	.pagify-pagination{
-		max-width: 624px;
-	}
-}
-
 @media screen and (max-width:640px){
 	div.searchDiv{
 		display: block;
 	}
 	div.homelistDiv{
-		width: calc(100% - 50px);
-		position: relative;
-		top: 200px;
-
 		li{
 			width: 100% !important;
 			margin: 0 !important;
@@ -1973,14 +2042,23 @@ div#agentcontent{
 				padding: 0;
 				text-align: left;
 				margin-bottom: 10px;
+				br{
+					display: none;
+				}
 			}
 			#saveBtn34{
 				width: 100%;
+				top: 20px;
+    			position: relative;
+			}
+			hr{
+				display: none;
 			}
 		}
 	}
 	div.commentList.undefined{
 		margin-left: 0;
+		margin-top: 40px;
 		h3{
 			text-align: center;
 		}
@@ -2067,5 +2145,75 @@ div#agentcontent{
 				width: 100%;
 			}
 		}
+	}
+
+	.public-record-wrap{
+		margin: 0 10%;
+		width: 80%;
+		.public-record-detail{
+			width: 100%;
+			display: block;
+		}
+	}
+	.cityinfo-wrap, .school-info-wrap{
+		width: 80%;
+		margin: 10px 10%;
+		padding: 0;
+	}
+	.home-map-wrap{
+		padding: 10px 10%;
+		width: 100%;
+		.map-canvas{
+			width: 100%;
+		}
+	}
+	header{
+		img.logoImg{
+			height: 15px;
+		}
+		.location-usa{
+			left: 25px;
+		    text-align: left;
+		    width: 300px;
+		    top: 30px;
+			p{
+				display:inline-block;
+				margin-right: 10px;
+			}
+		}
+		.location-usa:before{
+			display: none;
+			margin: 0;
+		}
+	}
+	.wechat_search .searchDiv .Select{	
+	    width: 100%;
+	    margin: 0;
+	}
+}
+
+@media screen and (max-width: 514px){
+	.pagify-pagination{
+		li{
+			display: none;
+		}
+		li.pagify-prev, li.pagify-next{
+			display: inline-block;
+		}
+	}
+}
+
+@media screen and (max-width: 390px){
+	div.loginWrap{
+		p.welcome-p{
+			display: none;
+		}
+	}
+	.wechat_search .searchDiv .Select{	
+	    width: 110%;
+	    margin-left: -5%;
+	    .Select-item-label{
+	    	font-size: 11px;
+	    }
 	}
 }

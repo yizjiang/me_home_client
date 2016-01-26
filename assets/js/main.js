@@ -67,6 +67,10 @@ var App = React.createClass({
         </div>
         <header>
             <a href='/#/main'><img className='logoImg' src="/img/logo.png" /></a>
+            <div className='location-usa'>
+              <p className='location-country'>美 国</p>
+              <p className='location-country-en'>United States</p>
+            </div>
             <div className='nav-wrap'>
               <ul className='nav-list'>
                 <li><a href='/#/main'>找房</a></li>
