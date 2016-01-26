@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>无标题文档</title>
+<!-- TemplateEndEditable -->
+<link rel="stylesheet" type="text/css" href="../css/libs/CSSRESET.css">
+<link rel="stylesheet" type="text/css" href="../css/common.css">
+<script src="../js/libs/jquery-1.11.1.min.js"></script>
+<script src="../js/common.js"></script>
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+</head>
+<body>
+	<div class="header">
+		<div class="_container">
+			<h1><a href="javascript:;"></a><span><i>美国</i><br/>United State</span></h1>
+			<h2>觅家</h2>
+			<ul class="nav">
+				<li class="active"><a href="index.html">找房子</a></li>
+				<li><a href="agentsteps.html">找经纪人</a></li>
+				<li><a href="schoolsteps.html">找学校</a></li>
+				<li><a href="mortgage.html">找贷款</a></li>
+			</ul>
+			<a href="javascript:;" class="a_func">注册/登陆</a>
+			<span class="span_btn"></span>
+		</div>
+	</div>
+	
+	<div class="func">
+		<div class="func_panel">
+			<div class="func_header">
+				<img  />
+				<p>您好，觅家欢迎您！</p>
+				<a href="javascript:;" class="a_login">登陆</a>
+				<a href="javascript:;" class="a_reg">注册</a>
+			</div>
+			
+			<ul class="ul_func">
+				<li><a href="javascript:;">找房子</a></li>
+				<li><a href="javascript:;">找经纪人</a></li>
+				<li><a href="javascript:;">找学校</a></li>
+				<li><a href="javascript:;">找贷款</a></li>
+			</ul>
+		</div>
+	</div>
+	
+	<div class="main">
+		<div class="_container clear">
+			<!-- TemplateBeginEditable name="EditRegion1" -->
+			
+			<!-- TemplateEndEditable -->
+		</div>
+	</div>
+	
+	<div class="link clear">
+		<div class="_container">
+			<dl>
+				<dt><img src="../img/icon_wechat.png" /></dt>
+				<dd>
+					<p><img src="../img/link_logo.png" /></p>
+					<p>扫一扫，关注外居了微信公众号</p>
+				</dd>
+			</dl>
+		</div>
+	</div>
+	
+	<div class="footer">
+		<p><a href="javascript:;">使用条款</a>|<a href="javascript:;">隐私协议</a>|<a href="javascript:;">关于我们</a>|<a href="javascript:;">联系我们</a></p>
+		<p>© 2015 觅家 版权所有 | 沪ICP备15046544号-1</p>
+	</div>
+</body>
+</html>
