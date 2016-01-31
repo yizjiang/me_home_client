@@ -53,7 +53,10 @@ var SearchBox = React.createClass({
     search['regionValue'] = region;
     var that = this;
     if (search.regionValue.length != 0) {
-      $('#home-h3-id').css('margin','20px 0 20px 20px');
+      $('#home-h3-id').css('padding-top','20px');
+      $('#searchDiv-id').addClass('has_value');
+      $('#content-id').addClass('afterSearch');
+
       search['regionValue'] = search.regionValue.join(',');
       console.log(search);
       $('.homelistDiv').addClass('loading');
@@ -83,7 +86,7 @@ var SearchBox = React.createClass({
   render: function() {
     var that = this;
     return (
-      <div className='searchDiv'>
+      <div className='searchDiv' id='searchDiv-id'>
         <h3 className='home_h3' id='home-h3-id'>觅 家 Find a Home</h3>
         <Select options={this.props.areas} change={this.changeRegionValue} selected={_selectRgion}/>
 

@@ -134,7 +134,7 @@ var HomeMain = React.createClass({
     }
 
     return (
-      <div className="content">
+      <div className="content" id='content-id'>
         <SearchBox areas={this.state.areas} searched={this.state.searched} callback={this.performedSearch}/>
 
         {homesComp}

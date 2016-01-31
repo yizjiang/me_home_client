@@ -5,14 +5,21 @@
 @import "react-select";
 
 $font-family: Roboto, sans-serif;
-$btn-color: #74c005;
+$green: #74c005;
+$dark-green: rgba(90,149,4,0.8);
 $yellow: #fbc03d;
-$bg-color: #fff;
+$white: white;
 $red: #D9534F;
+$dark-grey: #333;
+$med-dark-grey: #555;
+$med-grey: #666;
+$border-grey: #ccc;
+$border-grey-1: #888;
+$bg-grey: #f5f5f5;
+
 $chinese-font-family: Arial, sans-serif;
 $border: 1px solid #ccc;
 $border-radius: 5px;
-$dark-grey: #333;
 
 
 $inputbox-height: 40px;
@@ -52,7 +59,7 @@ ul.nav.navbar-nav{
 	position: absolute;
 	width: 100%;
 	height: 240px;
-	background-color: #555;
+	background-color: $med-dark-grey;
 	z-index: 16;
 	margin: 0;
 	top: 0;
@@ -76,7 +83,7 @@ ul.nav.navbar-nav{
 
 		a:hover{
 			background-color: transparent;
-			color: #fff;
+			color: $white;
 		}
 	}
 
@@ -92,8 +99,8 @@ header{
 	width: 100%;
 	z-index: 4;
 	height: 60px;
-	box-shadow: 0 0 10px #888;
-	border-bottom: 3px solid #8bc34a;
+	box-shadow: 0 0 10px $border-grey-1;
+	border-bottom: 3px solid $green;
 
 	img.logoImg{
 		height: 30px;
@@ -126,7 +133,7 @@ header{
 		content:'';
 		display: inline-block;
 		height: 32px;
-		border-left: 1px solid $btn-color;
+		border-left: 1px solid $green;
 		float: left;
 		margin-right: 5px;
 	}
@@ -170,7 +177,7 @@ header{
 			border-radius: 1px;
 			height: 5px;
 			width: 35px;
-			background: #555;
+			background: $med-dark-grey;
 			position: absolute;
 			display: block;
 			content: '';
@@ -182,7 +189,7 @@ header{
 			border-radius: 1px;
 			height: 5px;
 			width: 35px;
-			background: #555;
+			background: $med-dark-grey;
 			position: absolute;
 			display: block;
 			content: '';
@@ -208,7 +215,7 @@ header{
 
 		span:before, span:after{
 			top: 0;
-			background-color: #fff;
+			background-color: $white;
 		}
 			
 
@@ -234,26 +241,24 @@ div.content{
 	position: absolute;
 
    .statusbar_div{
-  		width: 624px;
+  		max-width: 960px;
   	}
 	p.Search_count{
 		font-size: 18px;
-		padding: 10px 15px;
-		font-weight: 500;
-		background-color: #fffdf7;
-		margin: 0;
-		text-align: center;
-		span:nth-of-type(1){
-			margin-left: 15px;
-		}
+		font-weight: 600;
+		line-height: 50px;
+		margin: 0 0 0 10%;
+		text-align: left;
 	}
 }
 
 .status_wrap{
-	position: absolute;
-	top: 7px;
-	right: calc(50% - 492px);
-	z-index: 11;
+    position: relative;
+    right: calc(13% + 50px);
+    float: right;
+    z-index: 11;
+    bottom: 40px;
+    margin-bottom: -30px;
 	button{
 		background: white;
 		color: $red;
@@ -270,7 +275,7 @@ div.content{
 		}
 	}
 	button.btn-active{
-		color: #ccc;
+		color: $border-grey;
 		background: #999;
 	}
 	button:active, button:focus, button:visited, button:hover{
@@ -285,10 +290,11 @@ div.content{
 	}
 }
 .map-canvas{
-	width: 624px;
-	position: absolute;
-	right: calc(50% - 512px);
-	height: calc(100% - 45px);
+	width: 90%;
+	max-width: 960px;
+	margin: 0 auto;
+	height: 500px;
+	position: relative;
 	#myMap{
 		width: 100%;
 		height: auto;
@@ -300,19 +306,20 @@ li.hotArea{
 }
 
 div.searchDiv{
-	width: 400px;
+	width: 90%;
+	max-width: 960px;
 	height: 100%;
-	margin-left: 0;
-	padding-top: 0px;
-	padding-bottom: 0px;
-	margin-top: 0px;
-	display: inline-block;
-	background-color: rgba(255,255,255,0.7);
-	float: left;
+	margin: 0 auto;
+	padding: 0px;
+	display: block;
+	background-color: rgba(255,255,255,0.3);
+	transition: all 0.5s;
 
 	.Select{
-		width: calc(90% - 100px);
-		margin-left: 5%;
+		width: calc(80% - 100px);
+		max-width: 540px;
+		margin: auto;
+		margin-left: 10%;
 		display: inline-block;
 		.Select-control{
 			min-height: 40px;
@@ -327,15 +334,15 @@ div.searchDiv{
 	h3.home_h3{
 		font-size: 24px;
 		font-weight: 600;
-		margin-left: 5%;
-		margin-top: 80px;
-		margin-bottom: 40px;
+		margin: 0 calc(10% + 50px) 20px;
+		padding-top: 160px;
 		transition: all 0.5s;
+		color: $dark-grey;
 	}
 
 	h3.home_h3:after{
 		content:'';
-		border-bottom: 3px solid #000;
+		border-bottom: 3px solid $dark-grey;
 		width: 200px;
     	display: block;
     	padding-top: 5px;
@@ -389,9 +396,9 @@ div.searchDiv{
 		    line-height: 1.5em;
 		    position: relative;
 		    top: -10px;
-		    color: #333;
+		    color: $dark-grey;
 		    margin: 0;
-		    box-shadow: 0 1px 5px #888;
+		    box-shadow: 0 1px 5px $border-grey-1;
     		border-radius: 0px 0px 5px 5px;
 
 		    li{
@@ -399,7 +406,7 @@ div.searchDiv{
 		    	border-bottom: $border;
 		    	padding: 5px 0;
 		    	a{
-		    		color: #333;
+		    		color: $dark-grey;
 		    	}
 		    	a:hover, a:active, a:focus, a.visited{
 		    		text-decoration: none;
@@ -417,9 +424,14 @@ div.searchDiv{
 
 	div.filter{
 		width: 90%;
-		margin-left: 5%;
+		margin: 0 auto;
 		position: relative;
-		background-color: transparent;
+		background-color: rgba(255,255,255,0.9);
+		padding: 0 20px 20px;
+		margin: 20px 5% 0;
+		border-radius: 0 0 10px 10px;
+		border-top: 10px solid $red;
+		transition: all 0.5s;
 
 		label{
 			margin-right: 10px;
@@ -448,11 +460,18 @@ div.searchDiv{
 			}
 		}
 
+		.schoolFilter{
+			.schoolWrap{
+				display: inline-block;
+				width: 30%;
+				margin: 0 1.5%;
+			}
+		}
+
 		.rc-slider{
 			margin-bottom: 15px;
-
 			.rc-slider-step{
-				background-color: $btn-color;
+				background-color: $green;
 				.rc-slider-dot-active{
 					border-color: $red;
 				}
@@ -466,13 +485,29 @@ div.searchDiv{
 	}
 }
 
+.searchDiv.has_value{
+	height: auto;
+	padding-bottom: 15px;
+	border-radius: 0 0 15px 15px;
+	box-shadow: 0 4px 5px $border-grey;
+	background-color: $dark-green;
+	position: relative;
+	z-index: 2;
+	h3.home_h3{
+		color: white;
+	}
+	h3.home_h3:after{
+		border-color: white;
+	}
+}
+
 .input-region{
 	height: $inputbox-height;
 	width: 100%;
 	padding: 0;
 	margin-bottom: 10px;
 	display: inline-block;
-	border: 1px solid $btn-color;
+	border: 1px solid $green;
 	outline: none;
 }
 
@@ -481,7 +516,7 @@ input.pricebox{
 	width: 41%;
 	padding: 0;
 	margin: 0;
-	border: 1px solid $btn-color;
+	border: 1px solid $green;
 }
 
 input#priceMin{
@@ -499,8 +534,8 @@ button#search, button#more{
 	height:$inputbox-height;
 	border: 0;
 	width: 50px;
-	color: #fff;
-	background: $btn-color;
+	color: $white;
+	background: $green;
 	border-radius: 0px;
 	font-size: 15px;
 	padding: 0;
@@ -537,9 +572,9 @@ div.citylistDiv ul{
 		margin-bottom: 10px;
 	}
 	li.select{
-		color: #fff;
+		color: $white;
 		line-height: 30px;
-		background-color: $btn-color;
+		background-color: $green;
 		border-radius: 30px;
 		padding: 8px;
 	}
@@ -547,9 +582,9 @@ div.citylistDiv ul{
 
 button.btngroup{
 	height: $inputbox-height;
-	background: $btn-color;
+	background: $green;
 	box-shadow: none;
-	color: #fff;
+	color: $white;
 	font-size: 16px;
 	border: 0;
 	outline: none;
@@ -557,7 +592,7 @@ button.btngroup{
 	border-radius: 5px;
 	a{
 		text-decoration: none;
-		color: #fff;
+		color: $white;
 	}
 }
 
@@ -569,25 +604,24 @@ button#choosebtn{
 	margin-left: 1%;
 	a{
 		text-decoration: none;
-		color: #fff;
+		color: $white;
 	}
 }
 
 button#search{
 	a{
 		text-decoration: none;
-		color: #fff;
+		color: $white;
 	}
 }
 
 div.searchresult_div{
-	width: calc(100% - 400px);
-	float: right;
-	margin: 0;
-	height: calc(100% - 80px);
-	height: 100%;
+	width: 90%;
+	max-width: 960px;	
+	margin: 0 auto;
+	height: auto;
     background-color: transparent;
-    transition: background-color 0.5s;
+    transition: all 0.5s;
 }
 
 div.searchresult_div.has_search_value{
@@ -632,10 +666,10 @@ div.homelistDiv{
 			}
 
 			td{
-				width: calc(100% - 100px);
+				width: 50%;
 				background-color: transparent;
 				vertical-align: top;
-				padding: 20px;
+				padding: 84px 20px;
 					
 				a{
 					text-decoration: none;
@@ -643,42 +677,28 @@ div.homelistDiv{
 					width: 100%;
 
 					p{
-						font-size: 15px;
+						font-size: 18px;
 						font-weight: 300;
-						line-height: 30px;
+						line-height: 36px;
 						margin: 0;
 					}
 				}
 			}
 
 			td.picture_td{
-				width: 100px;
-				height: 100px;
+				width: 240px;
+				height: 240px;
 				padding: 0;
                 img{
-                  width: 100px;
-                  height: 100px;
+                  width: 240px;
+                  height: 240px;
                 }
-				div.carousel{
-					width: 100%;
-					height: 100%;
-					ol.carousel-indicators{
-						display: none;
-						li{
-							display: none;
-						}
-					}
-					div.carousel-inner{
-						div.item{
-							img{
-								max-height: 100%;
-							}
-						}
-					}
-					a.carousel-control{
-						display: none;
-					}
-				}
+			}
+
+			td.homeprice{
+				width: calc(50% - 240px);
+				font-size: 24px;
+				font-weight: 600;
 			}
 		}
 		
@@ -730,7 +750,7 @@ div.ccent{
 				display: inline-block;
 				margin-right: 2%;
 				padding-right: 2%;
-				border-right: 1px solid #888;
+				border-right: 1px solid $border-grey-1;
 				text-align: center;
 
 				h3{
@@ -745,15 +765,15 @@ div.ccent{
 			}
 
 			button#favoriteBtn{
-				background-color: #fff;
-				border: 1px solid #888;
+				background-color: $white;
+				border: 1px solid $border-grey-1;
 				outline: none;
 				font-size: 16px;
-				color: #555;
+				color: $med-dark-grey;
 				vertical-align: text-bottom;
 
 				span.glyphicon{
-					color: #ccc;
+					color: $border-grey;
 					font-size: 20px;
 				}
 				span.glyphicon.liked{
@@ -762,7 +782,7 @@ div.ccent{
 			}
 
 			button#favoriteBtn.favored{
-				background-color: #555;
+				background-color: $med-dark-grey;
 				color: white;
 			}
 		}
@@ -842,7 +862,7 @@ div.ccent{
 				width: 48%;
 				margin: 1%;
 				display: inline-block;
-				border-bottom: 1px solid #888;
+				border-bottom: 1px solid $border-grey-1;
 
 				p.schoolp{
 					font-size: 14px;
@@ -1049,7 +1069,7 @@ div.loginWrap{
 	position: absolute;
 	top: 15px;
 	right: 100px;
-	color: #555;
+	color: $med-dark-grey;
 	font-size: 20px;
 	font-weight: 100;
 	z-index: 4;
@@ -1088,8 +1108,8 @@ div.homelistDiv.favoredHouse{
 }
 
 button#submitquestion{
-	color: #fff;
-    background-color: $btn-color;
+	color: $white;
+    background-color: $green;
     border: none;
     font-size: 16px;
     line-height: 30px;
@@ -1152,7 +1172,7 @@ div.tabdiv{
 	    	float: left;
 	    	border-bottom: none;
 	    	text-align: center;
-	    	background-color: #888;
+	    	background-color: $border-grey-1;
 
 	    	li{
 	    		display: block;
@@ -1217,7 +1237,7 @@ div[id^='react-tabs']{
 }
 
 .selectedItem {
-  color: $btn-color;
+  color: $green;
 }
 
 button.btn-success{
@@ -1238,7 +1258,7 @@ div.commentList.agent, div.commentList.undefined {
 		padding: 0;
 		margin: 5px 10px 5px 0;
 		display: inline-block;
-		background-color: #D9534F;
+		background-color: $red;
 		color: white;
 		border: 0;
 		border-radius: 5px;
@@ -1289,14 +1309,14 @@ div.agentDiv{
 	    	float: left;
 	    	border-bottom: none !important;
 	    	text-align: center;
-	    	background-color: #ccc;
+	    	background-color: $border-grey;
 
 	    	li{
 	    		display: block !important;
 	    		height: 50px;
 	    		padding: 0 !important;
 	    		line-height: 50px;
-	    		color: #666;
+	    		color: $med-grey;
 	    	}
 	    }
 	    div[id^='react-tabs']{
@@ -1332,7 +1352,7 @@ div.agentDiv{
 	    div[id^='react-tabs']{
 	    	div.question_div{
 	    		ul{
-	    			background-color: #fff;
+	    			background-color: $white;
 	    			list-style: none;
 
 	    			li{
@@ -1426,7 +1446,7 @@ div.agentDiv{
 
 	.react-tabs [role=tab][aria-selected=true] {
 	    color: white;
-	    background-color: $btn-color;
+	    background-color: $green;
 	    border-color: transparent;
 	    border-radius: 0;
 	    -moz-border-radius: 0;
@@ -1611,14 +1631,12 @@ div#agentcontent{
 .pagify-pagination{
 	list-style: none;
     text-align: center;
-    padding: 15px 20px 0!important;
-    margin: 0;
+    padding: 15px 20px 0;
+    margin: 0 auto 10px;
     vertical-align: bottom;
     position: relative;
-    width: 624px;
-	float: right;
-	right: calc(50% - 512px);
-	top: -65px;
+    width: 100%;
+    max-width: 960px;
 	li{
 		display: inline-block;
 		padding: 10px !important;
@@ -1626,12 +1644,12 @@ div#agentcontent{
 		margin: 0 5px;
 		background-color: transparent;
 		a{
-			color: #333;
+			color: $dark-grey;
 			font-weight: 400;
 		}
 		a:hover, a:active, a:focus, a:visited{
 			text-decoration: none;
-			color: #333;
+			color: $dark-grey;
 		}
 	}
 	li.pagify-prev,li.pagify-next{
@@ -1641,32 +1659,30 @@ div#agentcontent{
 	}
 }
 
-
 .landing-wrap{
 	width: 100%;
-    height: 300px;
-    position: absolute;
-    top: 100%;
+    position: relative;
+    background-color: $white;
 	.landing-icon{
 		display: inline-block;
 		width: 32%;
 		text-align: center;
 		margin: 40px 0;
-		color: #333;
+		color: $dark-grey;
 		span{
 			font-size: 40px;
 			width: 110px;
 			line-height: 104px;
 			display: block;
-			color: $btn-color;
-			border: 3px solid $btn-color;
+			color: $green;
+			border: 3px solid $green;
 			margin: auto;
 			border-radius: 100px;
 			padding: 0;
 		}
 		h3,p{
 			text-decoration: none;
-			color: #333;
+			color: $dark-grey;
 		}
 	}
 	.landing-icon:hover, .landing-icon:focus, .landing-icon:visited, .landing-icon:active{
@@ -1687,22 +1703,15 @@ div#agentcontent{
 		}
 		h3,p{
 			text-decoration: none;
-			color: #333;
+			color: $dark-grey;
 		}
 	}
 }
 
-@media screen and (min-width: 1025px){
-	div.searchDiv{
-		margin-left: calc(50% - 512px);
-	}
-	div.searchresult_div{
-		max-width: 624px;
-		margin-right: calc(50% - 512px);
-	}
-	.pagify-pagination{
-		max-width: 624px;
-	}
+div.content.afterSearch{
+	height: calc(300% - 60px);
+	background: $bg-grey;
+	position: relative;
 }
 
 @media screen and (max-width: 1000px){
@@ -1711,7 +1720,7 @@ div#agentcontent{
 			width: 90% !important;
 			margin: 10px 0 !important;
 			display: block !important;
-			border-bottom: 1px solid #888;
+			border-bottom: 1px solid $border-grey-1;
 
 			p.schoolp{
 				font-size: 16px !important;
@@ -1799,12 +1808,14 @@ div#agentcontent{
 		margin-top: -140px;
 		
 		h3.home_h3{
-			margin-top: 0px !important;
-			margin-bottom: 10px !important;
+			margin: 5px 25px 15px;
+			padding-top: 0px;
 		}
 
 		.Select{
 			padding-bottom: 20px;
+			width: calc(100% - 150px);
+    		margin-left: 25px;
 		}
 
 		div.filter{
@@ -1821,11 +1832,26 @@ div#agentcontent{
 			position: relative;
 
 			p{
-				color: #333;
+				color: $dark-grey;
 				font-size: 20px;
 			}
 		}
+		div.filter{
+			margin: 0 10px;
+			width: calc(100% - 20px);
+			.schoolFilter{
+				.schoolWrap{
+					width: 100%;
+					margin: 0;
+				}
+			}
+		}
 	}
+
+	div.searchDiv.has_value{
+		padding-top: 15px;
+	}
+
 	div.content{
 		top: 200px;
 		background-image: none;
@@ -1837,6 +1863,11 @@ div#agentcontent{
 		    width: 100%;
 		}
 	}
+
+	div.content.afterSearch{
+		top: 140px;
+	}
+
 	div.citylistDiv ul{
 		max-height: 290px;
 	}
@@ -1936,6 +1967,31 @@ div#agentcontent{
 			}
 
 		}
+		table{
+			tr{
+				td{
+					width: calc(100% - 140px);
+					padding: 15px;
+					a{
+						p{
+							font-size: 14px;
+							line-height: 21px;
+						}
+					}
+				}
+				td.picture_td{
+					width: 140px;
+					height: 140px;
+					img{
+						width: 140px;
+						height: 140px;
+					}
+				}
+				td.homeprice{
+					display: none;
+				}
+			}
+		}
 	}
 }
 
@@ -1987,7 +2043,7 @@ div#agentcontent{
 		    	width: calc(100% - 50px);
 		    	margin-left: 25px;
 		    	float: none;
-		    	background-color: #888;
+		    	background-color: $border-grey-1;
 
 		    	li{
 		    		display: inline-block;

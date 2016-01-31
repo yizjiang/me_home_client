@@ -26,13 +26,19 @@ var SearchOptions = React.createClass({
     }
     var schoolFilter = null;
     if(this.props.showSchoolFilter == true){
-      schoolFilter = (<div>
+      schoolFilter = (<div className='schoolFilter'>
+                       <div className='schoolWrap'>
                        <label>小学评分</label>
                        <Slider marks={marks} step={null} onChange={this.elementaryRatingChange} defaultValue={30}/>
+                       </div>
+                       <div className='schoolWrap'>
                        <label>初中评分</label>
                        <Slider marks={marks} step={null} onChange={this.middleRatingChange}/>
+                       </div>
+                       <div className='schoolWrap'>
                        <label>高中评分</label>
                        <Slider marks={marks} step={null} onChange={this.highRatingChange}/>
+                       </div>
                       </div>)
     }
 
@@ -91,7 +97,7 @@ var SearchOptions = React.createClass({
         <label>
           <input type='checkbox' checked={this.props.options.other} value='other'  onChange={this.props.callback}/>
           <span>其他</span>
-        </label><br/>
+        </label>
         <label>
           <span>房间数</span>
           <select id='bedNum' onChange={this.props.callback}>
@@ -125,7 +131,7 @@ var SearchOptions = React.createClass({
             <option value="50" selected={homeAge['50']}>50年内</option>
             <option value="80" selected={homeAge['80']}>80年内</option>
           </select>
-        </label><br/>
+        </label>
         <label>
           <span>最低价</span>
           <input id='priceMin' value={this.props.options.priceMin} placeholder='不限' onChange={this.props.callback}/>万

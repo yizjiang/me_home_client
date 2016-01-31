@@ -16,11 +16,6 @@ var HomeList = React.createClass({
 
     if(list != undefined && list.length > 0){
       statusHeader = <StatusBar {...this.props} /> ;
-      tableheader = (
-          <tr>
-            <th className = 'thpic'></th>
-            <th className = 'thdes'><p>详情</p></th>
-          </tr>)
 
       tablebody = list.map(function(value){
         var imgUrl;
@@ -49,6 +44,9 @@ var HomeList = React.createClass({
             <a href={'#/home_detail/' + value.id}><p>{value.addr1 + ' ' + value.city}</p></a>
             <a href={'#/home_detail/' + value.id}><p>{value.short_desc}</p></a>
           </td>
+          <td className='homeprice'>
+            <p>{value.price}</p>
+          </td>
         </tr>
           )
       })
@@ -62,7 +60,6 @@ var HomeList = React.createClass({
         {statusHeader}
         <div className={'homelistDiv ' + this.props.custom_style} id='homelistAnchor'>
           <table>
-            <thead>{tableheader}</thead>
             <tbody>{tablebody}</tbody>
           </table>
         </div>
