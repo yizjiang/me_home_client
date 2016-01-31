@@ -6,7 +6,7 @@
   <link href="//fonts.googleapis.com/css?family=Roboto:300,100,700" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <script type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
-  <%= stylesheet_link File.join(CDN_URL, '/css/bundle.css') %>
+  <%= stylesheet_link File.join(ASSET_URL, '/css/bundle.css') %>
   <script>
     var SERVER_URL = "<%= MEEHOME_SERVER_URL %>";
     var CLIENT_URL = "<%= MEEHOME_CLIENT_URL %>";
@@ -61,6 +61,6 @@
 <body>
 <div id="app"></div>
 </body>
-<%= javascript_tag File.join(CDN_URL, '/js/bundle_vendor.js') %>
-<%= javascript_tag File.join(CDN_URL, '/js/bundle.js') %>
+<%= javascript_tag File.join(ASSET_URL, '/js/bundle_vendor.js') %>
+<%= javascript_tag File.join(ASSET_URL, '/js/bundle.js') %>
 </html>

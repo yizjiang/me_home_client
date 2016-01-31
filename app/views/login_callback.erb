@@ -5,11 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="//fonts.googleapis.com/css?family=Roboto:300,100,700" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-  <%= stylesheet_link File.join(CDN_URL, '/css/bundle.css') %>
   <script>
     (function () {
       'use strict';
-      console.log(<%= params[:ticket] %>);
       window.opener.auth_callback(<%= params[:ticket] %>);
 
     })();
