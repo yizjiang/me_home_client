@@ -6,7 +6,9 @@ var infobox;
 
 var BingMap = React.createClass({
   searchServiceCallback: function (home_infos) {
-    map = new Microsoft.Maps.Map(document.getElementById('myMap'), {credentials: 'AjVrfYUU-6_5NnEHSjCxZ16XAJHyu0-J42p16WXCld6F52NujvxQ2iRV1X3UQeQs'});
+    map = new Microsoft.Maps.Map(document.getElementById('myMap'), {credentials: 'AjVrfYUU-6_5NnEHSjCxZ16XAJHyu0-J42p16WXCld6F52NujvxQ2iRV1X3UQeQs',
+                                                                    showMapTypeSelector:false
+                                                                    });
 //    dataLayer = new Microsoft.Maps.EntityCollection();
 //    map.entities.push(dataLayer);
 
@@ -16,6 +18,10 @@ var BingMap = React.createClass({
     infobox = new Microsoft.Maps.Infobox(new Microsoft.Maps.Location(0, 0), { visible: false, offset: new Microsoft.Maps.Point(0, 20) });
     map.entities.push(infobox);
 
+    Microsoft.Maps.Events.addHandler(map, 'mousewheel', function(e) {
+      e.handled = true;
+      return true;
+    });
 
     var output = document.getElementById("output");
 
