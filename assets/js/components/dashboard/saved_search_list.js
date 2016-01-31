@@ -17,7 +17,9 @@ var SavedSearchList = React.createClass({
          var search = JSON.parse(value);
          return search
        })
-       ServerActions.homeSearches(query[0]);  //TODO search all
+       if(!_.isEmpty(query[0])){
+         ServerActions.homeSearches(query[0]);  //TODO search all
+       }
      }
   },
 
@@ -26,6 +28,7 @@ var SavedSearchList = React.createClass({
       $(this).removeClass('selectedItem');
     });
     $('#' + index).addClass('selectedItem');
+    $("#savedListBtn").removeClass('btn-warning').addClass('btn-success').text('执行搜索');
   },
 
   removeSearch: function(value){
@@ -117,7 +120,7 @@ var SavedSearchList = React.createClass({
               )
             })}
           </form>
-         <Button id='savedListBtn' bsStyle='success' onClick={self.runSearch.bind(self, 'savedListBtn')}>选中记录，执行搜索</Button>
+         <Button id='savedListBtn' bsStyle='warning' onClick={self.runSearch.bind(self, 'savedListBtn')}>请选择记录</Button>
       </div>
       );
   }

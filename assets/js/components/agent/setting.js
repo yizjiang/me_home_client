@@ -47,7 +47,7 @@ var Setting = React.createClass({
   saveSelectedSearch: function(value, id) {
     $('#'+id).text('保存中')
     ServerActions.savePageConfig(UserStore.getCurrentUser(), {search: value}).then(() => {
-      $('#'+id).text('执行搜索');
+      $("#" + id).removeClass('btn-success').addClass('btn-warning').text('请选择记录');
        $('#desc').show();
       });
   },
