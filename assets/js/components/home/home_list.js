@@ -46,8 +46,13 @@ var HomeList = React.createClass({
             <img src={imgUrl}/>
           </td>
           <td className='thadd'>
+            {
+              value.short_desc.split(',').map((v) => {
+                return <a href={'#/home_detail/' + value.id}><p>{v}</p></a>
+              }
+            )}
+          <a href={'#/home_detail/' + value.id}><p>建造于: {value.year_built}年</p></a>
             <a href={'#/home_detail/' + value.id}><p>{value.addr1 + ' ' + value.city}</p></a>
-            <a href={'#/home_detail/' + value.id}><p>{value.short_desc}</p></a>
           </td>
         </tr>
           )

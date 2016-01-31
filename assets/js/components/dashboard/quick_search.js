@@ -111,6 +111,7 @@ var QuickSearch = React.createClass({
   },
 
   handleFilterChange: function(event) {
+    $('#desc').hide();
     if(event.target.id){
       this.setState({ [event.target.id]: event.target.value });
     } else {
@@ -137,7 +138,10 @@ var QuickSearch = React.createClass({
       search['api'] = true;
       $('#saveBtn' + id).text('保存中..');
 
-      ServerActions.saveCustomerSearch(search).then(() => { $('#saveBtn' + id).text('保存');});
+      ServerActions.saveCustomerSearch(search).then(() => { $('#saveBtn' + id).text('保存');
+                                                            $('#desc').show();
+
+                                                          });
     }
   },
 
@@ -155,6 +159,7 @@ var QuickSearch = React.createClass({
           <Select options={this.props.areas} change={this.changeRegionValue} selected={this.state.regionValue}/>
           <SearchOptions options={this.state} callback={this.handleFilterChange} show={true}/>
           <button id={'saveBtn' + this.props.wechat_user.id} className='btn btn-success' type="button" onClick={this.saveSearch.bind(this, this.props.wechat_user.id)} >保存</button>
+          <p id='desc' style={{display: 'none', width: '80px'}}> 已更新 </p>
           <hr />
         </div>
       </div>
