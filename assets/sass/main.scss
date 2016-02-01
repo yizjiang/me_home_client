@@ -669,7 +669,7 @@ div.homelistDiv{
 				width: 50%;
 				background-color: transparent;
 				vertical-align: top;
-				padding: 84px 20px;
+				padding: 0px 10px;
 					
 				a{
 					text-decoration: none;
@@ -916,6 +916,9 @@ ul.racism-list{
   margin-left: 15%;
   display: inline-block;
   vertical-align: top;
+  h3 {
+    font-size: 20px
+  }
   .public-record-detail{
     display: inline-block;
     vertical-align: top;

@@ -56,6 +56,7 @@ var Dashboard = React.createClass({
       home_list: HomeListStore.getProduct(),
       favorite_list: UserStore.getFavoriteHomes(),
       listView: true,
+      activeIndex: 1,
       areas: AreaStore.getArea(),
       wechatUser: UserStore.getWechatUser(),
       pagination: {
@@ -66,6 +67,10 @@ var Dashboard = React.createClass({
 
   getInitialState: function() {
     return this.stateObject();       //TODO re-design
+  },
+
+  handleSelected: function(index) {
+    this.setState({activeIndex: index})
   },
 
   showMode: function(mode) {
@@ -81,7 +86,6 @@ var Dashboard = React.createClass({
 
   // Remove change listeners from stores
   componentWillUnmount: function() {
-    console.log('unmount dashboad');
     AreaStore.removeChangeListener(this.loadArea);
     UserStore.removeChangeListener(this._onChange);
     HomeListStore.removeChangeListener(this._onChange);
@@ -165,7 +169,7 @@ var Dashboard = React.createClass({
 
     return (
       <div className='tabdiv'>
-      <Tabs onSelect={this.handleSelected} selectedIndex={1}>
+      <Tabs onSelect={this.handleSelected} selectedIndex={this.state.activeIndex}>
         <TabList>
           <Tab><span className='glyphicon glyphicon-heart'></span></Tab>
           <Tab><span className='glyphicon glyphicon-bookmark'></span></Tab>

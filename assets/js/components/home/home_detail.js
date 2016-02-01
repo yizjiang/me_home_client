@@ -240,14 +240,6 @@ var HomeDetail = React.createClass({
         </Carousel>
 
         {agentInfoComponent}
-        
-        <div className='description_div'>
-          <h3>
-           {mapping['description']}
-          </h3>
-          <p className='detailp'>{home['description']}</p>
-          <p className='detailp'>{home['chinese_description']}</p>
-        </div>
 
         {cityInfoComponent}
 
@@ -299,6 +291,14 @@ var HomeDetail = React.createClass({
 
         {schoolInfoCompoent}
         {publicRecordComponent}
+
+        <div className='description_div'>
+          <h3>
+               {mapping['description']}
+          </h3>
+          <p className='detailp'>{home['description']}</p>
+          <p className='detailp'>{home['chinese_description']}</p>
+        </div>
         <div className='home-map-wrap'>{mapComponent}</div>
       </div>
   );

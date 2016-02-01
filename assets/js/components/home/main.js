@@ -96,8 +96,16 @@ var HomeMain = React.createClass({
   },
 
   render: function () {
+
     var home_list = this.state.home_list
     home_list = this.filterHomes(home_list);
+
+    var e = $('.searchresult_div');
+    if (!_.isEmpty(e) && !_.isEmpty(home_list)) {
+      $(window).scrollTop(e.position().top)
+    }
+
+
     var pagination = this.state.pagination || {};
     var paginated = Paginator.paginate( home_list, pagination);
     var begin = this.state.pagination.page * this.state.pagination.perPage;
