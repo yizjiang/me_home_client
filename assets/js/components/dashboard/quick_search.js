@@ -123,7 +123,7 @@ var QuickSearch = React.createClass({
   changeRegionValue: function(regions) {
     _selectRgion = regions.map((region) => {
       return region.value
-    })
+    });
   },
 
   saveSearch: function(id) {

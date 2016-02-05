@@ -92,12 +92,23 @@ var Dashboard = React.createClass({
   },
 
   _onChange: function() {
+    var wechatUser = UserStore.getWechatUser();
+    // this W/A is because no matter flat the search query or not wechatUser can not be changed in mobile
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
+      wechatUser = {nickname: wechatUser.nickname,
+        head_img_url: wechatUser.head_img_url,
+        id: wechatUser.id,
+        user_id: wechatUser.user_id};
+    } else {
+      //wechatUser['search'] = search;
+      wechatUser = wechatUser;
+    }
     this.setState({data: UserStore.getQuestions(),
       saved_searches: UserStore.getSavedSearches(),
       current_user: UserStore.getCurrentUser(),
       home_list: HomeListStore.getProduct(),
       areas: AreaStore.getArea(),
-      wechatUser: UserStore.getWechatUser(),
+      wechatUser: wechatUser,
       favorite_list: UserStore.getFavoriteHomes()});
   },
 
@@ -127,6 +138,13 @@ var Dashboard = React.createClass({
 
     var homesComp = null;
     var favoriteHomesComp = null;
+    var savedListComp = null;
+
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
+      savedListComp = null;
+    } else {
+      savedListComp = <SavedSearchList list={this.state.saved_searches}/>
+    }
 
     if(this.state.listView){
       if(this.state.home_list.length > 5) {
@@ -183,7 +201,7 @@ var Dashboard = React.createClass({
 
         <TabPanel>
           {quickSearchComp}
-          <SavedSearchList list={this.state.saved_searches}/>
+          {savedListComp}
           <div className='searchResult'>
             {homesComp}
             {paginateComp}

@@ -7,7 +7,6 @@ var RawSelect = require('react-select');
 var Select = React.createClass({
 
   handleChange: function(_, options) {
-    console.log(options);
     this.props.change(options);
   },
 
