@@ -147,6 +147,10 @@ var QuickSearch = React.createClass({
 
   render: function() {
     var that = this;
+    var text = '已更新'
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
+      text = '已更新, 点击返回看结果';
+    }
     return (
       <div className='wechat_search'>
         <div className='wechat_wrap'>
@@ -159,7 +163,7 @@ var QuickSearch = React.createClass({
           <Select options={this.props.areas} change={this.changeRegionValue} selected={this.state.regionValue}/>
           <SearchOptions options={this.state} callback={this.handleFilterChange} show={true}/>
           <button id={'saveBtn' + this.props.wechat_user.id} className='btn btn-success' type="button" onClick={this.saveSearch.bind(this, this.props.wechat_user.id)} >保存</button>
-          <p id='desc' style={{display: 'none', width: '80px'}}> 已更新 </p>
+          <p id='desc' style={{display: 'none', width: '80px'}}> {text} </p>
           <hr />
         </div>
       </div>
