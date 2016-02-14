@@ -60,7 +60,7 @@ var App = React.createClass({
         <div className='menuDiv'>
           <ul id='MenuBox' className='nav navbar-nav'>
             <li><a href='/#/main' className='alinkClass'>找房</a></li>
-            <li><a href='/#/money' className='alinkClass'>找钱</a></li>
+            <li><a href='/static/mortgage.html' className='alinkClass'>找钱</a></li>
             <li><a href='/#/school' className='alinkClass'>找学校</a></li>
             {linkComponent}
           </ul>
@@ -74,7 +74,7 @@ var App = React.createClass({
             <div className='nav-wrap'>
               <ul className='nav-list'>
                 <li><a href='/#/main'>找房</a></li>
-                <li><a href='/#/money'>找钱</a></li>
+                <li><a href='/static/mortgage.html'>找钱</a></li>
                 <li><a href='/#/school'>找学校</a></li>
                 {linkComponent}
               </ul>

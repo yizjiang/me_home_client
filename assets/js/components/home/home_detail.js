@@ -1,7 +1,7 @@
 'use strict';
 var React = require('react'),
     BingMap = require('./bing_map'),
-    AgentInfo = require('./agent_info'),
+    AgentsInfo = require('./agents_info'),
     CityInfo = require('./city_info'),
     SchoolInfo = require('./school_info'),
     PublicRecord = require('./public_record'),
@@ -178,7 +178,7 @@ var HomeDetail = React.createClass({
         address: address, description: home.chinese_description, home_id: home.id}} show_details={false}/>
     }
 
-    var agentInfoComponent = <AgentInfo userID={UserStore.getCurrentUser().id}/>;
+    var agentInfoComponent = <AgentsInfo homeID={home.id} userID={UserStore.getCurrentUser().id}/>;
 
     var cityInfoComponent = null;
     if(home.city_info){

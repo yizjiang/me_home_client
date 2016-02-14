@@ -705,8 +705,11 @@ div.homelistDiv{
 	}
 }
 
-.homelistDiv.undefined.loading{
-	height: 100%;
+div.homelistDiv.loading{
+  background-image: url('../img/loading1.gif');
+  background-position: center;
+  background-size: cover;
+  height: 300px;
 }
 
 div.ccent{
@@ -1496,14 +1499,6 @@ div#agentcontent{
 	}
 }
 
-.loading{
-  background-image: url('../img/loading1.gif');
-  background-position: center;
-  background-size: cover;
-  height: 300px;
-}
-
-
 .agent_info_wrap{
 	display: inline-block;
 	max-width: calc(100% -623px);
@@ -1944,6 +1939,8 @@ div.content.afterSearch{
 		vertical-align: top;
 	}
 }
+
+
 
 @media screen and (max-width:640px){
 	div.searchDiv{

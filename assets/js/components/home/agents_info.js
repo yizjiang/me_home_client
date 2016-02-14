@@ -1,16 +1,21 @@
 var ServerActions = require('../../actions/server_action'),
   AgentStore = require('../../stores/agent_store'),
+  ContactAgent = require('./contact_agent'),
   _ = require('lodash');
 
 
-var AgentInfo = React.createClass({
+var AgentsInfo = React.createClass({
 
   getInitialState: function() {
-    return {agents: AgentStore.getAgents()}
+    var agents = AgentStore.getAgents().map((agent) => { agent['selected'] = true;
+                                                         return agent })
+    return {agents: agents}
   },
 
   _onChange: function() {
-    this.setState({agents: AgentStore.getAgents()});
+    var agents = AgentStore.getAgents().map((agent) => { agent['selected'] = true;
+    return agent })
+    this.setState({agents: agents});
   },
 
   // Add change listeners to stores
@@ -24,12 +29,15 @@ var AgentInfo = React.createClass({
     AgentStore.removeChangeListener(this._onChange);
   },
 
+  selectAgent: function() {
+    console.log('sasf');
+  },
 
   render: function() {
     return (
       <div className='agent_info_wrap'>
-        <h3>在线经纪人</h3>
-        {this.state.agents.map((agent) => {
+        <h3>联系经纪人</h3>
+        {this.state.agents.map((agent, index) => {
            return (
              <div className='agent_home_div'>
                <div className='agent-list'>
@@ -43,9 +51,10 @@ var AgentInfo = React.createClass({
            )
          }
        )}
+       <ContactAgent/>
       </div>
-      );
+    );
   }
 });
 
-module.exports = AgentInfo;
+module.exports = AgentsInfo;

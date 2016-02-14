@@ -1,6 +1,7 @@
 'use strict';
 var React = require('react'),
     StatusBar = require('./status_bar'),
+    classNames = require('classnames'),
     Carousel = require('react-bootstrap').Carousel,
     CarouselItem = require('react-bootstrap').CarouselItem,
     _ = require('lodash');
@@ -25,20 +26,11 @@ var HomeList = React.createClass({
           imgUrl = '../img/bay-area.jpg';
         };
 
-        var imageItems = null;
-        if(value.images != undefined) {
-          imageItems = value.images.map(function(img){
-                  return (
-                    <CarouselItem>
-                      <img src={CDN_URL + '/photo/' + img.image_url}/>
-                    </CarouselItem>
-                  )
-                }
-                )
-        }
         return (<tr>
           <td className='picture_td'>
-            <img src={imgUrl}/>
+            <a href={'#/home_detail/' + value.id}>
+              <img src={imgUrl}/>
+            </a>
           </td>
           <td className='thadd'>
             {
@@ -63,7 +55,7 @@ var HomeList = React.createClass({
     return (
       <div className='searchresult_div has_search_value'>
         {statusHeader}
-        <div className={'homelistDiv ' + this.props.custom_style} id='homelistAnchor'>
+        <div className={classNames('homelistDiv', this.props.custom_style)} id='homelistAnchor'>
           <table>
             <tbody>{tablebody}</tbody>
           </table>

@@ -4,8 +4,6 @@ var React = require('react'),
 var SelectItems = React.createClass({
 
   selectRegion: function(data){
-
-    console.log(data);
     this.props.callback(data)
   },
 

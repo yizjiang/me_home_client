@@ -58,7 +58,6 @@ var SearchBox = React.createClass({
       $('#content-id').addClass('afterSearch');
 
       search['regionValue'] = search.regionValue.join(',');
-      console.log(search);
       $('.homelistDiv').addClass('loading');
       ServerActions.homeSearch(search).then(() => {
         $('.homelistDiv').removeClass('loading');
