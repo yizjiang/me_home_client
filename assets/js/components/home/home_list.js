@@ -46,11 +46,12 @@ var HomeList = React.createClass({
                 return <a href={'#/home_detail/' + value.id}><p>{v}</p></a>
               }
             )}
-          <a href={'#/home_detail/' + value.id}><p>建造于: {value.year_built}年</p></a>
-            <a href={'#/home_detail/' + value.id}><p>{value.addr1 + ' ' + value.city}</p></a>
+            <a href={'#/home_detail/' + value.id}><p>建造于: {value.year_built}年</p></a>
+            <a className='home_address'href={'#/home_detail/' + value.id}><p>{value.addr1 + ' ' + value.city}</p></a>
+            <a className='home_price' href={'#/home_detail/' + value.id}><p>{value.price}</p></a>
           </td>
           <td className='homeprice'>
-            <p>{value.price}</p>
+            <a href={'#/home_detail/' + value.id}><p>{value.price}</p></a>
           </td>
         </tr>
           )

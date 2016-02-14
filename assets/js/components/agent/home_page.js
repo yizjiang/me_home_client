@@ -34,6 +34,7 @@ var HomePage = React.createClass({
 
     return (
       <div>
+      <div>
         <div className='agent_home_div'>
           <img className='profile_img' src={this.props.data.head_image}></img>
           <p>姓名: {this.props.data.header.name}</p>
@@ -44,6 +45,15 @@ var HomePage = React.createClass({
           <h3 className='previewH3'>优质房源</h3>
           {homesComp}
         </div>
+      </div>
+      <div className='float_menu'>
+        <ul>
+          <li><span className='glyphicon glyphicon-earphone'></span><br/>电话</li>
+          <li><span className='glyphicon glyphicon-phone'></span><br/>短信</li>
+          <li><span className='glyphicon glyphicon-comment'></span><br/>微信</li>
+          <li><span className='glyphicon glyphicon-envelope'></span><br/>电邮</li>
+        </ul>
+      </div>
       </div>
       );
   }

@@ -55,6 +55,60 @@ body{ position:relative; padding-top:60px;}
 .footer p a{ margin:0 11px 0 10px; color:#222; font-size:14px;}
 .footer p a:hover{ color:#FBC03D; text-decoration:underline;}
 
+
+div.icon_img{
+	position: relative;
+}
+.glyphicon{
+	font-size: 70px;
+	line-height: 120px;
+	width: 175px;
+	color: #74c005;
+	border: 8px solid #74c005;
+	border-radius: 100px;
+	padding: 20px;
+	position: absolute;
+	display: inline-block;
+	background-color: #f5f5f5;
+	text-align: center;
+}
+
+.glyphicon:after{
+	content:'';
+	color: white;
+	background-color: #74c005;
+	font-size: 32px;
+	border-radius: 65px;
+	display: block;
+	width: 65px;
+	height: 65px;
+	line-height: 40px;
+	position: absolute;
+	text-align: center;
+	vertical-align: middle;
+	font-weight: 800;
+	top: -25px;
+	left: -10px;
+	border: 8px solid #f5f5f5;
+}
+
+.glyphicon-search:after{
+	content: '1';
+}
+.glyphicon-usd:after, .glyphicon-user:after, .glyphicon-list-alt:after{
+	content: '2';
+}
+.glyphicon-shopping-cart:after, .glyphicon-thumbs-up:after, .glyphicon-check:after{
+	content: '3';
+}
+.glyphicon-bullhorn:after, .glyphicon-tasks:after{
+	content: '4';
+}
+.glyphicon-home:after{
+	content: '5';
+}
+
+
 @media (max-width:960px){
 	.header h1{ width:16.5%;}
 	.header h1 span{ display:none;}
