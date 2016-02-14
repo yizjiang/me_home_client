@@ -668,7 +668,7 @@ div.homelistDiv{
 			td{
 				width: 50%;
 				background-color: transparent;
-				vertical-align: top;
+				vertical-align: middle;
 				padding: 0px 10px;
 					
 				a{
@@ -694,11 +694,18 @@ div.homelistDiv{
                   height: 240px;
                 }
 			}
-
+			a.home_price{
+				display: none;
+			}
 			td.homeprice{
 				width: calc(50% - 240px);
-				font-size: 24px;
-				font-weight: 600;
+    			a{
+	    			p{
+	    				color: $red;
+	    				font-size: 28px;
+						font-weight: 600;
+					}
+				}
 			}
 		}
 		
@@ -1711,6 +1718,43 @@ div.content.afterSearch{
 	background: $bg-grey;
 	position: relative;
 }
+div#agentcontent{
+	div.float_menu{
+		width: 100%;
+		height: 90px;
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		margin: 0;
+		z-index: 111;
+		background-color: $bg-grey;
+		border-top: 1px solid $border-grey;
+		ul{
+			list-style: none;
+			padding: 0;
+			li{
+				display: inline-block;
+				width: 25%;
+				text-align: center;
+				padding-top: 10px;
+				span{
+					font-size: 16px;
+					line-height: 40px;
+					font-weight: 100;
+				}
+				span.glyphicon{
+					font-size: 20px;
+					font-weight: normal;
+					color: white;
+					background-color: $green;
+					width: 40px;
+					display: inline-block;
+					border-radius: 30px;
+				}
+			}
+		}
+	}	
+}
 
 @media screen and (max-width: 1000px){
 	.detailother{
@@ -1970,7 +2014,7 @@ div.content.afterSearch{
 		table{
 			tr{
 				td{
-					width: calc(100% - 140px);
+					width: calc(100% - 180px);
 					padding: 15px;
 					a{
 						p{
@@ -1983,9 +2027,23 @@ div.content.afterSearch{
 					width: 140px;
 					height: 140px;
 					img{
-						width: 140px;
-						height: 140px;
+						width: 180px;
+						height: 180px;
 					}
+				}
+				a.home_address{
+					display: none;
+				}
+				a.home_price{
+					display: block;
+					p{
+						font-weight: 600;
+						color: $red;
+						font-size: 16px;
+					}
+				}
+				td.thadd{
+					width: 100%;
 				}
 				td.homeprice{
 					display: none;
