@@ -29,7 +29,6 @@ var Header = React.createClass({
   },
 
   _onChange: function () {
-    console.log('onchange');
     this.setState(this.getStateFromStore());
   },
 

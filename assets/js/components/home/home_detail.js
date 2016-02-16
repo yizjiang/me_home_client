@@ -178,7 +178,11 @@ var HomeDetail = React.createClass({
         address: address, description: home.chinese_description, home_id: home.id}} show_details={false}/>
     }
 
-    var agentInfoComponent = <AgentsInfo homeID={home.id} userID={UserStore.getCurrentUser().id}/>;
+    var agentInfoComponent = null
+
+    if(home.id){
+      agentInfoComponent = <AgentsInfo homeID={home.id} userID={UserStore.getCurrentUser().id}/>;
+    }
 
     var cityInfoComponent = null;
     if(home.city_info){

@@ -54,7 +54,7 @@ var map = {
 };
 
 gulp.task('watch', function(){
-  gulp.watch(path.js, ['build', 'agent', 'set_search']);
+  gulp.watch(path.js, ['build', 'agent']);
   gulp.watch(path.vendor.js, ['vendor']);
   gulp.watch(path.sass, ['sass']);
 });

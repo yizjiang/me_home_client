@@ -363,6 +363,32 @@ var ServerActions = {
     });
   },
 
+  sendContactRequest: function (uid, toIds, home_id, msg) {
+    console.log(toIds);
+    console.log(msg);
+    return $.ajax({
+      url: '/agent/contact_request',
+
+      headers: {
+        'uid': uid
+      },
+
+      type: 'post',
+
+      dataType: 'json',
+
+      data: JSON.stringify({toUser: toIds, home_id: home_id, msg: msg}),
+
+      success: function(data) {
+        return data;
+      },
+
+      error: function(data) {
+        console.log('f');
+      }
+    });
+  },
+
   getAgents: function (userID) {
     $.ajax({
       url: '/agents/',
@@ -382,6 +408,29 @@ var ServerActions = {
 
       error: function() {
         console.error('load agents error');
+      }
+    });
+  },
+
+  getAllRequests: function(user) {
+    $.ajax({
+      url: '/agent/' + user.id + '/requests',
+      type: 'GET',
+
+      dataType: 'json',
+
+      success: function(data) {
+        AppDispatcher.handleAction({
+          actionType: 'ALL_REQUESTS',
+          data: data
+        })
+      },
+
+      error: function() {
+        AppDispatcher.handleAction({
+          actionType: 'ALL_REQUESTS',
+          data: []
+        })
       }
     });
   },
