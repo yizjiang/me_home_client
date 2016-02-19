@@ -12,6 +12,10 @@ var ReplyForm = React.createClass({
       <div>
         <h3>您的回答:</h3>
         <input id={'answer' + this.props.qid} className='answer-inputbox' type="text" placeholder="Answer question.."/>
+        <label>
+          <input type='checkbox' checked={true}/>
+          <span>发送二维码</span>
+        </label>
         <button id='search' type="button" onClick={this.handleSubmit.bind(this, this.props.qid)} >提交</button>
       </div>
       );

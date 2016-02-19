@@ -57,6 +57,16 @@ var UserStore = _.extend({}, EventEmitter.prototype, {
     return _currentUser;
   },
 
+  isCurrentUserAgent: function() {
+    if(_.isEmpty(_currentUser)){
+       return undefined
+     } else if (!_.isEmpty(_currentUser.agent_extention)) {
+       return true;
+     } else {
+       return false;
+     }
+  },
+
   getAgentPublishedPageConfig: function() {
     return _publishedPageConfig;
   },
