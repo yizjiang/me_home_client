@@ -37,9 +37,11 @@ var HomePage = React.createClass({
       <div>
         <div className='agent_home_div'>
           <img className='profile_img' src={this.props.data.head_image}></img>
-          <p>姓名: {this.props.data.header.name}</p>
-          <p>联系电话: {this.props.data.header.contact}</p>
-          <img src={this.props.data.qr_image}></img>
+          <div className='name_card'>
+            <p>姓名: {this.props.data.header.name}</p>
+            <p>联系电话: {this.props.data.header.contact}</p>
+          </div>
+          <img className='agent_qr_img' src={this.props.data.qr_image}></img>
         </div>
         <div className='preview_list_div'>
           <h3 className='previewH3'>优质房源</h3>
