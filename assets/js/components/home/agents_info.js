@@ -31,7 +31,8 @@ var AgentsInfo = React.createClass({
   },
 
   submitContactRequest: function(message, homeID) {
-    return ServerActions.sendContactRequest(this.props.userID, AgentStore.getAgents().map((agent) => agent.id), homeID, message)
+    var selectedAgents = _.filter(this.state.agents, (agent) => agent.selected).map((agent) => agent.id);
+    return ServerActions.sendContactRequest(this.props.userID, selectedAgents, homeID, message)
   },
 
   selectAgent: function(event) {

@@ -8,6 +8,8 @@ var React = require('react'),
     HomeListStore = require('../../stores/home_list_store'),
     ServerActions = require('../../actions/server_action'),
     UserStore = require('../../stores/user_store'),
+    AgentRequestStore = require('../../stores/agent_request_store'),
+    AgentRequests = require('../agent/agent_requests'),
     Button = require('react-bootstrap').Button,
     Col = require('react-bootstrap').Col,
     Carousel = require('react-bootstrap').Carousel,
@@ -40,24 +42,30 @@ var HomeDetail = React.createClass({
       this.loadHomeFromServer(this.props.params.id)
       currentHome = {images: [], public_schools:[], private_schools:[], assigned_school:[], public_record: {}};
     }
-    return {currentHome: currentHome, currentFavorite: UserStore.getFavoriteHomes()}              //TODO get user in mobile version
+    return {currentHome: currentHome, currentFavorite: UserStore.getFavoriteHomes(), agentRequests: undefined}              //TODO get user in mobile version
   },
 
   _onChange: function() {
-    this.setState({currentFavorite: UserStore.getFavoriteHomes()});
     if(!_.isEmpty(UserStore.getCurrentUser())){
-      ServerActions.metricTracking(UserStore.getCurrentUser(), {home_id: this.props.params.id})
+      if(UserStore.isCurrentUserAgent() && this.state.agentRequests == undefined){
+        ServerActions.getAllRequests(UserStore.getCurrentUser());
+      } else if (UserStore.isCurrentUserAgent() == false){
+        ServerActions.metricTracking(UserStore.getCurrentUser(), {home_id: this.props.params.id})
+      }
     }
+    this.setState({currentFavorite: UserStore.getFavoriteHomes(), agentRequests: AgentRequestStore.getAll()});
   },
 
   // Add change listeners to stores
   componentDidMount: function() {
     UserStore.addChangeListener(this._onChange);
+    AgentRequestStore.addChangeListener(this._onChange);
   },
 
   // Remove change listeners from stores
   componentWillUnmount: function() {
     UserStore.removeChangeListener(this._onChange);
+    AgentRequestStore.removeChangeListener(this._onChange);
   },
 
   favoriteAction: function() {
@@ -181,7 +189,14 @@ var HomeDetail = React.createClass({
     var agentInfoComponent = null
 
     if(home.id){
-      agentInfoComponent = <AgentsInfo homeID={home.id} userID={UserStore.getCurrentUser().id}/>;
+      if(UserStore.isCurrentUserAgent() == true){
+        var homeRequest = _.filter(this.state.agentRequests, (r) => r.home_id == home.id);
+        if(homeRequest.length == 1){
+          agentInfoComponent = <AgentRequests requests={ homeRequest } title={false}/>;
+        }
+      } else {
+        agentInfoComponent = <AgentsInfo homeID={home.id} userID={UserStore.getCurrentUser().id}/>;
+      }
     }
 
     var cityInfoComponent = null;
