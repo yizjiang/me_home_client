@@ -3,6 +3,7 @@
 @import "base";
 @import "slider";
 @import "react-select";
+@import "bootstrap";
 
 $font-family: Roboto, sans-serif;
 $green: #74c005;
@@ -714,6 +715,20 @@ div.homelistDiv{
 
 #contactAgent {
   width: 100%;
+  height: 80px;
+  padding: 0 20px;
+  line-height: 20px;
+  text-align: left;
+  vertical-align: top;
+}
+
+#submitContactRequest{
+  background-color: $green;
+  color: white;
+  border: 0;
+  border-radius: 5px;
+  padding: 5px;
+  margin-top: 10px;
 }
 
 div.homelistDiv.loading{
@@ -726,7 +741,47 @@ div.homelistDiv.loading{
 div.ccent{
 	top: 0px;
 	position: relative;
-
+    .question_div{
+      width: 70%;
+      margin: auto;
+      h3{
+        font-size: 20px;
+      }
+      #answer0{
+        height: 60px;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid $border-grey;
+        margin-right: 20px;
+        width: calc(100% - 300px);
+      }
+      #request{
+        .request-item{
+          font-size: 16px;
+          line-height: 1.5;
+          font-weight: 100;
+          input{
+            margin-right: 20px;
+          }
+        }
+        .property{
+          font-size: 16px;
+          line-height: 1.5;
+          font-weight: 300;
+          width: 120px;
+          border-bottom: 2px solid $green;
+          a{
+            color: $green;
+          }
+        }
+      }
+      #search{
+        width: 80px;
+        border-radius: 5px;
+        vertical-align: middle;
+        margin-left: 20px;
+      }
+    }
 	div.headerinfo_div{
 		padding: 20px 0;
 		width: 100%;
@@ -803,9 +858,10 @@ div.ccent{
 	}
 }
 .carousel{
-	width: 623px;
-	height: 414px;
-	display: inline-block;
+	width: 70%;
+    margin: auto;
+	height: auto;
+	display: block;
 }
 
 .carousel-inner > .item > img,
@@ -1293,6 +1349,7 @@ div.commentList.agent, div.commentList.undefined {
 }
 
 div.setting_header{
+    margin: 20px 0 20px 30px;
 	label.agentlabel{
 		font-size: 16px;
 		line-height: 40px;
@@ -1315,7 +1372,53 @@ div.agentDiv{
 	position: relative;
 	top: 10px;
 	margin-left: 25px;
-
+    div[id^='react-tabs']{
+      .filter{
+        border-top: 5px solid $red;
+        padding-top: 10px;
+      }
+      .question_div{
+        margin-left: 30px;
+        margin-bottom: 30px;
+        h3{
+          font-size: 20px;
+        }
+        #answer0{
+          height: 60px;
+          padding: 10px;
+          border-radius: 5px;
+          border: 1px solid $border-grey;
+          margin-right: 20px;
+          width: calc(100% - 300px);
+        }
+        #request{
+          .request-item{
+            font-size: 16px;
+            line-height: 1.5;
+            font-weight: 100;
+            input{
+              margin-right: 20px;
+            }
+          }
+          .property{
+            font-size: 16px;
+            line-height: 1.5;
+            font-weight: 300;
+            width: 120px;
+            border-bottom: 2px solid $green;
+            a{
+              color: $green;
+            }
+          }
+        }
+        #search{
+          width: 80px;
+          border-radius: 5px;
+          vertical-align: middle;
+          margin-left: 20px;
+        }
+      }
+    }
 	div.react-tabs{
 		margin: 0 !important;
 		padding: 0 !important;
@@ -1511,26 +1614,28 @@ div#agentcontent{
 }
 
 .agent_info_wrap{
-	display: inline-block;
-	max-width: calc(100% -623px);
-	vertical-align: top;
+	display: block;
+	width: 70%;
+	margin: auto;
 	.agent_home_div{
-		margin: 0 0 0 30px;
-		padding: 20px;
+		display: inline-block;
+        width: 33.33%;
+        margin: 0;
+		padding: 20px 0;
 		h3{
 			font-size: 24px;
 			text-align: center;
 		}
 		img{
-			width: 150px;
-			height: 150px;
+			width: 200px;
+			height: 200px;
 			display: inline-block;
 		}
 		img.profile_img{
 			width: 80px;
 			height: 80px;
 			border-radius: 80px;
-			margin: 0 20px;
+			margin: 0 20px 0 0;
 		}
 		.agent-detail-info{
 			width: calc(100% - 120px);
@@ -1543,6 +1648,32 @@ div#agentcontent{
 				text-decoration: none;
 			}
 		}
+        .agent-qr-image{
+          display: none;
+        }
+        .triger-div{
+          display: block;
+          width: 100%;
+          height: 100px;
+        }
+        .triger-div:hover{
+          .qr-layer{
+            position: fixed;
+            background-color: rgba(0,0,0,0.3);
+            right: 0;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            z-index: 11;
+          }
+          .agent-qr-image{
+            display: block;
+            position: fixed;
+            right: calc(50% - 100px);
+            top: 20%;
+            z-index: 111;
+          }
+        }
 	}	
 }
 
@@ -1780,6 +1911,9 @@ div#agentcontent{
 				}
 			}
 		}
+        .float_menu{
+
+        }
 	}	
 }
 

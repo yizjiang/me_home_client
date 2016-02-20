@@ -36,12 +36,12 @@ var HomePage = React.createClass({
       <div>
       <div>
         <div className='agent_home_div'>
-          <img className='profile_img' src={this.props.data.head_image}></img>
+          <img className='profile_img' src={this.props.data.head_image} />
           <div className='name_card'>
             <p>姓名: {this.props.data.header.name}</p>
             <p>联系电话: {this.props.data.header.contact}</p>
           </div>
-          <img className='agent_qr_img' src={this.props.data.qr_image}></img>
+          <img className='agent_qr_img' src={this.props.data.qr_image} />
         </div>
         <div className='preview_list_div'>
           <h3 className='previewH3'>优质房源</h3>
@@ -55,6 +55,12 @@ var HomePage = React.createClass({
           <li><span className='glyphicon glyphicon-comment'></span><br/>微信</li>
           <li><span className='glyphicon glyphicon-envelope'></span><br/>电邮</li>
         </ul>
+        <div className='float_tab'>
+          <div className='phone-tab'>+1(650)888-5188</div>
+          <div className='msg-tab'>+1(650)888-5188</div>
+          <div className='wechat-tab'><img className='agent_qr_img' src={this.props.data.qr_image} /></div>
+          <div className='email-tab'>agent.leo@gmail.com</div>
+        </div>
       </div>
       </div>
       );

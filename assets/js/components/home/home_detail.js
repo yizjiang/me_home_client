@@ -37,12 +37,11 @@ var HomeDetail = React.createClass({
 
   getInitialState: function() {
     var currentHome =  HomeListStore.getHomeById(this.props.params.id);
-    var self = this;
     if(_.isEmpty(currentHome)) {
       this.loadHomeFromServer(this.props.params.id)
       currentHome = {images: [], public_schools:[], private_schools:[], assigned_school:[], public_record: {}};
     }
-    return {currentHome: currentHome, currentFavorite: UserStore.getFavoriteHomes(), agentRequests: undefined}              //TODO get user in mobile version
+    return {currentHome: currentHome, currentFavorite: UserStore.getFavoriteHomes(), agentRequests: AgentRequestStore.getAll()}              //TODO get user in mobile version
   },
 
   _onChange: function() {
@@ -180,11 +179,11 @@ var HomeDetail = React.createClass({
     var address = home.addr1 + ', ' + home.addr2 + ', ' + home.city + ', ' + home.state + ', ' + home.zipcode;
 
     var mapComponent = null;
-    if(home.geo_point){
-      var points = home.geo_point.split(',');
-      mapComponent= <BingMap home_info={{lat: points[0], long: points[1],
-        address: address, description: home.chinese_description, home_id: home.id}} show_details={false}/>
-    }
+//    if(home.geo_point){
+//      var points = home.geo_point.split(',');
+//      mapComponent= <BingMap home_info={{lat: points[0], long: points[1],
+//        address: address, description: home.chinese_description, home_id: home.id}} show_details={false}/>
+//    }
 
     var agentInfoComponent = null
 

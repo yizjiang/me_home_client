@@ -3,7 +3,7 @@ var AppDispatcher = require('../dispatcher/app_dispatcher'),
   _ = require('lodash');
 
 // Define initial data points
-var _agentRequests = [];                   //TODO redesign, same object, seperate agent and user
+var _agentRequests = undefined;                   //TODO redesign, same object, seperate agent and user
 
 function loadData(data) {
   _agentRequests = data;

@@ -50,11 +50,15 @@ var AgentsInfo = React.createClass({
              return (
                <div className='agent_home_div'>
                  <div className='agent-list'>
-                   <img className='profile_img' src={agent.wechat_user.head_img_url} />
-                   <div className='agent-detail-info'>
-                     <input type='checkbox' checked={agent.selected} value={index} onChange={this.selectAgent}/>
-                     <a className='agent-link' href={CLIENT_URL + '/agent/' + agent.agent_extention.agent_identifier}>{agent.wechat_user.nickname}</a>
-                     <img src={agent.qr_code} />
+                   <div className='triger-div'>
+                     <img className='profile_img' src={agent.wechat_user.head_img_url} />
+                     <div className='agent-detail-info'>
+                      <input type='checkbox' checked={agent.selected} value={index} onChange={this.selectAgent}/>
+                      <a className='agent-link' href={CLIENT_URL + '/agent/' + agent.agent_extention.agent_identifier}>{agent.wechat_user.nickname}</a>
+                     </div>
+                     <div className='qr-layer'>
+                      <img className='agent-qr-image' src={agent.qr_code} />
+                     </div>
                    </div>
                  </div>
                </div>
