@@ -179,11 +179,11 @@ var HomeDetail = React.createClass({
     var address = home.addr1 + ', ' + home.addr2 + ', ' + home.city + ', ' + home.state + ', ' + home.zipcode;
 
     var mapComponent = null;
-//    if(home.geo_point){
-//      var points = home.geo_point.split(',');
-//      mapComponent= <BingMap home_info={{lat: points[0], long: points[1],
-//        address: address, description: home.chinese_description, home_id: home.id}} show_details={false}/>
-//    }
+    if(home.geo_point){
+      var points = home.geo_point.split(',');
+      mapComponent= <BingMap home_info={{lat: points[0], long: points[1],
+        address: address, description: home.chinese_description, home_id: home.id}} show_details={false}/>
+    }
 
     var agentInfoComponent = null
 
