@@ -235,8 +235,8 @@ var HomeDetail = React.createClass({
               <p>厕所</p>
             </div>
             <div className='last_div_child'>
-              <h3>{home['indoor_size']}</h3>
-              <p>千平方英尺</p>
+              <h3>{parseInt(home['indoor_size'])}</h3>
+              <p>平方米</p>
             </div>
             <Button id='favoriteBtn' className={favButtonClass} onClick={this.favoriteAction}>
               <span className={'glyphicon glyphicon-heart ' + heartClass}></span> 喜欢
@@ -285,11 +285,11 @@ var HomeDetail = React.createClass({
                                           mapping['indoor_size']
                                           + ': '
                                           + home['indoor_size']
-                                          + '千平方英尺, '
+                                          + ' '
                                           + mapping['lot_size']
                                           + ': '
                                           + home['lot_size']
-                                          + '千平方英尺, '
+                                          + ' '
                                           + home['stores']
                                           + mapping['stores']
                                          }
