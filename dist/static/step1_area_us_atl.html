@@ -1,0 +1,232 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>找经纪人步骤</title>
+<link href="css/css.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/libs/CSSRESET.css">
+<link rel="stylesheet" type="text/css" href="css/common.css">
+<script src="js/libs/jquery-1.11.1.min.js"></script>
+<script src="js/common.js"></script>
+<link rel="stylesheet" type="text/css" href="css/steps.css">
+<script src="js/steps.js"></script>
+<script type="text/javascript"> 
+function ScrollImgLeft(){ 
+var speed=30; 
+var scroll_begin = document.getElementById("scroll_begin"); 
+var scroll_end = document.getElementById("scroll_end"); 
+var scroll_div = document.getElementById("scroll_div"); 
+scroll_end.innerHTML=scroll_begin.innerHTML; 
+function Marquee(){ 
+if(scroll_end.offsetWidth-scroll_div.scrollLeft<=0) 
+scroll_div.scrollLeft-=scroll_begin.offsetWidth; 
+else 
+scroll_div.scrollLeft++; 
+} 
+var MyMar=setInterval(Marquee,speed); 
+scroll_div.onmouseover=function() {clearInterval(MyMar);} 
+scroll_div.onmouseout=function() {MyMar=setInterval(Marquee,speed);} 
+} 
+</script>
+</head>
+<body>
+<div class="header">
+    <div class="_container">
+        <h1><a href="javascript:;"></a><span><i>美国</i><br/>
+            United State</span></h1>
+        <h2>详情</h2>
+        <ul class="nav">
+            <li><a href="/">找房</a></li>
+            <li><a href="mortgage.html">找钱</a></li>
+            <li class="active"><a href="agentsteps.html">找经纪人</a></li>
+            <li><a href="schoolsteps.html">找学校</a></li>
+        </ul>
+        <a href="javascript:;" class="a_func">注册/登陆</a> <span class="span_btn"></span>  <a href="guide.html" class="return"><img src="img/topleft.png" width="24" height="20"></a> <a href="#" class="quesico">常见问题</a> </div>
+</div>
+<div class="func">
+    <div class="func_panel">
+        <div class="func_header"> <img  />
+            <p>您好，觅家欢迎您！</p>
+            <a href="javascript:;" class="a_login">登陆</a> <a href="javascript:;" class="a_reg">注册</a> </div>
+        <ul class="ul_func">
+            <li><a href="javascript:;">找房子</a></li>
+            <li><a href="javascript:;">找经纪人</a></li>
+            <li><a href="javascript:;">找学校</a></li>
+            <li><a href="javascript:;">找贷款</a></li>
+        </ul>
+    </div>
+</div>
+<div class="guide_banner">
+    <div class="bannernav">
+        <div class="nav_container" >
+            <div class="navtips" >
+                <h3>购房流程</h3>
+                <h4>五大步骤&nbsp;轻松搞定</h4>
+            </div>
+            <div class="steps-box"> <a href="step1.html" class="step">
+                <div class="stepbox  active">
+                    <div class="step_img1 step_img2hover"> </div>
+                    <h2>购房第一步</h2>
+                    <p>选择地区和城市</p>
+                    <p>选择学校</p>
+                </div>
+                </a> <a href="step2.html" class="step">
+                <div class="stepbox ">
+                    <div class="step_img2 "> </div>
+                    <h2>购房财务方案</h2>
+                    <p>现金购房</p>
+                    <p>贷款购房</p>
+                </div>
+                </a> <a href="step3.html" class="step">
+                <div class="stepbox ">
+                    <div class="step_img3 "> </div>
+                    <h2>选房看房</h2>
+                    <p>房屋搜索</p>
+                    <p>选择经纪人</p>
+                </div>
+                </a> <a href="step4.html" class="step">
+                <div class="stepbox ">
+                    <div class="step_img4 "> </div>
+                    <h2>报价买房</h2>
+                    <p>报价合同</p>
+                    <p>房屋检查</p>
+                </div>
+                </a> <a href="step5.html" class="step stephover">
+                <div class="stepbox ">
+                    <div class="step_img5 "> </div>
+                    <h2>交接过户</h2>
+                    <p>产权保险</p>
+                    <p>房屋过户</p>
+                </div>
+                </a> </div>
+        </div>
+    </div>
+</div>
+<div class="tips">
+    <div class="tipsbox"> <i>常见问题</i>
+        <div class="flex" id="scroll_div">
+            <ul id="scroll_begin">
+                <li><a href="#">在美国的房子有哪几种种类?</a></li>
+                <li><a href="#">美国买房是买新房好还是二手房好？?</a></li>
+                <li><a href="#">去美国买房要准备多少资金？</a></li>
+            </ul>
+            <ul id="scroll_end">
+            </ul>
+        </div>
+    </div>
+</div>
+   <a id="stepico"></a>
+<div class="main">
+    <div class="stepmain">
+        <div class="steptab">
+            <div class="steptitle"> <span><a href="step1.html#stepico"><i class="back-icon"><img src="img/back.png" width="24" height="20"> </i></a></span>
+                <h1 class="step_tips">Step1购房第一步</h1>
+            	<h1 class="step1_phone">购房第一步 —— 选择地区和城市</h1>
+            </div>
+            
+            <div class="stepone_tab">
+                <div class="tableft">
+                    <div class="stepselect">
+                        <h2 class="ng-binding"><strong>选择地区和城市</strong></h2>
+                    </div>
+                    <div class="tabmenu">
+                        <ul>
+                            <li ><a href="step1_area_us.html#stepico" class="firsta">美国</a></li>
+                            <li><a href="step1_area_us_sea.html#stepico">西雅图</a></li>                            
+                            <li><a href="step1_area_us_ord.html#stepico">芝加哥</a></li>
+                            <li class="cur"><a href="step1_area_us_atl.html#stepico">亚特兰大</a></li>
+                            <li><a href="step1_area_us_san.html#stepico">圣地亚哥</a></li>
+                            <li><a href="step1_area_us_jfk.html#stepico">纽约</a></li>
+                            <li><a href="step1_area_us_mia.html#stepico">迈阿密</a></li>
+                            <li><a href="step1_area_us_lax.html#stepico">洛杉矶</a></li>
+                            <li><a href="step1_area_us_sfo.html#stepico">旧金山</a></li>
+                            <li><a href="step1_area_us_dal.html#stepico">达拉斯</a></li>
+                            <h2 class="ng-binding"><strong>选择学校</strong></h2>
+                            <li><a href="step1_school_intro.html#stepico" class="firsta">美国学校系统介绍</a></li>
+                            <li><a href="step1_school_pubOrPri.html#stepico" class="firsta">公立学校与私立学校</a></li>
+                            <li><a href="step1_school_district.html#stepico" class="firsta">美国学区介绍</a></li>
+                            <!--li><a href="step1_school_intro.html#stepico" class="firsta">选择公立高中还是私立高中</a></li-->
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="tablist">
+                    <ul>
+                        <li>
+                            <h2>亚特兰大介绍</h2>
+                            <h3>地理位置</h3>
+                            <p>亚特兰大（Atlanta）位于美国东部，坐落在海拔350米的阿巴拉契亚山麓的台地上，是美国三大高地城市之一。 亦是美国佐治亚州首府和最大的工商业城市。是美国佐治亚州首府及最大城市，是富尔顿县的县政府驻地。是美国第9大都市区。作为一个铁路枢纽，亚特兰大的发展始于19世纪早期，在南北战争时期被摧毁，但在被选为州府后迅速重建。20世纪，它是美国民权运动的中心，并举办了1996年夏季奥林匹克运动会。</p>
+                            <h3>气候</h3>
+                            <p>亚特兰大属典型的副热带湿润气候，四季分明，气温变化相对和缓，全年降水分配均匀，代表美国东南部内陆地区的气候。冬季温和，微潮，时而偏向温暖，日最高气温低于0 °C（32 °F）的平均日数为1.7天，日最低气温低于0 °C（32 °F）的平均日数为40天，低于−5 °C（23 °F）的平均日数为8.3天；夏季相对炎热潮湿，日最高气温超过30 °C（86 °F）的日数年均有88天，超过35 °C（95 °F）的有11天。</p>
+                            <h3>经济</h3>
+                            <p>亚市被誉为“新南方之都”，经济多元，上百家大公司总部设在这里，包括可口可乐、家得宝、达美航空、联合包裹、假日酒店及南方贝尔等。全美500家大公司中有430家在亚市设立了分公司。1800多家工厂生产包括飞机、汽车、家具，纺织品、化学原料，食品、纸、钢铁等3500多种产品。该市IT业工作岗位数量增长较快。2011年，大亚特兰大地区GDP约2833亿美元，居全美各都会区第10位。对外出口额约172亿美元，居全美各都会区第18位，占全佐州出口总额的54.9%。前五大出口对象依次为：加拿大（31亿）、墨西哥（16亿）、新加坡（12亿）、中国（7.5亿）、日本（7.3亿）。出口额最大的产品依次为：运输设备（42亿）、机械设备（24亿）、计算机与电子产品（22亿）、化工产品（17亿）、食品（13亿） </P>
+                            <h3>教育</h3>
+                            <p>亚特兰大地区汇集着艾默里大学、佐治亚理工学院、佐治亚大学、佐治亚州立大学、肯尼索州立大学、美国国家疾病预控中心等高校和研究机构。佐治亚理工学院以理工见长，其工业与制造、生物医学、航空航天、土木工程、环境与卫生都名列全美前5位。艾默里大学以医学闻名，其生物医学、内科助理和大众健康都名列前茅。佐治亚理工学院与艾默里大学合作建立的生物医学系名列全美第二，在全美30个纳米医学中心中，该系拥有3个。佐治亚大学的中小学师资教育、技术与职业教育和特殊教育一直名列全美前3名。 </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="questions">
+            <div class="quesnav"> <a href="#">查看全部问题</a>
+                <p>购房常见问题</p>
+            </div>
+            <div class="quesbox">
+                <ul>
+                    <li>
+                        <h3 class="">如何寻找房源信息？</h3>
+                        <h4>在美国，房产中介人会把所有房源信息上传到房地产经纪人协会，继而公布在房地产网站上，客户就可以通过这些网站（例如外居乐）来浏览房源信息。在很多其他国家，比如中国，房地产业属于分散经营，购房者必须去每个中介公司寻找合适房源。外居乐是目前唯一提供美国真实房产信息的中文平台。</h4>
+                    </li>
+                    <li>
+                        <h3 class="">如何寻找房源信息？</h3>
+                        <h4>在美国，房 就可以通过这些网站 国家，比如中国，房地产业属于分散经营，购房者必须去每个中介公司寻找合适房源。外居乐是目前唯一提供美国真实房产信息的中文平台。</h4>
+                    </li>
+                    <li>
+                        <h3 class="">如何寻找房源信息？</h3>
+                        <h4 class="ng-scope">......</h4>
+                    </li>
+                    <li>
+                        <h3 class="">如何寻找房源信息？</h3>
+                        <h4 class="ng-scope">......</h4>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="link clear">
+    <div class="_container">
+        <dl>
+            <dt><img src="img/meejia_user_QR.png" /></dt>
+            <dd>
+                <p><img src="img/link_logo.png" /></p>
+                <p>扫一扫，关注觅家微信公众号</p>
+            </dd>
+        </dl>
+    </div>
+</div>
+<div class="footer">
+    <p><a href="javascript:;">使用条款</a>|<a href="javascript:;">隐私协议</a>|<a href="javascript:;">关于我们</a>|<a href="javascript:;">联系我们</a></p>
+    <p>© 2015 觅家 版权所有 | 津ICP备11007454号-4</p>
+</div>
+</body>
+</html>
+<script type="text/javascript">ScrollImgLeft();</script>
+<script>
+ $(function(){
+        var $div_li =$(".tabmenu ul li");
+		
+        $div_li.click(function(){
+            $(this).addClass("cur")            //当前<li>元素高亮
+                   .siblings().removeClass("cur");  //去掉其它同辈<li>元素的高亮
+            var index =  $div_li.index(this);  // 获取当前点击的<li>元素 在 全部li元素中的索引。
+            $("div.tablist  li")       //选取子节点。不选取子节点的话，会引起错误。如果里面还有div 
+                    .eq(index).show()   //显示 <li>元素对应的<div>元素
+                    .siblings().hide(); //隐藏其它几个同辈的<div>元素
+        })
+		    
+    })
+	
+</script>

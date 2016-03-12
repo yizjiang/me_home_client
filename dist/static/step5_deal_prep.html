@@ -1,0 +1,218 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>找经纪人步骤</title>
+<link href="css/css.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/libs/CSSRESET.css">
+<link rel="stylesheet" type="text/css" href="css/common.css">
+<script src="js/libs/jquery-1.11.1.min.js"></script>
+<script src="js/common.js"></script>
+<link rel="stylesheet" type="text/css" href="css/steps.css">
+<script src="js/steps.js"></script>
+<script type="text/javascript"> 
+function ScrollImgLeft(){ 
+var speed=30; 
+var scroll_begin = document.getElementById("scroll_begin"); 
+var scroll_end = document.getElementById("scroll_end"); 
+var scroll_div = document.getElementById("scroll_div"); 
+scroll_end.innerHTML=scroll_begin.innerHTML; 
+function Marquee(){ 
+if(scroll_end.offsetWidth-scroll_div.scrollLeft<=0) 
+scroll_div.scrollLeft-=scroll_begin.offsetWidth; 
+else 
+scroll_div.scrollLeft++; 
+} 
+var MyMar=setInterval(Marquee,speed); 
+scroll_div.onmouseover=function() {clearInterval(MyMar);} 
+scroll_div.onmouseout=function() {MyMar=setInterval(Marquee,speed);} 
+} 
+</script>
+</head>
+<body>
+<div class="header">
+    <div class="_container">
+        <h1><a href="javascript:;"></a><span><i>美国</i><br/>
+            United State</span></h1>
+        <h2>详情</h2>
+        <ul class="nav">
+            <li><a href="/">找房</a></li>
+            <li><a href="mortgage.html">找钱</a></li>
+            <li class="active"><a href="agentsteps.html">找经纪人</a></li>
+            <li><a href="schoolsteps.html">找学校</a></li>
+        </ul>
+        <a href="javascript:;" class="a_func">注册/登陆</a> <span class="span_btn"></span>  <a href="guide.html" class="return"><img src="img/topleft.png" width="24" height="20"></a> <a href="#" class="quesico">常见问题</a> </div>
+</div>
+<div class="func">
+    <div class="func_panel">
+        <div class="func_header"> <img  />
+            <p>您好，觅家欢迎您！</p>
+            <a href="javascript:;" class="a_login">登陆</a> <a href="javascript:;" class="a_reg">注册</a> </div>
+        <ul class="ul_func">
+            <li><a href="javascript:;">找房子</a></li>
+            <li><a href="javascript:;">找经纪人</a></li>
+            <li><a href="javascript:;">找学校</a></li>
+            <li><a href="javascript:;">找贷款</a></li>
+        </ul>
+    </div>
+</div>
+<div class="guide_banner">
+    <div class="bannernav">
+        <div class="nav_container" >
+            <div class="navtips" >
+                <h3>购房流程</h3>
+                <h4>五大步骤&nbsp;轻松搞定</h4>
+            </div>
+            <div class="steps-box"> <a href="step1.html" class="step ">
+                       <div class="stepbox  ">
+                    <div class="step_img1 ">  </div>
+                    <h2>购房第一步</h2>
+                    <p>选择地区和城市</p>
+                    <p>选择学校</p>
+                </div>
+                </a> <a href="step2.html" class="step">
+                <div class="stepbox">
+                    <div class="step_img2">   </div>
+                    <h2>购房财务方案</h2>
+                    <p>现金购房</p>
+                    <p>贷款购房</p>
+                </div>
+                </a> <a href="step3.html" class="step">
+                <div class="stepbox ">
+                    <div class="step_img3 ">   </div>
+                    <h2>选房看房</h2>
+                    <p>房屋搜索</p>
+                    <p>选择经纪人</p>
+                </div>
+                </a> <a href="step4.html" class="step">
+                <div class="stepbox ">
+                    <div class="step_img4 ">  </div>
+                    <h2>报价买房</h2>
+                    <p>报价合同</p>
+                    <p>房屋检查</p>
+                </div>
+                </a> <a href="step5.html" class="step stephover">
+                <div class="stepbox active ">
+                    <div class="step_img5 step_img5hover">   </div>
+                    <h2>交接过户</h2>
+                    <p>产权保险</p>
+                    <p>房屋过户</p>
+                </div>
+                </a> </div>
+        </div>
+    </div>
+</div>
+<div class="tips">
+    <div class="tipsbox"> <i>常见问题</i>
+        <div class="flex" id="scroll_div">
+            <ul id="scroll_begin">
+                <li><a href="#">在美国的房子有哪几种种类?</a></li>
+                <li><a href="#">美国买房是买新房好还是二手房好？?</a></li>
+                <li><a href="#">去美国买房要准备多少资金？</a></li>
+            </ul>
+            <ul id="scroll_end">
+            </ul>
+        </div>
+    </div>
+</div>
+ <a id="stepico"></a>
+<div class="main">
+    <div class="stepmain">
+        <div class="steptab">
+            <div class="steptitle"> <span><a href="step5.html#stepico"><i class="back-icon"><img src="img/back.png" width="24" height="20"> </i></a></span>
+                <h1 class="step_tips">Step5交接过户</h1>
+                     <h1 class="step1_phone">交接过户 —— 房屋保险</h1>
+            </div>
+            <div class="stepone_tab">
+                <div class="tableft">
+                    <div class="stepselect"> <h2 class="ng-binding"><strong>房屋保险</strong></h2></div>
+                    <div class="tabmenu">
+                        <ul>
+                            <li><a href="step5_insurance_owner.html#stepico" class="firsta">屋主保险</a></li>
+                            <li><a href="step5_insurance_earthquake.html#stepico" class="firsta">地震保险</a></li>
+                            <h2 class="ng-binding"><strong>产权保险</strong></h2>
+                            <li><a href="step5_title_desc.html#stepico" class="firsta">产权保险介绍</a></li>
+                            <h2 class="ng-binding"><strong>产权保险</strong></h2>
+                            <li><a href="step5_deal_desc.html#stepico" class="firsta">房屋过户介绍</a></li>
+                            <li class="cur"><a href="step5_deal_prep.html#stepico" class="firsta">过户前准备</a></li>
+                            <li><a href="step5_deal_fee.html#stepico" class="firsta">过户费用明细</a></li>
+                            <li><a href="step5_deal_files.html#stepico" class="firsta">过户时所需材料</a></li>
+                         </ul>
+                    </div>
+                </div>
+                <div class="tablist">
+                    <ul>
+                        <li>
+                            <h2>过户前准备</h2>
+                            <p>过户前一个星期，贷款的买主须落实房屋贷款。如果房贷利率还没锁定(Lock)，要马上锁定，以免过户时来不及办理。还要根据过户公司给的过户费清单(HUD-1)草稿，把过户费准备好，并通知银行什麽时候要多少钱。</p>   
+                            <p>过户前几天买方经纪人会向卖方经纪人要房屋检查时查出来的问题的修理帐单(Repair Invoice)。一般修理应有90天的保修期，修理帐单也可以做为保修凭据。买主在过户前还要把房子重新检查一遍(Final Walk Through)。除了看该修的东西都修好了，所有设备都正常运行，卖主应该留下的东西都在，还要记录水电气表的数位。如果发现没修好的东西，过户时一定要与卖主交涉。</p>    
+                            <p>在过户的前一天，过户公司会给一张精确的过户费清单，买主可根据清单上的过户费，到银行开现金支票(Casher Check)。现金支票可以开给买主自己，过户时在反面写上付给过户公司既可。过户时还要带一张私人支票，如果实际过户费超过现金支票数额，再开一张私人支票补齐。</p>    							
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="questions">
+            <div class="quesnav"> <a href="#">查看全部问题</a>
+                <p>购房常见问题</p>
+            </div>
+            <div class="quesbox">
+                <ul>
+                    <li>
+                        <h3 class="">如何寻找房源信息？</h3>
+                        <h4>在美国，房产中介人会把所有房源信息上传到房地产经纪人协会，继而公布在房地产网站上，客户就可以通过这些网站（例如外居乐）来浏览房源信息。在很多其他国家，比如中国，房地产业属于分散经营，购房者必须去每个中介公司寻找合适房源。外居乐是目前唯一提供美国真实房产信息的中文平台。</h4>
+                    </li>
+                    <li>
+                        <h3 class="">如何寻找房源信息？</h3>
+                        <h4>在美国，房 就可以通过这些网站 国家，比如中国，房地产业属于分散经营，购房者必须去每个中介公司寻找合适房源。外居乐是目前唯一提供美国真实房产信息的中文平台。</h4>
+                    </li>
+                    <li>
+                        <h3 class="">如何寻找房源信息？</h3>
+                        <h4 class="ng-scope">......</h4>
+                    </li>
+                    <li>
+                        <h3 class="">如何寻找房源信息？</h3>
+                        <h4 class="ng-scope">......</h4>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="link clear">
+    <div class="_container">
+        <dl>
+            <dt><img src="img/meejia_user_QR.png" /></dt>
+            <dd>
+                <p><img src="img/link_logo.png" /></p>
+                <p>扫一扫，关注觅家微信公众号</p>
+            </dd>
+        </dl>
+    </div>
+</div>
+<div class="footer">
+    <p><a href="javascript:;">使用条款</a>|<a href="javascript:;">隐私协议</a>|<a href="javascript:;">关于我们</a>|<a href="javascript:;">联系我们</a></p>
+    <p>© 2015 觅家 版权所有 | 津ICP备11007454号-4</p>
+</div>
+</body>
+</html>
+<script type="text/javascript">ScrollImgLeft();</script>
+<script>
+ $(function(){
+        var $div_li =$(".tabmenu ul li");
+		
+        $div_li.click(function(){
+            $(this).addClass("cur")            //当前<li>元素高亮
+                   .siblings().removeClass("cur");  //去掉其它同辈<li>元素的高亮
+            var index =  $div_li.index(this);  // 获取当前点击的<li>元素 在 全部li元素中的索引。
+            $("div.tablist  li")       //选取子节点。不选取子节点的话，会引起错误。如果里面还有div 
+                    .eq(index).show()   //显示 <li>元素对应的<div>元素
+                    .siblings().hide(); //隐藏其它几个同辈的<div>元素
+        })
+		    
+    })
+	
+</script>

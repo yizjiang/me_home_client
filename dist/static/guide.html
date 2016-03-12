@@ -1,0 +1,355 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>找经纪人步骤</title>
+<link href="css/css.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/libs/CSSRESET.css">
+<link rel="stylesheet" type="text/css" href="css/common.css">
+<script src="js/libs/jquery-1.11.1.min.js"></script>
+<script src="js/jquery.cookie.js"></script>
+<script src="js/common.js"></script>
+<link rel="stylesheet" type="text/css" href="css/steps.css">
+<script src="js/steps.js"></script>
+<script type="text/javascript"> 
+function ScrollImgLeft(){ 
+var speed=30; 
+var scroll_begin = document.getElementById("scroll_begin"); 
+var scroll_end = document.getElementById("scroll_end"); 
+var scroll_div = document.getElementById("scroll_div"); 
+scroll_end.innerHTML=scroll_begin.innerHTML; 
+function Marquee(){ 
+if(scroll_end.offsetWidth-scroll_div.scrollLeft<=0) 
+scroll_div.scrollLeft-=scroll_begin.offsetWidth; 
+else 
+scroll_div.scrollLeft++; 
+} 
+var MyMar=setInterval(Marquee,speed); 
+scroll_div.onmouseover=function() {clearInterval(MyMar);} 
+scroll_div.onmouseout=function() {MyMar=setInterval(Marquee,speed);} 
+} 
+</script>
+</head>
+<body>
+<div class="header">
+    <div class="_container guidenav">
+        <h1><a href="javascript:;"></a><span><i>美国</i><br/>
+            United State</span></h1>
+        <h2>觅家</h2>
+        <ul class="nav">
+            <li><a href="/">找房</a></li>
+            <li><a href="mortgage.html">找钱</a></li>
+            <li class="active"><a href="agentsteps.html">找经纪人</a></li>
+            <li><a href="schoolsteps.html">找学校</a></li>
+        </ul>
+        <a href="javascript:;" class="a_func">注册/登陆</a> <span class="span_btn"></span> <a href="#" class="quesico">常见问题</a></div>
+</div>
+<div class="func">
+    <div class="func_panel">
+        <div class="func_header"> <img  />
+            <p>您好，觅家欢迎您！</p>
+            <a href="javascript:;" class="a_login">登陆</a> <a href="javascript:;" class="a_reg">注册</a> </div>
+        <ul class="ul_func">
+            <li><a href="javascript:;" class=" ">找房子</a></li>
+            <li><a href="javascript:;">找经纪人</a></li>
+            <li><a href="javascript:;">找学校</a></li>
+            <li><a href="javascript:;">找贷款</a></li>
+        </ul>
+    </div>
+</div>
+<div class="guide_banner">
+    <div class="bannernav">
+        <div class="nav_container" >
+            <div class="navtips" >
+                <h3>购房流程</h3>
+                <h4>五大步骤&nbsp;轻松搞定</h4>
+            </div>
+            <div class="steps-box"> <a href="step1.html" class="step">
+                <div class="stepbox active">
+                    <div class="step_img1"> <img src="img/home_1_find.png" > </div>
+                    <h2>购房第一步</h2>
+                    <p>选择地区和城市</p>
+                    <p>选择学校</p>
+                </div>
+                </a> <a href="step1.html" class="step">
+                <div class="stepbox">
+                    <div class="step_img1"> <img src="img/home_2_money.png" > </div>
+                    <h2>购房财务方案</h2>
+                    <p>现金购房</p>
+                    <p>贷款购房</p>
+                </div>
+                </a> <a href="step1.html" class="step">
+                <div class="stepbox">
+                    <div class="step_img1"> <img src="img/home_3_house.png" > </div>
+                    <h2>选房看房</h2>
+                    <p>房屋搜索</p>
+                    <p>选择经纪人</p>
+                </div>
+                </a> <a href="step1.html" class="step">
+                <div class="stepbox">
+                    <div class="step_img1"> <img src="img/home_4_price.png" > </div>
+                    <h2>报价买房</h2>
+                    <p>报价合同</p>
+                    <p>房屋检查</p>
+                </div>
+                </a> <a href="step1.html" class="step stephover">
+                <div class="stepbox">
+                    <div class="step_img1"> <img src="img/home_5_key.png" > </div>
+                    <h2>交接过户</h2>
+                    <p>产权保险</p>
+                    <p>房屋过户</p>
+                </div>
+                </a> </div>
+        </div>
+    </div>
+</div>
+<div class="tips">
+    <div class="tipsbox"> <i>常见问题</i>
+        <div class="flex" id="scroll_div">
+            <ul id="scroll_begin">
+                <li><a href="#">在美国的房子有哪几种种类?</a></li>
+                <li><a href="#">美国买房是买新房好还是二手房好？?</a></li>
+                <li><a href="#">去美国买房要准备多少资金？</a></li>
+            </ul>
+            <ul id="scroll_end">
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="fivemain">
+    <div class="stepmain">
+        <div class="fivebox">
+            <div class="guidebanner"> <img src="img/mobile.png"  > </div>
+            <div class="onestep">
+                <div class="stepnav"> <span></span>
+                    <p><strong>购房第一步</strong>(选择地区和城市/选择学校)</p>
+                </div>
+                <div class="stepone stepguide">
+                    <div class="stepselect">
+                        <h2 class="ng-binding"><b class="cur">选择地区和城市</b></h2>
+                    </div>
+                    <div class="school schooltwo ">
+                         <dl>
+                         	<dt>
+                            	<a href="step1_area_us.html#stepico"><p>美国</p></a>
+                            </dt>
+                            <dd>
+                            	<p><a href="step1_area_us_sea.html#stepico">西雅图</a></p>
+                            	<p><a href="step1_area_us_ord.html#stepico">芝加哥</a></p>
+                            	<p><a href="step1_area_us_atl.html#stepico">亚特兰大</a></p>
+                            	<p><a href="step1_area_us_san.html#stepico">圣地亚哥</a></p>
+                            	<p><a href="step1_area_us_jfk.html#stepico">纽约</a></p>
+                            	<p><a href="step1_area_us_mia.html#stepico">迈阿密</a></p>
+                            	<p><a href="step1_area_us_lax.html#stepico">洛杉矶</a></p>
+                            	<p><a href="step1_area_us_sfo.html#stepico">旧金山</a></p>
+                            	<p><a href="step1_area_us_dal.html#stepico">达拉斯</a></p>
+                            </dd>
+                         </dl>
+                    </div>
+                    
+                </div>
+                <div class="stepone stepguide">
+                    <div class="stepselect cur">
+                        <h2 class="ng-binding"><b class="cur">选择学校</b></h2>
+                    </div>
+                    <div class="school schooltwo disabled" id="sch_1">
+                        <ul>
+                            <li><a href="step1_school_intro.html#stepico"><p>美国学校系统介绍</p></a></li>
+                            <li><a href="step1_school_pubOrPri.html#stepico"><p>公立学校与私立学校</p></a></li>
+                            <li><a href="step1_school_district.html#stepico"><p>美国学区介绍</p></a></li>
+                            <!--li><a href="#"><p>选择公立高中还是私立高中</p></a></li-->
+                        </ul>
+                    </div>
+                </div>
+                <div class="stepnav"> <span class="nav2"></span>
+                    <p><strong>购房财务方案</strong>(现金购房/贷款购房)</p>
+                </div>
+                
+                
+                
+                <div class="stepone stepguide">
+                    <div class="stepselect cur">
+                        <h2 class="ng-binding"><b class="cur">现金购房</b></h2>
+                    </div>
+                    <div class="school schooltwo disabled"  id="sch_2">
+                        <ul>
+                            <li><a href="step2_cash_steps.html#stepico"><p>现金购房步骤</p></a></li>
+                         </ul>
+                    </div>
+                </div>
+                   <div class="stepone stepguide">
+                    <div class="stepselect cur">
+                        <h2 class="ng-binding"><b class="cur">贷款购房</b></h2>
+                    </div>
+                    <div class="school schooltwo disabled"  id="sch_3">
+                        <ul>
+                            <li><a href="step2_mortgage_steps.html#stepico"><p>贷款购房步骤</p></a></li>
+                            <li><a href="step2_mortgage_attention.html#stepico"><p>外国人在美申请房贷的注意事项</p></a></li>
+                            <li><a href="step2_mortgage_types.html#stepico"><p>美国房贷种类</p></a></li>
+                            <li><a href="step2_mortgage_essentials.html#stepico"><p>外国人在美国申请房贷的条件</p></a></li>
+                            <li><a href="step2_mortgage_agency.html#stepico"><p>外国人如何接洽美国贷款机构</p></a></li>
+                            <li><a href="step2_mortgage_qualification.html#stepico"><p>如何获取银行批贷预先资格</p></a></li>
+                            <li><a href="step2_mortgage_audit.html#stepico"><p>如何协助银行完成贷款资格审核</p></a></li>
+                         </ul>
+                    </div>
+                </div>
+                 <div class="stepnav"> <span  class="nav3"></span>
+                    <p><strong>选房看房</strong>(房屋搜索/选择经纪人)</p>
+                </div>
+                <div class="stepone stepguide">
+                    <div class="stepselect cur">
+                        <h2 class="ng-binding"><b class="cur">房屋搜索</b></h2>
+                    </div>
+                    <div class="school schooltwo disabled"  id="sch_4">
+                        <ul>
+                            <li><a href="step3_house_price.html#stepico"><p>确定房价范围</p></a></li>
+                            <li><a href="step3_house_location.html#stepico"><p>决定买房地点</p></a></li>
+                            <li><a href="step3_house_type.html#stepico"><p>选择户型</p></a></li>
+                        </ul>
+                    </div>
+                    <div class="stepselect cur">
+                        <h2 class="ng-binding"><b class="cur">选择经纪人</b></h2>
+                    </div>
+                    <div class="school schooltwo disabled"  id="sch_5">
+                        <ul>
+                            <li><a href="step3_agent_keypoint.html#stepico"><p>选择经纪人注意要点</p></a></li>
+                            <li><a href="step3_agent_servicearea.html#stepico"><p>经纪人的服务范围</p></a></li>
+                         </ul>
+                    </div>
+                </div>
+                <div class="stepnav"> <span class="nav4"></span>
+                    <p><strong>报价买房</strong>(报价合同/房屋检查)</p>
+                </div>
+                <div class="stepone stepguide">
+                    <div class="stepselect cur">
+                        <h2 class="ng-binding"><b class="cur">报价合同</b></h2>
+                    </div>
+                    <div class="school schooltwo disabled"  id="sch_6">
+                        <ul>
+                            <li><a href="step4_offer_house.html#stepico"><p>查询房屋信息</p> </a></li>
+                            <li><a href="step4_offer_price.html#stepico"><p>报价并支付定金</p></a></li>
+                            <li><a href="step4_offer_attachment.html#stepico"><p>报价合同附加条款</p></a></li>
+                         </ul>
+                    </div>
+                    <div class="stepselect cur">
+                        <h2 class="ng-binding"><b class="cur">房屋检查</b></h2>
+                    </div>
+                    <div class="school schooltwo disabled"  id="sch_7">
+                        <ul>
+                            <li><a href="step4_check_house.html#stepico"><p>房屋检查注意事项</p></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="stepnav"> <span class="nav5"></span>
+                    <p><strong>交接过户</strong>(房屋保险/产权保险/房屋过户)</p>
+                </div>
+                <div class="stepone stepguide">
+                    <div class="stepselect cur">
+                        <h2 class="ng-binding"><b class="cur">房屋保险</b></h2>
+                    </div>
+                    <div class="school schooltwo disabled"  id="sch_8">
+                        <ul>
+                            <li><a href="step5_insurance_owner.html#stepico"><p>屋主保险</p></a></li>
+                            <li><a href="step5_insurance_earthquake.html#stepico"><p>地震保险</p></a></li>
+                        </ul>
+                    </div>
+                    <div class="stepselect cur">
+                        <h2 class="ng-binding"><b class="cur">产权保险</b></h2>
+                    </div>
+                    <div class="school schooltwo disabled"  id="sch_9">
+                        <ul>
+                            <li><a href="step5_title_desc.html#stepico"><p>产权保险介绍</p></a></li>
+                        </ul>
+                    </div>
+                    <div class="stepselect cur">
+                        <h2 class="ng-binding"><b class="cur">房屋过户</b></h2>
+                    </div>
+                    <div class="school schooltwo disabled"  id="sch_10">
+                        <ul>
+                            <li><a href="step5_deal_desc.html#stepico"><p>房屋过户介绍</p></a></li>
+                            <li><a href="step5_deal_prep.html#stepico"><p>过户前准备</p></a></li>
+                            <li><a href="step5_deal_fee.html#stepico"><p>过户费用明细</p></a></li>
+                            <li><a href="step5_deal_files.html#stepico"><p>过户时所需材料</p></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="questions">
+            <div class="quesnav"> <a href="#">查看全部问题</a>
+                <p>购房常见问题</p>
+            </div>
+            <div class="quesbox">
+                <ul>
+                    <li>
+                        <h3 class="">如何寻找房源信息？</h3>
+                        <h4>在美国，房产中介人会把所有房源信息上传到房地产经纪人协会，继而公布在房地产网站上，客户就可以通过这些网站（例如外居乐）来浏览房源信息。在很多其他国家，比如中国，房地产业属于分散经营，购房者必须去每个中介公司寻找合适房源。外居乐是目前唯一提供美国真实房产信息的中文平台。</h4>
+                    </li>
+                    <li>
+                        <h3 class="">如何寻找房源信息？</h3>
+                        <h4>在美国，房 就可以通过这些网站 国家，比如中国，房地产业属于分散经营，购房者必须去每个中介公司寻找合适房源。外居乐是目前唯一提供美国真实房产信息的中文平台。</h4>
+                    </li>
+                    <li>
+                        <h3 class="">如何寻找房源信息？</h3>
+                        <h4 class="ng-scope">......</h4>
+                    </li>
+                    <li>
+                        <h3 class="">如何寻找房源信息？</h3>
+                        <h4 class="ng-scope">......</h4>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="link clear">
+    <div class="_container">
+        <dl>
+            <dt><img src="img/meejia_user_QR.png" /></dt>
+            <dd>
+                <p><img src="img/link_logo.png" /></p>
+                <p>扫一扫，关注觅家微信公众号</p>
+            </dd>
+        </dl>
+    </div>
+</div>
+<div class="footer">
+    <p><a href="javascript:;">使用条款</a>|<a href="javascript:;">隐私协议</a>|<a href="javascript:;">关于我们</a>|<a href="javascript:;">联系我们</a></p>
+    <p>© 2015 觅家 版权所有 | 津ICP备11007454号-4</p>
+</div>
+</body>
+</html>
+<script type="text/javascript">ScrollImgLeft();</script>
+<script>
+ $(function(){
+        var $div_li =$(".stepone .stepselect");
+		var a=1
+        $div_li.click(function(){
+			if ($(this).hasClass('cur')){
+            $(this).removeClass("cur").siblings().addClass("cur");  
+            var index =  $div_li.index(this);  
+            $(".schooltwo").eq(index).css("display","block");
+			name =$(".schooltwo").eq(index).attr('id');
+  			 $.cookie(name,name);//设置cookie
+   		}else{
+ 			 $(this).addClass("cur");
+            var index =  $div_li.index(this);  
+            $(".schooltwo").eq(index).css("display","none")  //显示 <li>元素对应的<div>元素
+                      //隐藏其它几个同辈的<div>元素
+			}
+			
+		})
+		  for (var i =1; i < 11; i++) {
+			  b="sch_"+i;
+  	 if($.cookie(b)){ //如果cookie存在
+ 			 ida=$.cookie(b);
+ 			 idb="#"+ida;
+			$(idb).css("display","block"); //设置div的样式为cookie的值
+			$(idb).prev().removeClass('cur');
+   }
+	} 
+    })
+	
+</script>

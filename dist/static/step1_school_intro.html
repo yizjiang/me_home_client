@@ -1,0 +1,243 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>找经纪人步骤</title>
+<link href="css/css.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/libs/CSSRESET.css">
+<link rel="stylesheet" type="text/css" href="css/common.css">
+<script src="js/libs/jquery-1.11.1.min.js"></script>
+<script src="js/common.js"></script>
+<link rel="stylesheet" type="text/css" href="css/steps.css">
+<script src="js/steps.js"></script>
+<script type="text/javascript"> 
+function ScrollImgLeft(){ 
+var speed=30; 
+var scroll_begin = document.getElementById("scroll_begin"); 
+var scroll_end = document.getElementById("scroll_end"); 
+var scroll_div = document.getElementById("scroll_div"); 
+scroll_end.innerHTML=scroll_begin.innerHTML; 
+function Marquee(){ 
+if(scroll_end.offsetWidth-scroll_div.scrollLeft<=0) 
+scroll_div.scrollLeft-=scroll_begin.offsetWidth; 
+else 
+scroll_div.scrollLeft++; 
+} 
+var MyMar=setInterval(Marquee,speed); 
+scroll_div.onmouseover=function() {clearInterval(MyMar);} 
+scroll_div.onmouseout=function() {MyMar=setInterval(Marquee,speed);} 
+} 
+</script>
+</head>
+<body>
+<div class="header">
+    <div class="_container">
+        <h1><a href="javascript:;"></a><span><i>美国</i><br/>
+            United State</span></h1>
+        <h2>详情</h2>
+        <ul class="nav">
+            <li><a href="/">找房</a></li>
+            <li><a href="mortgage.html">找钱</a></li>
+            <li class="active"><a href="agentsteps.html">找经纪人</a></li>
+            <li><a href="schoolsteps.html">找学校</a></li>
+        </ul>
+        <a href="javascript:;" class="a_func">注册/登陆</a> <span class="span_btn"></span>  <a href="guide.html" class="return"><img src="img/topleft.png" width="24" height="20"></a> <a href="#" class="quesico">常见问题</a> </div>
+</div>
+<div class="func">
+    <div class="func_panel">
+        <div class="func_header"> <img  />
+            <p>您好，觅家欢迎您！</p>
+            <a href="javascript:;" class="a_login">登陆</a> <a href="javascript:;" class="a_reg">注册</a> </div>
+        <ul class="ul_func">
+            <li><a href="javascript:;">找房子</a></li>
+            <li><a href="javascript:;">找经纪人</a></li>
+            <li><a href="javascript:;">找学校</a></li>
+            <li><a href="javascript:;">找贷款</a></li>
+        </ul>
+    </div>
+</div>
+<div class="guide_banner">
+    <div class="bannernav">
+        <div class="nav_container" >
+            <div class="navtips" >
+                <h3>购房流程</h3>
+                <h4>五大步骤&nbsp;轻松搞定</h4>
+            </div>
+            <div class="steps-box"> <a href="step1.html" class="step">
+                 <div class="stepbox  active">
+                    <div class="step_img1 step_img2hover">  </div>
+                    <h2>购房第一步</h2>
+                    <p>选择地区和城市</p>
+                    <p>选择学校</p>
+                </div>
+                </a> <a href="step2.html" class="step">
+                <div class="stepbox ">
+                    <div class="step_img2 ">   </div>
+                    <h2>购房财务方案</h2>
+                    <p>现金购房</p>
+                    <p>贷款购房</p>
+                </div>
+                </a> <a href="step3.html" class="step">
+                <div class="stepbox ">
+                    <div class="step_img3 ">   </div>
+                    <h2>选房看房</h2>
+                    <p>房屋搜索</p>
+                    <p>选择经纪人</p>
+                </div>
+                </a> <a href="step4.html" class="step">
+                <div class="stepbox ">
+                    <div class="step_img4 ">  </div>
+                    <h2>报价买房</h2>
+                    <p>报价合同</p>
+                    <p>房屋检查</p>
+                </div>
+                </a> <a href="step5.html" class="step stephover">
+                <div class="stepbox ">
+                    <div class="step_img5 ">   </div>
+                    <h2>交接过户</h2>
+                    <p>产权保险</p>
+                    <p>房屋过户</p>
+                </div>
+                </a> </div>
+        </div>
+    </div>
+</div>
+<div class="tips">
+    <div class="tipsbox"> <i>常见问题</i>
+        <div class="flex" id="scroll_div">
+            <ul id="scroll_begin">
+                <li><a href="#">在美国的房子有哪几种种类?</a></li>
+                <li><a href="#">美国买房是买新房好还是二手房好？?</a></li>
+                <li><a href="#">去美国买房要准备多少资金？</a></li>
+            </ul>
+            <ul id="scroll_end">
+            </ul>
+        </div>
+    </div>
+</div>
+    <a id="stepico"></a>
+<div class="main">
+    <div class="stepmain">
+        <div class="steptab">
+    
+            <div class="steptitle"> <span><a href="step1.html#stepico"><i class="back-icon"><img src="img/back.png" width="24" height="20"> </i></a></span>
+                <h1 class="step_tips">Step1购房第一步</h1>
+                <h1 class="step1_phone">购房第一步 —— 选择地区和城市</h1>
+            </div>
+            <div class="stepone_tab">
+                <div class="tableft">
+                    <div class="stepselect">
+                        <h2 class="ng-binding"><strong>选择地区和城市</strong></h2>
+                    </div>
+                    <div class="tabmenu">
+                        <ul>
+                            <li><a href="step1_area_us.html#stepico" class="firsta">美国</a></li>
+                            <li><a href="step1_area_us_sea.html#stepico">西雅图</a></li>
+                            <li><a href="step1_area_us_ord.html#stepico">芝加哥</a></li>
+                            <li><a href="step1_area_us_atl.html#stepico">亚特兰大</a></li>
+                            <li><a href="step1_area_us_san.html#stepico">圣地亚哥</a></li>
+                            <li><a href="step1_area_us_jfk.html#stepico">纽约</a></li>
+                            <li><a href="step1_area_us_mia.html#stepico">迈阿密</a></li>
+                            <li><a href="step1_area_us_lax.html#stepico">洛杉矶</a></li>
+                            <li><a href="step1_area_us_sfo.html#stepico">旧金山</a></li>
+                            <li><a href="step1_area_us_dal.html#stepico">达拉斯</a></li>
+                            <h2 class="ng-binding"><strong>选择学校</strong></h2>
+                            <li class="cur"><a href="step1_school_intro.html#stepico" class="firsta">美国学校系统介绍</a></li>
+                            <li><a href="step1_school_pubOrPri.html#stepico" class="firsta">公立学校与私立学校</a></li>
+                            <li><a href="step1_school_district.html#stepico" class="firsta">美国学区介绍</a></li>
+                            <!--li><a href="step1_school_intro.html#stepico" class="firsta">选择公立高中还是私立高中</a></li-->
+                         
+                        </ul>
+                    </div>
+                </div>
+                <div class="tablist">
+                    <ul>
+                        <li>
+                            <h2>美国学校系统介绍</h2>
+                           <P>美国学校分为公立、私立两类，公立学校系统规模庞大，是因为背后有美国政府资助，所以美国九成的学生大多在公立教育系统内就读。联邦政府也设有教育部，不过功能不同于我国的教育部，美国教育部是教育政策研究&咨询的机构，负责制定教育政策，但不参与执行工作，也不监管地方学校，也因此对国家的教育素质、教育问题研究、通过教育法案等都起很大的作用。美国教育都由各州州政府去做规划、制定，联邦政府并不具备监管约束的权力，公立学校受到州政府&联邦政府的拨款，也因此受到各州州政府的监管，并遵守各州议会制定的有关教育的法律。私立学校基本上不受任何政府的监管，不过对学校政策有影响力的是家长和教师联合会PTA(Parent and Teacher Association)，以及较具有专业性质的一般坊间教育机构。</p>
+						   <P>美国的教育基本上可分为初级教育、中等教育、大学教育、研究生教育四个层次</p>
+						   <h3>一、初级教育（Primary School）年龄：约5—11岁</h3>
+						   <P>美国的初等教育包括一至两年的学前幼儿教育，一年的幼儿园，五至八年的小学教育。</P>
+						   <P>托儿所：学龄前儿童没有强制性的托儿所，不过有政府补助方案来资助低收入家庭的儿童，所以大部分家庭需要自己支付托儿所的费用。</P>
+						   <P>幼儿园：大部分归为小学教育。</P>
+						   <P>小学教育：在美国多数小学实行六年制教育，也有实行四年或八年制教育的小学。四年制或八年制小学通常把小学与初中或高中直接挂通起来。美国小学一般规模较小，每个班级一般不超过20人， 每班一名教师，这位教师负责带这个班大部分的主要课程。学生除午餐时间，或是上体育、音乐、美术课可能到体育馆或特别教室上课以外，其余时间留在导师的教 室内，没有固定的下课时间，但是在教室里导师可以给学生自由时间，有些教师会以自由时间的拥有或剥夺做为学生行为的奖惩。学校每天都会有至少一次约二十分钟的户外活动时间，户外活动时间次数与时间长短，每个学校不一定相同，每位教师必须完成各门课的教学任务和指导学生的课外活动。</P>		   
+						   <h3>二、中等教育（Secondary School）年龄：约12—18岁</h3>
+						   <p>三三制中学：是指初中和高中各3年，这类中学高中阶段设有为升学做准备的学术课程、为就业做准备的职业课程和学习基础知识的普通课程。</P>
+						   <p>六年制中学：把初中和高中合二为一，一般前3年实施普通教育，后3年实施分科教育，即学生分别选修学术课程、职业课程或普通课程。</P>
+						   <p>四年制中学：意味着该学区小学实行的是八年制，这类中学既有实施普通教育的普通中学，也有实施专科教育的专科学校和实施特殊教育的特殊学校。中学教师是分科授课的，一般一名教师负责2—3个班同一科目的教学工作。</P>
+						   <p>中学没有全国统一的课程设置和教材。但各州及各校的课程都必须能够使学生保持身心健康，掌握学习的基本技能，成为家庭中的有效成员，养成就业的知识和技 能，胜任公民职责，善于利用闲暇时间，培养一定的道德品质。美国初中课程以综合基础课为主，高中课程则具有较高助学术性。</P>
+						   <p>初中课程：一般包括必修的英语、数学、自然科学、社会科学、卫生和体育、美术音乐、家政与技术等。还有部分学时的选修课：外语、职业等。每一课程并不单指某 一学科，例如：英语就包括语言、文学、语法、修辞、新闻学、戏剧学等多种内容；而文学有美国文学、英国文学、世界文学、比较文学等之分；数学通常设有普通 数学、混合数学、代数、几何、三角、经济数学、商业数学等科目。</P>
+						   <p>高中课程：必修课和选修课之间的界限更加明显。1983年“全国高质量教育委员会”提出了高中基本必修的建议：4年英语、3年数学、3年自然科学、3年社会科学、半年电脑和二年外语。其它必修课因校而异。另外，为了应付许多社会问题，高中常增设一些应急课程，如性教育、安全教育、消费者教育、吸毒教育、全球教育等。</P>
+						   <p>美国中学课程设置特点有：1、在美国，教材是自主开发的，各州、各学区、甚至学校同科、同年级教师之间选用的教材也不一样。现行的美国初中课程主要以英文、数学、科学、社会学四大学科为主。2、美国学校并不提倡从小学外语，学生在初二的时候才开始学外语。3、美国初中一般不开设化学和物理课，这些课程安排在高中阶段。另外，学生每天的第一节课叫做cycle， 这节课是两个月换一次，包括 电脑（computer cycle ) 、健康教育( health cycle )、 美术( art cycle ) 等。4、美国学校注重孩子动手能力的培养。在艺术课上，美国初中生除了学习绘画技能，还有手工操作。同时，美国学校重视音乐教育。自小学三年级开始，孩子们就离不开乐器了。即使孩子将来不想当音乐家，也能在学校里收到系统和全面的音乐教育。5、美国学生的阅读量以及写作量都很大，除了规定书籍外，学生还需挑选大量的书籍进行自主阅读，写读后感，读书报告，参加阅读讨论，总结，以及每天写日记，英文课经常还要求写世界名著小说的点评。6、美国英语课的分数由家庭作业，学校作业，考试，写作和演讲几部分构成。而且，美国的教育也很重视演讲，从幼儿园开始，就有演说练习课，小学和初中都有演讲练习课，甚至在高中，《基础演讲》都被入选为高中生的必修课。在美国，中小学无论采用何种学制，都必须保证学生有12年的义务教育时间。美国人习惯称大学前的这种学制为K12学制。</P>					   
+						   <h3>三、大学教育（College and University）年龄：约19~22岁</h3>
+						   <p>美国的大学教育，通常分为四年制大学和社区大学。四年制大学四年念完后将可以拿到“学士”学位，而社区大学通常是念两年读完后可以拿到“副学士”。从学位授予角度来看，美国大学分为三类：综合性大学（University）、文理学院（Liberal Arts College）、社区学院（Community College）。</P>                    
+                        </li>
+                         
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="questions">
+            <div class="quesnav"> <a href="#">查看全部问题</a>
+                <p>购房常见问题</p>
+            </div>
+            <div class="quesbox">
+                <ul>
+                    <li>
+                        <h3 class="">如何寻找房源信息？</h3>
+                        <h4>在美国，房产中介人会把所有房源信息上传到房地产经纪人协会，继而公布在房地产网站上，客户就可以通过这些网站（例如外居乐）来浏览房源信息。在很多其他国家，比如中国，房地产业属于分散经营，购房者必须去每个中介公司寻找合适房源。外居乐是目前唯一提供美国真实房产信息的中文平台。</h4>
+                    </li>
+                    <li>
+                        <h3 class="">如何寻找房源信息？</h3>
+                        <h4>在美国，房 就可以通过这些网站 国家，比如中国，房地产业属于分散经营，购房者必须去每个中介公司寻找合适房源。外居乐是目前唯一提供美国真实房产信息的中文平台。</h4>
+                    </li>
+                    <li>
+                        <h3 class="">如何寻找房源信息？</h3>
+                        <h4 class="ng-scope">......</h4>
+                    </li>
+                    <li>
+                        <h3 class="">如何寻找房源信息？</h3>
+                        <h4 class="ng-scope">......</h4>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="link clear">
+    <div class="_container">
+        <dl>
+            <dt><img src="img/meejia_user_QR.png" /></dt>
+            <dd>
+                <p><img src="img/link_logo.png" /></p>
+                <p>扫一扫，关注觅家微信公众号</p>
+            </dd>
+        </dl>
+    </div>
+</div>
+<div class="footer">
+    <p><a href="javascript:;">使用条款</a>|<a href="javascript:;">隐私协议</a>|<a href="javascript:;">关于我们</a>|<a href="javascript:;">联系我们</a></p>
+    <p>© 2015 觅家 版权所有 | 津ICP备11007454号-4</p>
+</div>
+</body>
+</html>
+<script type="text/javascript">ScrollImgLeft();</script>
+<script>
+ $(function(){
+        var $div_li =$(".tabmenu ul li");
+		
+        $div_li.click(function(){
+            $(this).addClass("cur")            //当前<li>元素高亮
+                   .siblings().removeClass("cur");  //去掉其它同辈<li>元素的高亮
+            var index =  $div_li.index(this);  // 获取当前点击的<li>元素 在 全部li元素中的索引。
+            $("div.tablist  li")       //选取子节点。不选取子节点的话，会引起错误。如果里面还有div 
+                    .eq(index).show()   //显示 <li>元素对应的<div>元素
+                    .siblings().hide(); //隐藏其它几个同辈的<div>元素
+        })
+		    
+    })
+	
+</script>
