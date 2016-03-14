@@ -103,8 +103,9 @@ var HomeDetail = React.createClass({
       var yearDiff = currentDate.getUTCFullYear() - recordDate.getUTCFullYear()
       var monthDiff = currentDate.getMonth() - recordDate.getMonth()
       var diff = yearDiff + monthDiff/12
+      var publicPrice = parseInt(home.public_record.price) * 10000
       if(diff !== 0){
-        return (home.origin_price - home.public_record.price) / home.public_record.price / diff * 100
+        return (home.origin_price - publicPrice) / publicPrice / diff * 100
       } else{
         return 0;
       }
