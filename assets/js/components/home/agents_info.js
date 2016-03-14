@@ -57,6 +57,7 @@ var AgentsInfo = React.createClass({
                       <a className='agent-link' href={CLIENT_URL + '/agent/' + agent.agent_extention.agent_identifier}>{agent.wechat_user.nickname}</a>
                      </div>
                      <div className='qr-layer'>
+                      <div className='close-div'>x</div>
                       <img className='agent-qr-image' src={agent.qr_code} />
                      </div>
                    </div>
