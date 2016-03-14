@@ -60,20 +60,20 @@ div.icon_img { position: relative; }
 .glyphicon-home:after { content: '5'; }
 *, :after, :before { -webkit-box-sizing: border-box; box-sizing: border-box; }
 .greyframe { -webkit-box-shadow: 0 2px 4px 0 rgba(37,37,37,.039); box-shadow: 0 2px 4px 0 rgba(37,37,37,.039); border: 1px solid #e5e5e5; }
-.guide_banner { height: 300px; position: relative; display: flex; width: 100%; border-top: none; border-left: none; border-right: none; background-image: url(../img/desktop.jpg); background-size: cover; background-position: center center; }
-.bannernav { height: 170px; width: 100%; margin-top: 108px; background: hsla(0,0%,100%,.9); }
+.guide_banner { height: 240px; position: relative; display: flex; width: 100%; border-top: none; border-left: none; border-right: none; background-image: url(../img/SF_morning.jpg); background-size: cover; background-position: center center; }
+.bannernav { height: 120px; width: 100%; margin-top: 108px; background: hsla(0,0%,100%,.9); }
 .nav_container { height: 100%; max-width: 1340px; margin: 0 auto; padding: 0 30px; width: 100%; }
 .navtips { padding-top: 22px; padding-left: 30px; float: left; text-align: center }
-.navtips h3 { color: #333; font-size: 26px; font-weight: 700; line-height: 1.5; font-size: 54px; border-bottom: 2px solid #333; }
-.navtips h4 { color: #333; font-size: 26px; font-weight: 700; line-height: 1.5; }
+.navtips h3 { color: #333; font-size: 20px; font-weight: 700; line-height: 1.5; font-size: 40px; border-bottom: 2px solid #333; }
+.navtips h4 { color: #333; font-size: 20px; font-weight: 700; line-height: 1.5; }
 a { text-decoration: none }
 a:hover, a:visited { text-decoration: none }
-.steps-box { height: 100%; margin-left: 350px; }
-.step_img1 { height: 70px; width: 70px; margin: 0 auto; background: url(../img/home_1_find.png) 0 0 no-repeat; background-size: 100%; }
-.step_img2 { height: 70px; width: 70px; margin: 0 auto; background: url(../img/home_2_money.png) 0 0 no-repeat; background-size: 100%; }
-.step_img3 { height: 70px; width: 70px; margin: 0 auto; background: url(../img/home_3_house.png) 0 0 no-repeat; background-size: 100%; }
-.step_img4 { height: 70px; width: 70px; margin: 0 auto; background: url(../img/home_4_price.png) 0 0 no-repeat; background-size: 100%; }
-.step_img5 { height: 70px; width: 70px; margin: 0 auto; background: url(../img/home_5_key.png) 0 0 no-repeat; background-size: 100%; }
+.steps-box { height: 100%; margin-left: 300px; }
+.step_img1 { height: 70px; width: 70px; margin: 0 auto; background: url(../img/home_1_find.gif) 0 0 no-repeat; background-size: 100%; }
+.step_img2 { height: 70px; width: 70px; margin: 0 auto; background: url(../img/home_2_money.gif) 0 0 no-repeat; background-size: 100%; }
+.step_img3 { height: 70px; width: 70px; margin: 0 auto; background: url(../img/home_3_house.gif) 0 0 no-repeat; background-size: 100%; }
+.step_img4 { height: 70px; width: 70px; margin: 0 auto; background: url(../img/home_4_price.gif) 0 0 no-repeat; background-size: 100%; }
+.step_img5 { height: 70px; width: 70px; margin: 0 auto; background: url(../img/home_5_key.gif) 0 0 no-repeat; background-size: 100%; }
 .step_img1 img { width: 100%; height: 100%; }
 .step_img1hover { background: url(../img/home_1_findover.png) 0 0 no-repeat; background-size: 100%; }
 .step_img2hover { background: url(../img/home_2_moneyhover.png) 0 0 no-repeat; background-size: 100%; }
@@ -102,8 +102,8 @@ a:hover, a:visited { text-decoration: none }
 .stepmain { width: 100%; padding: 0 30px; max-width: 1340px; margin: 0 auto; }
 .stepbase { margin-bottom: 35px; border: 1px solid #e5e5e5; background: #fff; box-shadow: 0 2px 4px 0 rgba(37,37,37,.039); padding: 30px 45px; }
 .steptitle { box-sizing: border-box; margin: 0; font-weight: 700; color: #FBC03D; display: flex; -webkit-box-direction: normal; flex-direction: row; }
-.steptitle span { border-bottom: 2px solid #e5e5e5; font-style: italic; font-size: 36px; font-weight: 700; line-height: 1.4; display: block; font-family: Arial, Helvetica, sans-serif }
-.steptitle h1 { display: inline-block; padding-top: 8px; font-weight: bold; margin: 0; border-bottom: 2px solid #e5e5e5; font-size: 24px; line-height: 1.7; margin-left: 10px; -webkit-box-flex: 1; box-sizing: border-box; flex: 1; font-family: Arial, Helvetica, sans-serif, "宋体"; }
+.steptitle span { border-bottom: 2px solid #e5e5e5; font-style: italic; font-size: 30px; font-weight: 700; line-height: 1.4; display: block; font-family: Arial, Helvetica, sans-serif }
+.steptitle h1 { display: inline-block; padding-top: 8px; font-weight: bold; margin: 0; border-bottom: 2px solid #e5e5e5; font-size: 20px; line-height: 1.7; margin-left: 10px; -webkit-box-flex: 1; box-sizing: border-box; flex: 1; font-family: Arial, Helvetica, sans-serif, "宋体"; }
 .ng-binding { margin: 40px 0 20px; font-size: 18px; color: #000; }
 .ng-binding:before { content: ""; width: 14px; height: 14px; background: #000; display: inline-block; margin-right: 10px; }
 .steplist dl h3 { justify-content: flex-start; padding-left: 20px; background: #f5f5f5; font-size: 16px; font-weight: 700; color: #000; line-height: 32px; margin-bottom: 20px; }
