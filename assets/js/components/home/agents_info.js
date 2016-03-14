@@ -42,6 +42,14 @@ var AgentsInfo = React.createClass({
     this.setState({agents: agents, contactCount: count});
   },
 
+  closeAgent: function(event) {
+    $('.qr-layer').hide();
+  },
+
+  showAgent: function(event) {
+    $('.qr-layer').show();
+  },
+
   render: function() {
     return (
       <div className='agent_info_wrap'>
@@ -50,14 +58,14 @@ var AgentsInfo = React.createClass({
              return (
                <div className='agent_home_div'>
                  <div className='agent-list'>
-                   <div className='triger-div'>
+                   <div className='triger-div' onMouseOver={this.showAgent}>
                      <img className='profile_img' src={agent.wechat_user.head_img_url} />
                      <div className='agent-detail-info'>
                       <input type='checkbox' checked={agent.selected} value={index} onChange={this.selectAgent}/>
                       <a className='agent-link' href={CLIENT_URL + '/agent/' + agent.agent_extention.agent_identifier}>{agent.wechat_user.nickname}</a>
                      </div>
                      <div className='qr-layer'>
-                      <div className='close-div'>x</div>
+                      <div className='close-div' onClick={this.closeAgent}>x</div>
                       <img className='agent-qr-image' src={agent.qr_code} />
                      </div>
                    </div>
