@@ -82,8 +82,12 @@ var QuickSearch = React.createClass({
     if(search.regionValue != undefined){
        search.regionValue.split(',').forEach((value) => {
          var selectRegion = this.props.areas.find((area) => area.startsWith(value));
-         addRegion(selectRegion);
-         stateObject['regionValue'].push(selectRegion);
+
+         if(selectRegion != undefined) {
+           addRegion(selectRegion);
+           stateObject['regionValue'].push(selectRegion);
+         }
+
        });
     }
 

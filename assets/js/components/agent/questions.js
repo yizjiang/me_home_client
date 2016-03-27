@@ -38,8 +38,14 @@ var Questions = React.createClass({
         <h3>客户问题</h3>
         <ul>
       {this.state.questions.map(function(q){
+
+        var body = q.text
+        if(q.is_audio) {
+          body = <a href={q.media_url} download>{q.text}</a>
+        }
+
         return (<li>
-                {q.text}
+                {body}
                 <ReplyForm qid={q.id} callback={self.replyQuestion.bind(self, q.id)}/>
                 </li>)
       })
