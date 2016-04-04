@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Meejia</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+  <script>
+    var SERVER_URL = "<%= MEEHOME_SERVER_URL %>";
+    var CLIENT_URL = "<%= MEEHOME_CLIENT_URL %>";
+    var CDN_URL = "<%= CDN_URL %>"
+    var TICKET = "<%= @ticket %>";
+  </script>
+  <%= stylesheet_link File.join(ASSET_URL, '/wechat/weui.min.css') %>
+</head>
+<body>
+<a href="#" class="weui_btn weui_btn_primary">按钮</a>
+</body>
+
+</html>

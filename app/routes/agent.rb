@@ -64,5 +64,17 @@ module Routes
         {status: 'error'}.to_json
       end
     end
+
+    post '/agent/request_response' do
+      request_payload = JSON.parse request.body.read
+      response = Typhoeus.post("#{MEEHOME_SERVER_URL}/agent/request_response", headers: {uid: request.env['HTTP_UID'] }, body: request_payload )
+      if response.code == 200
+        {status: 'ok'}.to_json
+      else
+        status 400
+        {status: 'error'}.to_json
+      end
+    end
+
   end
 end

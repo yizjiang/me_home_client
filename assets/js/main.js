@@ -1,5 +1,8 @@
 'use strict';
 
+window.React = require('react/addons');
+window.ReactBootstrap = require("react-bootstrap");
+
 var React = require('react'),
     Router = require('react-router'), // or var Router = ReactRouter; in browsers
     Link = Router.Link,

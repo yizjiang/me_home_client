@@ -43,6 +43,7 @@ var HomePage = React.createClass({
           </div>
           <img className='agent_qr_img' src={this.props.data.qr_image} />
         </div>
+        <p>{this.props.data.description}</p>
         <div className='preview_list_div'>
           <h3 className='previewH3'>优质房源</h3>
           {homesComp}

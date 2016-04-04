@@ -363,9 +363,31 @@ var ServerActions = {
     });
   },
 
+  sendDetailToCustomer: function(uid, requestIds, msg) {
+    return $.ajax({
+      url: '/agent/request_response',
+
+      headers: {
+        'uid': uid
+      },
+
+      type: 'post',
+
+      dataType: 'json',
+
+      data: JSON.stringify({requests: requestIds, msg: msg}),
+
+      success: function(data) {
+        return data;
+      },
+
+      error: function(data) {
+        console.log('f');
+      }
+    });
+  },
+
   sendContactRequest: function (uid, toIds, home_id, msg) {
-    console.log(toIds);
-    console.log(msg);
     return $.ajax({
       url: '/agent/contact_request',
 

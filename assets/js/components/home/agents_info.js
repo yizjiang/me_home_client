@@ -30,9 +30,20 @@ var AgentsInfo = React.createClass({
     AgentStore.removeChangeListener(this._onChange);
   },
 
+  auth_back: function(ticket) {
+    ServerActions.getCurrentUser(ticket);
+    window.auth_window.close();
+  },
+
   submitContactRequest: function(message, homeID) {
-    var selectedAgents = _.filter(this.state.agents, (agent) => agent.selected).map((agent) => agent.id);
-    return ServerActions.sendContactRequest(this.props.userID, selectedAgents, homeID, message)
+    if (this.props.userID == undefined) {
+      var auth_window = window.open(SERVER_URL + '/users/login', null, "width=400,height=250");
+      window.auth_window = auth_window;
+      window.auth_callback = this.auth_back;
+    } else {
+      var selectedAgents = _.filter(this.state.agents, (agent) => agent.selected).map((agent) => agent.id);
+      return ServerActions.sendContactRequest(this.props.userID, selectedAgents, homeID, message)
+    }
   },
 
   selectAgent: function(event) {
@@ -54,12 +65,13 @@ var AgentsInfo = React.createClass({
     return (
       <div className='agent_info_wrap'>
         <h3>联系经纪人</h3>
+        <p>鼠标悬浮头像查看二维码扫描二维码</p>
           {this.state.agents.map((agent, index) => {
              return (
                <div className='agent_home_div'>
                  <div className='agent-list'>
-                   <div className='triger-div' onMouseOver={this.showAgent}>
-                     <img className='profile_img' src={agent.wechat_user.head_img_url} />
+                   <div className='triger-div'>
+                     <img className='profile_img' src={agent.wechat_user.head_img_url} onMouseOver={this.showAgent} onMouseOut={this.closeAgent}/>
                      <div className='agent-detail-info'>
                       <input type='checkbox' checked={agent.selected} value={index} onChange={this.selectAgent}/>
                       <a className='agent-link' href={CLIENT_URL + '/agent/' + agent.agent_extention.agent_identifier}>{agent.wechat_user.nickname}</a>

@@ -6,6 +6,14 @@ var React = require('react'),
 
 var AgentRequests = React.createClass({
 
+  handleReply: function(text) {
+    ServerActions.sendDetailToCustomer(UserStore.getCurrentUser().id,
+      this.props.requests[0].requests.map((r) => r.id),
+      text).then((data) => {
+      $('#desc').show();
+    })
+  },
+
   render: function () {
     var requests = this.props.requests
     if(requests == undefined){
@@ -19,7 +27,7 @@ var AgentRequests = React.createClass({
               <div id={'request'}>
                 <p className='property'>房源<a href={CLIENT_URL + '/#/home_detail/' + r.home_id}> {r.home_id}</a></p>
                 <label className='request-item'>
-                  <input type='checkbox' value={r.id} onChange={this.handleReply}/>
+                  <input type='checkbox' checked={true} value={r.id}/>
                   <span>{r.requests.map((request) => request.body)}</span>
                 </label>
               </div>
@@ -27,6 +35,7 @@ var AgentRequests = React.createClass({
           })
           }
          <ReplyForm qid={0} callback={this.handleReply}/>
+         <p id='desc' style={{display: 'none', width: '80px'}}> 已提交 </p>
       </div>
     );
   }

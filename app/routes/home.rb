@@ -26,12 +26,6 @@ module Routes
       json [{text: 'Where to buy'}]
     end
 
-    get '/mobile/home/:home_id' do
-      @data = params[:home_id]
-      content_type :html
-      erb :home_detail
-    end
-
     get '/homeSearch' do
       response = Typhoeus.get("#{MEEHOME_SERVER_URL}/home", params: params)
       response.body

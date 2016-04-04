@@ -49,6 +49,11 @@ module Routes
       'hello world'
     end
 
+    get '/quick_search' do
+      @ticket = params['ticket'] || ''
+      erb :quick_search
+    end
+
     get '/auth_callback' do
       erb :login_callback, layout: false
     end
