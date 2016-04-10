@@ -1,21 +1,184 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Meejia</title>
-  <link href="//fonts.googleapis.com/css?family=Roboto:300,100,700" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <title>觅家美国</title>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <script type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
-  <%= stylesheet_link File.join(ASSET_URL, '/css/bundle.css') %>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+
+  <%= javascript_tag File.join(ASSET_URL, '/js/bundle_vendor.js') %>
+  <%= stylesheet_link File.join(ASSET_URL, '/wechat/owl-carousel/owl.carousel.css') %>
+  <%= stylesheet_link File.join(ASSET_URL, '/wechat/owl-carousel/owl.theme.css') %>
+  <%= stylesheet_link File.join(ASSET_URL, '/wechat/custom.css') %>
+  <%= stylesheet_link File.join(ASSET_URL, '/wechat/components.css') %>
+  <%= stylesheet_link File.join(ASSET_URL, '/wechat/responsee.css') %>
+
+  <%= javascript_tag File.join(ASSET_URL, '/wechat/owl-carousel/owl.carousel.js') %>
   <script>
-    var SERVER_URL = "<%= MEEHOME_SERVER_URL %>";
-    var CLIENT_URL = "<%= MEEHOME_CLIENT_URL %>";
     var CDN_URL = "<%= CDN_URL %>"
-    var home_id = <%= @data %>;    //Todo
+
+    var home = {
+      addr1: "<%= addr1 %>",
+      addr2: "<%= addr2 %>",
+      bed_num: "<%= bed_num %>",
+      city: "<%= city %>",
+      county: "<%= county %>",
+      geo_point: "<%= geo_point %>",
+      id: "<%= id %>",
+      lot_size: "<%= lot_size %>",
+      neighborhood: "<%= neighborhood %>",
+      price: "<%= price %>",
+      state: "<%= state %>",
+      stores: "<%= stores %>",
+      unit_price: "<%= unit_price %>",
+      year_built: "<%= year_built %>",
+      zipcode: "<%= zipcode %>",
+      images: <%=  images.to_json %>,
+      assigned_school: <%= assigned_school.to_json %>,
+      city_info: <%= city_info.to_json %>,
+      short_desc: "<%= short_desc %>",
+      monthly_rent: "<%= monthly_rent %>",
+      property_tax: "<%= property_tax %>",
+      bath_num: "<%= bath_num %>",
+      indoor_size: "<%= indoor_size %>"
+    };
+    home.city_info = JSON.parse(home.city_info);
+    home.images = JSON.parse(home.images);
+    home.assigned_school = JSON.parse(home.assigned_school);
   </script>
 </head>
+
 <body>
-<div id="content"></div>
+
+<div id="owl-demo" class="owl-carousel">
+</div>
+
+<div>
+  <h3>族裔比例</h3>
+  <div id="canvas-holder">
+    <canvas id="chart-area" width="300" height="300"/>
+  </div>
+  <ul>
+    <li><span className='color-sq sq-red'></span>白人: <span className='data-span'><%= city_info['caucasion'] %></span></li>
+    <li><span className='color-sq sq-blue'></span>亚裔: <span className='data-span'><%= city_info['asian'] %></span></li>
+    <li><span className='color-sq sq-yellow'></span>非洲裔: <span className='data-span'><%= city_info['black'] %></span></li>
+    <li><span className='color-sq sq-dark'></span>西班牙裔: <span className='data-span'><%= city_info['hispanics'] %></span></li>
+    <li><span className='color-sq sq-grey'></span>其他: <span className='data-span'><%= (100 - (city_info['asian']).to_i - (city_info['black']).to_i - (city_info['caucasion']).to_i - (city_info['hispanics']).to_i) %></span></li>
+  </ul>
+</div>
+
+<div>
+  <div class='map-canvas'>
+    <div id='myMap'></div>
+    <div id="output"></div>
+  </div>
+</div>
+
+
+
+<script type="text/javascript">
+  $(document).ready(function () {
+    console.log(home);
+    var result = '';
+    var element = $( this );
+    _.forEach(home.images, function(img){
+      result += '<div class="item"><img class="lazyOwl" data-src="' + CDN_URL + '/photo/' + img.image_url + '" alt="Lazy Owl Image"></div>';
+    })
+    $(".owl-carousel").append(result);
+
+    $(".owl-carousel").owlCarousel({
+      items : 3,
+      lazyLoad : true,
+      navigation : true
+    });
+
+    var data = home.city_info;
+    var other = 100 - parseInt(data.asian) - parseInt(data.black) - parseInt(data.caucasion) -  parseInt(data.hispanics)
+
+    var pieData = [
+      {
+        value: parseInt(data.asian),
+        color:"#45BDBC",
+        highlight: "#45BDBC",
+        label: "亚裔"
+      },
+      {
+        value: parseInt(data.black),
+        color: "#FDB45C",
+        highlight: "#FDB45C",
+        label: "非洲裔"
+      },
+      {
+        value: parseInt(data.caucasion),
+        color: "#F54549",
+        highlight: "#F54549",
+        label: "白人"
+      },
+      {
+        value: parseInt(data.hispanics),
+        color: "#4D5360",
+        highlight: "#4D5360",
+        label: '西班牙裔'
+      },
+      {
+        value: parseInt(other),
+        color: "#949FB1",
+        highlight: "#949FB1",
+        label: "其他"
+      },
+    ];
+
+    var ctx = document.getElementById("chart-area").getContext("2d");
+    window.myPie = new Chart(ctx).Pie(pieData);
+
+    function showMap(home) {
+      map = new Microsoft.Maps.Map(document.getElementById('myMap'), {credentials: 'AjVrfYUU-6_5NnEHSjCxZ16XAJHyu0-J42p16WXCld6F52NujvxQ2iRV1X3UQeQs',
+        showMapTypeSelector:false
+      });
+//
+      infobox = new Microsoft.Maps.Infobox(new Microsoft.Maps.Location(0, 0), { visible: false, offset: new Microsoft.Maps.Point(0, 20) });
+      map.entities.push(infobox);
+
+      Microsoft.Maps.Events.addHandler(map, 'mousewheel', function(e) {
+        e.handled = true;
+        return true;
+      });
+
+      var output = document.getElementById("output");
+
+      if (output) {
+        while (output.hasChildNodes()) {
+          output.removeChild(output.lastChild);
+        }
+      }
+      var resultsHeader = document.createElement("h5");
+      output.appendChild(resultsHeader);
+      var that = this;
+
+      var lat = home.geo_point.split(',')[0];
+      var long = home.geo_point.split(',')[1];
+
+      var location = new Microsoft.Maps.Location(lat, long);
+      var pushpin = new Microsoft.Maps.Pushpin(location);
+
+      pushpin.Title = home.title;
+      pushpin.Description = home.short_desc;
+      map.entities.push(pushpin);
+//      Microsoft.Maps.Events.addHandler(pushpin, 'mouseover', that.displayInfo);
+//      Microsoft.Maps.Events.addHandler(pushpin, 'click', that.showHomeDetail);
+//        map.entities.push(pushpin);
+//      })
+      map.setView({center: location, zoom: 10});
+
+    };
+
+    showMap(home);
+  });
+</script>
+
 </body>
-<%= javascript_tag File.join(ASSET_URL, '/js/bundle_vendor.js') %>
-<%= javascript_tag File.join(ASSET_URL, '/js/home_detail.js') %>
+
 </html>

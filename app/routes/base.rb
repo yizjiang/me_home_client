@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require 'sinatra/contrib'
 require 'sinatra/json'
 
@@ -52,6 +54,12 @@ module Routes
     get '/quick_search' do
       @wechat_user_id = params['wid']
       erb :quick_search
+    end
+
+    get '/home/:id' do
+      response = Typhoeus.get("#{MEEHOME_SERVER_URL}/home/#{params[:id]}")     #todo request agent
+      home = JSON.parse response.body
+      erb :home_detail, :locals => home.symbolize_keys
     end
 
     get '/auth_callback' do

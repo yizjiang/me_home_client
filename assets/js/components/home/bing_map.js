@@ -65,8 +65,6 @@ var BingMap = React.createClass({
   },
 
   showHomeDetail: function(e) {
-     console.log('here');
-     console.log(e.target.HomeID);
      window.open(CLIENT_URL + '#/home_detail/' + e.target.HomeID, '_blank');
   },
 
