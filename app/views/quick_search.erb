@@ -5,15 +5,330 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
   <script>
-    var SERVER_URL = "<%= MEEHOME_SERVER_URL %>";
-    var CLIENT_URL = "<%= MEEHOME_CLIENT_URL %>";
-    var CDN_URL = "<%= CDN_URL %>"
-    var TICKET = "<%= @ticket %>";
+    var wechatUserId = "<%= @wechat_user_id %>";
+    console.log(wechatUserId);
   </script>
-  <%= stylesheet_link File.join(ASSET_URL, '/wechat/weui.min.css') %>
+  <%= stylesheet_link File.join(ASSET_URL, '/wechat/weui.css') %>
+  <%= javascript_tag File.join(ASSET_URL, '/js/bundle_vendor.js') %>
+
+  <%= stylesheet_link File.join(ASSET_URL, '/wechat/select2.css') %>
+  <%= javascript_tag File.join(ASSET_URL, '/wechat/select2.js') %>
 </head>
 <body>
-<a href="#" class="weui_btn weui_btn_primary">按钮</a>
+<div class="weui_cells_title">微信快速搜索</div>
+<div class="weui_cells weui_cells_form">
+  <div class="weui_cell">
+    <div class="weui_cell_hd">
+      <label class="weui_label">城市:</label>
+    </div>
+    <div class="weui_cell_bd weui_cell_primary">
+      <select class="weui_select" id="areaSelector" name="select2" multiple="multiple" style="width: 100%">
+      </select>
+    </div>
+  </div>
+  <div class="weui_cells_title">房型: </div>
+  <div class="weui_cells weui_cells_checkbox">
+    <label class="weui_cell weui_check_label" for="single_family">
+      <div class="weui_cell_hd">
+        <input type="checkbox" value='single_family' class="weui_check" name="checkbox1" id="single_family" checked="checked">
+        <i class="weui_icon_checked"></i>
+      </div>
+      <div class="weui_cell_bd weui_cell_primary">
+        <p>独栋别墅</p>
+      </div>
+    </label>
+    <label class="weui_cell weui_check_label" for="townhouse">
+      <div class="weui_cell_hd">
+        <input type="checkbox" name="checkbox1" class="weui_check" value='townhouse'  id="townhouse" checked="checked">
+        <i class="weui_icon_checked"></i>
+      </div>
+      <div class="weui_cell_bd weui_cell_primary">
+        <p>联排别墅</p>
+      </div>
+    </label>
+    <label class="weui_cell weui_check_label" for="multi_family">
+      <div class="weui_cell_hd">
+        <input type="checkbox" name="checkbox1" value='multi_family' class="weui_check" id="multi_family" >
+        <i class="weui_icon_checked"></i>
+      </div>
+      <div class="weui_cell_bd weui_cell_primary">
+        <p>复合别墅</p>
+      </div>
+    </label>
+    <label class="weui_cell weui_check_label" for="condo">
+      <div class="weui_cell_hd">
+        <input type="checkbox" name="checkbox1" value='condo' class="weui_check" id="condo" checked="checked">
+        <i class="weui_icon_checked"></i>
+      </div>
+      <div class="weui_cell_bd weui_cell_primary">
+        <p>公寓</p>
+      </div>
+    </label>
+    <label class="weui_cell weui_check_label" for="business">
+      <div class="weui_cell_hd">
+        <input type="checkbox" name="checkbox1" class="weui_check" value='business' id="business">
+        <i class="weui_icon_checked"></i>
+      </div>
+      <div class="weui_cell_bd weui_cell_primary">
+        <p>商住两用</p>
+      </div>
+    </label>
+    <label class="weui_cell weui_check_label" for="land">
+      <div class="weui_cell_hd">
+        <input type="checkbox" name="checkbox1" class="weui_check" value='land' id="land">
+        <i class="weui_icon_checked"></i>
+      </div>
+      <div class="weui_cell_bd weui_cell_primary">
+        <p>土地</p>
+      </div>
+    </label>
+    <label class="weui_cell weui_check_label" for="farm">
+      <div class="weui_cell_hd">
+        <input type="checkbox" name="checkbox1" value='farm' class="weui_check" id="farm">
+        <i class="weui_icon_checked"></i>
+      </div>
+      <div class="weui_cell_bd weui_cell_primary">
+        <p>农场</p>
+      </div>
+    </label>
+    <label class="weui_cell weui_check_label" for="other">
+      <div class="weui_cell_hd">
+        <input type="checkbox" name="checkbox1" value='other' class="weui_check" id="other">
+        <i class="weui_icon_checked"></i>
+      </div>
+      <div class="weui_cell_bd weui_cell_primary">
+        <p>其他</p>
+      </div>
+    </label>
+  </div>
+  <div class="weui_cells_title">更多选项: </div>
+  <div class="weui_cell weui_cell_select weui_select_after">
+    <div class="weui_cell_hd">
+      房间数
+    </div>
+    <div class="weui_cell_bd weui_cell_primary">
+      <select id='bedNum' class="weui_select" name="select2">
+        <option value="1">1+</option>
+        <option selected value="2">2+</option>
+        <option value="3">3+</option>
+        <option value="4">4+</option>
+        <option value="5">5+</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="weui_cell weui_cell_select weui_select_after">
+    <div class="weui_cell_hd">
+      室内面积
+    </div>
+    <div class="weui_cell_bd weui_cell_primary">
+      <select id='indoorSize' class="weui_select" name="select2">
+        <option value="538" >50平方米以上</option>
+        <option selected value="968" >90方米以上</option>
+        <option value="1291">120平方米以上</option>
+        <option value="1614">150平方米以上</option>
+        <option value="2153">200平方米以上</option>
+        <option value="2690">250平方米以上</option>
+        <option value="3229">3500平方米以上</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="weui_cell weui_cell_select weui_select_after">
+    <div class="weui_cell_hd">
+      房龄
+    </div>
+    <div class="weui_cell_bd weui_cell_primary">
+      <select id='homeAge' class="weui_select" name="select2">
+        <option value="200">不限</option>
+        <option value="5">5年内</option>
+        <option value="10">10年内</option>
+        <option value="20">20年内</option>
+        <option value="30">30年内</option>
+        <option value="50">50年内</option>
+        <option value="80">80年内</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="weui_cell weui_cell_select weui_select_after">
+    <div class="weui_cell_hd">
+      最低价
+    </div>
+    <div class="weui_cell_bd weui_cell_primary">
+      <select id='priceMin' class="weui_select" name="select2">
+        <option value="0">不限</option>
+        <option value="20">20万</option>
+        <option value="30">30万</option>
+        <option value="60">60万</option>
+        <option value="100">100万</option>
+        <option value="150">150万</option>
+        <option value="200">200万</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="weui_cell weui_cell_select weui_select_after">
+    <div class="weui_cell_hd">
+      最高价
+    </div>
+    <div class="weui_cell_bd weui_cell_primary">
+      <select id='priceMax' class="weui_select" name="select2">
+        <option value="20000">不限</option>
+        <option value="30">30万</option>
+        <option value="60">60万</option>
+        <option value="90">90万</option>
+        <option value="120">120万</option>
+        <option value="180">180万</option>
+        <option value="300">300万</option>
+      </select>
+    </div>
+  </div>
+
+  <div id="loadingToast" class="weui_loading_toast" style="display:none;">
+    <div class="weui_mask_transparent"></div>
+    <div class="weui_toast">
+      <div class="weui_loading">
+        <!-- :) -->
+        <div class="weui_loading_leaf weui_loading_leaf_0"></div>
+        <div class="weui_loading_leaf weui_loading_leaf_1"></div>
+        <div class="weui_loading_leaf weui_loading_leaf_2"></div>
+        <div class="weui_loading_leaf weui_loading_leaf_3"></div>
+        <div class="weui_loading_leaf weui_loading_leaf_4"></div>
+        <div class="weui_loading_leaf weui_loading_leaf_5"></div>
+        <div class="weui_loading_leaf weui_loading_leaf_6"></div>
+        <div class="weui_loading_leaf weui_loading_leaf_7"></div>
+        <div class="weui_loading_leaf weui_loading_leaf_8"></div>
+        <div class="weui_loading_leaf weui_loading_leaf_9"></div>
+        <div class="weui_loading_leaf weui_loading_leaf_10"></div>
+        <div class="weui_loading_leaf weui_loading_leaf_11"></div>
+      </div>
+      <p class="weui_toast_content">保存中</p>
+    </div>
+  </div>
+
+  <div id="toastConfirm" style="display: none;">
+    <div class="weui_mask_transparent"></div>
+    <div class="weui_toast">
+      <i class="weui_icon_toast"></i>
+      <p class="weui_toast_content">已完成</p>
+    </div>
+  </div>
+
+  <div id="toastError" style="display: none;">
+    <div class="weui_mask_transparent"></div>
+    <div class="weui_toast">
+      <i class="weui_icon_error_toast"></i>
+      <p class="weui_toast_content">对不起, 出错了</p>
+    </div>
+  </div>
+
+  <div class="weui_dialog_alert" id='regionError' style="display: none;">
+    <div class="weui_mask"></div>
+    <div class="weui_dialog">
+      <div class="weui_dialog_hd">
+        <strong class="weui_dialog_title">对不起</strong>
+      </div>
+      <div class="weui_dialog_bd">请选择城市</div>
+      <div class="weui_dialog_ft">
+        <a id="closeDialog"" class="weui_btn_dialog primary">确定</a>
+      </div>
+    </div>
+  </div>
+
+  <a href="javascript:;" id='submit' class="weui_btn weui_btn_primary">提交</a>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+
+    function getSearchSetting() {
+      var search = {};
+      search['api'] = true;
+      var regionValue = [];
+      _.forEach($('#areaSelector').select2("data"), function(data) {
+         regionValue.push(data.text.split(',')[0])
+      });
+      search['regionValue'] = regionValue.join(',');
+      search['priceMin'] = $('#priceMin').val();
+      search['priceMax'] = $('#priceMax').val();
+      search['bedNum'] = $('#bedNum').val();
+      search['home_age'] = $('#homeAge').val();
+      search['indoor_size'] = $('#indoorSize').val();
+      search['single_family'] = $('#single_family').prop('checked');
+      search['townhouse'] = $('#townhouse').prop('checked');
+      search['condo'] = $('#condo').prop('checked');
+      search['multi_family'] = $('#multi_family').prop('checked');
+      search['business'] = $('#business').prop('checked');
+      search['land'] = $('#land').prop('checked');
+      search['farm'] = $('#farm').prop('checked');
+      search['other'] = $('#other').prop('checked');
+
+      search['customer_id'] = wechatUserId;
+
+      console.log(search);
+      return search;
+    };
+
+    $('#closeDialog').click(function() {
+      $('#regionError').hide();
+    })
+    $("#areaSelector").select2();
+    $.ajax({
+      url: "/bay_area/?area=SF",
+      context:  $("#areaSelector")
+    }).done(function(areas) {
+        var result = '';
+        areas = JSON.parse(areas);
+        var element = $( this );
+        _.forEach(areas, function(data){
+          result += '<option value="' + data.split(',')[0] + '">' + data + '</option>';
+        })
+        element.append(result)
+      });
+
+    $("#submit").click(function() {
+      var search = {};
+      search = getSearchSetting();
+
+      if(_.isEmpty(search['regionValue'])){
+        $('#regionError').show();
+      }
+      else {
+        $('#loadingToast').show();
+        $.ajax({
+          url: '/agent/save_customer_search',
+
+          type: 'post',
+
+          dataType: 'json',
+
+          data: JSON.stringify(search),
+
+          success: function() {
+            $('#loadingToast').hide();
+            $('#toastConfirm').show();
+            setTimeout(function () {
+              $('#toastConfirm').hide();
+            }, 3000);
+          },
+
+          error: function() {
+            $('#loadingToast').hide();
+            $('#toastError').show();
+
+            setTimeout(function () {
+              $('#toastError').hide();
+            }, 2000);
+          }
+        });
+      }
+
+    });
+
+  });
+</script>
+
 </body>
 
 </html>

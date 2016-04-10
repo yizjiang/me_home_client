@@ -50,7 +50,7 @@ module Routes
     end
 
     get '/quick_search' do
-      @ticket = params['ticket'] || ''
+      @wechat_user_id = params['wid']
       erb :quick_search
     end
 

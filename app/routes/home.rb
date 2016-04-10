@@ -41,6 +41,11 @@ module Routes
       response.body
     end
 
+    get '/bay_area' do
+      response = Typhoeus.get("#{MEEHOME_SERVER_URL}/bay_area_cities", params: params)
+      response.body
+    end
+
     post '/saveSearch' do
       request_payload = JSON.parse request.body.read
       response = Typhoeus.post("#{MEEHOME_SERVER_URL}/user/save_search", headers: {uid: request.env['HTTP_UID'] }, body: request_payload )

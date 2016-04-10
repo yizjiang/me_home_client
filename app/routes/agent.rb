@@ -51,7 +51,12 @@ module Routes
     post '/agent/save_customer_search' do
       request_payload = JSON.parse request.body.read
       response = Typhoeus.post("#{MEEHOME_SERVER_URL}/agent/save_customer_search", headers: {uid: request.env['HTTP_UID'] }, body: request_payload )
-      response.body
+      if response.code == 200
+        response.body
+      else
+        status 400
+        {}.to_json
+      end
     end
 
     post '/agent/contact_request' do
