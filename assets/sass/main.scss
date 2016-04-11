@@ -49,9 +49,16 @@ $box--placeholdermargin: 10px;
 
 footer {
   position: fixed;
-  height: 50px;
+  height: 100px;
   width: 100%;
   bottom: 0;
+  border-top: 3px solid #74c005;
+  text-align: center;
+  background-color: white;
+  p{
+  	color: #333;
+  	line-height: 100px;
+  }
 }
 
 body {
@@ -245,8 +252,7 @@ div.content{
 	display: block;
 	background-size: cover;
 	width: 100%;
-	height: calc(100% - 60px);
-	position: absolute;
+	height: 450px;
 
    .statusbar_div{
   		max-width: 960px;
@@ -1851,6 +1857,7 @@ div#agentcontent{
 	width: 100%;
     position: relative;
     background-color: $white;
+    height: 350px;
 	.landing-icon{
 		display: inline-block;
 		width: 32%;
