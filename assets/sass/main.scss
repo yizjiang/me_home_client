@@ -47,6 +47,13 @@ $box--placeholdermargin: 10px;
 }
 
 
+footer {
+  position: fixed;
+  height: 50px;
+  width: 100%;
+  bottom: 0;
+}
+
 body {
   font-family: $font-family;
   font-weight: 900;
