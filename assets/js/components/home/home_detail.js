@@ -208,7 +208,7 @@ var HomeDetail = React.createClass({
 
     var publicRecordComponent = null;
     if(!_.isEmpty(home) && !_.isEmpty(home.public_record)){
-      publicRecordComponent = <PublicRecord record={home.public_record} diff={this.calculateDiff(home)}/>
+      publicRecordComponent = <PublicRecord record={home.public_record} listing={{agent: home.listing_agent, company: home.listed_by}} diff={this.calculateDiff(home)}/>
     }
 
     return (

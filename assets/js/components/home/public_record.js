@@ -3,7 +3,7 @@ var React = require('react');
 var PublicRecord = React.createClass({
 
   render: function() {
-    var {record, diff} = this.props;
+    var {record, listing, diff} = this.props;
     return (
       <div className='public-record-wrap'>
         <h3>最近挂牌记录</h3>
@@ -26,6 +26,14 @@ var PublicRecord = React.createClass({
         <div className='public-record-detail'>
           <h4>每年涨幅</h4>
           <p>{diff}%</p>
+        </div>
+        <div className='public-record-detail'>
+          <h4>经纪人</h4>
+          <p>{listing.agent}</p>
+        </div>
+        <div className='public-record-detail'>
+          <h4>公司</h4>
+          <p>{listing.company}</p>
         </div>
       </div>
     );
