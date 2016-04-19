@@ -1950,12 +1950,12 @@ div#agentcontent{
 }
 
 .goog-te-gadget{
-    width: 200px;
-    position: relative;
-    .goog-te-gadget-simple{
-
-   }
-
+  height: 30px;
+  right: 150px;
+  top: 15px;
+  padding-right: 15px;
+  position: absolute;
+  z-index: 4;
 }
 
 
