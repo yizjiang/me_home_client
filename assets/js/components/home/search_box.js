@@ -83,10 +83,13 @@ var SearchBox = React.createClass({
   },
 
   render: function() {
-    var that = this;
+    var text = "觅家";
+    if(ENV == 'staging') {
+      text = "觅 家 Starriver Inc"
+    }
     return (
       <div className='searchDiv' id='searchDiv-id'>
-        <h3 className='home_h3' id='home-h3-id'>觅 家 Starriver Inc</h3>
+        <h3 className='home_h3' id='home-h3-id'>{text}</h3>
         <Select options={this.props.areas} change={this.changeRegionValue} selected={_selectRgion}/>
 
         <button id='search' type="button" onClick={this.homeSearch} ><a href='#homelistAnchor'><span className='glyphicon glyphicon-search'></span></a></button>

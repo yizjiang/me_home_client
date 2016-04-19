@@ -13,7 +13,8 @@
     var CLIENT_URL = "<%= MEEHOME_CLIENT_URL %>";
     var CDN_URL = "<%= CDN_URL %>"
     var TICKET = "<%= @ticket %>";
-
+    var ENV = "<%= RACK_ENV %>"
+    console.log(ENV);
     function searchServiceCallback(result)
     {
       var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {credentials: 'AjVrfYUU-6_5NnEHSjCxZ16XAJHyu0-J42p16WXCld6F52NujvxQ2iRV1X3UQeQs'});
@@ -60,15 +61,19 @@
   </script>
 </head>
 <body>
+<% if RACK_ENV == 'staging' %>
 <div id="google_translate_element"></div>
 <script type="text/javascript">
   function googleTranslateElementInit() {
     new google.translate.TranslateElement({pageLanguage: 'zh-CN', includedLanguages: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
   }
 </script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<% end %>
 <div id="app"></div>
 <footer>
+  <% if RACK_ENV == 'staging' %>
   <p>Copyrights (c) 2007-2016 Starriver Inc | CA LICENSE# 01856523 </p>
+  <% end %>
   <p>© 2016 觅家美国 版权所有 | 备案号：11007454号-4 <a href="http://www.miitbeian.gov.cn">工信部网站</a></p>
   <p style="font-size: 10px; line-height: 10px">Disclaims: Based on information from various Association of REALTORS® as of date (show the current date).
     All data, including all measurements and calculations of area, is obtained from various sources and has not been, and will not be, verified by broker or MLS. All information should be independently reviewed and verified for accuracy. Properties may or may not be listed by the office/agent presenting the information.</p>
