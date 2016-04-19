@@ -105,7 +105,7 @@ var HomeDetail = React.createClass({
       var diff = yearDiff + monthDiff/12
       var publicPrice = parseInt(home.public_record.price) * 10000
       if(diff !== 0){
-        return (home.origin_price - publicPrice) / publicPrice / diff * 100
+        return ((home.origin_price - publicPrice) / diff / 10000).toFixed(2)
       } else{
         return 0;
       }

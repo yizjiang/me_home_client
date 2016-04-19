@@ -24,8 +24,8 @@ var PublicRecord = React.createClass({
           <p>{record.price}</p>
         </div>
         <div className='public-record-detail'>
-          <h4>每年涨幅</h4>
-          <p>{diff}%</p>
+          <h4>年增值</h4>
+          <p>{diff}万美金</p>
         </div>
         <div className='public-record-detail'>
           <h4>经纪人</h4>
