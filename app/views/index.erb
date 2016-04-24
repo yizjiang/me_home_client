@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <script type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
   <%= stylesheet_link File.join(ASSET_URL, '/css/bundle.css') %>
+  <%= javascript_tag File.join(ASSET_URL, '/js/bundle_vendor.js') %>
   <script>
     var SERVER_URL = "<%= MEEHOME_SERVER_URL %>";
     var CLIENT_URL = "<%= MEEHOME_CLIENT_URL %>";
@@ -69,17 +70,25 @@
     }
   </script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 <% end %>
+<script type="text/javascript">
+  $(window).load(function() {
+    // Animate loader off screen
+    $(".se-pre-con").fadeOut("slow");
+  });
+</script>
+<div class="se-pre-con">
+  页面加载中
+</div>
 <div id="app">
 </div>
+</body>
+<%= javascript_tag File.join(ASSET_URL, '/js/bundle.js') %>
 <footer>
   <% if RACK_ENV == 'staging' %>
-  <p>Copyrights (c) 2007-2016 Starriver Inc | CA LICENSE# 01856523 </p>
+    <p>Copyrights (c) 2007-2016 Starriver Inc | CA LICENSE# 01856523 </p>
   <% end %>
   <p>© 2016 觅家美国 版权所有 | 备案号：11007454号-4 <a href="http://www.miitbeian.gov.cn">工信部网站</a></p>
   <p style="font-size: 10px; line-height: 10px">Disclaims: Based on information from various Association of REALTORS® as of date (show the current date).
     All data, including all measurements and calculations of area, is obtained from various sources and has not been, and will not be, verified by broker or MLS. All information should be independently reviewed and verified for accuracy. Properties may or may not be listed by the office/agent presenting the information.</p>
 </footer>
-</body>
-<%= javascript_tag File.join(ASSET_URL, '/js/bundle_vendor.js') %>
-<%= javascript_tag File.join(ASSET_URL, '/js/bundle.js') %>
 </html>
