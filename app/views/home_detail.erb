@@ -19,7 +19,7 @@
   <%= javascript_tag File.join(ASSET_URL, '/wechat/owl-carousel/owl.carousel.js') %>
   <script>
     var CDN_URL = "<%= CDN_URL %>"
-
+    var activeAgents = <%= agents.to_json %>;
     var home = {
       addr1: "<%= addr1 %>",
       addr2: "<%= addr2 %>",
@@ -52,6 +52,15 @@
 </head>
 
 <body class='mobile-container'>
+<script type="text/javascript">
+  $(window).load(function() {
+    // Animate loader off screen
+    $(".se-pre-con").fadeOut("slow");
+  });
+</script>
+<div class="se-pre-con">
+  页面加载中
+</div>
 
 <div class='header'>
   觅家优质房源
@@ -148,6 +157,20 @@
   </div>
 </div>
 <div>
+  <h3 class='sub-header'>经纪人</h3>
+  <div class="agent-list">
+  <% @agents.each do |agent| %>
+    <div class="agentInfo">
+      <img class="profile_img" src=<%=agent['wechat_user']['head_img_url'] %>/>
+      <div class="agent_name">
+        <a href=<%= MEEHOME_CLIENT_URL + '/agent/' + agent['agent_extention']['agent_identifier']%>><%= agent['wechat_user']['nickname'] %></a>
+      </div>
+      <img class="qr-code-img" src=<%=agent['qr_code'] %>/>
+    </div>
+  <% end %>
+  </div>
+</div>
+<div>
   <h3 class='sub-header'>学校信息</h3>
   <div class='school primary'>
     <h4 class='school-name'>小学</h4>
@@ -223,7 +246,6 @@
 
 <script type="text/javascript">
   $(document).ready(function () {
-    console.log(home);
     var result = '';
     var element = $( this );
     _.forEach(home.images, function(img){
