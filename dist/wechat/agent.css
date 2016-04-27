@@ -8,65 +8,13 @@
     background: url('../img/preload.gif') center no-repeat #fff;
 }
 
-.map-canvas {
-    width: 90%;
-    max-width: 960px;
-    margin: 0 auto;
-    height: 500px;
-    position: relative; }
-.map-canvas #myMap {
-    width: 100%;
-    height: auto; }
+/*=============================================
 
-div#agentcontent div {
-    margin-left: 25px; }
-div#agentcontent div h3 {
-    font-size: 20px;
-    line-height: 30px; }
-div#agentcontent div div#homelistAnchor {
-    margin: 0 !important;
-    width: 100%;
-    overflow: hidden; }
-div#agentcontent div div#homelistAnchor ul li {
-    width: 48%;
-    margin: 1%; }
+               Float menu styling
 
+=============================================*/
 
-#agentcontent .float_menu {
-    margin: 0 0 0 30px;
-    padding: 20px; }
-img.profile_img {
-    width: 150px;
-    height: 150px;
-    border-radius: 80px;
-    margin: 0 30px 0 0;
-    display: inline-block; }
-#agentcontent .agent_home_div .name_card {
-    display: inline-block;
-    vertical-align: top;
-    margin: 0; }
-#agentcontent .agent_home_div .name_card p {
-    font-size: 18px;
-    line-height: 1.5;
-    font-weight: 300;
-    margin: 0; }
-#agentcontent .agent_home_div img.agent_qr_img {
-    width: 160px;
-    height: 160px;
-    display: block;
-    margin: 0 0 0 180px; }
-#agentcontent .agent_home_div h3 {
-    font-size: 24px;
-    text-align: center; }
-
-#agentcontent .preview_list_div .searchresult_div tr {
-    width: 100%; }
-#agentcontent .preview_list_div .searchresult_div tr .thadd {
-    width: 420px; }
-#agentcontent .preview_list_div .searchresult_div tr .homeprice {
-    width: calc(100% - 660px); }
-
-div#agentcontent div.float_menu {
+div#agentcontent .float_menu {
     width: 100%;
     height: 90px;
     position: fixed;
@@ -78,12 +26,16 @@ div#agentcontent div.float_menu {
     border-top: 1px solid #ccc; }
 div#agentcontent div.float_menu ul {
     list-style: none;
-    padding: 0; }
+    padding: 0;
+    font-size: 0;
+}
 div#agentcontent div.float_menu ul li {
     display: inline-block;
     width: 25%;
     text-align: center;
-    padding-top: 10px; }
+    padding-top: 10px;
+    font-size: 16px;
+}
 div#agentcontent div.float_menu ul li span {
     font-size: 16px;
     line-height: 40px;
@@ -96,132 +48,164 @@ div#agentcontent div.float_menu ul li span.glyphicon {
     width: 40px;
     display: inline-block;
     border-radius: 30px; }
+.float_menu a{
+    display: block;
+}
 
-.agent_info_wrap {
-    display: block;
-    width: 70%;
-    margin: auto; }
-.agent_info_wrap .agent_home_div {
-    display: inline-block;
-    width: 33.33%;
-    margin: 0;
-    padding: 20px 0; }
-.agent_info_wrap .agent_home_div h3 {
-    font-size: 24px;
-    text-align: center; }
-.agent_info_wrap .agent_home_div img {
-    width: 200px;
-    height: 200px;
-    display: inline-block; }
-img.profile_img {
-    width: 80px;
-    height: 80px;
-    border-radius: 80px;
-    margin: 0 20px 0 0; }
-.agent_info_wrap .agent_home_div .agent-detail-info {
-    width: calc(100% - 120px);
-    display: inline-block;
-    vertical-align: top; }
-.agent_info_wrap .agent_home_div .agent-detail-info .agent-link {
-    display: block;
+/*=============================================
+
+               header styling
+
+=============================================*/
+.agent_home_div{
     width: 100%;
-    font-size: 18px;
-    text-decoration: none; }
-.agent_info_wrap .agent_home_div .close-div {
-    color: white;
-    background-color: #D9534F;
-    display: none;
-    width: 24px;
-    line-height: 24px;
-    border-radius: 24px;
+    height: auto;
+    padding-bottom: 20px;
+    background-color: #f8f8f8;
     text-align: center;
+}
+.profile_img{
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    border-radius: 100px;
+    margin-top: 40px;
+}
+.agent-name{
+    font-size: 16px;
+    line-height: 1.5;
+    font-weight: 400;
+    padding: 0;
+    margin: 20px 0 0;
+}
+.contact-number{
+    font-size: 16px;
+    font-weight: 300;
     padding: 0;
     margin: 0;
-    position: absolute;
-    top: 20%;
-    right: calc(50% - 100px);
-    z-index: 112; }
-.agent_info_wrap .agent_home_div .agent-qr-image {
-    display: none; }
-.agent_info_wrap .agent_home_div .triger-div {
-    display: block;
-    width: 100%;
-    height: 100px; }
-.agent_info_wrap .agent_home_div .triger-div:hover .qr-layer {
-    position: fixed;
-    background-color: rgba(0, 0, 0, 0.3);
-    right: 0;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    z-index: 11; }
-.agent_info_wrap .agent_home_div .triger-div:hover .agent-qr-image {
-    display: block;
-    position: fixed;
-    right: calc(50% - 100px);
-    top: 20%;
-    z-index: 111; }
-.agent_info_wrap .agent_home_div .triger-div:hover .close-div {
-    display: block; }
-
-#agentcontent .float_menu {
-    margin: 0 0 0 30px;
-    padding: 20px; }
-img.profile_img {
-    width: 150px;
-    height: 150px;
-    border-radius: 80px;
-    margin: 0 30px 0 0;
-    display: inline-block; }
-#agentcontent .agent_home_div .name_card {
-    display: inline-block;
-    vertical-align: top;
-    margin: 0; }
-#agentcontent .agent_home_div .name_card p {
-    font-size: 18px;
-    line-height: 1.5;
+}
+.description{
+    font-size: 14px;
     font-weight: 300;
-    margin: 0; }
-
-img.agent_qr_img {
-    width: 160px;
-    height: 160px;
-    display: block;
-    margin: 0 0 0 180px; }
-#agentcontent .agent_home_div h3 {
-    font-size: 24px;
-    text-align: center; }
-
-#agentcontent .float_menu {
-    margin: 0 0 0 30px;
-    padding: 20px; }
-img.profile_img {
-    width: 150px;
-    height: 150px;
-    border-radius: 80px;
-    margin: 0 30px 0 0;
-    display: inline-block; }
-#agentcontent .agent_home_div .name_card {
-    display: inline-block;
-    vertical-align: top;
-    margin: 0; }
-#agentcontent .agent_home_div .name_card p {
-    font-size: 18px;
     line-height: 1.5;
-    font-weight: 300;
-    margin: 0; }
-#agentcontent .agent_home_div img.agent_qr_img {
-    width: 160px;
-    height: 160px;
-    display: block;
-    margin: 0 0 0 180px; }
-#agentcontent .agent_home_div h3 {
-    font-size: 24px;
-    text-align: center; }
+    max-width: 480px;
+    margin: 0 auto;
+}
 
-#agentcontent .preview_list_div .searchresult_div tr {
-    width: 100%; }
-#agentcontent .preview_list_div .searchresult_div tr .thadd {
-    width: 420px; }
-#agentcontent .preview_list_div .searchresult_div tr .homeprice {
-    width: calc(100% - 660px); }
+/*=============================
+
+           QR-code
+
+=============================*/
+.qr-warp{
+    width: 320px;
+    display: none;
+    margin: 20px auto;
+    background-color: #f8f8f8;
+    padding: 20px;
+    border-radius: 10px;
+}
+.agent_qr_img{
+    height: 280px;
+    width: 280px;
+    margin: 0 auto;
+    display: block;
+}
+
+/*==============================
+
+         House lists
+
+==============================*/
+.preview_list_div{
+    font-size: 0;
+    padding-bottom: 100px;
+}
+.previewH3{
+    text-align: center;
+}
+.item-link{
+    display: inline-block;
+    width: 50%;
+    color: #555;
+    vertical-align: top;
+}
+.estate-item{
+    display: block;
+    font-size: 16px;
+    width: calc(100% - 15px);
+    margin: 10px 5px 10px 10px;
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    min-height: 100px;
+    padding: 20px;
+}
+.estate-item:nth-child(2n){
+    margin: 10px 10px 10px 5px;
+}
+.estate-item p{
+    padding: 0;
+    margin: 0;
+    max-width: 480px;
+    text-align: center;
+}
+.estate-item .item-img{
+    width: 120px;
+    height: 120px;
+    display: block;
+    margin: 0 auto;
+    border: 1px solid #d8d8d8;
+}
+.estate-item .item-des{
+    text-align: center;
+    line-height: 1.5;
+}
+.estate-item .item-price{
+    font-size: 20px;
+    color: #74c005;
+    padding-top: 10px;
+    font-weight: 400;
+}
+
+/*====================================
+
+            Mobile styling
+
+====================================*/
+@media screen and (max-width: 640px){
+    .profile_img{
+        height: 60px;
+        width: 60px;
+        margin-top: 20px;
+    }
+    .agent-name{
+        margin-top: 10px;
+    }
+    .qr-warp{
+        padding: 10px;
+        margin: 10px auto;
+        width: 260px;
+    }
+    .agent_qr_img{
+        width: 240px;
+        height: 240px;
+        margin: 0 auto;
+    }
+    .item-link{
+        display: block;
+        width: calc(100% - 40px);
+        margin: 10px 20px;
+    }
+    .estate-item{
+        display: block;
+        width: 100%;
+        padding: 15px;
+        margin: 0;
+    }
+    .estate-item:nth-child(2n){
+        margin: 0;
+    }
+    .estate-item p{
+        margin: 0 auto;
+    }
+}

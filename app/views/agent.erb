@@ -1,69 +1,77 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>觅家美国</title>
-  <meta charset="utf-8">
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>觅家美国</title>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link href="//fonts.googleapis.com/css?family=Roboto:300,100,700" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-  <script type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
-  <%= stylesheet_link File.join(ASSET_URL, '/wechat/agent.css') %>
-  <%= javascript_tag File.join(ASSET_URL, '/js/bundle_vendor.js') %>
-  <script>
-    var SERVER_URL = "<%= MEEHOME_SERVER_URL %>";
-    var CLIENT_URL = "<%= MEEHOME_CLIENT_URL %>";
-    var CDN_URL = "<%= CDN_URL %>"
-    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
-      console.log('mobile');
-    }
-  </script>
+<link href="//fonts.googleapis.com/css?family=Roboto:300,100,700" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<script type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
+<%= stylesheet_link File.join(ASSET_URL, '/wechat/agent.css') %>
+<%= javascript_tag File.join(ASSET_URL, '/js/bundle_vendor.js') %>
+<script>
+var SERVER_URL = "<%= MEEHOME_SERVER_URL %>";
+var CLIENT_URL = "<%= MEEHOME_CLIENT_URL %>";
+var CDN_URL = "<%= CDN_URL %>"
+if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
+console.log('mobile');
+}
+</script>
 </head>
 <body>
 <script type="text/javascript">
-  $(window).load(function() {
-    // Animate loader off screen
-    $(".se-pre-con").fadeOut("slow");
-  });
+$(window).load(function() {
+// Animate loader off screen
+$(".se-pre-con").fadeOut("slow");
+  $('.wechat-icon').on("click",function(){
+     $('.qr-warp').fadeIn(800);
+  })
+});
 </script>
 <div class="se-pre-con">
-  页面加载中
+页面加载中
 </div>
-  <div id="agentcontent">
-    <div>
-      <div>
-        <div class='agent_home_div'>
-          <img class='profile_img' src= <%= @agent_info[:head_image]%>/>
-          <div class='name_card'>
-            <p>姓名: <%= @agent_info[:header]['name']%></p>
-            <p>联系电话: <%= @agent_info[:header]['contact']%></p>
-          </div>
-          <img class='agent_qr_img' src=<%= @agent_info[:qr_image]%> />
+<div id="agentcontent">
+  <div>
+    <div class="agent-page">
+      <div class='agent_home_div'>
+        <img class='profile_img' src= <%= @agent_info[:head_image]%>/>
+        <div class='name_card'>
+          <p class="agent-name">经纪人: <%= @agent_info[:header]['name'] || @agent_info[:cn_name]%></p>
+          <p class="contact-number">联系方式: <%= @agent_info[:header]['contact']%></p>
+          <p class="description"><%= @agent_info[:description]%></p>
         </div>
-        <p><%= @agent_info[:description]%></p>
-        <div class='preview_list_div'>
-          <h3 class='previewH3'>优质房源</h3>
-          <% @home_list.each do |home| %>
-          <p><%= home['addr1'] %></p>
-          <% end%>
-        </div>
+      </div><!--close agent_home_div-->
+
+      <div id="qr-anchor" class="qr-warp">
+        <img class='agent_qr_img' src=<%= @agent_info[:qr_image]%> />
       </div>
-      <div class='float_menu'>
-        <ul>
-          <li><span class='glyphicon glyphicon-earphone'></span><br/>电话</li>
-          <li><span class='glyphicon glyphicon-phone'></span><br/>短信</li>
-          <li><span class='glyphicon glyphicon-comment'></span><br/>微信</li>
-          <li><span class='glyphicon glyphicon-envelope'></span><br/>电邮</li>
-        </ul>
-        <div class='float_tab'>
-          <div class='phone-tab'>+1(650)888-5188</div>
-          <div class='msg-tab'>+1(650)888-5188</div>
-          <div class='wechat-tab'><img className='agent_qr_img' src=<%= @agent_info[:qr_img]%> /></div>
-          <div class='email-tab'>agent.leo@gmail.com</div>
-        </div>
-      </div>
+
+      <div class='preview_list_div'>
+        <h3 class='previewH3'>优质房源</h3>
+        <% @home_list.each do |home| %>
+          <a class="item-link" href=<%= File.join(MEEHOME_CLIENT_URL, 'home', home['id'].to_s)%>>
+            <div class="estate-item">
+              <img class="item-img" src=<%= home['images'].try(:[], 0).try(:[], 'image_url')%>/>
+              <p class="item-des item-price">价格：<%= home['price'] %></p>
+              <p class="item-des"><%= home['addr1'].concat(" #{home['city']}")%></p>
+              <p class="item-detail"><%= home['short_desc'] %></p>
+            </div>
+          </a>
+        <% end%>
+      </div> <!--close preview_list_div-->
+    </div><!--close agent-page-->
+    <div class='float_menu'>
+      <ul>
+        <li><a href=<%= "tel:#{@agent_info['phone']}" %> ><span class='glyphicon glyphicon-earphone'></span><br/>电话</a></li>
+        <li><a href="sms://#{@agent_info['phone']}"><span class='glyphicon glyphicon-phone'></span><br/>短信</a></li>
+        <li><a class="wechat-icon" href="#qr-anchor"><span class='glyphicon glyphicon-comment'></span><br/>微信</a></li>
+        <li><a href=<%= "mailto:#{@agent_info['mail']}" %> ><span class='glyphicon glyphicon-envelope'></span><br/>电邮</a></li>
+      </ul>
     </div>
   </div>
+</div>
 </body>
 </html>
