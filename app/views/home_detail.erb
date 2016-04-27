@@ -64,12 +64,12 @@
 
         data: JSON.stringify({home_id: home.id}),
 
-        success: function(data) {
-          console.log('ok')
+        success: function() {
+          $('#likeBtn').addClass('likedButton');
         },
 
         error: function() {
-          console.log('error');
+         //do nothing
         }
       });
 
@@ -95,7 +95,9 @@
 <div id="owl-demo" class="owl-carousel">
 </div>
 
-<button onclick="likeHome()">Click me</button>
+<div style="height: 50px">
+  <button id='likeBtn' class='likeButton' onclick="likeHome()"></button>
+</div>
 
 <div class='info'>
   <h3 class='sub-header'>房源信息</h3>
