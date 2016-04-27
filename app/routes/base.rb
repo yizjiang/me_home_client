@@ -61,7 +61,7 @@ module Routes
       home = JSON.parse response.body
       agents = JSON.parse Typhoeus.get("#{MEEHOME_SERVER_URL}/agents").body
       @agents = agents
-      home.merge!(agents: agents)
+      @uid = params['uid'] || ''
       erb :home_detail, :locals => home.symbolize_keys
     end
 

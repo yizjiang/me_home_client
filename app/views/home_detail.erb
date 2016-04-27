@@ -18,8 +18,8 @@
 
   <%= javascript_tag File.join(ASSET_URL, '/wechat/owl-carousel/owl.carousel.js') %>
   <script>
-    var CDN_URL = "<%= CDN_URL %>"
-    var activeAgents = <%= agents.to_json %>;
+    var CDN_URL = "<%= CDN_URL %>";
+    var uid = "<%=@uid%>";
     var home = {
       addr1: "<%= addr1 %>",
       addr2: "<%= addr2 %>",
@@ -38,6 +38,8 @@
       zipcode: "<%= zipcode %>",
       images: <%=  images.to_json %>,
       assigned_school: <%= assigned_school.to_json %>,
+      public_schools: <%= public_schools.to_json %>,
+      private_schools: <%= private_schools.to_json %>,
       city_info: <%= city_info.to_json %>,
       short_desc: "<%= short_desc %>",
       monthly_rent: "<%= monthly_rent %>",
@@ -48,6 +50,30 @@
     home.city_info = JSON.parse(home.city_info);
     home.images = JSON.parse(home.images);
     home.assigned_school = JSON.parse(home.assigned_school);
+    home.public_schools = JSON.parse(home.public_schools);
+    home.private_schools = JSON.parse(home.private_schools);
+    function likeHome() {
+      $.ajax({
+        url: '/favoriteHome',
+        headers: {
+          'uid': uid
+        },
+        type: 'POST',
+
+        dataType: 'json',
+
+        data: JSON.stringify({home_id: home.id}),
+
+        success: function(data) {
+          console.log('ok')
+        },
+
+        error: function() {
+          console.log('error');
+        }
+      });
+
+    }
   </script>
 </head>
 
@@ -68,6 +94,8 @@
 
 <div id="owl-demo" class="owl-carousel">
 </div>
+
+<button onclick="likeHome()">Click me</button>
 
 <div class='info'>
   <h3 class='sub-header'>房源信息</h3>
@@ -163,7 +191,8 @@
     <div class="agentInfo">
       <img class="profile_img" src=<%=agent['wechat_user']['head_img_url'] %>/>
       <div class="agent_name">
-        <a href=<%= MEEHOME_CLIENT_URL + '/agent/' + agent['agent_extention']['agent_identifier']%>><%= agent['wechat_user']['nickname'] %></a>
+        <a href=<%= MEEHOME_CLIENT_URL + '/agent/' + agent['agent_extention']['agent_identifier']%>><%= agent['agent_extention']['cn_name'] || agent['wechat_user']['nickname'] %></a>
+        <p> 从业经验: <%=  agent['agent_extention']['license_year']? Time.now.year - agent['agent_extention']['license_year'].to_i : 0%>年 </p>
       </div>
       <img class="qr-code-img" src=<%=agent['qr_code'] %>/>
     </div>
@@ -171,78 +200,161 @@
   </div>
 </div>
 <div>
-  <h3 class='sub-header'>学校信息</h3>
+<h3 class='sub-header'>指定学校</h3>
+<% if elemental=assigned_school.select{|sch| sch['grade'].include?('K')}.first %>
   <div class='school primary'>
     <h4 class='school-name'>小学</h4>
     <div class='school-table'>
       <div class='row row-name row-title'>学校名称</div>
-      <div class='row row-name'><%= assigned_school[1]['name'] %></div>
+      <div class='row row-name'><%= elemental['name'] %></div>
       <div class='row'>
         <div class='row-headline row-title'>学校评分</div>
-        <div class='row-headline row-title'>学校性质</div>
+        <div class='row-headline row-title'>教师学生比例</div>
       </div>
       <div  class='row'>
-        <div class='row-headline'><%= assigned_school[1]['rating'] %></div>
-        <div class='row-headline'><%= assigned_school[1]['school_type'] %></div>
+        <div class='row-headline'><%= elemental['rating'] %></div>
+        <div class='row-headline'><%= elemental['student_teacher_ratio'] %></div>
       </div>
       <div class='row'>
         <div class='row-headline row-title'>距离</div>
         <div class='row-headline row-title'>年级</div>
       </div>
       <div class='row'>
-        <div class='row-headline'><%= assigned_school[2]['distance'] %></div>
-        <div class='row-headline'><%= assigned_school[2]['grade'] %></div>
+        <div class='row-headline'><%= elemental['distance'] %></div>
+        <div class='row-headline'><%= elemental['grade'] %></div>
       </div>
     </div>
   </div>
+<% end %>
+<% if secondary=assigned_school.select{|sch| sch['grade'].include?('7')}.first %>
   <div class='school secondary'>
     <h4 class='school-name'>初中</h4>
     <div class='school-table'>
       <div class='row row-name row-title'>学校名称</div>
-      <div class='row row-name'><%= assigned_school[0]['name'] %></div>
+      <div class='row row-name'><%= secondary['name'] %></div>
       <div class='row'>
         <div class='row-headline row-title'>学校评分</div>
-        <div class='row-headline row-title'>学校性质</div>
+        <div class='row-headline row-title'>教师学生比例</div>
       </div>
       <div class='row'>
-        <div class='row-headline'><%= assigned_school[0]['rating'] %></div>
-        <div class='row-headline'><%= assigned_school[0]['school_type'] %></div>
+        <div class='row-headline'><%= secondary['rating'] %></div>
+        <div class='row-headline'><%= secondary['student_teacher_ratio'] %></div>
       </div>
       <div class='row'>
         <div class='row-headline row-title'>距离</div>
         <div class='row-headline row-title'>年级</div>
       </div>
       <div class='row'>
-        <div class='row-headline'><%= assigned_school[2]['distance'] %></div>
-        <div class='row-headline'><%= assigned_school[2]['grade'] %></div>
+        <div class='row-headline'><%= secondary['distance'] %></div>
+        <div class='row-headline'><%= secondary['grade'] %></div>
       </div>
     </div>
   </div>
+  <% end %>
+  <% if high=assigned_school.select{|sch| sch['grade'].include?('12')}.first %>
+    <div class='school high'>
+      <h4 class='school-name'>高中</h4>
+      <div class='school-table'>
+        <div class='row row-name row-title'>学校名称</div>
+        <div class='row row-name'><%= high['name'] %></div>
+        <div class='row'>
+          <div class='row-headline row-title'>学校评分</div>
+          <div class='row-headline row-title'>教师学生比例</div>
+        </div>
+        <div class='row'>
+          <div class='row-headline'><%= high['rating'] %></div>
+          <div class='row-headline'><%= high['student_teacher_ratio'] %></div>
+        </div>
+        <div class='row'>
+          <div class='row-headline row-title'>距离</div>
+          <div class='row-headline row-title'>年级</div>
+        </div>
+        <div class='row'>
+          <div class='row-headline'><%= high['distance'] %></div>
+          <div class='row-headline'><%= high['grade'] %></div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+<h3 class='sub-header'>其他附近学校</h3>
+<h4 class='school-name'>公立</h4>
+<% public_schools.each do |school|%>
   <div class='school high'>
-    <h4 class='school-name'>高中</h4>
     <div class='school-table'>
       <div class='row row-name row-title'>学校名称</div>
-      <div class='row row-name'><%= assigned_school[2]['name'] %></div>
+      <div class='row row-name'><%= school['name'] %></div>
       <div class='row'>
         <div class='row-headline row-title'>学校评分</div>
-        <div class='row-headline row-title'>学校性质</div>
+        <div class='row-headline row-title'>教师学生比例</div>
       </div>
       <div class='row'>
-        <div class='row-headline'><%= assigned_school[2]['rating'] %></div>
-        <div class='row-headline'><%= assigned_school[2]['school_type'] %></div>
+        <div class='row-headline'><%= school['rating'] %></div>
+        <div class='row-headline'><%= school['student_teacher_ratio'] %></div>
       </div>
       <div class='row'>
         <div class='row-headline row-title'>距离</div>
         <div class='row-headline row-title'>年级</div>
       </div>
       <div class='row'>
-        <div class='row-headline'><%= assigned_school[2]['distance'] %></div>
-        <div class='row-headline'><%= assigned_school[2]['grade'] %></div>
+        <div class='row-headline'><%= school['distance'] %></div>
+        <div class='row-headline'><%= school['grade'] %></div>
       </div>
     </div>
   </div>
-</div>
+<% end %>
 
+<h4 class='school-name'>私立</h4>
+<% private_schools.each do |school|%>
+  <div class='school high'>
+    <div class='school-table'>
+      <div class='row row-name row-title'>学校名称</div>
+      <div class='row row-name'><%= school['name'] %></div>
+      <div class='row'>
+        <div class='row-headline row-title'>学校评分</div>
+        <div class='row-headline row-title'>教师学生比例</div>
+      </div>
+      <div class='row'>
+        <div class='row-headline'><%= school['rating'] %></div>
+        <div class='row-headline'><%= school['student_teacher_ratio'] %></div>
+      </div>
+      <div class='row'>
+        <div class='row-headline row-title'>距离</div>
+        <div class='row-headline row-title'>年级</div>
+      </div>
+      <div class='row'>
+        <div class='row-headline'><%= school['distance'] %></div>
+        <div class='row-headline'><%= school['grade'] %></div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<h4 class='school-name'>大学</h4>
+<% colleges.each do |school|%>
+  <div class='school high'>
+    <div class='school-table'>
+      <div class='row row-name row-title'>学校名称</div>
+      <div class='row row-name'><%= school['name'] %></div>
+      <div class='row'>
+        <div class='row-headline row-title'>学校评分</div>
+        <div class='row-headline row-title'>教师学生比例</div>
+      </div>
+      <div class='row'>
+        <div class='row-headline'><%= school['rating'] %></div>
+        <div class='row-headline'><%= school['student_teacher_ratio'] %></div>
+      </div>
+      <div class='row'>
+        <div class='row-headline row-title'>距离</div>
+        <div class='row-headline row-title'>年级</div>
+      </div>
+      <div class='row'>
+        <div class='row-headline'><%= school['distance'] %></div>
+        <div class='row-headline'>大学</div>
+      </div>
+    </div>
+  </div>
+<% end %>
 
 <script type="text/javascript">
   $(document).ready(function () {

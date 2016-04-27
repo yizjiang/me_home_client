@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'typhoeus'
 
 module Routes
@@ -9,7 +10,10 @@ module Routes
 
     get '/agent/:name' do
       response = Typhoeus.get("#{MEEHOME_SERVER_URL}/agent/#{params[:name]}")
-      @data = response.body
+      body = JSON.parse response.body
+      @home_list = body['home_list']
+      @agent_info = body.delete_if{|k,_| k.to_sym == :home_list}.symbolize_keys
+      p @agent_info
       content_type :html
       erb :agent
     end

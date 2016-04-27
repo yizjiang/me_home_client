@@ -150,6 +150,8 @@ gulp.task('vendor', function() {
     .transform(babelify)
     .bundle()
     .pipe(source('bundle_vendor.js'))
+    .pipe(buffer())
+    .pipe(uglify())
     .pipe(gulp.dest(path.dist.js));
 })
 
