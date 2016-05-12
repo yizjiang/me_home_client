@@ -54,7 +54,7 @@ $(".se-pre-con").fadeOut("slow");
         <% @home_list.each do |home| %>
           <a class="item-link" href=<%= File.join(MEEHOME_CLIENT_URL, 'home', home['id'].to_s)%>>
             <div class="estate-item">
-              <img class="item-img" src=<%= home['images'].try(:[], 0).try(:[], 'image_url')%>/>
+              <img class="item-img" src=<%= File.join(CDN_URL, 'photo', home['images'].try(:[], 0).try(:[], 'image_url'))%>>
               <p class="item-des item-price">价格：<%= home['price'] %></p>
               <p class="item-des"><%= home['addr1'].concat(" #{home['city']}")%></p>
               <p class="item-detail"><%= home['short_desc'] %></p>
@@ -65,10 +65,10 @@ $(".se-pre-con").fadeOut("slow");
     </div><!--close agent-page-->
     <div class='float_menu'>
       <ul>
-        <li><a href=<%= "tel:#{@agent_info['phone']}" %> ><span class='glyphicon glyphicon-earphone'></span><br/>电话</a></li>
-        <li><a href="sms://#{@agent_info['phone']}"><span class='glyphicon glyphicon-phone'></span><br/>短信</a></li>
+        <li><a href=<%= "tel:#{@agent_info[:phone]}" %> ><span class='glyphicon glyphicon-earphone'></span><br/>电话</a></li>
+        <li><a href=<%= "sms://#{@agent_info[:phone]}" %>><span class='glyphicon glyphicon-phone'></span><br/>短信</a></li>
         <li><a class="wechat-icon" href="#qr-anchor"><span class='glyphicon glyphicon-comment'></span><br/>微信</a></li>
-        <li><a href=<%= "mailto:#{@agent_info['mail']}" %> ><span class='glyphicon glyphicon-envelope'></span><br/>电邮</a></li>
+        <li><a href=<%= "mailto:#{@agent_info[:mail]}" %> ><span class='glyphicon glyphicon-envelope'></span><br/>电邮</a></li>
       </ul>
     </div>
   </div>
