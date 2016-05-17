@@ -96,6 +96,10 @@ var HomeDetail = React.createClass({
     }
   },
 
+  incHomeView: function(id) {
+      // TODO send reqeust to server, inc home view cnt
+  },
+
   calculateDiff: function(home) {
     if(!_.isEmpty(home) && !_.isEmpty(home.public_record)){
       var recordDate = new Date(home.public_record.record_date);
@@ -189,6 +193,7 @@ var HomeDetail = React.createClass({
     var agentInfoComponent = null
 
     if(home.id){
+      this.incHomeView(home.id);
       if(UserStore.isCurrentUserAgent() == true){
         var homeRequest = _.filter(this.state.agentRequests, (r) => r.home_id == home.id);
         if(homeRequest.length == 1){

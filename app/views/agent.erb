@@ -66,7 +66,7 @@ $(".se-pre-con").fadeOut("slow");
     <div class='float_menu'>
       <ul>
         <li><a href=<%= "tel:#{@agent_info[:phone]}" %> ><span class='glyphicon glyphicon-earphone'></span><br/>电话</a></li>
-        <li><a href="sms://#{@agent_info[:phone]}"><span class='glyphicon glyphicon-phone'></span><br/>短信</a></li>
+        <li><a href=<%= "sms://#{@agent_info[:phone]}" %>><span class='glyphicon glyphicon-phone'></span><br/>短信</a></li>
         <li><a class="wechat-icon" href="#qr-anchor"><span class='glyphicon glyphicon-comment'></span><br/>微信</a></li>
         <li><a href=<%= "mailto:#{@agent_info[:mail]}" %> ><span class='glyphicon glyphicon-envelope'></span><br/>电邮</a></li>
       </ul>
