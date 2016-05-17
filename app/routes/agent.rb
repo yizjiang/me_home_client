@@ -12,7 +12,7 @@ module Routes
       response = Typhoeus.get("#{MEEHOME_SERVER_URL}/agent/#{params[:name]}")
       body = JSON.parse response.body
       @home_list = body['home_list']
-      @agent_info = body.delete_if{|k,_| k.to_sym == :home_list}.symbolize_keys[]
+      @agent_info = body.delete_if{|k,_| k.to_sym == :home_list}.symbolize_keys
       content_type :html
       erb :agent
     end
