@@ -14,11 +14,12 @@
     var CLIENT_URL = "<%= MEEHOME_CLIENT_URL %>";
     var CDN_URL = "<%= CDN_URL %>"
     var TICKET = "<%= @ticket %>";
-    var ENV = "<%= RACK_ENV %>"
-    console.log(ENV);
+    var ENV = "<%= RACK_ENV %>";
+    var ACCESS_KEY = "<%= ACCESS_KEY %>";
+
     function searchServiceCallback(result)
     {
-      var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {credentials: 'AjVrfYUU-6_5NnEHSjCxZ16XAJHyu0-J42p16WXCld6F52NujvxQ2iRV1X3UQeQs'});
+      var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {credentials: ACCESS_KEY});
       var output = document.getElementById("output");
       if (output)
       {

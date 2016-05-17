@@ -20,6 +20,8 @@
   <script>
     var CDN_URL = "<%= CDN_URL %>";
     var uid = "<%=@uid%>";
+    var ACCESS_KEY = "<%= ACCESS_KEY %>";
+
     var home = {
       addr1: "<%= addr1 %>",
       addr2: "<%= addr2 %>",
@@ -415,7 +417,7 @@
     window.myPie = new Chart(ctx).Pie(pieData);
 
     function showMap(home) {
-      map = new Microsoft.Maps.Map(document.getElementById('myMap'), {credentials: 'AjVrfYUU-6_5NnEHSjCxZ16XAJHyu0-J42p16WXCld6F52NujvxQ2iRV1X3UQeQs',
+      map = new Microsoft.Maps.Map(document.getElementById('myMap'), {credentials: ACCESS_KEY,
         showMapTypeSelector:false
       });
 //

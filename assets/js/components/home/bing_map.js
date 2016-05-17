@@ -6,7 +6,7 @@ var infobox;
 
 var BingMap = React.createClass({
   searchServiceCallback: function (home_infos) {
-    map = new Microsoft.Maps.Map(document.getElementById('myMap'), {credentials: 'AjVrfYUU-6_5NnEHSjCxZ16XAJHyu0-J42p16WXCld6F52NujvxQ2iRV1X3UQeQs',
+    map = new Microsoft.Maps.Map(document.getElementById('myMap'), {credentials: ACCESS_KEY,
                                                                     showMapTypeSelector:false
                                                                     });
 //    dataLayer = new Microsoft.Maps.EntityCollection();
