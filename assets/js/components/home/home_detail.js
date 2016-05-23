@@ -134,7 +134,7 @@ var HomeDetail = React.createClass({
                    description: '详情',
                    indoor_size: '室内面积',
                    link: '网址',
-                   lot_size: '总体面积',
+                   lot_size: '占地面积',
                    neighborhood: '社区',
                    price: '价格',
                    status: '状态',
@@ -184,7 +184,7 @@ var HomeDetail = React.createClass({
     var address = home.addr1 + ', ' + home.addr2 + ', ' + home.city + ', ' + home.state + ', ' + home.zipcode;
 
     var mapComponent = null;
-    if(home.geo_point){
+    if(home.geo_point != -1 && home.geo_point != undefined ){
       var points = home.geo_point.split(',');
       mapComponent= <BingMap home_info={{lat: points[0], long: points[1],
         address: address, description: home.chinese_description, home_id: home.id}} show_details={false}/>
@@ -290,21 +290,23 @@ var HomeDetail = React.createClass({
                   <p className='detailp'>{
                                           mapping['indoor_size']
                                           + ': '
-                                          + home['indoor_size']
-                                          + ' '
-                                          + mapping['lot_size']
-                                          + ': '
-                                          + home['lot_size']
-                                          + ' '
-                                          + home['stores']
-                                          + mapping['stores']
+                                          + home['chinese_indoor_size'] + '(' + home['indoor_size'] + '平方英尺)'
                                          }
                   </p>
+                <p className='detailp'>{
+                    mapping['lot_size']
+                    + ': '
+                    +  home['chinese_lot_size'] + '(' + home['lot_size'] + ')'
+                    + ' '
+                    + home['stores']
+                    + mapping['stores']
+                  }
+                </p>
               </Col>
 
               <Col md = {6} className='detailPara singledetail'>
                 <h3 className='detailh3'>
-                 {mapping['price'] + ': ' + home['price']}
+                 {mapping['price'] + ': ' + home['price'] + '(约' + parseInt(home['price']) * 6.5 + '万元)'}
                 </h3>
                 <p className='detailp'>{mapping['unit_price'] + ': ' + home['unit_price']}</p>
                 <p className='detailp'>{'月租金: 约' + home['monthly_rent']}</p>

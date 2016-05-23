@@ -120,6 +120,18 @@
     </div>
   </div>
   <div class='item-wrap'>
+    <h4 class='info-item'>室内面积：</h4>
+    <div class='info-detail'>
+      <%= chinese_indoor_size %>(<%= indoor_size.to_i %>平方英尺)
+    </div>
+  </div>
+  <div class='item-wrap'>
+    <h4 class='info-item'>占地面积：</h4>
+    <div class='info-detail'>
+      <%= chinese_lot_size %>(<%= lot_size.to_i %>平方英尺)
+    </div>
+  </div>
+  <div class='item-wrap'>
     <h4 class='info-item'>房屋单价：</h4>
     <div class='info-detail'>
       <%= unit_price %>
@@ -440,15 +452,18 @@
       output.appendChild(resultsHeader);
       var that = this;
 
-      var lat = home.geo_point.split(',')[0];
-      var long = home.geo_point.split(',')[1];
+      if(home.geo_point != -1 && home.geo_point != undefined){
+        var lat = home.geo_point.split(',')[0];
+        var long = home.geo_point.split(',')[1];
 
-      var location = new Microsoft.Maps.Location(lat, long);
-      var pushpin = new Microsoft.Maps.Pushpin(location);
+        var location = new Microsoft.Maps.Location(lat, long);
+        var pushpin = new Microsoft.Maps.Pushpin(location);
 
-      pushpin.Title = home.title;
-      pushpin.Description = home.short_desc;
-      map.entities.push(pushpin);
+        pushpin.Title = home.title;
+        pushpin.Description = home.short_desc;
+        map.entities.push(pushpin);
+      }
+
 //      Microsoft.Maps.Events.addHandler(pushpin, 'mouseover', that.displayInfo);
 //      Microsoft.Maps.Events.addHandler(pushpin, 'click', that.showHomeDetail);
 //        map.entities.push(pushpin);

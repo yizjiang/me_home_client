@@ -26,8 +26,13 @@ var HomePage = React.createClass({
       homesComp = <HomeList listView={true} callback={this.showMode} custom_style={'previewList'} count={home_list.length} list={home_list}/>
     } else {
       var home_infos = home_list.map((home) => {
-        var points = home.geo_point.split(',');
-      return {lat: points[0],long: points[1], home_id: home.id, description: home.short_desc, title: home.addr1}
+        var lat, long;
+        if(home.geo_point != -1 && home.geo_point != undefined){
+          lat = home.geo_point.split(',')[0];
+          long = home.geo_point.split(',')[1];
+        }
+
+      return {lat: lat,long: long, home_id: home.id, description: home.short_desc, title: home.addr1}
     });
     homesComp = <HomeMap listView={false} callback={this.showMode} count={home_list.length} home_infos={home_infos}/>
   }
