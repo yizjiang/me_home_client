@@ -355,20 +355,20 @@
       <div class='row row-name row-title'>学校名称</div>
       <div class='row row-name'><%= school['name'] %></div>
       <div class='row'>
-        <div class='row-headline row-title'>学校评分</div>
+        <div class='row-headline row-title'>排名</div>
+        <div class='row-headline row-title'>在校学生</div>
+      </div>
+      <div class='row'>
+        <div class='row-headline'><%= school['rank'] %></div>
+        <div class='row-headline'><%= school['enrolled_student'] %>人</div>
+      </div>
+      <div class='row'>
         <div class='row-headline row-title'>教师学生比例</div>
+        <div class='row-headline row-title'>录取率</div>
       </div>
       <div class='row'>
-        <div class='row-headline'><%= school['rating'] %></div>
         <div class='row-headline'><%= school['student_teacher_ratio'] %></div>
-      </div>
-      <div class='row'>
-        <div class='row-headline row-title'>距离</div>
-        <div class='row-headline row-title'>年级</div>
-      </div>
-      <div class='row'>
-        <div class='row-headline'><%= school['distance'] %></div>
-        <div class='row-headline'>大学</div>
+        <div class='row-headline'><%= school['admin_rate'] %>% </div>
       </div>
     </div>
   </div>

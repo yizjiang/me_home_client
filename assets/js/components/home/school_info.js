@@ -3,6 +3,7 @@
 var React = require('react'),
     ReactTabs = require('react-tabs'),
     School = require('./school'),
+    College = require('./college'),
     Tab = ReactTabs.Tab,
     Tabs = ReactTabs.Tabs,
     TabList = ReactTabs.TabList,
@@ -13,8 +14,8 @@ var SchoolInfo = React.createClass({
 
   render: function () {
 
-    var assignedSchools, publicSchools, privateSchools;
-    assignedSchools = publicSchools = privateSchools = <p>暂无学校信息</p>;
+    var assignedSchools, publicSchools, privateSchools, colleges;
+    assignedSchools = publicSchools = privateSchools = colleges = <p>暂无学校信息</p>;
 
     if(this.props.assigned_schools.length > 0 ){
       assignedSchools = this.props.assigned_schools.map((school) => {
@@ -34,6 +35,12 @@ var SchoolInfo = React.createClass({
       })
     }
 
+    if(this.props.colleges.length > 0 ){
+      colleges = this.props.colleges.map((college) => {
+        return <College {...college}/>
+      })
+    }
+
     return (
        <div className='school-info-wrap'>
          <Tabs selectedIndex={0}>
@@ -41,6 +48,7 @@ var SchoolInfo = React.createClass({
              <Tab>指定学校</Tab>
              <Tab>公立学校</Tab>
              <Tab>私立学校</Tab>
+             <Tab>大学</Tab>
            </TabList>
 
            <TabPanel>
@@ -53,6 +61,10 @@ var SchoolInfo = React.createClass({
 
            <TabPanel>
               {privateSchools}
+           </TabPanel>
+
+           <TabPanel>
+              {colleges}
            </TabPanel>
          </Tabs>
        </div>

@@ -39,7 +39,7 @@ var HomeDetail = React.createClass({
     var currentHome =  HomeListStore.getHomeById(this.props.params.id);
     if(_.isEmpty(currentHome)) {
       this.loadHomeFromServer(this.props.params.id)
-      currentHome = {images: [], public_schools:[], private_schools:[], assigned_school:[], public_record: {}};
+      currentHome = {images: [], colleges:[], public_schools:[], private_schools:[], assigned_school:[], public_record: {}};
     }
     return {currentHome: currentHome, currentFavorite: UserStore.getFavoriteHomes(), agentRequests: AgentRequestStore.getAll()}              //TODO get user in mobile version
   },
@@ -121,6 +121,7 @@ var HomeDetail = React.createClass({
 
   render: function () {
     var home = this.state.currentHome;
+    console.log(home);
     var mapping = {addr1: '地址',
                    addr2: '门牌',
                    city: '城市',
@@ -175,6 +176,11 @@ var HomeDetail = React.createClass({
 
     }
 
+    if(home.colleges == undefined ){
+      home['colleges'] = [];
+
+    }
+
     var favButtonClass, heartClass;
     if(this.isFavorite()){
       favButtonClass = 'favored';
@@ -209,7 +215,7 @@ var HomeDetail = React.createClass({
       cityInfoComponent = <CityInfo data={home.city_info} />
     }
 
-    var schoolInfoCompoent = <SchoolInfo assigned_schools= {home.assigned_school} public_schools= {home.public_schools} private_schools= {home.private_schools}/>
+    var schoolInfoCompoent = <SchoolInfo colleges= {home.colleges} assigned_schools= {home.assigned_school} public_schools= {home.public_schools} private_schools= {home.private_schools}/>
 
     var publicRecordComponent = null;
     if(!_.isEmpty(home) && !_.isEmpty(home.public_record)){
