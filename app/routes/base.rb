@@ -53,14 +53,22 @@ module Routes
 
     get '/quick_search' do
       @wechat_user_id = params['wid']
+      response = Typhoeus.get("#{MEEHOME_SERVER_URL}/wechat/user/#{@wechat_user_id}/search")
+      @search = response.body
+      @from_agent = params['from_agent'] || false
       erb :quick_search
     end
 
     get '/home/:id' do
       response = Typhoeus.get("#{MEEHOME_SERVER_URL}/home/#{params[:id]}")     #todo request agent
       home = JSON.parse response.body
-      agents = JSON.parse Typhoeus.get("#{MEEHOME_SERVER_URL}/agents").body
-      @agents = agents
+      if params[:agent_id]
+        agent = JSON.parse Typhoeus.get("#{MEEHOME_SERVER_URL}/agent/#{params[:agent_id]}/show").body
+        @agents = [agent]
+      else
+        agents = JSON.parse Typhoeus.get("#{MEEHOME_SERVER_URL}/agents").body
+        @agents = agents
+      end
       @uid = params['uid'] || ''
       erb :home_detail, :locals => home.symbolize_keys
     end

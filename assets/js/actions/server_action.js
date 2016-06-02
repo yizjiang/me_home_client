@@ -502,6 +502,29 @@ var ServerActions = {
     });
   },
 
+  generateHomeQrCode: function(agent_id, sourceType, sourceId){
+    return $.ajax({
+      url: '/generate_home_qr_code',
+
+      headers: {
+        'uid': agent_id
+      },
+
+      type: 'post',
+
+      dataType: 'json',
+
+      data: JSON.stringify({sourceType: sourceType, sourceId: sourceId}),
+
+      success: function(data) {
+      },
+
+      error: function() {
+        console.log('error generate qr code');
+      }
+    });
+  },
+
   savePageConfig: function(user, value) {
     return $.ajax({
       url: '/save_page_config',
@@ -514,7 +537,7 @@ var ServerActions = {
 
       dataType: 'json',
 
-      data: JSON.stringify(value),
+      data: JSON.stringify({search: value}),
 
       success: function(data) {
         AppDispatcher.handleAction({
@@ -569,6 +592,7 @@ var ServerActions = {
       data: {}
     })
   },
+
 
   getCurrentUser: function(ticket) {
     var url;

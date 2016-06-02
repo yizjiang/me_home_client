@@ -24,7 +24,7 @@ var TabPanel = ReactTabs.TabPanel;
 var Agent = React.createClass({
 
   getInitialState: function() {
-    return {data: UserStore.getAgentPublishedPage()}
+    return {data: UserStore.getAgentInfo()}
   },
 
   _onChange: function() {
@@ -55,7 +55,7 @@ var Agent = React.createClass({
 //    $('#MenuBox').fadeOut(300, 'linear');
     var tabPanel = <TabPanel></TabPanel>;
     var tab = <Tab>预览</Tab>;
-    if(!_.isEmpty(this.state.data.header)){
+    if(!_.isEmpty(this.state.data)){
       tabPanel = <TabPanel>
         <HomePage data={this.state.data}/>
       </TabPanel>
@@ -87,7 +87,6 @@ var Agent = React.createClass({
 
                 
                 <Tab>设置</Tab>
-                {tab}
                 <Tab>答疑</Tab>
                 <Tab>客户</Tab>
               </TabList>
@@ -108,7 +107,6 @@ var Agent = React.createClass({
               <TabPanel id='react-tabs-1'>
                 <Setting/>
               </TabPanel>
-              {tabPanel}
               <TabPanel>
                 <Questions/>
               </TabPanel>

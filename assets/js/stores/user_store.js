@@ -9,7 +9,7 @@ var _currentUser = {};
 var _questions = [];
 var _savedSearches = [];
 var _favoriteHomes = [];
-var _publishedPageConfig = {};
+var _agentExtention = {};
 var _publishedPage = {};
 var _qrImage = {};
 var _qrCode = '';
@@ -20,7 +20,7 @@ function setCurrentUser(user) {
   _questions = user.questions || [];
   _savedSearches = user.saved_searches || [];
   _favoriteHomes = user.homes || [];
-  _publishedPageConfig = user.published_page_config || {};
+  _agentExtention = user.agent_extention || {}
   _qrImage = user.qr_image || {};
   _qrCode = user.qr_code || '';
   _wechatUser = user.wechat_user|| {}
@@ -30,8 +30,8 @@ function setSavedSearch(savedSearches) {
   _savedSearches = savedSearches
 }
 
-function setPublishedPageConfig(result) {
-  _publishedPageConfig = result
+function setAgentExtention(result) {
+  _agentExtention = result;
 }
 
 function setQRImage(img) {
@@ -67,8 +67,8 @@ var UserStore = _.extend({}, EventEmitter.prototype, {
      }
   },
 
-  getAgentPublishedPageConfig: function() {
-    return _publishedPageConfig;
+  getAgentInfo: function() {
+    return _agentExtention;
   },
 
   getWechatUser: function() {
@@ -135,7 +135,7 @@ AppDispatcher.register(function(payload) {
       setQuestions(action.data);
       break;
     case UserConstants.PUBLISH_PAGE_CONFIG:
-      setPublishedPageConfig(action.data);
+      setAgentExtention(action.data);
       break;
     case UserConstants.PUBLISH_PAGE:
       setPublishedPage(action.data);

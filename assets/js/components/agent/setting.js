@@ -6,12 +6,17 @@ var React = require('react'),
   SavedSearch = require('../dashboard/saved_search_list'),
   ServerActions = require('../../actions/server_action'),
   FileDrop = require('./file_drop'),
+  HomeQrCode = require('./home_qr_code'),
   Button = require('react-bootstrap').Button;
 
 var Setting = React.createClass({
 
   getStateFromStore: function () {
-    return  { page_config: UserStore.getAgentPublishedPageConfig(),
+    var pageConfig = UserStore.getAgentInfo().page_config;
+    if(pageConfig != undefined) {
+      pageConfig = JSON.parse(pageConfig)
+    }
+    return  { page_config: pageConfig,
       saved_searches: UserStore.getSavedSearches(),
       qr_img: UserStore.getQRImage(),
       qr_code: UserStore.getQRCode()}
@@ -41,12 +46,12 @@ var Setting = React.createClass({
   },
 
   populateHeader: function(value) {
-    ServerActions.savePageConfig(UserStore.getCurrentUser(), {header: value})
+    return ServerActions.savePageConfig(UserStore.getCurrentUser(), {header: value})
   },
 
   saveSelectedSearch: function(value, id) {
     $('#'+id).text('保存中')
-    ServerActions.savePageConfig(UserStore.getCurrentUser(), {search: value}).then(() => {
+    ServerActions.savePageConfig(UserStore.getCurrentUser(), JSON.parse(value[0])).then(() => {
       $("#" + id).removeClass('btn-success').addClass('btn-warning').text('请选择记录');
        $('#desc').show();
       });
@@ -71,11 +76,13 @@ var Setting = React.createClass({
     else {
       file_drop = <FileDrop/>
     }
-
     return (
       <div>
         <Header callback={this.populateHeader}/>
-        <SavedSearch className='agent' list={this.state.saved_searches} selected={this.state.page_config.search} callback={this.saveSelectedSearch}/>
+        <h3>查找房源，生成二维码</h3>
+        <HomeQrCode/>
+        <h3>选择过往搜索，执行搜索来设置您主页的推荐房源</h3>
+        <SavedSearch className='agent' list={this.state.saved_searches} selected={[this.state.page_config]} callback={this.saveSelectedSearch}/>
         <p id='desc' style={{display: 'none'}} > 保存完毕，请点击预览查看 </p>
         <div className='shareGroup'>
           <div className='shareDiv'>

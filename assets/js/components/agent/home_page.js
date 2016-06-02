@@ -21,7 +21,7 @@ var HomePage = React.createClass({
 
   render: function () {
     var homesComp = null;
-    var home_list = this.props.data.home_list;
+    var home_list = this.props.data.home;
     if(this.state.listView){
       homesComp = <HomeList listView={true} callback={this.showMode} custom_style={'previewList'} count={home_list.length} list={home_list}/>
     } else {
@@ -43,8 +43,8 @@ var HomePage = React.createClass({
         <div className='agent_home_div'>
           <img className='profile_img' src={this.props.data.head_image} />
           <div className='name_card'>
-            <p>姓名: {this.props.data.header.name}</p>
-            <p>联系电话: {this.props.data.header.contact}</p>
+            <p>姓名: {this.props.data.cn_name}</p>
+            <p>联系电话: {this.props.data.phone}</p>
           </div>
           <img className='agent_qr_img' src={this.props.data.qr_image} />
         </div>
@@ -62,10 +62,10 @@ var HomePage = React.createClass({
           <li><span className='glyphicon glyphicon-envelope'></span><br/>电邮</li>
         </ul>
         <div className='float_tab'>
-          <div className='phone-tab'>+1(650)888-5188</div>
-          <div className='msg-tab'>+1(650)888-5188</div>
+          <div className='phone-tab'>{this.props.data.phone}</div>
+          <div className='msg-tab'>+{this.props.data.phone}</div>
           <div className='wechat-tab'><img className='agent_qr_img' src={this.props.data.qr_image} /></div>
-          <div className='email-tab'>agent.leo@gmail.com</div>
+          <div className='email-tab'>{this.props.data.mail}</div>
         </div>
       </div>
       </div>

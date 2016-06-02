@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
   <script>
     var wechatUserId = "<%= @wechat_user_id %>";
-    console.log(wechatUserId);
+    var search = <%= @search %>
+    var fromAgent = <%= @from_agent %>
   </script>
   <%= stylesheet_link File.join(ASSET_URL, '/wechat/weui.css') %>
   <%= javascript_tag File.join(ASSET_URL, '/js/bundle_vendor.js') %>
@@ -30,7 +31,7 @@
   <div class="weui_cells weui_cells_checkbox">
     <label class="weui_cell weui_check_label" for="single_family">
       <div class="weui_cell_hd">
-        <input type="checkbox" value='single_family' class="weui_check" name="checkbox1" id="single_family" checked="checked">
+        <input type="checkbox" value='single_family' class="weui_check" name="checkbox1" id="single_family">
         <i class="weui_icon_checked"></i>
       </div>
       <div class="weui_cell_bd weui_cell_primary">
@@ -39,7 +40,7 @@
     </label>
     <label class="weui_cell weui_check_label" for="townhouse">
       <div class="weui_cell_hd">
-        <input type="checkbox" name="checkbox1" class="weui_check" value='townhouse'  id="townhouse" checked="checked">
+        <input type="checkbox" name="checkbox1" class="weui_check" value='townhouse'  id="townhouse">
         <i class="weui_icon_checked"></i>
       </div>
       <div class="weui_cell_bd weui_cell_primary">
@@ -57,7 +58,7 @@
     </label>
     <label class="weui_cell weui_check_label" for="condo">
       <div class="weui_cell_hd">
-        <input type="checkbox" name="checkbox1" value='condo' class="weui_check" id="condo" checked="checked">
+        <input type="checkbox" name="checkbox1" value='condo' class="weui_check" id="condo">
         <i class="weui_icon_checked"></i>
       </div>
       <div class="weui_cell_bd weui_cell_primary">
@@ -109,7 +110,7 @@
     <div class="weui_cell_bd weui_cell_primary">
       <select id='bedNum' class="weui_select" name="select2">
         <option value="1">1+</option>
-        <option selected value="2">2+</option>
+        <option value="2">2+</option>
         <option value="3">3+</option>
         <option value="4">4+</option>
         <option value="5">5+</option>
@@ -124,7 +125,7 @@
     <div class="weui_cell_bd weui_cell_primary">
       <select id='indoorSize' class="weui_select" name="select2">
         <option value="538" >50平方米以上</option>
-        <option selected value="968" >90方米以上</option>
+        <option value="968" >90方米以上</option>
         <option value="1291">120平方米以上</option>
         <option value="1614">150平方米以上</option>
         <option value="2153">200平方米以上</option>
@@ -282,15 +283,32 @@
       search['other'] = $('#other').prop('checked');
 
       search['customer_id'] = wechatUserId;
-
-      console.log(search);
+      search['from_agent'] = fromAgent;
       return search;
     };
 
     $('#closeDialog').click(function() {
       $('#regionError').hide();
     })
-    $("#areaSelector").select2();
+
+    $("#areaSelector").select2({placeholder: search.regionValue});
+
+
+    (function() {
+      $('#bedNum').val(search.bedNum || 2).change();
+      $('#indoorSize').val(search.indoor_size || '968').change();
+      $('#homeAge').val(search.home_age || '10').change();
+      $('#priceMin').val(search.priceMin || '0').change();
+      $('#priceMax').val(search.priceMax || '20000').change();
+
+      _.each(search.client_home_type, function(type){
+          $('#'+type).attr("checked",true);
+        }
+      );
+
+    }());
+
+
     $.ajax({
       url: "/bay_area/?area=SF",
       context:  $("#areaSelector")
@@ -299,7 +317,13 @@
         areas = JSON.parse(areas);
         var element = $( this );
         _.forEach(areas, function(data){
-          result += '<option value="' + data.split(',')[0] + '">' + data + '</option>';
+
+          result += '<option value="' + data.split(',')[0] + '"';
+          if(_.indexOf(search.regionValue.split(','), data.split(',')[0]) != -1 ){
+            // TODO how to pre-select
+            result += 'selected';
+          }
+          result += '>' + data + '</option>';
         })
         element.append(result)
       });

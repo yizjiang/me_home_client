@@ -16,6 +16,8 @@
   <%= stylesheet_link File.join(ASSET_URL, '/wechat/components.css') %>
   <%= stylesheet_link File.join(ASSET_URL, '/wechat/responsee.css') %>
 
+  <%= stylesheet_link File.join(ASSET_URL, '/wechat/agent.css') %>
+
   <%= javascript_tag File.join(ASSET_URL, '/wechat/owl-carousel/owl.carousel.js') %>
   <script>
     var CDN_URL = "<%= CDN_URL %>";
@@ -202,22 +204,27 @@
   </div>
 </div>
 <% end %>
-<div>
-  <h3 class='sub-header'>经纪人</h3>
-  <div class="agent-list">
-  <% @agents.each do |agent| %>
-    <div class="agentInfo">
-      <img class="profile_img" src=<%=agent['wechat_user']['head_img_url'] %>/>
-      <div class="agent_name">
-        <a href=<%= MEEHOME_CLIENT_URL + '/agent/' + agent['agent_extention']['agent_identifier']%>><%= agent['agent_extention']['cn_name'] || agent['wechat_user']['nickname'] %></a>
-        <p> 从业经验: <%=  agent['agent_extention']['license_year']? Time.now.year - agent['agent_extention']['license_year'].to_i : 0%>年 </p>
+
+<% if @agents.length > 0 %>
+  <div>
+    <h3 class='sub-header'>经纪人</h3>
+    <div class="agent-list">
+    <% @agents.each do |agent| %>
+      <div class="agentInfo">
+        <img class="profile_img" src=<%=agent['head_image'] %>/>
+        <div class="agent_name">
+          <a href=<%= MEEHOME_CLIENT_URL + '/agent/' + agent['agent_identifier']%>><%= agent['cn_name'] %></a>
+          <p> 从业经验: <%=  agent['license_year']? Time.now.year - agent['license_year'].to_i : 0%>年 </p>
+          <p><a href=<%= "tel:#{agent['phone']}" %> >电话: <%= agent['phone'] %> </a></p>
+        </div>
+        <img class="qr-code-img" src=<%=agent['qr_code'] %>/>
       </div>
-      <img class="qr-code-img" src=<%=agent['qr_code'] %>/>
+    <% end %>
     </div>
-  <% end %>
   </div>
-</div>
+<% end %>
 <div>
+
 <h3 class='sub-header'>指定学校</h3>
 <% if elemental=assigned_school.select{|sch| sch['grade'].include?('K')}.first %>
   <div class='school primary'>

@@ -29,6 +29,10 @@ $(".se-pre-con").fadeOut("slow");
      $('.qr-warp').fadeIn(800);
   })
 });
+
+function showQR() {
+  $('#qr-anchor').toggle();
+}
 </script>
 <div class="se-pre-con">
 页面加载中
@@ -39,14 +43,19 @@ $(".se-pre-con").fadeOut("slow");
       <div class='agent_home_div'>
         <img class='profile_img' src= <%= @agent_info[:head_image]%>/>
         <div class='name_card'>
-          <p class="agent-name">经纪人: <%= @agent_info[:header]['name'] || @agent_info[:cn_name]%></p>
-          <p class="contact-number">联系方式: <%= @agent_info[:header]['contact']%></p>
-          <p class="description"><%= @agent_info[:description]%></p>
+          <p class="agent-name">经纪人: <%= @agent_info[:cn_name]%></p>
+          <p class="contact-number">联系方式: <%= @agent_info[:phone]%></p>
+          <p class="contact-number">执照号:<%= @agent_info[:license_id] %></p>
+          <p class="description">签名: <%= @agent_info[:description]%></p>
+        </div>
+        <div class='name_card'>
+          <p class="agent-name">关注觅家</p>
+          <img class='profile_img' src= <%= File.join(MEEHOME_SERVER_URL ,@agent_info[:meejia_image]) %>/>
         </div>
       </div><!--close agent_home_div-->
 
       <div id="qr-anchor" class="qr-warp">
-        <img class='agent_qr_img' src=<%= @agent_info[:qr_image]%> />
+        <img class='agent_qr_img' src=<%= @agent_info[:qr_code]%> />
       </div>
 
       <div class='preview_list_div'>
@@ -54,7 +63,7 @@ $(".se-pre-con").fadeOut("slow");
         <% @home_list.each do |home| %>
           <a class="item-link" href=<%= File.join(MEEHOME_CLIENT_URL, 'home', home['id'].to_s)%>>
             <div class="estate-item">
-              <img class="item-img" src=<%= File.join(CDN_URL, 'photo', home['images'].try(:[], 0).try(:[], 'image_url'))%>>
+              <img class="item-img" src=<%= File.join(CDN_URL, 'photo', home['images'].try(:[], 0).try(:[], 'image_url') || 'default.jpg')%>>
               <p class="item-des item-price">价格：<%= home['price'] %></p>
               <p class="item-des"><%= home['addr1'].concat(" #{home['city']}")%></p>
               <p class="item-detail"><%= home['short_desc'] %></p>
@@ -67,7 +76,7 @@ $(".se-pre-con").fadeOut("slow");
       <ul>
         <li><a href=<%= "tel:#{@agent_info[:phone]}" %> ><span class='glyphicon glyphicon-earphone'></span><br/>电话</a></li>
         <li><a href=<%= "sms://#{@agent_info[:phone]}" %>><span class='glyphicon glyphicon-phone'></span><br/>短信</a></li>
-        <li><a class="wechat-icon" href="#qr-anchor"><span class='glyphicon glyphicon-comment'></span><br/>微信</a></li>
+        <li><a class="wechat-icon" onclick="showQR()"><span class='glyphicon glyphicon-comment'></span><br/>微信</a></li>
         <li><a href=<%= "mailto:#{@agent_info[:mail]}" %> ><span class='glyphicon glyphicon-envelope'></span><br/>电邮</a></li>
       </ul>
     </div>

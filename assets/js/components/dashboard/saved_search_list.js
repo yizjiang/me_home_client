@@ -42,11 +42,18 @@ var SavedSearchList = React.createClass({
   render: function() {
     var self = this;
     var index = 0;
+    var defaultText = undefined;
+    var defaultButton = <Button id='savedListBtn' bsStyle='warning' onClick={self.runSearch.bind(self, 'savedListBtn')}>请选择记录</Button>
+    if(this.props.list.length == 0){
+      defaultText =  <p>还没有查询记录，请返回首页查询后再来</p>;
+      defaultButton = <Button bsStyle='success' href={CLIENT_URL} >前去搜索页面</Button>
+    }
 
     //TODO why not work first time go to dashboard page
     return (
       <div className={"commentList " + this.props.className}>
          <h3>我的查询记录</h3>
+         {defaultText}
          <form>
          {this.props.list.map(function(value){
             var searchOption = JSON.parse(value.search_query);
@@ -61,11 +68,11 @@ var SavedSearchList = React.createClass({
             var label = '地区: ' + searchOption.regionValue;
 
             if(searchOption.priceMin != undefined){
-              label += ' 最低价: ' + searchOption.priceMax + '万 '
+              label += ' 最低价: ' + searchOption.priceMin + '万 '
             }
 
             if(searchOption.priceMin != undefined){
-              label += '最高价: ' + searchOption.priceMin + '万 '
+              label += '最高价: ' + searchOption.priceMax + '万 '
             }
 
             if(searchOption.bedNum != undefined){
@@ -104,9 +111,11 @@ var SavedSearchList = React.createClass({
             if(searchOption.indoor_size != undefined){
               label += ' 室内面积大于: ' + parseInt(parseInt(searchOption.indoor_size) * 0.093) + '平方米'
             }
-
+            // TODO: populate agent saved search
             var checked = _.findIndex(self.props.selected, function(search){
-              return search.regionValue == searchOption.regionValue && search.priceMin == searchOption.priceMin && search.priceMax == searchOption.priceMax
+              return search.regionValue == searchOption.regionValue &&
+              search.priceMin == searchOption.priceMin &&
+              search.priceMax == searchOption.priceMax
             })
             index = index+1;
             return(
@@ -120,7 +129,7 @@ var SavedSearchList = React.createClass({
               )
             })}
           </form>
-         <Button id='savedListBtn' bsStyle='warning' onClick={self.runSearch.bind(self, 'savedListBtn')}>请选择记录</Button>
+          {defaultButton}
       </div>
       );
   }

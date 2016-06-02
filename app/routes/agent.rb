@@ -8,11 +8,17 @@ module Routes
       response.body
     end
 
+    post '/generate_home_qr_code' do
+      request_payload = JSON.parse request.body.read
+      response = Typhoeus.post("#{MEEHOME_SERVER_URL}/agent/#{request.env['HTTP_UID']}/generate_home_qr_code", body: request_payload )
+      response.body
+    end
+
     get '/agent/:name' do
       response = Typhoeus.get("#{MEEHOME_SERVER_URL}/agent/#{params[:name]}")
       body = JSON.parse response.body
-      @home_list = body['home_list']
-      @agent_info = body.delete_if{|k,_| k.to_sym == :home_list}.symbolize_keys
+      @home_list = body['home']
+      @agent_info = body.delete_if{|k,_| k.to_sym == :home}.symbolize_keys
       content_type :html
       erb :agent
     end
@@ -20,6 +26,14 @@ module Routes
     get '/agent/:name/page' do
       response = Typhoeus.get("#{MEEHOME_SERVER_URL}/agent/#{params[:name]}")
       response.body
+    end
+
+    get  '/agent/:id/setting' do
+      @user_id = params[:id]
+      response = Typhoeus.get("#{MEEHOME_SERVER_URL}/agent/#{@user_id}/show")
+      @extention = response.body
+      content_type :html
+      erb :agent_setting
     end
 
     post '/save_page_config' do

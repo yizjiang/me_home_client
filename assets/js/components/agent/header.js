@@ -6,13 +6,14 @@ var React = require('react'),
 var Header = React.createClass({
 
   getStateFromStore: function () {
-    var name, contact, pageConf;
-    pageConf = UserStore.getAgentPublishedPageConfig();
-    if (pageConf.header != undefined) {
-      name = pageConf.header.name;
-      contact = pageConf.header.contact;
+    var pageConf;
+    pageConf = UserStore.getAgentInfo();
+    return {name: pageConf.cn_name,
+            phone: pageConf.phone,
+            email: pageConf.mail,
+            license: pageConf.license_id,
+            description: pageConf.description
     }
-    return {name: name, contact: contact}
   },
 
   getInitialState: function () {
@@ -40,7 +41,8 @@ var Header = React.createClass({
 },
 
 saveHeader: function () {
-  this.props.callback(this.state);
+  this.props.callback(this.state).then(() => {
+  $('#saveSuccess').show()});
 }
 ,
 
@@ -49,9 +51,16 @@ render: function () {
     <div className='setting_header'>
       <label className='agentlabel'>姓名</label>
       <input id='name' type="text" value={this.state.name} onChange={this.handleFilterChange}/>
-      <label className='agentlabel'>联系方式</label>
-      <input id='contact' type="text" value={this.state.contact} onChange={this.handleFilterChange}/>
-      <Button bsStyle='success' className='save_header' onClick={this.saveHeader}>保存联系方式</Button>
+      <label className='agentlabel'>电话</label>
+      <input id='phone' type="text" value={this.state.phone} onChange={this.handleFilterChange}/>
+      <label className='agentlabel'>执照号</label>
+      <input id='license' type="text" value={this.state.license} onChange={this.handleFilterChange}/>
+      <label className='agentlabel'>电子邮箱</label>
+      <input id='email' type="text" value={this.state.email} onChange={this.handleFilterChange}/>
+      <label className='agentlabel'>个人介绍</label>
+      <input id='description' type="text" value={this.state.description} onChange={this.handleFilterChange}/>
+      <Button bsStyle='success' className='save_header' onClick={this.saveHeader}>保存</Button>
+      <p id='saveSuccess' style={{display: 'none', width: '80px'}} >保存成功</p>
     </div>
     );
 }
