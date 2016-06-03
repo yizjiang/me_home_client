@@ -155,21 +155,21 @@ var HomeMain = React.createClass({
           <div className='landing-icon'>
             <a href='static/get_home.html'>
               <span className='glyphicon glyphicon-home'></span>
-              <h3>如何购房</h3>
+              <p>如何购房</p>
               <p>每日更新，最全的中文实时房屋资源</p>
             </a>
           </div>
           <div className='landing-icon'>
             <a href='static/get_agent.html'>
               <span className='glyphicon glyphicon-thumbs-up'></span>
-              <h3>如何选经纪人</h3>
+              <p>如何选经纪人</p>
               <p>顶级华人经纪人，任君挑选</p>
             </a>
           </div>
           <div className='landing-icon'>
             <a href='static/get_money.html'>
               <span className='glyphicon glyphicon-piggy-bank'></span>
-              <h3>如何办贷款</h3>
+              <p>如何办贷款</p>
               <p>快捷方便，觅家助您轻松办贷款</p>
             </a>
           </div>

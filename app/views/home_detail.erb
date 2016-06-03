@@ -210,14 +210,16 @@
     <h3 class='sub-header'>经纪人</h3>
     <div class="agent-list">
     <% @agents.each do |agent| %>
-      <div class="agentInfo">
+        <div class="agentInfo">
+          <a href=<%= MEEHOME_CLIENT_URL + '/agent/' + agent['agent_identifier'] %> >
         <img class="profile_img" src=<%=agent['head_image'] %>/>
+            </a>
         <div class="agent_name">
-          <a href=<%= MEEHOME_CLIENT_URL + '/agent/' + agent['agent_identifier']%>><%= agent['cn_name'] %></a>
+          <a ><%= agent['cn_name'] %></a>
           <p> 从业经验: <%=  agent['license_year']? Time.now.year - agent['license_year'].to_i : 0%>年 </p>
           <p><a href=<%= "tel:#{agent['phone']}" %> >电话: <%= agent['phone'] %> </a></p>
         </div>
-        <img class="qr-code-img" src=<%=agent['qr_code'] %>/>
+        <a href=<%= agent['qr_code'] %>><img class="qr-code-img" src=<%=agent['qr_code'] %>/></a>
       </div>
     <% end %>
     </div>

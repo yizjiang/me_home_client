@@ -50,7 +50,9 @@ function showQR() {
         </div>
         <div class='name_card'>
           <p class="agent-name">关注觅家</p>
-          <img class='profile_img' src= <%= File.join(MEEHOME_SERVER_URL ,@agent_info[:meejia_image]) %>/>
+          <a href= <%= File.join(MEEHOME_SERVER_URL ,@agent_info[:meejia_image]) %>>
+            <img class='profile_img' src= <%= File.join(MEEHOME_SERVER_URL ,@agent_info[:meejia_image]) %>/>
+          </a>
         </div>
       </div><!--close agent_home_div-->
 
