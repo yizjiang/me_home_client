@@ -2,11 +2,11 @@
 <html>
 <head>
   <title>觅家美国</title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <script>
     var userId = "<%= @user_id %>";
-    var extention = <%= @extention %>
   </script>
   <%= stylesheet_link File.join(ASSET_URL, '/wechat/weui.css') %>
   <%= javascript_tag File.join(ASSET_URL, '/js/bundle_vendor.js') %>
@@ -306,11 +306,11 @@
   $(document).ready(function() {
 
     (function() {
-      $('#name').val(extention.cn_name);
-      $('#license').val(extention.license_id);
-      $('#phone').val(extention.phone);
-      $('#email').val(extention.mail);
-      $('#description').val(extention.description);
+      $('#name').val("<%= @extention['cn_name'] %>");
+      $('#license').val("<%= @extention['license_id'] %>");
+      $('#phone').val("<%= @extention['phone'] %>");
+      $('#email').val("<%= @extention['mail'] %>");
+      $('#description').val("<%= @extention['description'] %>");
     }());
 
     function getSearchSetting() {

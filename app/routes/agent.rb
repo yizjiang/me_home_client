@@ -31,7 +31,7 @@ module Routes
     get  '/agent/:id/setting' do
       @user_id = params[:id]
       response = Typhoeus.get("#{MEEHOME_SERVER_URL}/agent/#{@user_id}/show")
-      @extention = response.body
+      @extention = JSON.parse response.body
       content_type :html
       erb :agent_setting
     end
