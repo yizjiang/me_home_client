@@ -223,6 +223,7 @@ div#agentcontent div.float_menu ul li span.glyphicon {
     color: #555;
     vertical-align: top;
     position: relative;
+    height: 300px;
 }
 .estate-item{
     display: block;
