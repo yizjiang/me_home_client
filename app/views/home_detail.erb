@@ -12,12 +12,9 @@
   <%= javascript_tag File.join(ASSET_URL, '/js/bundle_vendor.js') %>
   <%= stylesheet_link File.join(ASSET_URL, '/wechat/owl-carousel/owl.carousel.css') %>
   <%= stylesheet_link File.join(ASSET_URL, '/wechat/owl-carousel/owl.theme.css') %>
-  <%= stylesheet_link File.join(ASSET_URL, '/wechat/custom.css') %>
   <%= stylesheet_link File.join(ASSET_URL, '/wechat/components.css') %>
   <%= stylesheet_link File.join(ASSET_URL, '/wechat/responsee.css') %>
-
-  <%= stylesheet_link File.join(ASSET_URL, '/wechat/agent.css') %>
-
+  <%= stylesheet_link File.join(ASSET_URL, '/wechat/custom.css') %>
   <%= javascript_tag File.join(ASSET_URL, '/wechat/owl-carousel/owl.carousel.js') %>
   <script>
     var CDN_URL = "<%= CDN_URL %>";
@@ -76,8 +73,7 @@
          //do nothing
         }
       });
-
-    }
+    };
   </script>
 </head>
 
@@ -98,9 +94,8 @@
 
 <div id="owl-demo" class="owl-carousel">
 </div>
-
-<div style="height: 50px">
-  <button id='likeBtn' class='likeButton' onclick="likeHome()"></button>
+<div class="likebtnwrap">
+<button id='likeBtn' class='likeButton' onclick="likeHome()"></button>
 </div>
 
 <div class='info'>
@@ -205,28 +200,7 @@
 </div>
 <% end %>
 
-<% if @agents.length > 0 %>
-  <div>
-    <h3 class='sub-header'>经纪人</h3>
-    <div class="agent-list">
-    <% @agents.each do |agent| %>
-        <div class="agentInfo">
-          <a href=<%= MEEHOME_CLIENT_URL + '/agent/' + agent['agent_identifier'] %> >
-        <img class="profile_img" src=<%=agent['head_image'] %>/>
-            </a>
-        <div class="agent_name">
-          <a ><%= agent['cn_name'] %></a>
-          <p> 从业经验: <%=  agent['license_year']? Time.now.year - agent['license_year'].to_i : 0%>年 </p>
-          <p><a href=<%= "tel:#{agent['phone']}" %> >电话: <%= agent['phone'] %> </a></p>
-        </div>
-        <a href=<%= agent['qr_code'] %>><img class="qr-code-img" src=<%=agent['qr_code'] %>/></a>
-      </div>
-    <% end %>
-    </div>
-  </div>
-<% end %>
 <div>
-
 <h3 class='sub-header'>指定学校</h3>
 <% if elemental=assigned_school.select{|sch| sch['grade'].include?('K')}.first %>
   <div class='school primary'>
@@ -382,9 +356,42 @@
     </div>
   </div>
 <% end %>
+<div class="last-wrap">
+</div>
+<% if @agents.length > 0 %>
+  <div class="float-agent">
+    <% agent = @agents.select{|x| x['qr_code'].present?}.first %>
+    <% url = MEEHOME_CLIENT_URL + '/agent/' + agent['agent_identifier'] %>
+    <div class="agent-info-wrap">
+      <a class="profile-img" href=<%=url %> style="background:url(<%=agent['head_image'] %>) no-repeat center / cover"/>
+      </a>
+      <div class="agent-info">
+        <a class="agent-name" href=<%=url %> ><%= agent['cn_name'] %></a>
+        <div class="icon-wrap">
+          <a class="phone-icon" href=<%= "tel:#{agent['phone']}" %> > </a>
+          <a class="wechat-icon"> </a>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+<% end %>
+<div class="qrcode-layer hidden">
+  <img class="qr-code-img" src=<%=agent['qr_code'] %>/>
+</div>
 
 <script type="text/javascript">
   $(document).ready(function () {
+    $(".wechat-icon").click(function(){
+      $(".qrcode-layer").removeClass("hidden");
+      $(".qrcode-layer").addClass("show");
+    });
+
+    $(".qrcode-layer").click(function(){
+      $(this).removeClass("show");
+      $(this).addClass("hidden");
+    });
+
     var result = '';
     var element = $( this );
     _.forEach(home.images, function(img){
