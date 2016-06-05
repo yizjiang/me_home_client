@@ -26,7 +26,7 @@ $(window).load(function() {
 // Animate loader off screen
 $(".se-pre-con").fadeOut("slow");
   $('.wechat-icon').on("click",function(){
-     $('.qr-warp').fadeIn(800);
+     $('.qr-warp').fadeIn(900);
   })
 });
 
@@ -35,40 +35,54 @@ function showQR() {
 }
 </script>
 <div class="se-pre-con">
-页面加载中
+  <div class="loading-text">稍安勿躁<br>休息 休息一下</div>
+  <div class="preloading"></div>
 </div>
 <div id="agentcontent">
+  <div class="header">
+    <div class="logo">
+    </div>
+  </div>
   <div>
     <div class="agent-page">
       <div class='agent_home_div'>
         <img class='profile_img' src= <%= @agent_info[:head_image]%>/>
         <div class='name_card'>
-          <p class="agent-name">经纪人: <%= @agent_info[:cn_name]%></p>
-          <p class="contact-number">联系方式: <%= @agent_info[:phone]%></p>
-          <p class="contact-number">执照号:<%= @agent_info[:license_id] %></p>
-          <p class="description">签名: <%= @agent_info[:description]%></p>
-        </div>
-        <div class='name_card'>
-          <p class="agent-name">关注觅家</p>
-          <a href= <%= File.join(MEEHOME_SERVER_URL ,@agent_info[:meejia_image]) %>>
-            <img class='profile_img' src= <%= File.join(MEEHOME_SERVER_URL ,@agent_info[:meejia_image]) %> />
-          </a>
+          <p class="agent-name"><%= @agent_info[:cn_name]%></p>
+          <p class="info-mail"><%= @agent_info[:mail]%></p>
+          <p class="contact-number">经纪人执照号 <%= @agent_info[:license_id] %></p>
+          <p class="description"><%= @agent_info[:description]%></p>
+        
+          <div class="arrow-container">
+            <div class="open-panel">
+              长按扫码加我为经纪人
+            </div>
+            <div class="arrow">
+            </div>
+            <div id="qr-anchor" class="qr-warp">
+              <img class='agent_qr_img' src=<%= @agent_info[:qr_code]%> />
+            </div>
+          </div>
         </div>
       </div><!--close agent_home_div-->
 
-      <div id="qr-anchor" class="qr-warp">
-        <img class='agent_qr_img' src=<%= @agent_info[:qr_code]%> />
-      </div>
+      
 
       <div class='preview_list_div'>
         <h3 class='previewH3'>优质房源</h3>
         <% @home_list.each do |home| %>
-          <a class="item-link" href=<%= File.join(MEEHOME_CLIENT_URL, 'home', home['id'].to_s)%>>
+          <a class="item-link" href=<%= File.join(MEEHOME_CLIENT_URL, 'home', home['id'].to_s)%> style="background: url(<%= File.join(CDN_URL, 'photo', home['images'].try(:[], 0).try(:[], 'image_url') || 'default.jpg')%>) no-repeat center / cover">
             <div class="estate-item">
-              <img class="item-img" src=<%= File.join(CDN_URL, 'photo', home['images'].try(:[], 0).try(:[], 'image_url') || 'default.jpg')%>>
-              <p class="item-des item-price">价格：<%= home['price'] %></p>
-              <p class="item-des"><%= home['addr1'].concat(" #{home['city']}")%></p>
-              <p class="item-detail"><%= home['short_desc'] %></p>
+              <div class="item-panel left">
+                <div class="item-price">
+                  <%= home['price'] %>
+                </div>
+                <div class="item-address">
+                  <%= home['addr1'].concat(" #{home['city']}")%>
+                </div>
+              </div><div class="item-panel right">
+                <div class="item-bedroom right-items"> -- <br>Beds</div><div class="item-bathroom right-items"> -- <br>Baths</div><div class="item-squareft right-items"> -- <br>Sq. Ft.</div>
+              </div>
             </div>
           </a>
         <% end%>
