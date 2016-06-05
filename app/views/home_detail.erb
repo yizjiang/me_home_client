@@ -387,8 +387,8 @@
   $(document).ready(function () {
     var result = '';
     var element = $( this );
-    _.forEach(home.images, function(img){
-      result += '<div class="item"><img class="lazyOwl" data-src="' + CDN_URL + '/photo/' + img.image_url + '" alt="Lazy Owl Image"></div>';
+    for(var index in home.images){
+      result += '<div class="item"><img class="lazyOwl" data-src="' + CDN_URL + '/photo/' + home.images[index].image_url + '" alt="Lazy Owl Image"></div>';
     })
     $(".owl-carousel").append(result);
 

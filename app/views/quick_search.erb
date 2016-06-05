@@ -264,9 +264,10 @@
       var search = {};
       search['api'] = true;
       var regionValue = [];
-      _.forEach($('#areaSelector').select2("data"), function(data) {
-         regionValue.push(data.text.split(',')[0])
-      });
+      var selectedValue = $('#areaSelector').select2("data");
+      for(var index in selectedValue){
+        regionValue.push(selectedValue[index].text.split(',')[0])
+      }
       search['regionValue'] = regionValue.join(',');
       search['priceMin'] = $('#priceMin').val();
       search['priceMax'] = $('#priceMax').val();
@@ -301,10 +302,9 @@
       $('#priceMin').val(search.priceMin || '0').change();
       $('#priceMax').val(search.priceMax || '20000').change();
 
-      _.each(search.client_home_type, function(type){
-          $('#'+type).attr("checked",true);
-        }
-      );
+      for(var i in search.client_home_type){
+        $('#'+search.client_home_type[i]).attr("checked",true);
+      }
 
     }());
 
@@ -316,15 +316,13 @@
         var result = '';
         areas = JSON.parse(areas);
         var element = $( this );
-        _.forEach(areas, function(data){
+        var result = '';
 
-          result += '<option value="' + data.split(',')[0] + '"';
-          if(_.indexOf(search.regionValue.split(','), data.split(',')[0]) != -1 ){
-            // TODO how to pre-select
-            result += 'selected';
-          }
-          result += '>' + data + '</option>';
-        })
+        for(var i in areas){
+          // TODO how to pre-select
+          result += '<option value="' + areas[i].split(',')[0] + '"';
+          result += '>' + areas[i] + '</option>';
+         }
         element.append(result)
       });
 
@@ -332,7 +330,7 @@
       var search = {};
       search = getSearchSetting();
 
-      if(_.isEmpty(search['regionValue'])){
+      if(search['regionValue'].length == 0){
         $('#regionError').show();
       }
       else {

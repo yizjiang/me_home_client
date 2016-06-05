@@ -18,7 +18,7 @@ var Setting = React.createClass({
     }
     return  { page_config: pageConfig,
       saved_searches: UserStore.getSavedSearches(),
-      qr_img: UserStore.getQRImage(),
+      meejia_image: UserStore.getMeejiaImage(),
       qr_code: UserStore.getQRCode()}
   },
 
@@ -60,11 +60,12 @@ var Setting = React.createClass({
 
   render: function () {
     var content, file_drop;
-    if(this.state.qr_img.is_followed == true){
+    if(this.state.meejia_image.is_followed == true){
        content = <p>请分享此二维码给您的客户，以便了解客户在觅家服务上的活动</p>
+
     }
     else {
-      content = <p>您还未关注觅家公众号，请扫描此二维码后刷新</p>
+      content = <p>请扫描此二维码后刷新页面关注觅家经纪公众号</p>
     }
 
     if(this.state.qr_code){
@@ -87,7 +88,7 @@ var Setting = React.createClass({
         <div className='shareGroup'>
           <div className='shareDiv'>
             {content}
-            <img id={'qrcode'} src={SERVER_URL + "/" + this.state.qr_img.img_url} height="160" width="160"/>
+            <img id={'qrcode'} src={this.state.meejia_image.img_url || CLIENT_URL + '/img/loading.gif' } height="160" width="160"/>
           </div>
           {file_drop}
         </div>

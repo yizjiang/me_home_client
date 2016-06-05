@@ -6,5 +6,6 @@ module.exports = keyMirror({
   SUBMIT_QUESTION: null,
   FAVORITE_HOME: null,
   PUBLISH_PAGE: null,
-  PUBLISH_PAGE_CONFIG: null
+  PUBLISH_PAGE_CONFIG: null,
+  MEEJIA_IMAGE: null
 });

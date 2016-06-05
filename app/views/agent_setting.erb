@@ -317,9 +317,11 @@
       var search = {};
       search['api'] = true;
       var regionValue = [];
-      _.forEach($('#areaSelector').select2("data"), function(data) {
-        regionValue.push(data.text.split(',')[0])
-      });
+      var selectedValue = $('#areaSelector').select2("data");
+      for(var index in selectedValue){
+        regionValue.push(selectedValue[index].text.split(',')[0])
+      }
+
       search['regionValue'] = regionValue.join(',');
       search['priceMin'] = $('#priceMin').val();
       search['priceMax'] = $('#priceMax').val();
@@ -363,9 +365,9 @@
         var result = '';
         areas = JSON.parse(areas);
         var element = $( this );
-        _.forEach(areas, function(data){
-          result += '<option value="' + data.split(',')[0] + '">' + data + '</option>';
-        })
+        for (var i in areas){
+          result += '<option value="' + areas[i].split(',')[0] + '">' + areas[i] + '</option>';
+        }
         element.append(result)
       });
 
@@ -375,13 +377,10 @@
       search = getSearchSetting();
       personalInfo = getPersonalInfo();
 
-      if(_.isEmpty(search['regionValue'])){
+      if(search['regionValue'].length == 0){
         $('#regionError').show();
       }
       else {
-        console.log(search);
-        console.log(personalInfo);
-
         $('#loadingToast').show();
         $.ajax({
           url: '/save_page_config',

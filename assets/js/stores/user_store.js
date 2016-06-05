@@ -11,7 +11,7 @@ var _savedSearches = [];
 var _favoriteHomes = [];
 var _agentExtention = {};
 var _publishedPage = {};
-var _qrImage = {};
+var _meejiaImage = {};
 var _qrCode = '';
 var _wechatUser = {};
 
@@ -21,7 +21,7 @@ function setCurrentUser(user) {
   _savedSearches = user.saved_searches || [];
   _favoriteHomes = user.homes || [];
   _agentExtention = user.agent_extention || {}
-  _qrImage = user.qr_image || {};
+  _meejiaImage = user.meejia_image || {};
   _qrCode = user.qr_code || '';
   _wechatUser = user.wechat_user|| {}
 }
@@ -34,8 +34,8 @@ function setAgentExtention(result) {
   _agentExtention = result;
 }
 
-function setQRImage(img) {
-  _qrImage = img
+function setMeejiaImage(meejiaImage) {
+  _meejiaImage = meejiaImage
 }
 
 function setPublishedPage(result) {
@@ -75,8 +75,8 @@ var UserStore = _.extend({}, EventEmitter.prototype, {
     return _wechatUser;
   },
 
-  getQRImage: function() {
-    return _qrImage;
+  getMeejiaImage: function() {
+    return _meejiaImage;
   },
 
   getQRCode: function() {
@@ -139,6 +139,9 @@ AppDispatcher.register(function(payload) {
       break;
     case UserConstants.PUBLISH_PAGE:
       setPublishedPage(action.data);
+      break;
+    case UserConstants.MEEJIA_IMAGE:
+      setMeejiaImage(action.data);
       break;
     default:
       return true;

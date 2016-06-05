@@ -502,6 +502,24 @@ var ServerActions = {
     });
   },
 
+  getMeejiaImage: function(agent_id) {
+    return $.ajax({
+      url: '/agent/' + agent_id + '/meejia_image',
+      type: 'get',
+
+      success: function(data) {
+        AppDispatcher.handleAction({
+          actionType: UserConstants.MEEJIA_IMAGE,
+          data: JSON.parse(data)
+        })
+      },
+
+      error: function() {
+        console.log('error generate qr code');
+      }
+    });
+  },
+
   generateHomeQrCode: function(agent_id, sourceType, sourceId){
     return $.ajax({
       url: '/generate_home_qr_code',

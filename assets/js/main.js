@@ -1,5 +1,5 @@
 'use strict';
-
+window._ = require('lodash');
 window.React = require('react/addons');
 window.ReactBootstrap = require("react-bootstrap");
 
@@ -26,7 +26,12 @@ var React = require('react'),
 
 //ServerActions.fetchRegionRanking('');
 
-ServerActions.getCurrentUser(TICKET).then(function(value){console.log(value)});
+ServerActions.getCurrentUser(TICKET).then(function(value){
+  console.log(value);
+  if(value.agent_identifier != undefined){
+    ServerActions.getMeejiaImage(value.id)
+  }
+});
 
 var App = React.createClass({
 
