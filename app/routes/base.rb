@@ -67,7 +67,7 @@ module Routes
         @agents = [agent]
       else
         agents = JSON.parse Typhoeus.get("#{MEEHOME_SERVER_URL}/agents").body
-        @agents = agents
+        @agents = agents.select{|x| x['qr_code'].present?}
       end
       @uid = params['uid'] || ''
       erb :home_detail, :locals => home.symbolize_keys

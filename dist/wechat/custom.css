@@ -272,11 +272,17 @@ table.area-table {
     width: 100%;
     padding: 15px;
 }
+
 .qrcode-layer.hidden{
     display: none;
 }
 .qr-code-img{
     width: 100%;
+}
+.qr-code-description{
+  color: white;
+  text-align: center;
+  width: 100%;
 }
 /*=================================================
 
@@ -338,4 +344,55 @@ table.area-table {
     height: 30px;
     display: inline-block;
     vertical-align: middle;
+}
+
+.arrow-container {
+    width: 100%;
+    position: relative;
+    z-index: 0;
+}
+
+.open-panel {
+    text-align: center;
+    font-size: 18px;
+    letter-spacing: 2px;
+    line-height: 60px;
+    height: 60px;
+    border-radius: 5px;
+    background-color: #74c005;
+    width: 320px;
+    margin: 0 auto;
+    color: white;
+}
+
+.arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    left: calc(50% - 10px);
+    border-color: #74c005 transparent transparent transparent;
+
+    -webkit-animation: arrow-updown .5s infinite; /* Safari 4+ */
+    -moz-animation: arrow-updown .5s infinite; /* Fx 5+ */
+    -o-animation: arrow-updown .5s infinite; /* Opera 12+ */
+    animation: arrow-updown .5s infinite;
+}
+
+.qr-warp {
+    width: 320px;
+    margin: 20px auto;
+    background-color: #f8f8f8;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.agent_qr_img {
+    width: 200px;
+    margin: 0 auto;
+    display: block;
+}
+
+.agent_qr_img.loading{
+    width: 100px;
 }

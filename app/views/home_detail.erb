@@ -20,7 +20,7 @@
     var CDN_URL = "<%= CDN_URL %>";
     var uid = "<%=@uid%>";
     var ACCESS_KEY = "<%= ACCESS_KEY %>";
-
+    var agentId = "<%= @agents.first['agent_id'] %>"
     var home = {
       addr1: "<%= addr1 %>",
       addr2: "<%= addr2 %>",
@@ -359,26 +359,36 @@
 <% end %>
 <div class="last-wrap">
 </div>
+<div class="arrow-container">
+  <div class="open-panel">
+    关注觅家，长按获取
+  </div>
+  <div class="arrow">
+  </div>
+  <div id="qr-anchor" class="qr-warp">
+    <img id='meejiaImage' class='agent_qr_img loading' src=<%= File.join(MEEHOME_CLIENT_URL, 'img/preload.gif')%> />
+  </div>
+</div>
 <% if @agents.length > 0 %>
   <div class="float-agent">
-    <% agent = @agents.select{|x| x['qr_code'].present?}.first %>
+    <% agent = @agents.first %>
     <% url = MEEHOME_CLIENT_URL + '/agent/' + agent['agent_identifier'] %>
     <div class="agent-info-wrap">
       <a class="profile-img" href=<%=url %> style="background:url(<%=agent['head_image'] %>) no-repeat center / cover"/>
       </a>
       <div class="agent-info">
-        <a class="agent-name" href=<%=url %> ><%= agent['cn_name'] %></a>
+        <a class="agent-name" href=<%=url %> ><%= "#{agent['cn_name']}: 专业的置业经纪人希望为您服务"%></a>
         <div class="icon-wrap">
           <a class="phone-icon" href=<%= "tel:#{agent['phone']}" %> > </a>
           <a class="wechat-icon"> </a>
         </div>
       </div>
-      
     </div>
   </div>
 <% end %>
 <div class="qrcode-layer hidden">
   <img class="qr-code-img" src=<%=agent['qr_code'] %>/>
+  <p class="qr-code-description">长按扫码</p>
 </div>
 
 <script type="text/javascript">
@@ -393,11 +403,32 @@
       $(this).addClass("hidden");
     });
 
+    $.ajax({
+      url: '/agent/' + agentId + '/meejia_image',
+      type: 'get',
+
+      success: function(data) {
+        data = JSON.parse(data);
+        var qrImage;
+        if(data.is_followed){
+          qrImage = data.img_url
+        } else {
+          qrImage = data.meejia_url
+        }
+        $('#meejiaImage').removeClass('loading')
+        $('#meejiaImage').attr('src', qrImage);
+      },
+
+      error: function() {
+        console.log('error generate qr code');
+      }
+    });
+
     var result = '';
     var element = $( this );
     for(var index in home.images){
       result += '<div class="item"><img class="lazyOwl" data-src="' + CDN_URL + '/photo/' + home.images[index].image_url + '" alt="Lazy Owl Image"></div>';
-    })
+    }
     $(".owl-carousel").append(result);
 
     $(".owl-carousel").owlCarousel({
@@ -408,7 +439,6 @@
 
     var data = home.city_info;
     var other = 100 - parseInt(data.asian) - parseInt(data.black) - parseInt(data.caucasion) -  parseInt(data.hispanics)
-
     var pieData = [
       {
         value: parseInt(data.asian),

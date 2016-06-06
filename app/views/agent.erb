@@ -16,8 +16,8 @@ var SERVER_URL = "<%= MEEHOME_SERVER_URL %>";
 var CLIENT_URL = "<%= MEEHOME_CLIENT_URL %>";
 var CDN_URL = "<%= CDN_URL %>"
 var agentId = "<%= @agent_info[:agent_id] %>";
-var articleId = "<%= @article_id %>";
-
+var articleId = "<%= JSON.parse(@agent_info[:page_config])['article_id'] %>";
+console.log(articleId);
 if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
 console.log('mobile');
 }
@@ -34,10 +34,6 @@ $(".se-pre-con").fadeOut("slow");
 });
 
 $(document).ready(function() {
-  function showQR() {
-    $('#qr-anchor').toggle();
-  };
-
   $.ajax({
     url: '/agent/' + agentId + '/meejia_image',
     type: 'get',
@@ -66,7 +62,9 @@ $(document).ready(function() {
 
       success: function(data) {
         data = JSON.parse(data);
-        $('#article').html(data.content);
+        $('#title').html(data.title);
+        $('#digest').html(data.digest);
+        $('#content').html(data.content);
       },
 
       error: function() {
@@ -78,7 +76,7 @@ $(document).ready(function() {
 
 </script>
 <div class="se-pre-con">
-  <div class="loading-text">稍安勿躁<br>休息 休息一下</div>
+  <div class="loading-text">稍安勿躁<br>休息,休息一下</div>
   <div class="preloading"></div>
 </div>
 <div id="agentcontent">
@@ -95,10 +93,11 @@ $(document).ready(function() {
           <p class="info-mail"><%= @agent_info[:mail]%></p>
           <p class="contact-number">经纪人执照号 <%= @agent_info[:license_id] %></p>
           <p class="description"><%= @agent_info[:description]%></p>
-        
-          <div class="arrow-container">
+
+          <a id="agent_qr_panel"></a>
+          <div id="'qr_panel" class="arrow-container">
             <div class="open-panel">
-              长按扫码加我为经纪人
+              经纪人二维码，长按获取
             </div>
             <div class="arrow">
             </div>
@@ -109,10 +108,12 @@ $(document).ready(function() {
         </div>
       </div><!--close agent_home_div-->
 
-      
-
-      <div id="article">
+      <div>
+        <h3 class='previewH3'>推荐文章</h3>
+        <h5 id="title"/>
+        <h6 id="digest"/>
       </div>
+      <div class='article_content' id="content"></div>
 
       <div class='preview_list_div'>
         <h3 class='previewH3'>优质房源</h3>
@@ -127,18 +128,32 @@ $(document).ready(function() {
                   <%= home['addr1'].concat(" #{home['city']}")%>
                 </div>
               </div><div class="item-panel right">
-                <div class="item-bedroom right-items"> -- <br>Beds</div><div class="item-bathroom right-items"> -- <br>Baths</div><div class="item-squareft right-items"> -- <br>Sq. Ft.</div>
+                <div class="item-bedroom right-items"> <%= home['bed_num'] %> <br>卧室</div>
+                <div class="item-bathroom right-items"> <%= home['bath_num'] %>  <br>浴室</div>
+                <div class="item-squareft right-items">室内:<%= home['chinese_indoor_size'].to_i %>平米 <br>占地:<%= home['chinese_lot_size'].to_i %>平米</div>
               </div>
             </div>
           </a>
         <% end%>
       </div> <!--close preview_list_div-->
+
+      <div class="arrow-container">
+        <div class="open-panel">
+          关注觅家，长按获取
+        </div>
+        <div class="arrow">
+        </div>
+        <div id="qr-anchor" class="qr-warp">
+          <img id='meejiaImage' class='agent_qr_img' src=<%= File.join(MEEHOME_CLIENT_URL, 'img/preloading.gif')%> />
+        </div>
+      </div>
+
     </div><!--close agent-page-->
     <div class='float_menu'>
       <ul>
         <li><a href=<%= "tel:#{@agent_info[:phone]}" %> ><span class='glyphicon glyphicon-earphone'></span><br/>电话</a></li>
         <li><a href=<%= "sms://#{@agent_info[:phone]}" %>><span class='glyphicon glyphicon-phone'></span><br/>短信</a></li>
-        <li><a class="wechat-icon" onclick="showQR()"><span class='glyphicon glyphicon-comment'></span><br/>微信</a></li>
+        <li><a class="wechat-icon" href="#agent_qr_panel"><span class='glyphicon glyphicon-comment'></span><br/>微信</a></li>
         <li><a href=<%= "mailto:#{@agent_info[:mail]}" %> ><span class='glyphicon glyphicon-envelope'></span><br/>电邮</a></li>
       </ul>
     </div>
