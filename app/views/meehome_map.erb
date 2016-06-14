@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <title>觅家美国</title>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+  <script src='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js'></script>
+  <link href='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css' rel='stylesheet' />
+  <style>
+    body { margin:0; padding:0; }
+    #meemap { position:absolute; top:0; bottom:0; width:100%; }
+  </style>
+  <script>
+    var schools = JSON.parse(<%= @schools.to_json %>);
+  </script>
+</head>
+<body>
+<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
+<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css' rel='stylesheet' />
+<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css' rel='stylesheet' />
+
+<div id='meemap'></div>
+
+<script>
+  L.mapbox.accessToken = 'pk.eyJ1IjoiZGV1Ym95IiwiYSI6ImNpcDg3cm1xMzAxN3VzeW5vdWd6YWx4c2IifQ.cU1CJ-BMZuoyHigylGe4gA';
+  var map = L.mapbox.map('meemap', 'mapbox.streets')
+      .setView([37.424, -122.167], 10);
+
+  var markers = new L.MarkerClusterGroup();
+
+  for (var i = 0; i < schools.length; i++) {
+    var school = schools[i];
+    var title = school['name'];
+    var latlng = school['geo_point'];
+    if (latlng && latlng != -1 && latlng.split(',').length==2) {
+      var marker = L.marker(new L.LatLng(latlng.split(',')[0], latlng.split(',')[1]), {
+        icon: L.mapbox.marker.icon({'marker-symbol': 'college', 'marker-color': '0044FF'}),
+        title: title
+      });
+      marker.bindPopup(title);
+      markers.addLayer(marker);
+    }
+  }
+  map.addLayer(markers);
+</script>
+</body>
+</html>
