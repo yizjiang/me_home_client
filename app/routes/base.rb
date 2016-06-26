@@ -97,6 +97,12 @@ module Routes
       response.body
     end
 
+    get '/meemap' do
+      response = Typhoeus.get("#{MEEHOME_SERVER_URL}/all_schools")
+      @schools = response.body
+      erb :meehome_map
+    end
+
     post '/metric_tracking' do
       request_payload = JSON.parse request.body.read
       response = Typhoeus.post("#{MEEHOME_SERVER_URL}/user/metric_tracking", headers: {uid: request.env['HTTP_UID'] }, body: request_payload )
