@@ -15,10 +15,6 @@ module Routes
     set :raise_errors, :after_handler
     set :public_dir, 'dist'
 
-    configure :dashboard do
-      set :show_exceptions, false
-    end
-
     helpers Sinatra::JSON, Sinatra::Contrib
 
     helpers do
@@ -47,6 +43,10 @@ module Routes
       @json_body ||= JSON.parse(request.body.read) rescue {}
     end
 
+    error do
+      send_file '500.html'
+    end
+
     get '/hi' do
       'hello world'
     end
@@ -66,8 +66,11 @@ module Routes
         agent = JSON.parse Typhoeus.get("#{MEEHOME_SERVER_URL}/agent/#{params[:agent_id]}/show").body
         @agents = [agent]
       else
-        agents = JSON.parse Typhoeus.get("#{MEEHOME_SERVER_URL}/agents").body
-        @agents = agents.select{|x| x['qr_code'].present?}
+        @agents = JSON.parse Typhoeus.get("#{MEEHOME_SERVER_URL}/agents").body
+      end
+      @listing_agent = home['listing_agent'].merge(listed_by: home['listed_by'])
+      if home['listing_agent'] && @agents.length > 1
+        @agents= @agents.delete_if{|agent| agent['agent_id'] == home['listing_agent']['id']}
       end
       @uid = params['uid'] || ''
       erb :home_detail, :locals => home.symbolize_keys

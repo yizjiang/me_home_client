@@ -118,6 +118,11 @@ module Routes
       response.body
     end
 
+    get '/home/search/listing' do
+      response = Typhoeus.get("#{MEEHOME_SERVER_URL}/home/search/listing", params: params)
+      response.body
+    end
+
     def get_user_session
       response = Typhoeus.get("#{MEEHOME_SERVER_URL}/session", params: params)
       response.body

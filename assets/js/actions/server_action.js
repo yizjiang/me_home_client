@@ -520,7 +520,28 @@ var ServerActions = {
     });
   },
 
-  generateHomeQrCode: function(agent_id, sourceType, sourceId){
+  homeSearchByListing: function(sourceType, sourceId){
+    return $.ajax({
+      url: '/home/search/listing',
+
+      type: 'get',
+      data: {sourceType: sourceType, sourceId: sourceId},
+
+      success: function(data) {
+        AppDispatcher.handleAction({
+          actionType: 'SEARCH_BY_LIST',
+          data: JSON.parse(data)
+        })
+      },
+
+      error: function() {
+        console.log('error generate qr code');
+      }
+    });
+  },
+
+  generateHomeQrCode: function(agent_id, homeId){
+    console.log(homeId);
     return $.ajax({
       url: '/generate_home_qr_code',
 
@@ -532,7 +553,7 @@ var ServerActions = {
 
       dataType: 'json',
 
-      data: JSON.stringify({sourceType: sourceType, sourceId: sourceId}),
+      data: JSON.stringify({home_id: homeId}),
 
       success: function(data) {
       },

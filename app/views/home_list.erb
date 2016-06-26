@@ -1,0 +1,18 @@
+<% @home_list.each do |home| %>
+  <a class="item-link" href=<%= File.join(MEEHOME_CLIENT_URL, 'home', home['id'].to_s)%> style="background: url(<%= File.join(CDN_URL, 'photo', home['images'].try(:[], 0).try(:[], 'image_url') || 'default.jpg')%>) no-repeat center / cover">
+  <div class="estate-item">
+    <div class="item-panel left">
+      <div class="item-price">
+        <%= home['price'] %>
+      </div>
+      <div class="item-address">
+        <%= home['addr1'].concat(" #{home['city']}")%>
+      </div>
+    </div><div class="item-panel right">
+    <div class="item-bedroom right-items"> <%= home['bed_num'] %> <br>卧室</div>
+    <div class="item-bathroom right-items"> <%= home['bath_num'] %>  <br>浴室</div>
+    <div class="item-squareft right-items">室内:<%= home['chinese_indoor_size'].to_i %>平米 <br>占地:<%= home['chinese_lot_size'].to_i %>平米</div>
+  </div>
+  </div>
+  </a>
+<% end%>

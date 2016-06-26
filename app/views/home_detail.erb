@@ -20,7 +20,7 @@
     var CDN_URL = "<%= CDN_URL %>";
     var uid = "<%=@uid%>";
     var ACCESS_KEY = "<%= ACCESS_KEY %>";
-    var agentId = "<%= @agents.first['agent_id'] %>"
+    var agentId = "<%= @agents.first.try(:[], 'agent_id') %>"
     var home = {
       addr1: "<%= addr1 %>",
       addr2: "<%= addr2 %>",
@@ -53,6 +53,30 @@
     home.assigned_school = JSON.parse(home.assigned_school);
     home.public_schools = JSON.parse(home.public_schools);
     home.private_schools = JSON.parse(home.private_schools);
+
+    function agentRequest() {
+      $.ajax({
+        url: '/agent/contact_request',
+        headers: {
+          'uid': uid
+        },
+        type: 'POST',
+
+        dataType: 'json',
+
+        data: JSON.stringify({home_id: home.id}),
+
+        success: function() {
+          $('#agentRequestConfirmation').text('已成功发送');
+          $('#agentRequestConfirmation').show();
+        },
+        error: function() {
+          $('#agentRequestConfirmation').text('请重试');
+          $('#agentRequestConfirmation').show();
+        }
+      });
+    };
+
     function likeHome() {
       $.ajax({
         url: '/favoriteHome',
@@ -357,6 +381,25 @@
     </div>
   </div>
 <% end %>
+
+<div>
+  <h3 class='sub-header'>卖方经纪人</h3>
+  <p>姓名：<%= @listing_agent['name']%></p>
+  <p>公司：<%= @listing_agent[:listed_by]%></p>
+  <% if @listing_agent['profile_image'] %>
+    <img style="width:60px" src=<%= @listing_agent['profile_image'] %> />
+  <% end %>
+</div>
+
+<div>
+  <h3 class='sub-header'>我感兴趣</h3>
+  <div class="weui_cell_bd weui_cell_primary">
+    <textarea id='description' class="weui_textarea" placeholder="我对此房源感兴趣，请与我联系" rows="3"></textarea>
+  </div>
+  <button onclick="agentRequest()">我感兴趣</button>
+  <p style="display: none" id="agentRequestConfirmation"></p>
+</div>
+
 <div class="last-wrap">
 </div>
 <div class="arrow-container">
