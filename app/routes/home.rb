@@ -31,6 +31,13 @@ module Routes
       response.body
     end
 
+    get '/homeMap' do
+      response = Typhoeus.get("#{MEEHOME_SERVER_URL}/homes/show_all", params: params)
+      @homes = JSON.parse response.body
+      content_type :html
+      erb :home_map
+    end
+
     get '/regionSearch' do
       response = Typhoeus.get("#{MEEHOME_SERVER_URL}/region", params: params)
       response.body

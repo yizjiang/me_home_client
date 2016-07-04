@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <title>觅家美国</title>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <script src='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js'></script>
+  <link href='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css' rel='stylesheet' />
+  <style>
+    body { margin:0; padding:0; }
+    #meemap { position:absolute; top:0; bottom:0; width:100%; }
+  </style>
+  <script>
+    var homes = <%= @homes.to_json %>;
+    var CDN_URL = "<%= CDN_URL %>";
+    var CLIENT_URL = "<%= MEEHOME_CLIENT_URL %>";
+  </script>
+</head>
+
+<style>
+  .popup {
+    text-align:center;
+  }
+  .popup .slideshow .image        { display:none; }
+  .popup .slideshow .image.active { display:block; }
+  .popup .slideshow img {
+    width:100%;
+  }
+  .popup .slideshow .caption {
+    background:#eee;
+    padding:10px;
+  }
+  .popup .cycle {
+    padding:10px 0 20px;
+  }
+</style>
+
+
+<body>
+<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
+<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css' rel='stylesheet' />
+<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css' rel='stylesheet' />
+
+<div id='meemap'></div>
+
+<script>
+  L.mapbox.accessToken = 'pk.eyJ1IjoiZGV1Ym95IiwiYSI6ImNpcDg3cm1xMzAxN3VzeW5vdWd6YWx4c2IifQ.cU1CJ-BMZuoyHigylGe4gA';
+  var map = L.mapbox.map('meemap', 'mapbox.streets')
+    .setView([homes[0].geo_point.split(',')[0], homes[0].geo_point.split(',')[1]], 13);
+
+  var myLayer = L.mapbox.featureLayer().addTo(map);
+  var geoJson = [];
+
+  for (var i in homes) {
+    var home = homes[i];
+    var image_url = '';
+    if(home.images.length > 0 && home.images[0] != undefined){
+      image_url = CDN_URL + home.images[0].image_url
+    }
+    var homeJson = {
+      type: 'Feature',
+      "geometry": { "type": "Point", "coordinates": [home.geo_point.split(',')[1], home.geo_point.split(',')[0]]},
+      "properties": {
+        'homeId': home.id,
+        'title': home.addr1,
+        'marker-color': '#3c4e5a',
+        'marker-symbol': 'warehouse',
+        'marker-size': 'large',
+
+        // Store the image url and caption in an array.
+        'images': [
+          [image_url, home.short_desc],
+        ]
+      }
+    }
+    geoJson.push(homeJson);
+  }
+
+  myLayer.on('layeradd', function(e) {
+    var marker = e.layer;
+    var feature = marker.feature;
+    var images = feature.properties.images
+    var slideshowContent = '';
+
+    for(var i = 0; i < images.length; i++) {
+      var img = images[i];
+
+      slideshowContent += '<div class="image' + (i === 0 ? ' active' : '') + '">' +
+        '<img src="' + img[0] + '" />' +
+        '<div class="caption">' + img[1] + '</div>' +
+        '</div>';
+    }
+
+    // Create custom popup content
+    var popupContent =  '<div id="' + feature.properties.id + '" class="popup">' +
+      '<a href="' + CLIENT_URL + '/home/'+ feature.properties.homeId + '">' +
+      '<h2>' + feature.properties.title + '</h2>' + '</a>' +
+      '<div class="slideshow">' +
+      slideshowContent +
+      '</div>' +
+    '</div>';
+
+    // http://leafletjs.com/reference.html#popup
+    marker.bindPopup(popupContent,{
+      closeButton: false,
+      minWidth: 320
+    });
+  });
+
+  // Add features to the map
+  myLayer.setGeoJSON(geoJson);
+
+</script>
+</body>
+</html>
