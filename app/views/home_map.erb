@@ -50,7 +50,8 @@
     .setView([homes[0].geo_point.split(',')[0], homes[0].geo_point.split(',')[1]], 13);
 
   var myLayer = L.mapbox.featureLayer().addTo(map);
-  var geoJson = [];
+  var markers = new L.MarkerClusterGroup();
+
 
   for (var i in homes) {
     var home = homes[i];
@@ -58,59 +59,37 @@
     if(home.images.length > 0 && home.images[0] != undefined){
       image_url = CDN_URL + home.images[0].image_url
     }
-    var homeJson = {
-      type: 'Feature',
-      "geometry": { "type": "Point", "coordinates": [home.geo_point.split(',')[1], home.geo_point.split(',')[0]]},
-      "properties": {
-        'homeId': home.id,
-        'title': home.addr1,
-        'marker-color': '#3c4e5a',
-        'marker-symbol': 'warehouse',
-        'marker-size': 'large',
+    var lat = home.geo_point.split(',')[0];
+    var long = home.geo_point.split(',')[1];
 
-        // Store the image url and caption in an array.
-        'images': [
-          [image_url, home.short_desc],
-        ]
-      }
-    }
-    geoJson.push(homeJson);
-  }
+    var marker = L.marker(new L.LatLng(lat, long), {
+      icon: L.mapbox.marker.icon({'marker-symbol': 'warehouse', 'marker-color': '0044FF'}),
+    });
 
-  myLayer.on('layeradd', function(e) {
-    var marker = e.layer;
-    var feature = marker.feature;
-    var images = feature.properties.images
     var slideshowContent = '';
 
-    for(var i = 0; i < images.length; i++) {
-      var img = images[i];
-
-      slideshowContent += '<div class="image' + (i === 0 ? ' active' : '') + '">' +
-        '<img src="' + img[0] + '" />' +
-        '<div class="caption">' + img[1] + '</div>' +
-        '</div>';
-    }
+    slideshowContent += '<div class="image active">' +
+      '<img src="' + image_url + '" />' +
+      '<div class="caption">' + home.short_desc + '</div>' +
+      '</div>';
 
     // Create custom popup content
-    var popupContent =  '<div id="' + feature.properties.id + '" class="popup">' +
-      '<a href="' + CLIENT_URL + '/home/'+ feature.properties.homeId + '">' +
-      '<h2>' + feature.properties.title + '</h2>' + '</a>' +
+    var popupContent =  '<div id="' + home.id + '" class="popup">' +
+      '<a href="' + CLIENT_URL + '/home/'+ home.id + '">' +
+      '<h2>' + home.addr1 + '</h2>' + '</a>' +
       '<div class="slideshow">' +
-      slideshowContent +
+        slideshowContent +
       '</div>' +
-    '</div>';
+      '</div>';
 
-    // http://leafletjs.com/reference.html#popup
-    marker.bindPopup(popupContent,{
+    marker.bindPopup(popupContent, {
       closeButton: false,
       minWidth: 320
     });
-  });
 
-  // Add features to the map
-  myLayer.setGeoJSON(geoJson);
-
+    markers.addLayer(marker);
+  }
+  map.addLayer(markers);
 </script>
 </body>
 </html>
