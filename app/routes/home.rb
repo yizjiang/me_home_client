@@ -130,6 +130,12 @@ module Routes
       response.body
     end
 
+    post '/user/send_home_card' do
+      request_payload = JSON.parse request.body.read
+      response = Typhoeus.post("#{MEEHOME_SERVER_URL}/user/send_home_card", headers: {uid: request.env['HTTP_UID'] }, body: request_payload )
+      response.body
+    end
+
     def get_user_session
       response = Typhoeus.get("#{MEEHOME_SERVER_URL}/session", params: params)
       response.body

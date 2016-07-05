@@ -77,6 +77,29 @@
       });
     };
 
+    function sendHomeCard() {
+      $.ajax({
+        url: '/user/send_home_card',
+        headers: {
+          'uid': uid
+        },
+        type: 'POST',
+
+        dataType: 'json',
+
+        data: JSON.stringify({home_id: home.id}),
+
+        success: function() {
+          $('#homeCardConfirmation').text('已成功发送');
+          $('#homeCardConfirmation').show();
+        },
+        error: function() {
+          $('#homeCardConfirmation').text('请重试');
+          $('#homeCardConfirmation').show();
+        }
+      });
+    };
+
     function likeHome() {
       $.ajax({
         url: '/favoriteHome',
@@ -403,6 +426,13 @@
 <div class="last-wrap">
 </div>
 <div class="arrow-container">
+  <div class="open-panel" onclick="sendHomeCard()">
+    发送房屋名牌
+  </div>
+  <div class="arrow">
+  </div>
+  <p style="display: none" id="homeCardConfirmation"></p>
+  <br/>
   <div class="open-panel">
     关注觅家，长按获取
   </div>
