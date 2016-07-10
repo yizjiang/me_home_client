@@ -12,6 +12,8 @@ var gulp = require('gulp'),
     react = require('gulp-react'),
     imagemin = require('gulp-imagemin'),
     source = require('vinyl-source-stream'),
+    cleanCSS = require('gulp-clean-css'),
+    merge = require('merge-stream'),
     sourcemaps = require('gulp-sourcemaps');
 
 
@@ -133,6 +135,69 @@ gulp.task('build:production', function() {
     .pipe(gulp.dest(path.dist.js));
 
 })
+
+gulp.task('wechat:agent', function () {
+  var sassStream = gulp.src('assets/sass/agent.scss')
+    .pipe(sass({}))
+    .pipe(sourcemaps.write('./'));
+
+  var cssStream = gulp.src('assets/sass/wechat/agent.css');
+
+  //merge the two streams and concatenate their contents into a single file
+  return merge(sassStream, cssStream)
+    .pipe(concat('agent.css'))
+    .pipe(cleanCSS({}))
+    .pipe(gulp.dest('./dist/wechat'));
+});
+
+gulp.task('wechat:agent_setting', function () {
+  //merge the two streams and concatenate their contents into a single file
+  return gulp.src(['assets/sass/wechat/select2.css', 'assets/sass/wechat/weui.css'])
+    .pipe(sourcemaps.write('./'))
+    .pipe(concat('agent_setting.css'))
+    .pipe(cleanCSS({}))
+    .pipe(gulp.dest('./dist/wechat'));
+});
+
+gulp.task('wechat:agent_setting_js', function () {
+  //merge the two streams and concatenate their contents into a single file
+  return browserify('./assets/js/wechat/agent_setting.js')
+    .transform(babelify)
+    .bundle()
+    .pipe(source('agent_setting.js'))
+    .pipe(buffer())
+    .pipe(uglify())
+    .pipe(gulp.dest('dist/wechat'));
+});
+
+
+gulp.task('wechat:home_detail_js', function () {
+  //merge the two streams and concatenate their contents into a single file
+  return browserify('./assets/js/wechat/home_detail.js')
+    .transform(babelify)
+    .bundle()
+    .pipe(source('home_detail.js'))
+    .pipe(buffer())
+    .pipe(uglify())
+    .pipe(gulp.dest('dist/wechat'));
+});
+
+gulp.task('wechat:home_detail', function () {
+  //merge the two streams and concatenate their contents into a single file
+  return gulp.src(['assets/sass/wechat/owl.carousel.css',
+      'assets/sass/wechat/custom.css',
+      'assets/sass/wechat/components.css',
+      'assets/sass/wechat/owl.theme.css',
+      'assets/sass/wechat/responsee.css'])
+    .pipe(sourcemaps.write('./'))
+    .pipe(concat('home_detail.css'))
+    .pipe(cleanCSS({}))
+    .pipe(gulp.dest('./dist/wechat'));
+});
+
+gulp.task('wechat:build', ['wechat:agent',
+  'wechat:agent_setting', 'wechat:agent_setting_js',
+  'wechat:home_detail', 'wechat:home_detail_js']);
 
 gulp.task('agent:production', function(){
    return browserify(path.app.agent)

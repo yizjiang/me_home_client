@@ -6,16 +6,9 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <script type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
-
-  <%= javascript_tag File.join(ASSET_URL, '/js/bundle_vendor.js') %>
-  <%= stylesheet_link File.join(ASSET_URL, '/wechat/owl-carousel/owl.carousel.css') %>
-  <%= stylesheet_link File.join(ASSET_URL, '/wechat/owl-carousel/owl.theme.css') %>
-  <%= stylesheet_link File.join(ASSET_URL, '/wechat/components.css') %>
-  <%= stylesheet_link File.join(ASSET_URL, '/wechat/responsee.css') %>
-  <%= stylesheet_link File.join(ASSET_URL, '/wechat/custom.css') %>
-  <%= javascript_tag File.join(ASSET_URL, '/wechat/owl-carousel/owl.carousel.js') %>
+  <%= stylesheet_link File.join(ASSET_URL, '/wechat/home_detail.css') %>
+  <%= javascript_tag File.join(ASSET_URL, '/wechat/home_detail.js') %>
   <script>
     var CDN_URL = "<%= CDN_URL %>";
     var uid = "<%=@uid%>";
@@ -48,11 +41,6 @@
       bath_num: "<%= bath_num %>",
       indoor_size: "<%= indoor_size %>"
     };
-    home.city_info = JSON.parse(home.city_info);
-    home.images = JSON.parse(home.images);
-    home.assigned_school = JSON.parse(home.assigned_school);
-    home.public_schools = JSON.parse(home.public_schools);
-    home.private_schools = JSON.parse(home.private_schools);
 
     function agentRequest() {
       $.ajax({
