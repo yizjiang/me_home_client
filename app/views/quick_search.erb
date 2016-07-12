@@ -9,11 +9,8 @@
     var search = <%= @search %>
     var fromAgent = <%= @from_agent %>
   </script>
-  <%= stylesheet_link File.join(ASSET_URL, '/wechat/weui.css') %>
-  <%= javascript_tag File.join(ASSET_URL, '/js/bundle_vendor.js') %>
-
-  <%= stylesheet_link File.join(ASSET_URL, '/wechat/select2.css') %>
-  <%= javascript_tag File.join(ASSET_URL, '/wechat/select2.js') %>
+  <%= javascript_tag File.join(ASSET_URL, '/wechat/agent_setting.js') %>
+  <%= stylesheet_link File.join(ASSET_URL, '/wechat/agent_setting.css') %>
 </head>
 <body>
 <div class="weui_cells_title">微信快速搜索</div>
