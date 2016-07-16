@@ -14,6 +14,7 @@ var gulp = require('gulp'),
     source = require('vinyl-source-stream'),
     cleanCSS = require('gulp-clean-css'),
     merge = require('merge-stream'),
+    replace = require('gulp-replace'),
     sourcemaps = require('gulp-sourcemaps');
 
 
@@ -178,6 +179,7 @@ gulp.task('wechat:home_detail_js', function () {
     .bundle()
     .pipe(source('home_detail.js'))
     .pipe(buffer())
+    .pipe(replace(/'use strict';/g, ''))
     .pipe(uglify())
     .pipe(gulp.dest('dist/wechat'));
 });
