@@ -174,14 +174,19 @@ gulp.task('wechat:agent_setting_js', function () {
 
 gulp.task('wechat:home_detail_js', function () {
   //merge the two streams and concatenate their contents into a single file
-  return browserify('./assets/js/wechat/home_detail.js')
+   browserify('./assets/js/wechat/home_detail.js')
     .transform(babelify)
     .bundle()
-    .pipe(source('home_detail.js'))
+    .pipe(source('home_detail_temp.js'))
     .pipe(buffer())
     .pipe(replace(/'use strict';/g, ''))
     .pipe(uglify())
     .pipe(gulp.dest('dist/wechat'));
+
+  return gulp.src(['assets/js//mapbox.js',
+      'dist/wechat/home_detail_temp.js'])
+    .pipe(concat('home_detail.js'))
+    .pipe(gulp.dest('./dist/wechat'));
 });
 
 gulp.task('wechat:home_detail', function () {
@@ -190,7 +195,8 @@ gulp.task('wechat:home_detail', function () {
       'assets/sass/wechat/custom.css',
       'assets/sass/wechat/components.css',
       'assets/sass/wechat/owl.theme.css',
-      'assets/sass/wechat/responsee.css'])
+      'assets/sass/wechat/responsee.css',
+      'assets/sass/wechat/mapbox.css'])
     .pipe(sourcemaps.write('./'))
     .pipe(concat('home_detail.css'))
     .pipe(cleanCSS({}))

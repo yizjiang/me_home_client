@@ -7,8 +7,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+
+  <style>
+    body { margin:0; padding:0; }
+    #myMap { position:absolute; top:0; bottom:0; width:30%; }
+  </style>
+
   <%= stylesheet_link File.join(ASSET_URL, '/wechat/home_detail.css') %>
   <%= javascript_tag File.join(ASSET_URL, '/wechat/home_detail.js') %>
+
   <script>
     var CDN_URL = "<%= CDN_URL %>";
     var uid = "<%=@uid%>";
@@ -261,7 +268,6 @@
   </table>
   <div class='map-canvas'>
     <div id='myMap'></div>
-    <div id="output"></div>
   </div>
 </div>
 <% end %>
@@ -566,54 +572,29 @@
       },
     ];
 
+
+    L.mapbox.accessToken = 'pk.eyJ1IjoiZGV1Ym95IiwiYSI6ImNpcDg3cm1xMzAxN3VzeW5vdWd6YWx4c2IifQ.cU1CJ-BMZuoyHigylGe4gA';
+    var map = L.mapbox.map('myMap', 'mapbox.streets')
+      .setView([home.geo_point.split(',')[0], home.geo_point.split(',')[1]], 13);
+
+    var myLayer = L.mapbox.featureLayer().addTo(map);
+
+    var image_url = '';
+    if(home.images.length > 0 && home.images[0] != undefined){
+      image_url = CDN_URL + home.images[0].image_url
+    }
+    var lat = home.geo_point.split(',')[0];
+    var long = home.geo_point.split(',')[1];
+
+    var marker = L.marker(new L.LatLng(lat, long), {
+      icon: L.mapbox.marker.icon({'marker-symbol': 'warehouse', 'marker-color': '0044FF'}),
+    });
+
+    map.addLayer(marker);
+
     var ctx = document.getElementById("chart-area").getContext("2d");
     window.myPie = new Chart(ctx).Pie(pieData);
 
-    function showMap(home) {
-      map = new Microsoft.Maps.Map(document.getElementById('myMap'), {credentials: ACCESS_KEY,
-        showMapTypeSelector:false
-      });
-//
-      infobox = new Microsoft.Maps.Infobox(new Microsoft.Maps.Location(0, 0), { visible: false, offset: new Microsoft.Maps.Point(0, 20) });
-      map.entities.push(infobox);
-
-      Microsoft.Maps.Events.addHandler(map, 'mousewheel', function(e) {
-        e.handled = true;
-        return true;
-      });
-
-      var output = document.getElementById("output");
-
-      if (output) {
-        while (output.hasChildNodes()) {
-          output.removeChild(output.lastChild);
-        }
-      }
-      var resultsHeader = document.createElement("h5");
-      output.appendChild(resultsHeader);
-      var that = this;
-
-      if(home.geo_point != -1 && home.geo_point != undefined){
-        var lat = home.geo_point.split(',')[0];
-        var long = home.geo_point.split(',')[1];
-
-        var location = new Microsoft.Maps.Location(lat, long);
-        var pushpin = new Microsoft.Maps.Pushpin(location);
-
-        pushpin.Title = home.title;
-        pushpin.Description = home.short_desc;
-        map.entities.push(pushpin);
-      }
-
-//      Microsoft.Maps.Events.addHandler(pushpin, 'mouseover', that.displayInfo);
-//      Microsoft.Maps.Events.addHandler(pushpin, 'click', that.showHomeDetail);
-//        map.entities.push(pushpin);
-//      })
-      map.setView({center: location, zoom: 10});
-
-    };
-
-    showMap(home);
   });
 </script>
 
