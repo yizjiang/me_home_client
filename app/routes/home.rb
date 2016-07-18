@@ -32,7 +32,11 @@ module Routes
     end
 
     get '/homeMap' do
-      response = Typhoeus.get("#{MEEHOME_SERVER_URL}/homes/show_all", params: params)
+      if params[:uid]
+        response = Typhoeus.get("#{MEEHOME_SERVER_URL}/user/#{params[:uid]}/homes")
+      else
+        response = Typhoeus.get("#{MEEHOME_SERVER_URL}/homes/show_all", params: params)
+      end
       @homes = JSON.parse response.body
       content_type :html
       erb :home_map
@@ -50,6 +54,11 @@ module Routes
 
     get '/bay_area' do
       response = Typhoeus.get("#{MEEHOME_SERVER_URL}/bay_area_cities", params: params)
+      response.body
+    end
+
+    get '/isFavoriteHome' do
+      response = Typhoeus.get("#{MEEHOME_SERVER_URL}/user/#{params[:uid]}/homes?shorten=true")
       response.body
     end
 

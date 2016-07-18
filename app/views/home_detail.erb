@@ -14,6 +14,7 @@
     var uid = "<%=@uid%>";
     var ACCESS_KEY = "<%= ACCESS_KEY %>";
     var agentId = "<%= @agents.first.try(:[], 'agent_id') %>"
+    var favorite = false;
     var home = {
       addr1: "<%= addr1 %>",
       addr2: "<%= addr2 %>",
@@ -88,9 +89,34 @@
       });
     };
 
-    function likeHome() {
+    function isMyFavoriteHome() {
       $.ajax({
-        url: '/favoriteHome',
+        url: '/isFavoriteHome',
+        type: 'get',
+        data: {uid: uid},
+
+        success: function(data) {
+          if( data.indexOf(home.id) != -1) {
+            favorite = true
+            $('#likeBtn').addClass('likedButton');
+          }
+        },
+
+        error: function() {
+          //do nothing
+        }
+      });
+    };
+
+    function likeHome() {
+      var url;
+      if (favorite) {
+        url = '/unfavoriteHome'
+      } else {
+        url = '/favoriteHome'
+      }
+      $.ajax({
+        url: url,
         headers: {
           'uid': uid
         },
@@ -101,7 +127,11 @@
         data: JSON.stringify({home_id: home.id}),
 
         success: function() {
-          $('#likeBtn').addClass('likedButton');
+          if (favorite) {
+            $('#likeBtn').removeClass('likedButton');
+          } else {
+            $('#likeBtn').addClass('likedButton');
+          }
         },
 
         error: function() {
@@ -463,6 +493,9 @@
       $(this).removeClass("show");
       $(this).addClass("hidden");
     });
+
+
+    isMyFavoriteHome();
 
     $.ajax({
       url: '/agent/' + agentId + '/meejia_image',

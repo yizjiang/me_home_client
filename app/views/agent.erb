@@ -13,6 +13,7 @@ var CLIENT_URL = "<%= MEEHOME_CLIENT_URL %>";
 var CDN_URL = "<%= CDN_URL %>"
 var agentId = "<%= @agent_info[:agent_id] %>";
 var articleId = '';
+
 <% if @agent_info[:page_config] %>
   articleId = "<%= JSON.parse(@agent_info[:page_config])['article_id'] %>";
 <% end %>
@@ -54,19 +55,26 @@ $(document).ready(function() {
     }
   });
 
-  $.ajax({
-    url: '/agent/' + agentId + '/home_list',
-    type: 'get',
-
-    success: function(data) {
-      console.log(data);
-      $(".preview_list_div").append(data);
-    },
-
-    error: function() {
-      console.log('error home list');
-    }
+  $("#nextPage").click(function(){
+    updateHomeLIst();
   });
+
+  function updateHomeLIst() {
+    $.ajax({
+      url: '/agent/' + agentId + '/home_list',
+      type: 'get',
+
+      success: function(data) {
+        $(".preview_list_div").html(data);
+      },
+
+      error: function() {
+        console.log('error home list');
+      }
+    });
+  }
+
+  updateHomeLIst();
 
   if(articleId != ''){
     $.ajax({
@@ -83,10 +91,6 @@ $(document).ready(function() {
         console.log('error fetching article');
       }
     });
-  }
-
-  if(agentId != '') {
-
   }
 })
 
@@ -131,11 +135,16 @@ $(document).ready(function() {
       </div>
       <div class='article_content' id="content"></div>
 
+      <h3 class='previewH3'>优质房源</h3>
       <div class='preview_list_div'>
-        <h3 class='previewH3'>优质房源</h3>
+
       </div> <!--close preview_list_div-->
 
       <div class="arrow-container">
+        <div id="nextPage" class="open-panel">
+          换一批
+        </div>
+        <br/>
         <div class="open-panel">
           关注觅家，长按获取
         </div>
