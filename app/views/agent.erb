@@ -56,16 +56,25 @@ $(document).ready(function() {
   });
 
   $("#nextPage").click(function(){
-    updateHomeLIst();
+    updateHomeLIst(false);
   });
 
-  function updateHomeLIst() {
+  function updateHomeLIst(firstTime) {
     $.ajax({
       url: '/agent/' + agentId + '/home_list',
       type: 'get',
 
       success: function(data) {
         $(".preview_list_div").html(data);
+        if(!firstTime) {
+          $('html, body').animate({
+            scrollTop: $('.previewH3').offset().top
+          }, 800, function(){
+
+            // Add hash (#) to URL when done scrolling (default click behavior)
+            window.location.hash = 'homeList';
+          });
+        }
       },
 
       error: function() {
@@ -74,7 +83,7 @@ $(document).ready(function() {
     });
   }
 
-  updateHomeLIst();
+  updateHomeLIst(true);
 
   if(articleId != ''){
     $.ajax({
@@ -134,7 +143,7 @@ $(document).ready(function() {
         <h6 id="digest"/>
       </div>
       <div class='article_content' id="content"></div>
-
+      <a href="#homeList"></a>
       <h3 class='previewH3'>优质房源</h3>
       <div class='preview_list_div'>
 

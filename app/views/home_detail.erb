@@ -150,6 +150,10 @@
 </head>
 
 <body class='mobile-container'>
+<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
+<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css' rel='stylesheet' />
+<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css' rel='stylesheet' />
+
 <script type="text/javascript">
   $(window).load(function() {
     // Animate loader off screen
@@ -450,11 +454,10 @@
 <div class="last-wrap">
 </div>
 <div class="arrow-container">
-  <div class="open-panel" onclick="sendHomeCard()">
-    发送房屋名牌
-  </div>
-  <div class="arrow">
-  </div>
+  <!--<div class="open-panel" onclick="sendHomeCard()">-->
+    <!--发送房屋名牌-->
+  <!--</div>-->
+  <!--<div class="arrow"></div>-->
   <p style="display: none" id="homeCardConfirmation"></p>
   <br/>
   <div class="open-panel">
@@ -574,10 +577,10 @@
 
 
     L.mapbox.accessToken = 'pk.eyJ1IjoiZGV1Ym95IiwiYSI6ImNpcDg3cm1xMzAxN3VzeW5vdWd6YWx4c2IifQ.cU1CJ-BMZuoyHigylGe4gA';
-    var map = L.mapbox.map('myMap', 'mapbox.streets')
-      .setView([home.geo_point.split(',')[0], home.geo_point.split(',')[1]], 13);
 
-    var myLayer = L.mapbox.featureLayer().addTo(map);
+    var map = L.mapbox.map('myMap', 'mapbox.streets')
+      .setView([home.geo_point.split(',')[0], home.geo_point.split(',')[1]], 15);
+    var markers = new L.MarkerClusterGroup();
 
     var image_url = '';
     if(home.images.length > 0 && home.images[0] != undefined){
@@ -586,12 +589,27 @@
     var lat = home.geo_point.split(',')[0];
     var long = home.geo_point.split(',')[1];
 
+
     var marker = L.marker(new L.LatLng(lat, long), {
       icon: L.mapbox.marker.icon({'marker-symbol': 'warehouse', 'marker-color': '0044FF'}),
     });
 
-    map.addLayer(marker);
+    markers.addLayer(marker);
 
+    var title = '';
+    for (var i in home.assigned_school){
+      lat = home.assigned_school[i].geo_point.split(',')[0];
+      long = home.assigned_school[i].geo_point.split(',')[1];
+       title = home.assigned_school[i].name;
+       marker = L.marker(new L.LatLng(lat, long), {
+        icon: L.mapbox.marker.icon({'marker-symbol': 'college', 'marker-color': '228B22'}),
+        title: title
+      });
+      marker.bindPopup(title);
+      markers.addLayer(marker);
+    }
+
+    map.addLayer(markers);
     var ctx = document.getElementById("chart-area").getContext("2d");
     window.myPie = new Chart(ctx).Pie(pieData);
 
