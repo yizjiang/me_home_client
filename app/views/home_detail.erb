@@ -485,11 +485,11 @@
       </div>
     </div>
   </div>
+  <div class="qrcode-layer hidden">
+    <img class="qr-code-img" src=<%=agent['qr_code'] %>/>
+    <p class="qr-code-description">长按扫码</p>
+  </div>
 <% end %>
-<div class="qrcode-layer hidden">
-  <img class="qr-code-img" src=<%=agent['qr_code'] %>/>
-  <p class="qr-code-description">长按扫码</p>
-</div>
 
 <script type="text/javascript">
   $(document).ready(function () {
