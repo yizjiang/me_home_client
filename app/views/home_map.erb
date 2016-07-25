@@ -57,7 +57,7 @@
     var home = homes[i];
     var image_url = '';
     if(home.images.length > 0 && home.images[0] != undefined){
-      image_url = CDN_URL + home.images[0].image_url
+      image_url = CDN_URL + 'photo/' + home.images[0].image_url
     }
     var lat = home.geo_point.split(',')[0];
     var long = home.geo_point.split(',')[1];
