@@ -235,13 +235,33 @@
         loadHome();
     });
 
+    function zoomIn(coords) {
+        coordinates.innerHTML = 'Longitude:' + coords.lng + '<br>' + 'Latitude:' + coords.lat;
+        getRegionPrice(coords.lng, coords.lat)
+
+        map.jumpTo({center: [coords.lng, coords.lat]});
+
+        var zoomLevel = map.getZoom();
+        if(zoomLevel > 9 && zoomLevel < 13){
+            zoomLevel += 1;
+        } else if (zoomLevel < 9.5) {
+            zoomLevel += 3
+        }
+
+        map.zoomTo(zoomLevel);
+
+        geojson.features[0].geometry.coordinates = [coords.lng, coords.lat];
+        map.getSource('point').setData(geojson);
+    }
+
     map.on('click', function (e) {
         console.log('xxx');
         console.log(e.lngLat);
         var features = map.queryRenderedFeatures(e.point, { layers: ['points', 'route'] });
         console.log(features);
         if (!features.length) {
-            return;
+           zoomIn(e.lngLat);
+           return
         }
 
         var feature = features[1];
