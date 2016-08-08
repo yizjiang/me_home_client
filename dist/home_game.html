@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title></title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.21.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.21.0/mapbox-gl.css' rel='stylesheet' />
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+
+    <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:60px; bottom:0; width:100%; height: 90%}
+    </style>
+</head>
+<body>
+
+<style>
+    .popup {
+        text-align:center;
+    }
+    .popup .slideshow .image        { display:none; }
+    .popup .slideshow .image.active { display:block; }
+    .popup .slideshow img {
+        width:100%;
+    }
+    .popup .slideshow .caption {
+        background:#eee;
+        padding:10px;
+    }
+    .popup .cycle {
+        padding:10px 0 20px;
+    }
+
+    .popup .cycle a.prev { float:left; }
+    .popup .cycle a.next { float:right; }
+
+    .mapboxgl-popup {
+        max-width: 400px;
+        font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    }
+
+    .marker {
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        height: 60px;
+        width: 60px;
+    }
+
+    .coordinates {
+        background: rgba(0,0,0,0.5);
+        color: #fff;
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        padding:5px 10px;
+        margin: 0;
+        font-size: 11px;
+        line-height: 18px;
+        border-radius: 3px;
+        display: none;
+    }
+
+    #fly {
+        display: block;
+        position: relative;
+        margin: 0px auto;
+        width: 50%;
+        height: 40px;
+        padding: 10px;
+        border: none;
+        border-radius: 3px;
+        font-size: 12px;
+        text-align: center;
+        color: #fff;
+        background: #ee8a65;
+    }
+</style>
+<p id="step">请把图中原点移到您家的位置</p>
+<div id='map'></div>
+<pre id='coordinates' class='coordinates'></pre>
+<br/>
+<button id='fly'>换房到湾区</button>
+<script>
+    window.$ = window.jQuery;
+
+    mapboxgl.accessToken = 'pk.eyJ1IjoiZGV1Ym95IiwiYSI6ImNpcDg3cm1xMzAxN3VzeW5vdWd6YWx4c2IifQ.cU1CJ-BMZuoyHigylGe4gA';
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v9',
+        center: [114.02596652697486, 36.359101519740605],
+        zoom: 4.5
+    });
+
+    var canvas = map.getCanvasContainer();
+
+    var geojson = {
+        "type": "FeatureCollection",
+        "features": [{
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [114.02596652697486, 36.359101519740605]
+            }
+        }]
+    };
+
+    function mouseDown() {
+        if (!isCursorOverPoint) return;
+
+        isDragging = true;
+
+        // Set a cursor indicator
+        canvas.style.cursor = 'grab';
+
+        // Mouse events
+        map.on('mousemove', onMove);
+        map.on('mouseup', onUp);
+    }
+
+    function onMove(e) {
+        if (!isDragging) return;
+        var coords = e.lngLat;
+
+        // Set a UI indicator for dragging.
+        canvas.style.cursor = 'grabbing';
+
+        // Update the Point feature in `geojson` coordinates
+        // and call setData to the source layer `point` on it.
+        geojson.features[0].geometry.coordinates = [coords.lng, coords.lat];
+        map.getSource('point').setData(geojson);
+    }
+
+    function getRegionPrice(long, lat) {
+        $.ajax({
+            url: '/priceFromGeocode',
+            data: {long: long, lat: lat},
+            type: 'get',
+
+            success: function(data) {
+              data = JSON.parse(data);
+              $('#step').html('您的位置在' + data.region + '每平米房价' + '<input type="text" name="size" value="' +  data.price/10000 + '万">'
+                         + '<br>' + '步骤2: 输入你当前房屋的面积: <input type="text" name="size">平米 <br>后点击换放到湾区');
+            },
+
+            error: function(data) {
+                console.log(data)
+            }
+        })
+    }
+
+    function onUp(e) {
+        if (!isDragging) return;
+        var coords = e.lngLat;
+
+        // Print the coordinates of where the point had
+        // finished being dragged to on the map.
+        coordinates.style.display = 'block';
+        coordinates.innerHTML = 'Longitude:' + coords.lng + '<br>' + 'Latitude:' + coords.lat;
+        getRegionPrice(coords.lng, coords.lat)
+
+        map.jumpTo({center: [coords.lng, coords.lat]});
+
+        var zoomLevel = map.getZoom() + 3;
+        if(zoomLevel > 9){
+            zoomLevel = 9;
+        }
+        map.zoomTo(zoomLevel);
+
+        canvas.style.cursor = '';
+        isDragging = false;
+    }
+
+    map.on('load', function() {
+
+        // Add a single point to the map
+        map.addSource('point', {
+            "type": "geojson",
+            "data": geojson
+        });
+
+        map.setLayoutProperty('country-label-lg', 'text-field', '{name_zh}');
+
+        map.addLayer({
+            "id": "point",
+            "type": "circle",
+            "source": "point",
+            "paint": {
+                "circle-radius": 15,
+                "circle-color": "#3887be"
+            }
+        });
+
+        // If a feature is found on map movement,
+        // set a flag to permit a mousedown events.
+        map.on('mousemove', function(e) {
+            var features = map.queryRenderedFeatures(e.point, { layers: ['point'] });
+
+            // Change point and cursor style as a UI indicator
+            // and set a flag to enable other mouse events.
+            if (features.length) {
+                map.setPaintProperty('point', 'circle-color', '#3bb2d0');
+                canvas.style.cursor = 'move';
+                isCursorOverPoint = true;
+                map.dragPan.disable();
+            } else {
+                map.setPaintProperty('point', 'circle-color', '#3887be');
+                canvas.style.cursor = '';
+                isCursorOverPoint = false;
+                map.dragPan.enable();
+            }
+        });
+
+        // Set `true` to dispatch the event before other functions call it. This
+        // is necessary for disabling the default map dragging behaviour.
+        map.on('mousedown', mouseDown, true);
+    });
+
+    map.once('moveend', function(){
+
+    });
+
+    document.getElementById('fly').addEventListener('click', function () {
+        // Fly to a random location by offsetting the point -74.50, 40
+        // by up to 5 degrees.
+        map.flyTo({
+            center: [
+                -121.938102434,
+                37.60092460002588],
+            zoom: 9.5
+        });
+        step.innerHTML= '我们为你换到了1处湾区房产';
+
+        loadHome();
+    });
+
+    map.on('click', function (e) {
+        console.log('xxx');
+        console.log(e.lngLat);
+        var features = map.queryRenderedFeatures(e.point, { layers: ['points', 'route'] });
+        console.log(features);
+        if (!features.length) {
+            return;
+        }
+
+        var feature = features[1];
+
+        // Populate the popup and set its coordinates
+        // based on the feature found.
+        if(feature){
+            console.log(feature.properties);
+            var popup = new mapboxgl.Popup()
+                    .setLngLat(map.unproject(e.point))
+                    .setHTML(feature.properties.description)
+                    .addTo(map);
+            console.log(popup);
+        } else {
+            var feature = features[0];
+            console.log(map.unproject(e.point));
+            var popup = new mapboxgl.Popup()
+                    .setLngLat(map.unproject(e.point))
+                    .setHTML(feature.properties.description)
+                    .addTo(map);
+            console.log(popup);
+
+        }
+    });
+
+    function loadHome(){
+        $.ajax({
+            url: '/homeForMe',
+
+            type: 'get',
+
+            success: function(data) {
+                console.log(data);
+                var geojson = {
+                    "type": "FeatureCollection",
+                    "features": [
+                        {
+                            "type": "Feature",
+                            "properties": {
+                                "message": "Foo",
+                                "iconSize": [60, 60],
+                            },
+                            "geometry": {
+                                "type": "Point",
+                                "coordinates": [
+                                    -122.30798014665153,
+                                    37.51490151800034
+                                ]
+                            }
+                        }
+                    ]
+                };
+
+
+
+                // Create custom popup content
+                var popupContent =  getPopUpContent({images: [], description: '独栋别墅'});
+
+                map.addSource("points", {
+                    "type": "geojson",
+                    "data": {
+                        "type": "FeatureCollection",
+                        "features": [{
+                            "type": "Feature",
+                            "geometry": {
+                                "type": "Point",
+                                "coordinates": [ -122.30798014665153,  37.51490151800034]
+                            },
+                            "properties": {
+                                "title": "别墅",
+                                "icon": "town-hall",
+                                "description": popupContent
+                            }
+                        }
+                        ]
+                    }
+                })
+                map.addLayer({
+                    "id": "points",
+                    "type": "symbol",
+                    "source": "points",
+                    "layout": {
+                        "icon-image": "{icon}-15",
+                        "icon-allow-overlap": true,
+                        "text-field": "{title}",
+                        "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+                        "text-offset": [0, 0.6],
+                        "text-anchor": "top"
+                    },
+                    "paint": {
+                        "icon-color": '#123456',
+                        "text-color": 'purple'
+                    }
+                });
+
+                addRegionPolygon();
+
+// transform 有问题
+//                var marker = geojson.features[0];
+//                var el = document.createElement('button');
+//                el.className = 'marker';
+//                el.style.backgroundImage = 'url(https://placekitten.com/g/60/60)';
+//
+//                el.addEventListener('click', function() {
+//                    window.alert(marker.properties.message);
+//                });
+//
+//                // add marker to map
+//                console.log(el);
+//                new mapboxgl.Marker(el)
+//                    //.setLngLat(new mapboxgl.LngLat(marker.geometry.coordinates[0],marker.geometry.coordinates[1]))
+//                        .setLngLat(marker.geometry.coordinates)
+//                        .addTo(map);
+
+            },
+
+            error: function() {
+              console.log('error')
+            }
+        });
+    }
+
+  function getPopUpContent(data) {
+      var slideshowContent = '';
+
+      for (var i in data.images) {
+          slideshowContent += '<div class="image ' + ( (i == 0) ? 'active' : '') + '">' +
+                  '<img src="' + data.images[i] + '" />' +
+                  '<div class="caption">' + data.description + '</div>' +
+                  '</div>';
+      }
+
+      var popup = '<div id="' + 'id:1' + '" class="popup">' +
+              '<a href="' + data.link + '">' +
+              '<h2>' + data.title + '</h2>' + '</a>' +
+              '<div class="slideshow">' +
+              slideshowContent +
+              '</div>' +
+              '<div class="cycle">' +
+              '<a href="#" class="prev">&laquo; Previous</a>' +
+              '<a href="#" class="next">Next &raquo;</a>' +
+              '</div>' +
+      '</div>';
+
+      return popup;
+  }
+
+  function addRegionPolygon(){
+      map.addSource('bayarea', {
+          'type': 'geojson',
+          'data': {
+              'type': 'FeatureCollection',
+               'features': [
+                   {
+                       'type': 'Feature',
+                       'properties': {
+                           'description': getPopUpContent({title: '科技公司的圣地：硅谷', images: ['./img/company1.jpg',
+                               './img/company2.jpg', './img/company3.jpg'], description: '硅谷硅谷（英语：Silicon Valley），是高科技事业云集的美国加州圣塔克拉拉谷的别称。' +
+                                   '位于加利福尼亚州北部，旧金山湾区南部；一般包含圣塔克拉拉县和东旧金山湾区的费利蒙市。' +
+                                   '最早是研究和生产以硅为基础的半导体芯片的地方，因此得名。尽管美国和世界其他高新技术区都在不断发展壮大，' +
+                                   '但硅谷仍然是高科技技术创新和发展的开创者，该地区的风险投资占全美风险投资总额的三分之一。'})
+                       },
+                       'geometry': {
+                           'type': 'Polygon',
+                           'coordinates': [[
+                               [-122.31572865327391, 37.493935630175656],
+                               [-122.17158242702538, 37.408491917672336],
+                               [-122.01146920846026, 37.32616643830934],
+                               [-121.87572322450262, 37.40247880379158],
+                               [-122.09313752401202, 37.44279649687945],
+                               [-122.1970827324451, 37.527743063927275]]]
+                       }
+                   },
+                   {
+                       'type': 'Feature',
+                       'properties': {
+                           'description': getPopUpContent({title: '连接旧金山和硅谷的轴心', images:['./img/peninsula.jpeg'], description: '介于旧金山和南湾的地区是旧金山半岛，当地常简称为“半岛（The Peninsula）”。' +
+                                   '这地区由圣马刁县的数个中小型城市和近郊社区和圣塔克拉拉县西北部份所组成，也包含数个太平洋岸边的城镇，' +
+                                   '如柏思域加(Pacifica）和半月湾(Half Moon Bay）。虽然有许多富有家庭居住在此，半岛居民的组成是相当多样化的。' +
+                                   '这里许多城镇在二次世界大战后时期前仅是乡村生活的中心，战后，许多中产和富有家庭迁移至此，也带动当地发展。' +
+                                   '自1980年代起，中产和富有家庭的数量因硅谷高科技产业的繁荣而急速成长。' +
+                                   '来自外国的许多当地家庭，也是居民组成多样化的原因之一。'})
+                       },
+                       'geometry': {
+                           'type': 'Polygon',
+                           'coordinates': [[
+                               [-122.380651869, 37.6498625006098],
+                               [-122.366355305, 37.59570211233448],
+                               [-122.253303849, 37.567306935032704],
+                               [-122.226979461, 37.54465657281138],
+                               [-122.315262469, 37.49296763153464],
+                               [-122.427301632, 37.600888051162556]
+                               ]]
+                       }
+                   },
+                   {
+                       'type': 'Feature',
+                       'properties': {
+                           'description': getPopUpContent({title: '最大的华人聚集区', images:['./img/east_bay.jpg'], description: '广义上的东湾包括康曲科士达县以及阿拉米达县全境，狭义则泛指两县滨临旧金山湾的城市，' +
+                                   '包括最北的里奇蒙、奥伯尼、伯克利、爱莫瑞维尔、奥克兰、阿拉米达、圣利安卓、海沃、联合市、纽华克、以及佛利蒙。' +
+                                   '东湾的华人社区传统上以奥克兰华埠为中心，但在其他小城市也发展了华人购物中心。相较于旧金山、半岛、北湾、和南湾，' +
+                                   '东湾的房价比较便宜，但是气候却是最宜人的；没有旧金山的冷，也没有南湾的热。'})
+                       },
+                       'geometry': {
+                           'type': 'Polygon',
+                           'coordinates': [[
+                               [-122.031810051, 37.67935730144269],
+                               [-121.881295226, 37.57245306013864],
+                               [-121.944414346, 37.50623390425844],
+                               [-122.044433875, 37.50777455248313],
+                               [-122.143482341, 37.586305439834575],
+                               [-122.055115572, 37.624001636745746]
+                           ]]
+                       }
+                   }
+
+               ]
+
+          }
+      });
+
+      map.addLayer({
+          'id': 'route',
+          'type': 'fill',
+          'source': 'bayarea',
+          'layout': {},
+          'paint': {
+              'fill-color': 'blue',
+              'fill-opacity': 0.2
+          }
+      });
+  }
+
+    $('#map').on('click', '.popup .cycle a', function() {
+        var $slideshow = $('.slideshow'),
+                $newSlide;
+
+        if ($(this).hasClass('prev')) {
+            $newSlide = $slideshow.find('.active').prev();
+            if ($newSlide.index() < 0) {
+                $newSlide = $('.image').last();
+            }
+        } else {
+            $newSlide = $slideshow.find('.active').next();
+            if ($newSlide.index() < 0) {
+                $newSlide = $('.image').first();
+            }
+        }
+
+        $slideshow.find('.active').removeClass('active').hide();
+        $newSlide.addClass('active').show();
+        return false;
+    });
+
+</script>
+
+</body>
+</html>

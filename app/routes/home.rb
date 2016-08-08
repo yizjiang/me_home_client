@@ -145,6 +145,34 @@ module Routes
       response.body
     end
 
+
+
+
+### for game #####################
+    get '/homeForMe' do
+      json [{id: 1}]
+    end
+
+    get '/priceFromGeocode' do
+      url = "https://api.mapbox.com/geocoding/v5/mapbox.places/#{params[:long]},#{params[:lat]}.json?access_token=pk.eyJ1IjoiZGV1Ym95IiwiYSI6ImNpcDg3cm1xMzAxN3VzeW5vdWd6YWx4c2IifQ.cU1CJ-BMZuoyHigylGe4gA"
+      response = Typhoeus.get(url)
+      response = JSON.parse response.body
+
+      if response['features'].length > 0
+        district = response['features'][0]['context'][0]['text'].split.first
+        price = REGION_PRICE[district] || 30000
+        {region: district, price: price}.to_json
+      else
+        {region: 'unknown', price: 30000}.to_json
+      end
+    end
+
+    get '/regionPrice' do
+      json REGION_PRICE
+    end
+################################
+
+
     def get_user_session
       response = Typhoeus.get("#{MEEHOME_SERVER_URL}/session", params: params)
       response.body
