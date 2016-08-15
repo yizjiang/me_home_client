@@ -1,0 +1,1054 @@
+---
+Shenzhen:
+  price: '50842'
+  label: 深圳
+Wenzhou:
+  price: '17303'
+  label: 温州
+Zhoushan:
+  price: '11269'
+  label: 舟山
+Beijing:
+  price: '47619'
+  label: 北京
+Fuzhou:
+  price: '4831'
+  label: 抚州
+Jinan:
+  price: '11182'
+  label: 济南
+Shanghai:
+  price: '43052'
+  label: 上海
+Lingshui:
+  price: '15513'
+  label: 陵水
+Dongguan:
+  price: '11139'
+  label: 东莞
+Xiamen:
+  price: '32537'
+  label: 厦门
+Suzhou:
+  price: '15313'
+  label: 苏州
+Taizhou:
+  price: '6799'
+  label: 泰州
+Nanjing:
+  price: '21695'
+  label: 南京
+Langfang:
+  price: '13132'
+  label: 廊坊
+Canton:
+  price: '21443'
+  label: 广州
+Jinhua:
+  price: '10542'
+  label: 金华
+Lishui:
+  price: '12706'
+  label: 丽水
+Zhengzhou:
+  price: '10401'
+  label: 郑州
+Hangzhou:
+  price: '19386'
+  label: 杭州
+Ningbo:
+  price: '12507'
+  label: 宁波
+Zhuhai:
+  price: '18948'
+  label: 珠海
+Dalian:
+  price: '10076'
+  label: 大连
+Hefei:
+  price: '12476'
+  label: 合肥
+Tianjin:
+  price: '18887'
+  label: 天津
+Wuhan:
+  price: '11991'
+  label: 武汉
+Shijiazhuang:
+  price: '9601'
+  label: 石家庄
+Qingdao:
+  price: '11938'
+  label: 青岛
+Sanya:
+  price: '17659'
+  label: 三亚
+Putian:
+  price: '9301'
+  label: 莆田
+Lanzhou:
+  price: '8842'
+  label: 兰州
+Nanchang:
+  price: '9064'
+  label: 南昌
+Shaoxing:
+  price: '8806'
+  label: 绍兴
+Baoding:
+  price: '8128'
+  label: 保定
+Nantong:
+  price: '8398'
+  label: 南通
+Quanzhou:
+  price: '7990'
+  label: 泉州
+Zhangzhou:
+  price: '8352'
+  label: 漳州
+Quzhou:
+  price: '7971'
+  label: 衢州
+Ledong:
+  price: '8321'
+  label: 乐东
+Yangzhou:
+  price: '7970'
+  label: 扬州
+Foshan:
+  price: '8318'
+  label: 佛山
+Longyan:
+  price: '7952'
+  label: 龙岩
+Kunming:
+  price: '8284'
+  label: 昆明
+Wanning:
+  price: '7857'
+  label: 万宁
+Wuxi:
+  price: '8256'
+  label: 无锡
+Baoting:
+  price: '7824'
+  label: 保亭
+Chengdu:
+  price: '8205'
+  label: 成都
+Zhongshan:
+  price: '7750'
+  label: 中山
+Taiyuan:
+  price: '8167'
+  label: 太原
+Huzhou:
+  price: '7749'
+  label: 湖州
+Lhasa:
+  price: '7659'
+  label: 拉萨
+Seaport:
+  price: '7655'
+  label: 海口
+Tianshui:
+  price: '7114'
+  label: 天水
+Zhenjiang:
+  price: '6653'
+  label: 镇江
+Huizhou:
+  price: '7645'
+  label: 惠州
+Chongqing:
+  price: '7008'
+  label: 重庆
+Urumqi:
+  price: '6601'
+  label: 乌鲁木齐
+Harbin:
+  price: '7465'
+  label: 哈尔滨
+Sanming:
+  price: '6957'
+  label: 三明
+Changchun:
+  price: '6471'
+  label: 长春
+Jiaxing:
+  price: '7411'
+  label: 嘉兴
+Xi'an:
+  price: '6954'
+  label: 西安
+Shigatse:
+  price: '6405'
+  label: 日喀则
+Yantai:
+  price: '7405'
+  label: 烟台
+Ningde:
+  price: '6838'
+  label: 宁德
+Hohhot:
+  price: '6403'
+  label: 呼和浩特
+Changzhou:
+  price: '7317'
+  label: 常州
+Nanping:
+  price: '6396'
+  label: 南平
+Wenchang:
+  price: '7251'
+  label: 文昌
+Dali:
+  price: '6786'
+  label: 大理
+Liangshan:
+  price: '6391'
+  label: 凉山
+Nanning:
+  price: '7175'
+  label: 南宁
+Cangzhou:
+  price: '6745'
+  label: 沧州
+Xuzhou:
+  price: '6361'
+  label: 徐州
+Shantou:
+  price: '7167'
+  label: 汕头
+Liuzhou:
+  price: '6734'
+  label: 柳州
+Lianyungang:
+  price: '6353'
+  label: 连云港
+Shenyang:
+  price: '7165'
+  label: 沈阳
+Changsha:
+  price: '6676'
+  label: 长沙
+Tai'an:
+  price: '6349'
+  label: 泰安
+Shannan:
+  price: '6259'
+  label: 山南
+Guiyang:
+  price: '6234'
+  label: 贵阳
+Yichang:
+  price: '5994'
+  label: 宜昌
+Yancheng:
+  price: '6175'
+  label: 盐城
+Tangshan:
+  price: '5987'
+  label: 唐山
+Qinhuangdao:
+  price: '6161'
+  label: 秦皇岛
+Jincheng:
+  price: '5972'
+  label: 晋城
+Handan:
+  price: '6133'
+  label: 邯郸
+Zhanjiang:
+  price: '5910'
+  label: 湛江
+sunshine:
+  price: '6066'
+  label: 日照
+Dongying:
+  price: '5909'
+  label: 东营
+Zhangjiakou:
+  price: '6062'
+  label: 张家口
+East:
+  price: '5883'
+  label: 东方
+Chengde:
+  price: '6036'
+  label: 承德
+Garze:
+  price: '5882'
+  label: 甘孜
+Qionghai:
+  price: '6030'
+  label: 琼海
+Maoming:
+  price: '5850'
+  label: 茂名
+Fuyang:
+  price: '6028'
+  label: 阜阳
+Xining:
+  price: '5838'
+  label: 西宁
+Zibo:
+  price: '5827'
+  label: 淄博
+Xiangyang:
+  price: '5816'
+  label: 襄阳
+Changjiang:
+  price: '5539'
+  label: 昌江
+Shihezi:
+  price: '5289'
+  label: 石河子
+Chifeng:
+  price: '5774'
+  label: 赤峰
+Tongling:
+  price: '5536'
+  label: 铜陵
+Zhaoqing:
+  price: '5268'
+  label: 肇庆
+Ganzhou:
+  price: '5773'
+  label: 赣州
+Fingers:
+  price: '5435'
+  label: 五指山
+Anqing:
+  price: '5242'
+  label: 安庆
+Wuhu:
+  price: '5749'
+  label: 芜湖
+Changzhi:
+  price: '5434'
+  label: 长治
+Yulin:
+  price: '4086'
+  label: 玉林
+Chengmai:
+  price: '5713'
+  label: 澄迈
+Xuancheng:
+  price: '5372'
+  label: 宣城
+Yibin:
+  price: '5173'
+  label: 宜宾
+Guilin:
+  price: '5701'
+  label: 桂林
+Baoshan:
+  price: '5364'
+  label: 保山
+Lu'an:
+  price: '5171'
+  label: 六安
+Huaian:
+  price: '5694'
+  label: 淮安
+Liaocheng:
+  price: '5335'
+  label: 聊城
+Dandong:
+  price: '5170'
+  label: 丹东
+Yuxi:
+  price: '5670'
+  label: 玉溪
+Bengbu:
+  price: '5320'
+  label: 蚌埠
+Ting:
+  price: '5130'
+  label: 定安
+Jining:
+  price: '5638'
+  label: 济宁
+Xingtai:
+  price: '5313'
+  label: 邢台
+Luoyang:
+  price: '5124'
+  label: 洛阳
+Baotou:
+  price: '5582'
+  label: 包头
+Weihai:
+  price: '5300'
+  label: 威海
+Daqing:
+  price: '5119'
+  label: 大庆
+Puyang:
+  price: '5105'
+  label: 濮阳
+Texas:
+  price: '4993'
+  label: 德州
+Huangshan:
+  price: '5103'
+  label: 黄山
+Lijiang:
+  price: '4983'
+  label: 丽江
+Luzhou:
+  price: '5082'
+  label: 泸州
+Qiqihar:
+  price: '4934'
+  label: 齐齐哈尔
+Nyingchi:
+  price: '5080'
+  label: 林芝
+Ya'an:
+  price: '4926'
+  label: 雅安
+Qingyang:
+  price: '5058'
+  label: 庆阳
+Suining:
+  price: '4885'
+  label: 遂宁
+Yinchuan:
+  price: '5053'
+  label: 银川
+Shangrao:
+  price: '4884'
+  label: 上饶
+Jiujiang:
+  price: '5046'
+  label: 九江
+Jilin:
+  price: '4882'
+  label: 吉林
+Huaibei:
+  price: '5019'
+  label: 淮北
+Lingao:
+  price: '4879'
+  label: 临高
+Jieyang:
+  price: '5016'
+  label: 揭阳
+Florida:
+  price: '4871'
+  label: 达州
+Chizhou:
+  price: '5011'
+  label: 池州
+Binzhou:
+  price: '4870'
+  label: 滨州
+Jinzhong:
+  price: '4867'
+  label: 晋中
+Hengshui:
+  price: '4824'
+  label: 衡水
+Weifang:
+  price: '4669'
+  label: 潍坊
+Jiangmen:
+  price: '4864'
+  label: 江门
+Ji'an:
+  price: '4754'
+  label: 吉安
+Huludao:
+  price: '4665'
+  label: 葫芦岛
+Jinzhou:
+  price: '4853'
+  label: 锦州
+Laiwu:
+  price: '4747'
+  label: 莱芜
+Ma'anshan:
+  price: '4654'
+  label: 马鞍山
+Kaifeng:
+  price: '4845'
+  label: 开封
+Suqian:
+  price: '4746'
+  label: 宿迁
+Wuwei:
+  price: '4620'
+  label: 武威
+Nanchong:
+  price: '4841'
+  label: 南充
+Guang'an:
+  price: '4729'
+  label: 广安
+Heze:
+  price: '4608'
+  label: 菏泽
+Mianyang:
+  price: '4840'
+  label: 绵阳
+Yellowstone:
+  price: '4727'
+  label: 黄石
+Chuzhou:
+  price: '4606'
+  label: 滁州
+Meizhou:
+  price: '4718'
+  label: 梅州
+Heyuan:
+  price: '4582'
+  label: 河源
+Shiyan:
+  price: '4837'
+  label: 十堰
+Chaozhou:
+  price: '4704'
+  label: 潮州
+Changde:
+  price: '4573'
+  label: 常德
+Tongliao:
+  price: '4702'
+  label: 通辽
+Nanyang:
+  price: '4563'
+  label: 南阳
+Linyi:
+  price: '4825'
+  label: 临沂
+Jiuquan:
+  price: '4688'
+  label: 酒泉
+Tunchang:
+  price: '4562'
+  label: 屯昌
+Yueyang:
+  price: '4559'
+  label: 岳阳
+Neijiang:
+  price: '4512'
+  label: 内江
+Zunyi:
+  price: '4559'
+  label: 遵义
+Qingyuan:
+  price: '4495'
+  label: 清远
+Danzhou:
+  price: '4558'
+  label: 儋州
+Zigong:
+  price: '4481'
+  label: 自贡
+Shaoguan:
+  price: '4554'
+  label: 韶关
+Yichun:
+  price: '3118'
+  label: 伊春
+Shanwei:
+  price: '4552'
+  label: 汕尾
+Yingtan:
+  price: '4473'
+  label: 鹰潭
+Aba:
+  price: '4536'
+  label: 阿坝
+Xuchang:
+  price: '4473'
+  label: 许昌
+Jingzhou:
+  price: '4533'
+  label: 荆州
+Yan'an:
+  price: '4449'
+  label: 延安
+Bayannaoer:
+  price: '4532'
+  label: 巴彦淖尔
+Pu'er:
+  price: '4446'
+  label: 普洱
+Xinzhou:
+  price: '4532'
+  label: 忻州
+Linfen:
+  price: '4446'
+  label: 临汾
+Pingdingshan:
+  price: '4521'
+  label: 平顶山
+Yanbian:
+  price: '4425'
+  label: 延边
+Guangyuan:
+  price: '4400'
+  label: 广元
+Erdos:
+  price: '4301'
+  label: 鄂尔多斯
+Lincang:
+  price: '4221'
+  label: 临沧
+Xinyang:
+  price: '4390'
+  label: 信阳
+Huainan:
+  price: '4299'
+  label: 淮南
+Chuxiong:
+  price: '4208'
+  label: 楚雄
+Zaozhuang:
+  price: '4385'
+  label: 枣庄
+Karamay:
+  price: '4294'
+  label: 克拉玛依
+North Sea:
+  price: '4207'
+  label: 北海
+Benxi:
+  price: '4366'
+  label: 本溪
+Yunfu:
+  price: '4291'
+  label: 云浮
+Xiaogan:
+  price: '4193'
+  label: 孝感
+Bozhou:
+  price: '3056'
+  label: 博州
+Hebi:
+  price: '4267'
+  label: 鹤壁
+Zhumadian:
+  price: '4181'
+  label: 驻马店
+Changji:
+  price: '4360'
+  label: 昌吉
+Longnan:
+  price: '4257'
+  label: 陇南
+Ili:
+  price: '4173'
+  label: 伊犁
+Pingliang:
+  price: '4358'
+  label: 平凉
+Ziyang:
+  price: '4251'
+  label: 资阳
+Yangjiang:
+  price: '4166'
+  label: 阳江
+Guigang:
+  price: '4347'
+  label: 贵港
+Hezhou:
+  price: '4241'
+  label: 贺州
+Bazhong:
+  price: '4156'
+  label: 巴中
+Enshi:
+  price: '4344'
+  label: 恩施
+Liaoyang:
+  price: '4228'
+  label: 辽阳
+Dingxi:
+  price: '4129'
+  label: 定西
+Xinxiang:
+  price: '4341'
+  label: 新乡
+Zhuzhou:
+  price: '4225'
+  label: 株洲
+Good health:
+  price: '4104'
+  label: 安康
+Jiaozuo:
+  price: '3969'
+  label: 焦作
+Anshan:
+  price: '4086'
+  label: 鞍山
+Zhongwei:
+  price: '3938'
+  label: 中卫
+Xinyu:
+  price: '4077'
+  label: 新余
+Dehong:
+  price: '3936'
+  label: 德宏
+Matsubara:
+  price: '4059'
+  label: 松原
+Sunny:
+  price: '3893'
+  label: 朝阳
+Fushun:
+  price: '4058'
+  label: 抚顺
+Shennongjia:
+  price: '3885'
+  label: 神农架
+Wuhai:
+  price: '4057'
+  label: 乌海
+Leshan:
+  price: '3871'
+  label: 乐山
+Datong:
+  price: '4043'
+  label: 大同
+Yingkou:
+  price: '3862'
+  label: 营口
+Mudanjiang:
+  price: '4037'
+  label: 牡丹江
+Qiongzhong:
+  price: '3862'
+  label: 琼中
+Xianyang:
+  price: '4021'
+  label: 咸阳
+silver:
+  price: '3854'
+  label: 白银
+Xishuangbanna:
+  price: '3981'
+  label: 西双版纳
+Baoji:
+  price: '3845'
+  label: 宝鸡
+Panzhihua:
+  price: '3842'
+  label: 攀枝花
+Zhangjiajie:
+  price: '3790'
+  label: 张家界
+Shangqiu:
+  price: '3751'
+  label: 商丘
+Shaoyang:
+  price: '3836'
+  label: 邵阳
+Qujing:
+  price: '3785'
+  label: 曲靖
+Red River:
+  price: '3734'
+  label: 红河
+Siping:
+  price: '3826'
+  label: 四平
+Jingdezhen:
+  price: '3777'
+  label: 景德镇
+Baicheng:
+  price: '3727'
+  label: 白城
+Xiangtan:
+  price: '3825'
+  label: 湘潭
+Panjin:
+  price: '3775'
+  label: 盘锦
+Zhangye:
+  price: '3718'
+  label: 张掖
+Sanmenxia:
+  price: '3805'
+  label: 三门峡
+Qiannan:
+  price: '3774'
+  label: 黔南
+Anyang:
+  price: '3717'
+  label: 安阳
+Luohe:
+  price: '3802'
+  label: 漯河
+Wuzhou:
+  price: '3769'
+  label: 梧州
+Pingxiang:
+  price: '3713'
+  label: 萍乡
+Hechi:
+  price: '3797'
+  label: 河池
+Chenzhou:
+  price: '3768'
+  label: 郴州
+Wenshan:
+  price: '3694'
+  label: 文山
+White Sands:
+  price: '3795'
+  label: 白沙
+Xing'an:
+  price: '3765'
+  label: 兴安
+Baise:
+  price: '3693'
+  label: 百色
+Linxia:
+  price: '3795'
+  label: 临夏
+Jiyuan:
+  price: '3757'
+  label: 济源
+Hengyang:
+  price: '3692'
+  label: 衡阳
+Meishan:
+  price: '3793'
+  label: 眉山
+Tonghua:
+  price: '3753'
+  label: 通化
+Deyang:
+  price: '3685'
+  label: 德阳
+Haidong:
+  price: '3680'
+  label: 海东
+Gannan:
+  price: '3570'
+  label: 甘南
+Fuxin:
+  price: '3676'
+  label: 阜新
+Yongzhou:
+  price: '3565'
+  label: 永州
+Southeast:
+  price: '3671'
+  label: 黔东南
+Guyuan:
+  price: '3564'
+  label: 固原
+Luliang:
+  price: '3671'
+  label: 吕梁
+Fangchenggang:
+  price: '3546'
+  label: 防城港
+Huaihua:
+  price: '3668'
+  label: 怀化
+Zhaotong:
+  price: '3536'
+  label: 昭通
+Tieling:
+  price: '3623'
+  label: 铁岭
+Hami:
+  price: '3531'
+  label: 哈密
+Liaoyuan:
+  price: '3617'
+  label: 辽源
+Kashi:
+  price: '3523'
+  label: 喀什
+Yangquan:
+  price: '3604'
+  label: 阳泉
+Anshun:
+  price: '3513'
+  label: 安顺
+Suizhou:
+  price: '3588'
+  label: 随州
+Altay:
+  price: '3501'
+  label: 阿勒泰
+Yuncheng:
+  price: '3587'
+  label: 运城
+Jiamusi:
+  price: '3491'
+  label: 佳木斯
+Qinzhou:
+  price: '3484'
+  label: 钦州
+Huanggang:
+  price: '3371'
+  label: 黄冈
+Heihe:
+  price: '3268'
+  label: 黑河
+Liupanshui:
+  price: '3481'
+  label: 六盘水
+Bijie:
+  price: '3371'
+  label: 毕节
+Jiayuguan:
+  price: '3267'
+  label: 嘉峪关
+Hulunbeier:
+  price: '3469'
+  label: 呼伦贝尔
+Suihua:
+  price: '3366'
+  label: 绥化
+Tianmen:
+  price: '3243'
+  label: 天门
+Ezhou:
+  price: '3451'
+  label: 鄂州
+Loudi:
+  price: '3365'
+  label: 娄底
+Hakusan:
+  price: '3202'
+  label: 白山
+Weinan:
+  price: '3441'
+  label: 渭南
+Haixi:
+  price: '3357'
+  label: 海西
+Jinchang:
+  price: '3185'
+  label: 金昌
+Wujiaqu:
+  price: '3422'
+  label: 五家渠
+Hanzhong:
+  price: '3355'
+  label: 汉中
+Jixi:
+  price: '3175'
+  label: 鸡西
+Wulanchabu:
+  price: '3413'
+  label: 乌兰察布
+Tongren:
+  price: '3344'
+  label: 铜仁
+Shangluo:
+  price: '3126'
+  label: 商洛
+Xiangxi:
+  price: '3394'
+  label: 湘西
+Shuozhou:
+  price: '3294'
+  label: 朔州
+Wuzhong:
+  price: '3386'
+  label: 吴忠
+Tacheng:
+  price: '3290'
+  label: 塔城
+Zhoukou:
+  price: '3113'
+  label: 周口
+Jingmen:
+  price: '3374'
+  label: 荆门
+Bavaria:
+  price: '3281'
+  label: 巴州
+Diqing:
+  price: '3108'
+  label: 迪庆
+Huangnan:
+  price: '3102'
+  label: 黄南
+guest:
+  price: '2934'
+  label: 来宾
+Qitaihe:
+  price: '3099'
+  label: 七台河
+Alxa:
+  price: '2859'
+  label: 阿拉善
+Chongzuo:
+  price: '3093'
+  label: 崇左
+Southwest Guizhou:
+  price: '2856'
+  label: 黔西南
+Gol:
+  price: '3083'
+  label: 锡林郭勒
+Tongchuan:
+  price: '2855'
+  label: 铜川
+Yiyang:
+  price: '3077'
+  label: 益阳
+Xiantao:
+  price: '2851'
+  label: 仙桃
+Nujiang:
+  price: '2834'
+  label: 怒江
+Xianning:
+  price: '3029'
+  label: 咸宁
+Turpan:
+  price: '2817'
+  label: 吐鲁番
+Aksu:
+  price: '2999'
+  label: 阿克苏
+Rambling:
+  price: '2802'
+  label: 海北
+Shizuishan:
+  price: '2978'
+  label: 石嘴山
+Hainan Prefecture:
+  price: '2784'
+  label: 海南州
+Qianjiang:
+  price: '2938'
+  label: 潜江
+Wada:
+  price: '2758'
+  label: 和田
+Shuangyashan:
+  price: '2710'
+  label: 双鸭山
+Kezhou:
+  price: '2684'
+  label: 克州
+Tumushuke:
+  price: '1881'
+  label: 图木舒克
+Hegang:
+  price: '2646'
+  label: 鹤岗
+Alar:
+  price: '2574'
+  label: 阿拉尔
+Daxinganling:
+  price: '2260'
+  label: 大兴安岭
+Beitun:
+  price: '2224'
+  label: 北屯

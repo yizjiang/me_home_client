@@ -1,0 +1,1 @@
+PRICE_FOR_REGION = YAML.load_file('config/price_for_region.yml')

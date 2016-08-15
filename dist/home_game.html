@@ -81,9 +81,18 @@
 <div id='map'></div>
 <pre id='coordinates' class='coordinates'></pre>
 <br/>
-<button id='fly'>换房到湾区</button>
+<button id='fly' style="{display: 'none'}">换房到湾区</button>
 <script>
+
+    var homes =[];
+    var agents = [];
+    var personalInfo = {};
+    var bidIndex;
+
     window.$ = window.jQuery;
+
+    var needFly = true;
+    $('#fly').hide();
 
     mapboxgl.accessToken = 'pk.eyJ1IjoiZGV1Ym95IiwiYSI6ImNpcDg3cm1xMzAxN3VzeW5vdWd6YWx4c2IifQ.cU1CJ-BMZuoyHigylGe4gA';
     var map = new mapboxgl.Map({
@@ -140,8 +149,10 @@
 
             success: function(data) {
               data = JSON.parse(data);
-              $('#step').html('您的位置在' + data.region + '每平米房价' + '<input type="text" name="size" value="' +  data.price/10000 + '万">'
-                         + '<br>' + '步骤2: 输入你当前房屋的面积: <input type="text" name="size">平米 <br>后点击换放到湾区');
+              $('#step').html('您的位置在' + data.label + '。每平米房价' + '<input type="text" id="price" value="' +  data.price/10000 + '">万'
+                         + '<br>' + '步骤2: 输入你当前房屋的面积: <input type="text" id="indoor-size" value="100">平米和能额外支付的金额:' + '<input type="text" id="cash">' + '万人民币' + '<br>后点击换放到湾区');
+              $('#fly').show();
+              personalInfo.resident = data.label
             },
 
             error: function(data) {
@@ -222,17 +233,10 @@
     });
 
     document.getElementById('fly').addEventListener('click', function () {
-        // Fly to a random location by offsetting the point -74.50, 40
-        // by up to 5 degrees.
-        map.flyTo({
-            center: [
-                -121.938102434,
-                37.60092460002588],
-            zoom: 9.5
-        });
-        step.innerHTML= '我们为你换到了1处湾区房产';
-
-        loadHome();
+        var propertyValue = parseInt($('#indoor-size').val()) * parseFloat($('#price').val()) * 10000
+                + parseInt($('#cash').val()) * 10000
+        personalInfo.propertyValue = (propertyValue / 6.67 / 10000).toFixed(2) ;
+        loadHome( {indoor_size: $('#indoor-size').val(), price: $('#price').val() * 10000, cash: $('#cash').val() * 10000 });
     });
 
     function zoomIn(coords) {
@@ -242,7 +246,7 @@
         map.jumpTo({center: [coords.lng, coords.lat]});
 
         var zoomLevel = map.getZoom();
-        if(zoomLevel > 9 && zoomLevel < 13){
+        if(zoomLevel > 9 && zoomLevel < 12){
             zoomLevel += 1;
         } else if (zoomLevel < 9.5) {
             zoomLevel += 3
@@ -255,11 +259,8 @@
     }
 
     map.on('click', function (e) {
-        console.log('xxx');
-        console.log(e.lngLat);
-        var features = map.queryRenderedFeatures(e.point, { layers: ['points', 'route'] });
-        console.log(features);
-        if (!features.length) {
+        var features = map.queryRenderedFeatures(e.point, { layers: ['homes', 'route'] });
+        if (!features.length && needFly) {
            zoomIn(e.lngLat);
            return
         }
@@ -269,95 +270,120 @@
         // Populate the popup and set its coordinates
         // based on the feature found.
         if(feature){
-            console.log(feature.properties);
+            // found marker
             var popup = new mapboxgl.Popup()
                     .setLngLat(map.unproject(e.point))
                     .setHTML(feature.properties.description)
                     .addTo(map);
-            console.log(popup);
-        } else {
-            var feature = features[0];
-            console.log(map.unproject(e.point));
-            var popup = new mapboxgl.Popup()
-                    .setLngLat(map.unproject(e.point))
-                    .setHTML(feature.properties.description)
-                    .addTo(map);
-            console.log(popup);
+            if (map.getZoom() < 10.5 ) {
+                map.setCenter(e.lngLat);
+                 map.zoomIn(map.getZoom() + 3);
+             }
 
+        } else if( features.length > 0 ) {
+            var feature = features[0];
+            // click on region
+            var popup = new mapboxgl.Popup()
+                    .setLngLat(map.unproject(e.point))
+                    .setHTML(feature.properties.description)
+                    .addTo(map);
         }
     });
 
-    function loadHome(){
+    function loadHome(data){
+        console.log(data);
+
         $.ajax({
             url: '/homeForMe',
-
+            data: data,
             type: 'get',
 
             success: function(data) {
-                console.log(data);
-                var geojson = {
-                    "type": "FeatureCollection",
-                    "features": [
-                        {
-                            "type": "Feature",
-                            "properties": {
-                                "message": "Foo",
-                                "iconSize": [60, 60],
-                            },
-                            "geometry": {
-                                "type": "Point",
-                                "coordinates": [
-                                    -122.30798014665153,
-                                    37.51490151800034
-                                ]
-                            }
-                        }
-                    ]
-                };
-
-
+                data = JSON.parse(data);
+                // step.innerHTML= '我们为你换到了1处湾区房产';
 
                 // Create custom popup content
-                var popupContent =  getPopUpContent({images: [], description: '独栋别墅'});
 
-                map.addSource("points", {
-                    "type": "geojson",
-                    "data": {
-                        "type": "FeatureCollection",
-                        "features": [{
+                var popupContent = '';
+                for (var key in data) {
+                    homes = homes.concat(data[key]);
+                }
+
+                var featureHomes = [];
+
+                console.log(homes);
+
+                if(homes.length > 0) {
+                    loadAgent(false);
+                    map.flyTo({
+                        center: [
+                            -121.938102434,
+                            37.60092460002588],
+                        zoom: 8.5
+                    });
+                    $('#step').html('您的资产是' + personalInfo.propertyValue  + '万美元。有' + homes.length + '处位于加州湾区的房产满足您要求,请尝试购买.')
+                    needFly = false;
+
+                    $('#fly').hide();
+
+                    var geo_points = [];
+                    for(var i in homes) {
+                        popupContent =  getPopUpContent({
+                            title: (homes[i].chinese_home_type + ':' + homes[i].price),
+                            images: homes[i].images,
+                            description: homes[i].short_desc,
+                            purchase_index: i});
+                        geo_points = homes[i].geo_point.split(',');
+                        featureHomes.push({
                             "type": "Feature",
                             "geometry": {
                                 "type": "Point",
-                                "coordinates": [ -122.30798014665153,  37.51490151800034]
+                                "coordinates": [geo_points[1], geo_points[0]]
                             },
                             "properties": {
-                                "title": "别墅",
+                                "title": homes[i].chinese_home_type,
                                 "icon": "town-hall",
                                 "description": popupContent
                             }
-                        }
-                        ]
-                    }
-                })
-                map.addLayer({
-                    "id": "points",
-                    "type": "symbol",
-                    "source": "points",
-                    "layout": {
-                        "icon-image": "{icon}-15",
-                        "icon-allow-overlap": true,
-                        "text-field": "{title}",
-                        "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
-                        "text-offset": [0, 0.6],
-                        "text-anchor": "top"
-                    },
-                    "paint": {
-                        "icon-color": '#123456',
-                        "text-color": 'purple'
-                    }
-                });
+                        })
 
-                addRegionPolygon();
+                    }
+                    map.addSource("homes", {
+                        "type": "geojson",
+                        "data": {
+                            "type": "FeatureCollection",
+                            "features": featureHomes
+                        }
+                    })
+                    map.addLayer({
+                        "id": "homes",
+                        "type": "symbol",
+                        "source": "homes",
+                        "layout": {
+                            "icon-image": "{icon}-15",
+                            "icon-allow-overlap": true,
+                            "text-field": "{title}",
+                            "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+                            "text-offset": [0, 0.6],
+                            "text-anchor": "top"
+                        },
+                        "paint": {
+                            "icon-color": '#123456',
+                            "text-color": 'purple'
+                        }
+                    });
+
+                    addRegionPolygon(data);
+
+                } else {
+                    var indoorSize = $('#indoor-size').val();
+                    var price = $('#price').val();
+                    var cash =  $('#cash').val() || 0;
+                    $('#step').html('您所在地的每平米房价' + '<input type="text" id="price" value="' +  price + '">万'
+                            + '面积 <input type="text" id="indoor-size" value="' + indoorSize + '">平米 ' +
+                            '您现有住房不足以换到美国房产, 请选择另一处房产或输入您能补出的金额: ' + '<input type="text" id="cash" value="' + cash +'">' + '万人民币后再试'
+                    );
+                }
 
 // transform 有问题
 //                var marker = geojson.features[0];
@@ -395,21 +421,68 @@
       }
 
       var popup = '<div id="' + 'id:1' + '" class="popup">' +
-              '<a href="' + data.link + '">' +
               '<h2>' + data.title + '</h2>' + '</a>' +
               '<div class="slideshow">' +
               slideshowContent +
-              '</div>' +
+              '</div>';
+
+         if (data.purchase_index != undefined) {
+           popup += '<button onclick="buyHouse(' + data.purchase_index+ ')">我要竞购</button>';
+         }
+
+         popup +=
               '<div class="cycle">' +
-              '<a href="#" class="prev">&laquo; Previous</a>' +
-              '<a href="#" class="next">Next &raquo;</a>' +
+              '<a href="#" class="prev">&laquo; 上一张</a>' +
+              '<a href="#" class="next">下一张 &raquo;</a>' +
               '</div>' +
       '</div>';
 
       return popup;
   }
 
-  function addRegionPolygon(){
+  function buyHouse(purchaseIndex) {
+      bidIndex = purchaseIndex;
+      if(agents.length > 0){
+          var content = '<div><p>你需要选择一位经纪人</p>'
+          for(var i in agents) {
+              content += '<div onclick="bidHome(' + i + ')"><p>' + agents[i].cn_name + '</p><img src="' + agents[i].head_image + '" height="42" width="42"/></div>';
+          }
+          $('#map').css({top: '120px'});
+          $('#step').html(content);
+
+      } else {
+         loadAgent(purchaseIndex);
+      }
+  }
+
+  function bidHome(agentIndex) {
+      var offerCount = parseInt(Math.random() * 20)
+      var content = '<p>' + agents[agentIndex].cn_name + ': 有' + offerCount + '名买家也对此房感兴趣。</p>';
+      content += '您的最终出价<input type="text" id="bidPrice" value="' + personalInfo.propertyValue + '">万美元 <button onclick="makeOffer()">出价</button>'
+      $('#step').html(content);
+  }
+
+  function makeOffer() {
+      var finalPrice = $('#bidPrice').val();
+      $('#step').html('<p>' + finalPrice + '万美元成交</p>');
+  }
+
+  function loadAgent(purchaseIndex) {
+      $.ajax({
+          url: '/agents',
+          type: 'get',
+
+          success: function(data) {
+            agents = JSON.parse(data);
+            if(purchaseIndex != false) buyHouse(purchaseIndex)
+          },
+          error: function () {
+          }
+      });
+  }
+
+  function addRegionPolygon(data){
+
       map.addSource('bayarea', {
           'type': 'geojson',
           'data': {
@@ -427,12 +500,14 @@
                        'geometry': {
                            'type': 'Polygon',
                            'coordinates': [[
-                               [-122.31572865327391, 37.493935630175656],
-                               [-122.17158242702538, 37.408491917672336],
-                               [-122.01146920846026, 37.32616643830934],
-                               [-121.87572322450262, 37.40247880379158],
-                               [-122.09313752401202, 37.44279649687945],
-                               [-122.1970827324451, 37.527743063927275]]]
+                               [-122.120558173, 37.36128208455243],
+                               [-122.093895106, 37.396594552822904],
+                               [-122.012323669, 37.44442727108121],
+                               [-121.78740852387352, 37.39690891083079],
+                                  [-121.71963297261476, 37.28090740808216],
+                                  [-121.7286308989527, 37.16386640279954],
+                                   [-121.98106133616318, 37.238378865134095]
+                           ]]
                        }
                    },
                    {
@@ -448,12 +523,11 @@
                        'geometry': {
                            'type': 'Polygon',
                            'coordinates': [[
-                               [-122.380651869, 37.6498625006098],
-                               [-122.366355305, 37.59570211233448],
-                               [-122.253303849, 37.567306935032704],
-                               [-122.226979461, 37.54465657281138],
-                               [-122.315262469, 37.49296763153464],
-                               [-122.427301632, 37.600888051162556]
+                               [-122.44888177701301, 37.54936003402969],
+                               [-122.42848944582954, 37.68012583958105],
+                               [-122.29933801500056, 37.60630988245501],
+                               [-122.21097124653886, 37.532420599472374],
+                               [-122.36245713533066, 37.49236663949037]
                                ]]
                        }
                    },

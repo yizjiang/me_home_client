@@ -1,15 +1,7 @@
-source "https://rubygems.org"
+require 'rake'
+require 'csv'
 
-gem 'sinatra'
-gem 'sinatra-contrib'
-gem 'uglifier'
-gem 'activesupport'
-#gem 'dotenv'
-#gem 'erubis'
-gem 'rake'
-gem 'redis-rack'
-#gem 'rack-mount'
-#gem 'nokogiri'
-#gem 'tilt-jbuilder'
-gem 'typhoeus'
-gem 'addressable'
+rake_tasks = Dir["lib/tasks/*.rake"]
+rake_tasks.each do |rakefile|
+  load(File.expand_path(rakefile))
+end

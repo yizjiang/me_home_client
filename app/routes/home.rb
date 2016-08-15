@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require 'typhoeus'
 
 module Routes
@@ -150,7 +152,8 @@ module Routes
 
 ### for game #####################
     get '/homeForMe' do
-      json [{id: 1}]
+      response = Typhoeus.get("#{MEEHOME_SERVER_URL}/home/search/price", params: params)
+      response.body
     end
 
     get '/priceFromGeocode' do
@@ -159,11 +162,16 @@ module Routes
       response = JSON.parse response.body
 
       if response['features'].length > 0
-        district = response['features'][0]['context'][0]['text'].split.first
-        price = REGION_PRICE[district] || 30000
-        {region: district, price: price}.to_json
+        region = response['features'][0]['context']
+        region.each do |r|
+          district = r['text'].split.first
+          if PRICE_FOR_REGION.key?(district)
+            return PRICE_FOR_REGION[district].to_json
+          end
+        end
+        {label: '中国', price: 30000}.to_json
       else
-        {region: 'unknown', price: 30000}.to_json
+        {region: '中国', price: 30000}.to_json
       end
     end
 
