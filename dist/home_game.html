@@ -122,7 +122,7 @@
     }
     .step-content{
       box-sizing: border-box;
-      padding: 15px;
+      padding: 10px;
     }
     .hidden {
       display: none;
@@ -142,7 +142,6 @@
   </div>
   <p id="step">请把图中原点移到您家的位置</p>
   <button class="start">开始</div>
-  
 </div>
 <div class="step hidden">
   <div class="header"></div>
@@ -158,6 +157,7 @@
     var agents = [];
     var personalInfo = {};
     var bidIndex;
+    var selectAgent;
 
     window.$ = window.jQuery;
 
@@ -212,6 +212,8 @@
     }
 
     function getRegionPrice(long, lat) {
+        $('.header').removeClass('hidden');
+        $('.step').removeClass('hidden');
         $.ajax({
             url: '/priceFromGeocode',
             data: {long: long, lat: lat},
@@ -223,7 +225,7 @@
               $('.step').removeClass('hidden');
               $('.overlay').addClass('hidden');
               $('.step-content').html('<div class="step-item">' + '您的位置在' + data.label + '。每平米房价' + '<input type="text" id="price" value="' +  data.price/10000 + '">万'
-                    + '<br>' + '步骤2: 输入你当前房屋的面积: <input type="text" id="indoor-size" value="100">平米和能额外支付的金额:' + '<input type="text" id="cash">' + '万人民币' + '<br>后点击换房到湾区');
+                    + '<br>' + '步骤2: 输入你当前房屋的面积: <input type="text" id="indoor-size" value="100">平米和能额外支付的金额:' + '<input type="text" id="cash">' + '万人民币' + '<br>后点击觅家到湾区');
               $('#fly').show();
             },
             error: function(data) {
@@ -241,6 +243,8 @@
         coordinates.style.display = 'block';
         coordinates.innerHTML = 'Longitude:' + coords.lng + '<br>' + 'Latitude:' + coords.lat;
         getRegionPrice(coords.lng, coords.lat)
+
+        $('.step-content').removeClass('hidden');
 
         map.jumpTo({center: [coords.lng, coords.lat]});
 
@@ -303,26 +307,27 @@
 
     });
 
+    function hidePopup() {
+        $('.panel').addClass('hidden');
+        $('.overlay').addClass('hidden');
+        $('.step-content').addClass('hidden');
+        $('.header').addClass('hidden');
+        $('.step').addClass('hidden');
+    }
+
     $('.start').on('click',function(){
-      $('.panel').addClass('hidden');
-      $('.overlay').addClass('hidden');
+        hidePopup();
     });
 
     document.getElementById('fly').addEventListener('click', function () {
         // Fly to a random location by offsetting the point -74.50, 40
         // by up to 5 degrees.
         var propertyValue = parseInt($('#indoor-size').val()) * parseFloat($('#price').val()) * 10000
-                + parseInt($('#cash').val()) * 10000
+                + (parseInt($('#cash').val()) || 0) * 10000
         personalInfo.propertyValue = (propertyValue / 6.67 / 10000).toFixed(2) ;
 
 
         $('overlay').addClass('hidden');
-        map.flyTo({
-            center: [
-                -121.938102434,
-                37.60092460002588],
-            zoom: 9.5
-        });
 
        loadHome( {indoor_size: $('#indoor-size').val(), price: $('#price').val() * 10000, cash: $('#cash').val() * 10000 });
         $('.step').addClass('hidden');
@@ -331,7 +336,7 @@
     function zoomIn(coords) {
         coordinates.innerHTML = 'Longitude:' + coords.lng + '<br>' + 'Latitude:' + coords.lat;
         getRegionPrice(coords.lng, coords.lat)
-
+        $('.step-content').removeClass('hidden');
         map.jumpTo({center: [coords.lng, coords.lat]});
 
         var zoomLevel = map.getZoom();
@@ -400,7 +405,9 @@
 
                 var featureHomes = [];
 
-                console.log(homes);
+                $('.step').removeClass('hidden');
+                $('.overlay').addClass('hidden');
+                $('.panel').removeClass('hidden');
 
                 if(homes.length > 0) {
                     loadAgent(false);
@@ -410,7 +417,7 @@
                             37.60092460002588],
                         zoom: 8.5
                     });
-                    $('#step').html('您的资产是' + personalInfo.propertyValue  + '万美元。有' + homes.length + '处位于加州湾区的房产满足您要求,请尝试购买.')
+                    $('.step-content').html('您的资产是' + personalInfo.propertyValue  + '万美元。有' + homes.length + '处位于加州湾区的房产满足您要求,请尝试购买.')
                     needFly = false;
 
                     $('#fly').hide();
@@ -468,7 +475,7 @@
                     var indoorSize = $('#indoor-size').val();
                     var price = $('#price').val();
                     var cash =  $('#cash').val() || 0;
-                    $('#step').html('您所在地的每平米房价' + '<input type="text" id="price" value="' +  price + '">万'
+                    $('.step-content').html('您所在地的每平米房价' + '<input type="text" id="price" value="' +  price + '">万'
                             + '面积 <input type="text" id="indoor-size" value="' + indoorSize + '">平米 ' +
                             '您现有住房不足以换到美国房产, 请选择另一处房产或输入您能补出的金额: ' + '<input type="text" id="cash" value="' + cash +'">' + '万人民币后再试'
                     );
@@ -531,13 +538,16 @@
 
   function buyHouse(purchaseIndex) {
       bidIndex = purchaseIndex;
+      $('.step').removeClass('hidden');
+      $('.step-content').removeClass('hidden');
+      $('.header').removeClass('hidden');
+
       if(agents.length > 0){
           var content = '<div><p>你需要选择一位经纪人</p>'
           for(var i in agents) {
               content += '<div onclick="bidHome(' + i + ')"><p>' + agents[i].cn_name + '</p><img src="' + agents[i].head_image + '" height="42" width="42"/></div>';
           }
-          $('#map').css({top: '120px'});
-          $('#step').html(content);
+          $('.step-content').html(content);
 
       } else {
          loadAgent(purchaseIndex);
@@ -545,15 +555,31 @@
   }
 
   function bidHome(agentIndex) {
-      var offerCount = parseInt(Math.random() * 20)
-      var content = '<p>' + agents[agentIndex].cn_name + ': 有' + offerCount + '名买家也对此房感兴趣。</p>';
-      content += '您的最终出价<input type="text" id="bidPrice" value="' + personalInfo.propertyValue + '">万美元 <button onclick="makeOffer()">出价</button>'
-      $('#step').html(content);
+      selectAgent = agents[agentIndex];
+      var offerCount = parseInt(Math.random() * 20);
+      var content = '<p>' + selectAgent.cn_name + ': 有' + offerCount + '名买家也对此房感兴趣。</p>';
+      content += '您的最终出价<input type="text" id="bidPrice" value="' + parseFloat(homes[bidIndex].price) +
+              '">万美元 <button onclick="makeOffer(' + offerCount + ')">出价</button>';
+
+      $('.step-content').html(content);
   }
 
-  function makeOffer() {
-      var finalPrice = $('#bidPrice').val();
-      $('#step').html('<p>' + finalPrice + '万美元成交</p>');
+  function makeOffer(count) {
+      console.log(homes[bidIndex]);
+      var finalPrice = parseFloat($('#bidPrice').val());
+      var listPrice = parseFloat(homes[bidIndex].price);
+      if((finalPrice - listPrice) * 2 > count){
+          $('.step-content').html('<p>恭喜您以' + finalPrice + '万美元(溢价' +
+                  (finalPrice - listPrice) + '万美元)购得此房</p><a href="./home/' + homes[bidIndex].id + '">点击查看房屋详情</a>');
+      } else {
+          var content = '<p>' + selectAgent.cn_name + ': 大约还有' +
+                  (count - parseInt((finalPrice - listPrice) * 2)) + '名买家比您出价高。</p>';
+          content += '请提高报价至<input type="text" id="bidPrice" value="' + parseFloat(finalPrice) +
+                  '">万美元 <button onclick="makeOffer(' + count + ')">出价</button> <button onclick="hidePopup()">放弃</button>';
+
+          $('.step-content').html(content);
+      }
+
   }
 
   function loadAgent(purchaseIndex) {
