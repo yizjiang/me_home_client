@@ -166,7 +166,14 @@
 </div>
 
 <div class='header'>
-  觅家优质房源
+  <% content = '觅家优质房源' %>
+  <% content = "恭喜您刚刚以#{params[:price]}万美金购得此房" if params[:glk] %>
+
+  <%= content %>
+
+  <% if params[:glk]%>
+    <button style="background-color: blueviolet;height: 30px; color:yellow" onclick="document.location.href='../home_game.html';">开始游戏</button>
+  <% end %>
 </div>
 
 <div id="owl-demo" class="owl-carousel">

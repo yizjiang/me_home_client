@@ -417,7 +417,7 @@
                             37.60092460002588],
                         zoom: 8.5
                     });
-                    $('.step-content').html('您的资产是' + personalInfo.propertyValue  + '万美元。有' + homes.length + '处位于加州湾区的房产满足您要求,请尝试购买.')
+                    $('.step-content').html('您的资产是' + personalInfo.propertyValue  + '万美元。有' + homes.length + '处位于加州湾区的房产满足您要求, 您可以查看他们所在地区并尝试购买.')
                     needFly = false;
 
                     $('#fly').hide();
@@ -565,12 +565,14 @@
   }
 
   function makeOffer(count) {
-      console.log(homes[bidIndex]);
+      var home = homes[bidIndex];
       var finalPrice = parseFloat($('#bidPrice').val());
-      var listPrice = parseFloat(homes[bidIndex].price);
+      var listPrice = parseFloat(home.price);
       if((finalPrice - listPrice) * 2 > count){
-          $('.step-content').html('<p>恭喜您以' + finalPrice + '万美元(溢价' +
-                  (finalPrice - listPrice) + '万美元)购得此房</p><a href="./home/' + homes[bidIndex].id + '">点击查看房屋详情</a>');
+          $('.step-content').html('<p>恭喜您以' + finalPrice + '万美元(仅溢价' +
+                  (finalPrice - listPrice) + '万美元)购得此' +
+                  home.bed_num + '卧室' + home.chinese_indoor_size + '的' + home.chinese_home_type +
+                  '</p><a href="./home/' + home.id + '?glk=true&price=' + finalPrice + '">点击查看房屋详情</a>');
       } else {
           var content = '<p>' + selectAgent.cn_name + ': 大约还有' +
                   (count - parseInt((finalPrice - listPrice) * 2)) + '名买家比您出价高。</p>';
