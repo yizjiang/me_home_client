@@ -2,6 +2,7 @@
 
 require 'sinatra/contrib'
 require 'sinatra/json'
+require 'csv'
 
 module Routes
   class Base < Sinatra::Application
@@ -49,6 +50,14 @@ module Routes
 
     get '/hi' do
       'hello world'
+    end
+
+    get '/qa' do
+      CSV.read('./config/qa.csv').to_json   
+    end
+    
+    get '/home_tutorial' do
+      erb :home_tutorial_qa
     end
 
     get '/quick_search' do
