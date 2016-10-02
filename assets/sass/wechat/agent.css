@@ -228,9 +228,9 @@ div#agentcontent div.float_menu ul li span.glyphicon {
            QR-code
 
 =============================*/
-.qr-warp {
+.qr-wrap {
     width: 320px;
-    margin: 20px auto;
+    margin: 20px auto 90px;
     background-color: #f8f8f8;
     padding: 20px;
     border-radius: 10px;
@@ -331,7 +331,7 @@ div#agentcontent div.float_menu ul li span.glyphicon {
         width: 80%;
     }
 
-    .qr-warp {
+    .qr-wrap {
         padding: 10px;
         margin: 10px auto;
         width: 80%;

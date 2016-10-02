@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8' />
+  <title></title>
+  <meta charset=utf-8 />
+  <title>A simple map</title>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+  <script src='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js'></script>
+  <link href='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css' rel='stylesheet' />
+  <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
+  <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css' rel='stylesheet' />
+  <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css' rel='stylesheet' />
+
+
+  <style>
+    #map { position:absolute; bottom:0; width:100%; height: 80%; }
+  </style>
+</head>
+<body>
+
+  <div id='map'></div>
+  <button onclick="regionSelect('chinese')">华人最多的城市</button>
+  <button onclick="regionSelect('wealthy')">最有钱的社区</button>
+  <button onclick="regionSelect('tech')">科技公司的集中地</button>
+  <script>
+    window.$ = window.jQuery;
+
+
+    L.mapbox.accessToken = 'pk.eyJ1IjoiZGV1Ym95IiwiYSI6ImNpcDg3cm1xMzAxN3VzeW5vdWd6YWx4c2IifQ.cU1CJ-BMZuoyHigylGe4gA';
+    map = L.mapbox.map('map', 'mapbox.streets').setView([37.5483, -121.9886], 10);
+    var markers = new L.MarkerClusterGroup();
+
+    function regionSelect(region) {
+      markers.clearLayers();
+
+      var long, lat;
+      if(region =='chinese') {
+        lat = 37.5483;
+        long = -121.9886;
+      } else if (region == 'wealthy') {
+        lat = 37.4419;
+        long = -122.1430;
+      }
+
+      var marker = L.marker(new L.LatLng(lat, long), {
+        icon: L.mapbox.marker.icon({'marker-symbol': 'warehouse', 'marker-color': '0044FF'}),
+      });
+
+      markers.addLayer(marker);
+      map.addLayer(markers);
+    };
+  </script>
+</body>
+</html>

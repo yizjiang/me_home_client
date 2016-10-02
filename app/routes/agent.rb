@@ -15,9 +15,12 @@ module Routes
     end
 
     get '/agent/:name' do
-      response = Typhoeus.get("#{MEEHOME_SERVER_URL}/agent/#{params[:name]}")
+      user_query = ''
+      user_query = "?uid=#{params[:uid]}" if params[:uid]
+      response = Typhoeus.get("#{MEEHOME_SERVER_URL}/agent/#{params[:name]}#{user_query}")
       body = JSON.parse response.body
       @agent_info = body.delete_if{|k,_| k.to_sym == :home}.symbolize_keys
+
       content_type :html
       erb :agent
     end

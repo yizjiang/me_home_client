@@ -56,8 +56,29 @@ module Routes
       CSV.read('./config/qa.csv').to_json   
     end
     
-    get '/home_tutorial' do
+    get '/tutorial' do
       erb :home_tutorial_qa
+    end
+
+    get '/game' do
+      @uid = '4cdee2ddfd082da8414336c621584126' #SecureRandom.hex
+      erb :home_game
+    end
+
+    get '/region_tutorial' do
+      erb :region_tutorial
+    end
+
+
+    get '/check_login' do
+      response = Typhoeus.get("#{MEEHOME_SERVER_URL}/check_login", params: {uid: params[:uid]})
+      response.body
+    end
+
+    post '/qr_code' do
+      #response = Typhoeus.post("#{MEEHOME_SERVER_URL}/qr_code", body: {uid: params[:uid]})
+      #response.body
+      {url: 'http://localhost:3032/agents/login_4cdee2ddfd082da8414336c621584126.png'}.to_json
     end
 
     get '/quick_search' do

@@ -5,6 +5,9 @@
   <title></title>
   <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
   <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.21.0/mapbox-gl.js'></script>
+
+  <script src='http://res.wx.qq.com/open/js/jweixin-1.0.0.js'></script>
+
   <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.21.0/mapbox-gl.css' rel='stylesheet' />
   <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
   <style>
@@ -16,19 +19,19 @@
     }
     #map {
       position: absolute;
-      top: 0; 
-      bottom: 0; 
-      width: 100%; 
+      top: 0;
+      bottom: 0;
+      width: 100%;
       height: 100%
     }
     .popup {
       text-align: center;
     }
-    .popup .slideshow .image{ 
-      display: none; 
+    .popup .slideshow .image{
+      display: none;
     }
     .popup .slideshow .image.active {
-      display: block; 
+      display: block;
     }
     .popup .slideshow img {
       width: 100%;
@@ -40,11 +43,11 @@
     .popup .cycle {
         padding: 10px 0 20px;
     }
-    .popup .cycle a.prev { 
-      float:left; 
+    .popup .cycle a.prev {
+      float:left;
     }
-    .popup .cycle a.next { 
-      float:right; 
+    .popup .cycle a.next {
+      float:right;
     }
     .mapboxgl-popup {
       max-width: 400px;
@@ -152,12 +155,82 @@
 <pre id='coordinates' class='coordinates'></pre>
 </div>
 <script>
+  var uid = "<%=@uid%>";
+  var loginPic = '';
+  $.ajax({
+    url: '/qr_code',
+    data: {uid: uid},
+    type: 'post',
+
+    success: function(data) {
+      data = JSON.parse(data);
+      loginPic = data.url
+    },
+    error: function(data) {
+      console.log(data)
+    }
+  });
+
+
+    wx.config({
+        debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+        appId: 'wx18034235da4be445', // 必填，公众号的唯一标识
+        timestamp: '1471594625', // 必填，生成签名的时间戳
+        nonceStr: 'leojyz', // 必填，生成签名的随机串
+        signature: 'd56c6b2422ed7168f17c41a945fa14ce61e2ae14',// 必填，签名，见附录1
+        jsApiList: ['onMenuShareTimeline'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+    });
+
+    wx.ready(function(){
+         console.log('here');
+        // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
+      wx.onMenuShareTimeline({
+        title: 'hello', // 分享标题
+        link: 'www.meejia.cn', // 分享链接
+        imgUrl: 'http://meejia.cn/img/default.jpeg', // 分享图标
+        success: function () {
+          // 用户确认分享后执行的回调函数
+        },
+        cancel: function () {
+          // 用户取消分享后执行的回调函数
+        }
+      });
+    });
+
+
 
     var homes =[];
     var agents = [];
     var personalInfo = {};
-    var bidIndex;
+    var bidIndex = 0;
     var selectAgent;
+    var cachedContent = '';
+
+  function checkLogin() {
+    $.ajax({
+      url: '/check_login',
+      data: {uid: uid},
+      type: 'get',
+
+      success: function(data) {
+        data = JSON.parse(data);
+        if (data.login == true) {
+          var home = homes[bidIndex];
+          console.log(home)
+          if(home) {
+            $('.step-content').html(cachedContent +
+                '</p><a href="./home/' + home.id + '?glk=true&price=' + home.finalPrice + '">点击查看房屋详情</a>');
+          }
+        }
+
+      },
+      error: function(data) {
+        console.log(data)
+      }
+    })
+  }
+
+  setInterval(checkLogin, 1500);
 
     window.$ = window.jQuery;
 
@@ -353,6 +426,7 @@
     }
 
     map.on('click', function (e) {
+        hidePopup();
         var features = map.queryRenderedFeatures(e.point, { layers: ['homes', 'route'] });
         if (!features.length && needFly) {
            zoomIn(e.lngLat);
@@ -417,7 +491,7 @@
                             37.60092460002588],
                         zoom: 8.5
                     });
-                    $('.step-content').html('您的资产是' + personalInfo.propertyValue  + '万美元。有' + homes.length + '处位于加州湾区的房产满足您要求, 您可以查看他们所在地区并尝试购买.')
+                    $('.step-content').html('您的资产' + personalInfo.propertyValue  + '万美元。' + homes.length + '处加州湾区的房产供您选择, 您可以查看他们所在地区并尝试购买.')
                     needFly = false;
 
                     $('#fly').hide();
@@ -556,7 +630,7 @@
 
   function bidHome(agentIndex) {
       selectAgent = agents[agentIndex];
-      var offerCount = parseInt(Math.random() * 20);
+      var offerCount = 1 + parseInt(Math.random() * 15);
       var content = '<p>' + selectAgent.cn_name + ': 有' + offerCount + '名买家也对此房感兴趣。</p>';
       content += '您的最终出价<input type="text" id="bidPrice" value="' + parseFloat(homes[bidIndex].price) +
               '">万美元 <button onclick="makeOffer(' + offerCount + ')">出价</button>';
@@ -566,16 +640,32 @@
 
   function makeOffer(count) {
       var home = homes[bidIndex];
+      var needPrice = parseFloat(home.price);
+
+      for (var i = 0; i < count; i ++) {
+          var increasePrice = 0.1 + Math.random();
+          needPrice += increasePrice;
+      }
+
+      console.log(needPrice);
+
       var finalPrice = parseFloat($('#bidPrice').val());
       var listPrice = parseFloat(home.price);
-      if((finalPrice - listPrice) * 2 > count){
+
+      if( finalPrice >= needPrice){
           $('.step-content').html('<p>恭喜您以' + finalPrice + '万美元(仅溢价' +
-                  (finalPrice - listPrice) + '万美元)购得此' +
+                  (finalPrice - listPrice).toFixed(2) + '万美元)购得此' +
                   home.bed_num + '卧室' + home.chinese_indoor_size + '的' + home.chinese_home_type +
-                  '</p><a href="./home/' + home.id + '?glk=true&price=' + finalPrice + '">点击查看房屋详情</a>');
+                 '<p>扫描此二维码分享此房屋</p>' +
+                 '<img src="' + loginPic + '"></img>');
+        homes[bidIndex].finalPrice = finalPrice;
+        cachedContent = '<p>恭喜您以' + finalPrice + '万美元(仅溢价' +
+            (finalPrice - listPrice).toFixed(2) + '万美元)购得此' +
+            home.bed_num + '卧室' + home.chinese_indoor_size + '的' + home.chinese_home_type
+
       } else {
-          var content = '<p>' + selectAgent.cn_name + ': 大约还有' +
-                  (count - parseInt((finalPrice - listPrice) * 2)) + '名买家比您出价高。</p>';
+          var content = '<p>' + selectAgent.cn_name + ':有' + count + '名买家同您竞价, 您的报价并非最高,别的买家一般都会加价1千到1万美元</p>';
+
           content += '请提高报价至<input type="text" id="bidPrice" value="' + parseFloat(finalPrice) +
                   '">万美元 <button onclick="makeOffer(' + count + ')">出价</button> <button onclick="hidePopup()">放弃</button>';
 

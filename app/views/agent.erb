@@ -29,7 +29,7 @@ $(window).load(function() {
 // Animate loader off screen
 $(".se-pre-con").fadeOut("slow");
   $('.wechat-icon').on("click",function(){
-     $('.qr-warp').fadeIn(900);
+     $('.qr-wrap').fadeIn(900);
   })
 });
 
@@ -130,7 +130,7 @@ $(document).ready(function() {
             </div>
             <div class="arrow">
             </div>
-            <div id="qr-anchor" class="qr-warp">
+            <div id="qr-anchor" class="qr-wrap">
               <img class='agent_qr_img' src=<%= @agent_info[:qr_code]%> />
             </div>
           </div>
@@ -159,7 +159,7 @@ $(document).ready(function() {
         </div>
         <div class="arrow">
         </div>
-        <div id="qr-anchor" class="qr-warp">
+        <div id="qr-anchor" class="qr-wrap">
           <img id='meejiaImage' class='agent_qr_img' src=<%= File.join(MEEHOME_CLIENT_URL, 'img/preloading.gif')%> />
         </div>
       </div>

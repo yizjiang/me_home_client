@@ -1,6 +1,6 @@
 development:
-   server_url: http://localhost:3032 
-   client_url: http://localhost:3031
+   server_url: localhost:3032
+   client_url: localhost:3031
    cdn_url: <%= ENV['SERVER_URL'] || 'http://mirror-10018786.file.myqcloud.com/' %>
 
 test:

@@ -172,7 +172,7 @@
   <%= content %>
 
   <% if params[:glk]%>
-    <button style="background-color: blueviolet;height: 30px; color:yellow" onclick="document.location.href='../home_game.html';">开始游戏</button>
+    <button style="background-color: blueviolet;height: 30px; color:yellow" onclick="document.location.href='../game';">开始游戏</button>
   <% end %>
 </div>
 
@@ -472,14 +472,14 @@
   </div>
   <div class="arrow">
   </div>
-  <div id="qr-anchor" class="qr-warp">
+  <div id="qr-anchor" class="qr-wrap">
     <img id='meejiaImage' class='agent_qr_img loading' src=<%= File.join(MEEHOME_CLIENT_URL, 'img/preload.gif')%> />
   </div>
 </div>
 <% if @agents.length > 0 %>
   <div class="float-agent">
     <% agent = @agents.first %>
-    <% url = MEEHOME_CLIENT_URL + '/agent/' + agent['agent_identifier'] %>
+    <% url = MEEHOME_CLIENT_URL + '/agent/' + agent['agent_identifier'] + '?uid=' + @uid%>
     <div class="agent-info-wrap">
       <a class="profile-img" href=<%=url %> style="background:url(<%=agent['head_image'] %>) no-repeat center / cover"/>
       </a>
