@@ -26,7 +26,27 @@
   <script>
     window.$ = window.jQuery;
 
+    var geoJson = {
+      chinese: [
+        {
+          lat: 37.5483,
+          long: -121.9886
+        }
+      ],
 
+      wealthy: [
+        {
+          lat: 37.4419,
+          long: -122.1430
+        }
+      ],
+      tech: [
+        {
+          lat: 37.3688,
+          long: -122.0363
+        }
+      ]
+    }
     L.mapbox.accessToken = 'pk.eyJ1IjoiZGV1Ym95IiwiYSI6ImNpcDg3cm1xMzAxN3VzeW5vdWd6YWx4c2IifQ.cU1CJ-BMZuoyHigylGe4gA';
     map = L.mapbox.map('map', 'mapbox.streets').setView([37.5483, -121.9886], 10);
     var markers = new L.MarkerClusterGroup();
@@ -34,20 +54,17 @@
     function regionSelect(region) {
       markers.clearLayers();
 
-      var long, lat;
-      if(region =='chinese') {
-        lat = 37.5483;
-        long = -121.9886;
-      } else if (region == 'wealthy') {
-        lat = 37.4419;
-        long = -122.1430;
+      var long, lat, marker;
+
+      for(var i = 0; i < geoJson[region].length; i++) {
+        long = geoJson[region][i].long;
+        lat = geoJson[region][i].lat;
+        marker = L.marker(new L.LatLng(lat, long), {
+          icon: L.mapbox.marker.icon({'marker-symbol': 'warehouse', 'html': 'safaf', 'marker-size': 'large', 'marker-color': '0044FF'}),
+        });
+        markers.addLayer(marker);
       }
 
-      var marker = L.marker(new L.LatLng(lat, long), {
-        icon: L.mapbox.marker.icon({'marker-symbol': 'warehouse', 'marker-color': '0044FF'}),
-      });
-
-      markers.addLayer(marker);
       map.addLayer(markers);
     };
   </script>
