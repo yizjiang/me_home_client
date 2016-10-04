@@ -9,20 +9,209 @@
   <script src='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js'></script>
   <link href='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css' rel='stylesheet' />
   <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
+  <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
   <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css' rel='stylesheet' />
   <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css' rel='stylesheet' />
-
-
   <style>
-    #map { position:absolute; bottom:0; width:100%; height: 80%; }
+    body {
+      padding: 0;
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      overflow: none;
+    }
+    .header{
+      width: 100%;
+      height: 50px;
+      box-sizing: border-box;
+      padding: 10px 0;
+      box-shadow: 0 0 5px #ccc;
+      position: relative;
+      z-index: 2;
+    }
+    .logo{
+      background: url("img/logo.png") no-repeat center center / contain;
+      height: 30px;
+      width: 100%;
+    }
+
+    .rankings{
+      width: 100%;
+      height: 164px;
+      position: absolute;
+      top: 50px;
+      overflow-y: auto;
+    }
+    .title{
+      font-size: 16px;
+      line-height: 40px;
+      border-bottom: 1px solid #ccc;
+      box-sizing: border-box;
+      padding: 0px 20px;
+      position: relative;
+    }
+    .title:after{
+      content: "";
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 10px 10px 0 10px;
+      border-color: #ee8a65 transparent transparent transparent;
+      position: absolute;
+      right: 20px;
+      top: 13px;
+    }
+    .search-title{
+      font-size: 16px;
+      text-align: center;
+      padding: 10px 0;
+      box-shadow: 0 0 3px #ccc;
+      background-color: #f8f8f8;
+    }
+    .rankings{
+      font-size: 14px;
+    }
+    .ranking{
+      padding: 0;
+      margin: 0;
+    }
+    .hidden{
+      display: none;
+    }
+    .item{
+      list-style: none;
+      width: 100%;
+      font-size: 0;
+      border-bottom: 1px solid #ccc;
+      padding: 10px 0;
+    }
+    .item:nth-child(even){
+      background-color: rgba(126,188,31,.1);
+    }
+    .item-name,.price,.size{
+      display: inline-block;
+      font-weight: 300;
+      font-size: 14px;
+      color: #333;
+      width: 33.33%;
+      padding: 0;
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    #map { 
+      position: absolute; 
+      bottom: 0; 
+      width: 100%; 
+      height: calc(100% - 214px); 
+    }
   </style>
 </head>
 <body>
+  <div class="header">
+    <div class="logo"></div>
+  </div>
+  <div class="rankings">
+    <div class="search-title">
+      快速搜索
+    </div>
+    <div class="chinese-area area">
+      <div class="title">华人最多的城市</div>
+      <ul class="chinese-ranking ranking hidden">
+        <li class="item">
+          <h3 class="item-name">城市</h3>
+          <p class="price">均价</p>
+          <p class="size">面积</p>
+        </li>
+        <li class="item">
+          <h3 class="item-name">Foster City</h3>
+          <p class="price">130万美金</p>
+          <p class="size">114平方米</p>
+          <button onclick="regionSelect('chinese')">查看地图</button>
+          <button onclick="regionSelect('chinese')">加入快速搜索</button>
+        </li>
+        <li class="item">
+          <h3 class="item-name">Mountain View</h3>
+          <p class="price">120万美金</p>
+          <p class="size">124平方米</p>
+          <button onclick="regionSelect('chinese')">查看地图</button>
+          <button onclick="regionSelect('chinese')">加入快速搜索</button>
+        </li>
+        <li class="item">
+          <h3 class="item-name">San Jose</h3>
+          <p class="price">108万美金</p>
+          <p class="size">132平方米</p>
+          <button onclick="regionSelect('chinese')">查看地图</button>
+          <button onclick="regionSelect('chinese')">加入快速搜索</button>
+        </li>
+      </ul>
+    </div>
 
+    <div class="wealth-area area">
+      <div class="title">最有钱的社区</div>
+      <ul class="wealth-ranking ranking hidden">
+        <li class="item">
+          <h3 class="item-name">城市</h3>
+          <p class="price">均价</p>
+          <p class="size">面积</p>
+        </li>
+        <li class="item">
+          <h3 class="item-name">Atherton</h3>
+          <p class="price">680万美金</p>
+          <p class="size">143平方米</p>
+          <button onclick="regionSelect('chinese')">查看地图</button>
+          <button onclick="regionSelect('chinese')">加入快速搜索</button>
+        </li>
+        <li class="item">
+          <h3 class="item-name">Palo Alto</h3>
+          <p class="price">642万美金</p>
+          <p class="size">154平方米</p>
+          <button onclick="regionSelect('chinese')">查看地图</button>
+          <button onclick="regionSelect('chinese')">加入快速搜索</button>
+        </li>
+        <li class="item">
+          <h3 class="item-name">Hillsborough</h3>
+          <p class="price">528万美金</p>
+          <p class="size">234平方米</p>
+          <button onclick="regionSelect('chinese')">查看地图</button>
+          <button onclick="regionSelect('chinese')">加入快速搜索</button>
+        </li>
+      </ul>
+    </div>
+
+    <div class="tech-area area">
+      <div class="title">科技公司的集中地</div>
+      <ul class="tech-ranking ranking hidden">
+        <li class="item">
+          <h3 class="item-name">城市</h3>
+          <p class="price">均价</p>
+          <p class="size">面积</p>
+        </li>
+        <li class="item">
+          <h3 class="item-name">San Jose</h3>
+          <p class="price">123万美金</p>
+          <p class="size">113平方米</p>
+          <button onclick="regionSelect('chinese')">查看地图</button>
+          <button onclick="regionSelect('chinese')">加入快速搜索</button>
+        </li>
+        <li class="item">
+          <h3 class="item-name">Mountain View</h3>
+          <p class="price">120万美金</p>
+          <p class="size">124平方米</p>
+          <button onclick="regionSelect('chinese')">查看地图</button>
+          <button onclick="regionSelect('chinese')">加入快速搜索</button>
+        </li>
+        <li class="item">
+          <h3 class="item-name">San Francisco</h3>
+          <p class="price">248万美金</p>
+          <p class="size">132平方米</p>
+          <button onclick="regionSelect('chinese')">查看地图</button>
+          <button onclick="regionSelect('chinese')">加入快速搜索</button>
+        </li>
+      </ul>
+    </div>
+  </div>
   <div id='map'></div>
-  <button onclick="regionSelect('chinese')">华人最多的城市</button>
-  <button onclick="regionSelect('wealthy')">最有钱的社区</button>
-  <button onclick="regionSelect('tech')">科技公司的集中地</button>
   <script>
     window.$ = window.jQuery;
 
@@ -67,6 +256,18 @@
 
       map.addLayer(markers);
     };
+
+    $('.title').click(function(e){
+      var target = $(e.target);
+      var list = target.parent('.area');
+      var isHide = $('.ranking').hasClass('hidden');
+      console.log(isHide);
+      if (isHide) {
+        list.children('.ranking').removeClass('hidden');
+      } else {
+        list.children('.ranking').addClass('hidden');
+      }
+    });
   </script>
 </body>
 </html>
