@@ -108,6 +108,31 @@
   </style>
 </head>
 <body>
+<script>
+  uid = "<%=@uid%>";
+  loginPic = '';
+
+  $.ajax({
+    url: '/qr_code',
+    data: {uid: uid},
+    type: 'post',
+
+    success: function(data) {
+      data = JSON.parse(data);
+      loginPic = data.url
+    },
+    error: function(data) {
+      console.log(data)
+    }
+  });
+
+  function wechatLogin() {
+    $('#login').attr('src', loginPic);
+    $('#login').show();
+  };
+
+</script>
+
   <div class="header">
     <div class="logo"></div>
   </div>
@@ -213,48 +238,68 @@
   </div>
   <div id='map'></div>
   <script>
-    window.$ = window.jQuery;
 
     var geoJson = {
-      chinese: [
-        {
-          lat: 37.5483,
-          long: -121.9886
-        }
-      ],
+      chinese: 'Foster City, Fremont, Union City',
+      wealthy: 'Palo Alto, Los Altos',
+      tech: 'Mountain View, Sunnyvale'
+    };
 
-      wealthy: [
-        {
-          lat: 37.4419,
-          long: -122.1430
-        }
-      ],
-      tech: [
-        {
-          lat: 37.3688,
-          long: -122.0363
-        }
-      ]
-    }
     L.mapbox.accessToken = 'pk.eyJ1IjoiZGV1Ym95IiwiYSI6ImNpcDg3cm1xMzAxN3VzeW5vdWd6YWx4c2IifQ.cU1CJ-BMZuoyHigylGe4gA';
     map = L.mapbox.map('map', 'mapbox.streets').setView([37.5483, -121.9886], 10);
     var markers = new L.MarkerClusterGroup();
 
+    function checkLogin() {
+      $.ajax({
+        url: '/check_login',
+        data: {uid: uid},
+        type: 'get',
+
+        success: function(data) {
+          data = JSON.parse(data);
+          if (data.login == true) {
+            var home = homes[bidIndex];
+            if(home) {
+              $('.step-content').html(cachedContent +
+                  '</p><a href="./home/' + home.id + '?glk=true&price=' + home.finalPrice + '">点击查看房屋详情</a>');
+            }
+          }
+
+        },
+        error: function(data) {
+          console.log(data)
+        }
+      })
+    }
+
     function regionSelect(region) {
       markers.clearLayers();
 
-      var long, lat, marker;
+      $.ajax({
+        url: '/homeSearch',
+        data: {regionValue: geoJson[region] , priceMin: 50.0, priceMax: 300.0, limit: 100, shorten: true},
+        type: 'get',
 
-      for(var i = 0; i < geoJson[region].length; i++) {
-        long = geoJson[region][i].long;
-        lat = geoJson[region][i].lat;
-        marker = L.marker(new L.LatLng(lat, long), {
-          icon: L.mapbox.marker.icon({'marker-symbol': 'warehouse', 'html': 'safaf', 'marker-size': 'large', 'marker-color': '0044FF'}),
-        });
-        markers.addLayer(marker);
-      }
+        success: function(data) {
+          var homes = JSON.parse(data);
+          var long, lat, marker;
+          map.setView([37.5483, -121.9886], 10);
+          for(var i = 0; i < homes.length; i++) {
+            long = homes[i].geo_point.split(',')[1];
+            lat = homes[i].geo_point.split(',')[0];
+            marker = L.marker(new L.LatLng(lat, long), {
+              icon: L.mapbox.marker.icon({'marker-symbol': 'warehouse', 'html': 'safaf', 'marker-size': 'large', 'marker-color': '0044FF'}),
+            });
+            markers.addLayer(marker);
+          }
+          map.addLayer(markers);
+          map.setView([lat, long], map.getZoom() + 1);
+        },
+        error: function(data) {
 
-      map.addLayer(markers);
+        }
+      });
+
     };
 
     $('.title').click(function(e){
