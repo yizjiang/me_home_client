@@ -66,7 +66,8 @@ module Routes
     end
 
     get '/region_tutorial' do
-      @uid = '4cdee2ddfd082da8414336c621584126'
+      p params[:uid]
+      @uid = params[:uid] || ''
       erb :region_tutorial
     end
 

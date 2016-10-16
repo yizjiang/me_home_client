@@ -90,6 +90,17 @@ module Routes
       end
     end
 
+    post '/agent/add_customer_search' do
+      request_payload = JSON.parse request.body.read
+      response = Typhoeus.post("#{MEEHOME_SERVER_URL}/agent/add_customer_search", headers: {uid: request.env['HTTP_UID'] }, body: request_payload )
+      if response.code == 200
+        response.body
+      else
+        status 400
+        {}.to_json
+      end
+    end
+
     post '/agent/contact_request' do
       request_payload = JSON.parse request.body.read
       response = Typhoeus.post("#{MEEHOME_SERVER_URL}/agent/contact_request", headers: {uid: request.env['HTTP_UID'] }, body: request_payload )
