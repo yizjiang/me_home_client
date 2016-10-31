@@ -284,18 +284,24 @@
 <% end %>
 
 <div>
-<h3 class='sub-header'>指定学校</h3>
-<% if elemental=assigned_school.select{|sch| sch['grade'].include?('K')}.first %>
+<h3 class='sub-header'>附近学校</h3>
   <div class='school primary'>
     <h4 class='school-name'>小学</h4>
+    <% if elemental=assigned_school.select{|sch| sch['grade'].include?('K')}.first %>
     <div class='school-table'>
-      <div class='row row-name row-title'>学校名称</div>
-      <div class='row row-name'><%= elemental['name'] %></div>
+      <div class='row'>
+        <div class='row-headline row-title'>学校名称</div>
+        <div class='row-headline row-title'>学校性质</div>
+      </div>
+      <div class='row'>
+        <div class='row-headline'><%= elemental['name'] %></div>
+        <div class='row-headline'>指派</div>
+      </div>
       <div class='row'>
         <div class='row-headline row-title'>学校评分</div>
         <div class='row-headline row-title'>教师学生比例</div>
       </div>
-      <div  class='row'>
+      <div class='row'>
         <div class='row-headline'><%= elemental['rating'] %></div>
         <div class='row-headline'><%= elemental['student_teacher_ratio'] %></div>
       </div>
@@ -307,15 +313,85 @@
         <div class='row-headline'><%= elemental['distance'] %></div>
         <div class='row-headline'><%= elemental['grade'] %></div>
       </div>
+    <% end %>
+    <br/>
+    <% public_schools.select{|sch| sch['grade'].include?('K')}.each do |school|%>
+      <div class='school high'>
+        <div class='school-table'>
+          <div class='row'>
+            <div class='row-headline row-title'>学校名称</div>
+            <div class='row-headline row-title'>学校性质</div>
+          </div>
+          <div class='row'>
+            <div class='row-headline'><%= elemental['name'] %></div>
+            <div class='row-headline'>公立</div>
+          </div>
+          <div class='row'>
+            <div class='row-headline row-title'>学校评分</div>
+            <div class='row-headline row-title'>教师学生比例</div>
+          </div>
+          <div class='row'>
+            <div class='row-headline'><%= school['rating'] %></div>
+            <div class='row-headline'><%= school['student_teacher_ratio'] %></div>
+          </div>
+          <div class='row'>
+            <div class='row-headline row-title'>距离</div>
+            <div class='row-headline row-title'>年级</div>
+          </div>
+          <div class='row'>
+            <div class='row-headline'><%= school['distance'] %></div>
+            <div class='row-headline'><%= school['grade'] %></div>
+          </div>
+        </div>
+      </div>
+      <br/>
+    <% end %>
+    <% private_schools.select{|sch| sch['grade'].include?('K')}.each do |school|%>
+      <div class='school high'>
+        <div class='school-table'>
+          <div class='row'>
+            <div class='row-headline row-title'>学校名称</div>
+            <div class='row-headline row-title'>学校性质</div>
+          </div>
+          <div class='row'>
+            <div class='row-headline'><%= elemental['name'] %></div>
+            <div class='row-headline'>私立</div>
+          </div>
+          <div class='row'>
+            <div class='row-headline row-title'>学校评分</div>
+            <div class='row-headline row-title'>教师学生比例</div>
+          </div>
+          <div class='row'>
+            <div class='row-headline'><%= school['rating'] %></div>
+            <div class='row-headline'><%= school['student_teacher_ratio'] %></div>
+          </div>
+          <div class='row'>
+            <div class='row-headline row-title'>距离</div>
+            <div class='row-headline row-title'>年级</div>
+          </div>
+          <div class='row'>
+            <div class='row-headline'><%= school['distance'] %></div>
+            <div class='row-headline'><%= school['grade'] %></div>
+          </div>
+        </div>
+      </div>
+      <br/>
+    <% end %>
     </div>
   </div>
-<% end %>
-<% if secondary=assigned_school.select{|sch| sch['grade'].include?('7')}.first %>
+
   <div class='school secondary'>
     <h4 class='school-name'>初中</h4>
+    <% if secondary=assigned_school.select{|sch| sch['grade'].include?('7')}.first %>
     <div class='school-table'>
-      <div class='row row-name row-title'>学校名称</div>
-      <div class='row row-name'><%= secondary['name'] %></div>
+      <div class='row'>
+        <div class='row-headline row-title'>学校名称</div>
+        <div class='row-headline row-title'>学校性质</div>
+      </div>
+      <div class='row'>
+        <div class='row-headline'><%= elemental['name'] %></div>
+        <div class='row-headline'>指派</div>
+      </div>
       <div class='row'>
         <div class='row-headline row-title'>学校评分</div>
         <div class='row-headline row-title'>教师学生比例</div>
@@ -332,15 +408,84 @@
         <div class='row-headline'><%= secondary['distance'] %></div>
         <div class='row-headline'><%= secondary['grade'] %></div>
       </div>
+      <% end %>
+    <br/>
+     <% public_schools.select{|sch| sch['grade'].include?('7')}.each do |school|%>
+      <div class='school high'>
+        <div class='school-table'>
+          <div class='row'>
+            <div class='row-headline row-title'>学校名称</div>
+            <div class='row-headline row-title'>学校性质</div>
+          </div>
+          <div class='row'>
+            <div class='row-headline'><%= elemental['name'] %></div>
+            <div class='row-headline'>公立</div>
+          </div>
+          <div class='row'>
+            <div class='row-headline row-title'>学校评分</div>
+            <div class='row-headline row-title'>教师学生比例</div>
+          </div>
+          <div class='row'>
+            <div class='row-headline'><%= school['rating'] %></div>
+            <div class='row-headline'><%= school['student_teacher_ratio'] %></div>
+          </div>
+          <div class='row'>
+            <div class='row-headline row-title'>距离</div>
+            <div class='row-headline row-title'>年级</div>
+          </div>
+          <div class='row'>
+            <div class='row-headline'><%= school['distance'] %></div>
+            <div class='row-headline'><%= school['grade'] %></div>
+          </div>
+        </div>
+      </div>
+      <br/>
+    <% end %>
+    <% private_schools.select{|sch| sch['grade'].include?('7')}.each do |school|%>
+      <div class='school high'>
+        <div class='school-table'>
+          <div class='row'>
+            <div class='row-headline row-title'>学校名称</div>
+            <div class='row-headline row-title'>学校性质</div>
+          </div>
+          <div class='row'>
+            <div class='row-headline'><%= elemental['name'] %></div>
+            <div class='row-headline'>公立</div>
+          </div>
+          <div class='row'>
+            <div class='row-headline row-title'>学校评分</div>
+            <div class='row-headline row-title'>教师学生比例</div>
+          </div>
+          <div class='row'>
+            <div class='row-headline'><%= school['rating'] %></div>
+            <div class='row-headline'><%= school['student_teacher_ratio'] %></div>
+          </div>
+          <div class='row'>
+            <div class='row-headline row-title'>距离</div>
+            <div class='row-headline row-title'>年级</div>
+          </div>
+          <div class='row'>
+            <div class='row-headline'><%= school['distance'] %></div>
+            <div class='row-headline'><%= school['grade'] %></div>
+          </div>
+        </div>
+      </div>
+      <br/>
+    <% end %>
     </div>
   </div>
-  <% end %>
-  <% if high=assigned_school.select{|sch| sch['grade'].include?('12')}.first %>
-    <div class='school high'>
-      <h4 class='school-name'>高中</h4>
+  <div class='school high'>
+    <h4 class='school-name'>高中</h4>
+    <% if high=assigned_school.select{|sch| sch['grade'].include?('12')}.first %>
       <div class='school-table'>
-        <div class='row row-name row-title'>学校名称</div>
-        <div class='row row-name'><%= high['name'] %></div>
+        <div class='row'>
+          <div class='row-headline row-title'>学校名称</div>
+          <div class='row-headline row-title'>学校性质</div>
+        </div>
+        <div class='row'>
+          <div class='row-headline'><%= elemental['name'] %></div>
+          <div class='row-headline'>指派</div>
+        </div>
         <div class='row'>
           <div class='row-headline row-title'>学校评分</div>
           <div class='row-headline row-title'>教师学生比例</div>
@@ -357,62 +502,73 @@
           <div class='row-headline'><%= high['distance'] %></div>
           <div class='row-headline'><%= high['grade'] %></div>
         </div>
+    <% end %>
+    <br/>
+    <% public_schools.select{|sch| sch['grade'].include?('12')}.each do |school|%>
+      <div class='school high'>
+        <div class='school-table'>
+          <div class='row'>
+            <div class='row-headline row-title'>学校名称</div>
+            <div class='row-headline row-title'>学校性质</div>
+          </div>
+          <div class='row'>
+            <div class='row-headline'><%= elemental['name'] %></div>
+            <div class='row-headline'>公立</div>
+          </div>
+          <div class='row'>
+            <div class='row-headline row-title'>学校评分</div>
+            <div class='row-headline row-title'>教师学生比例</div>
+          </div>
+          <div class='row'>
+            <div class='row-headline'><%= school['rating'] %></div>
+            <div class='row-headline'><%= school['student_teacher_ratio'] %></div>
+          </div>
+          <div class='row'>
+            <div class='row-headline row-title'>距离</div>
+            <div class='row-headline row-title'>年级</div>
+          </div>
+          <div class='row'>
+            <div class='row-headline'><%= school['distance'] %></div>
+            <div class='row-headline'><%= school['grade'] %></div>
+          </div>
+        </div>
       </div>
+      <br/>
+    <% end %>
+    <% private_schools.select{|sch| sch['grade'].include?('12')}.each do |school|%>
+      <div class='school high'>
+        <div class='school-table'>
+          <div class='row'>
+            <div class='row-headline row-title'>学校名称</div>
+            <div class='row-headline row-title'>学校性质</div>
+          </div>
+          <div class='row'>
+            <div class='row-headline'><%= elemental['name'] %></div>
+            <div class='row-headline'>公立</div>
+          </div>
+          <div class='row'>
+            <div class='row-headline row-title'>学校评分</div>
+            <div class='row-headline row-title'>教师学生比例</div>
+          </div>
+          <div class='row'>
+            <div class='row-headline'><%= school['rating'] %></div>
+            <div class='row-headline'><%= school['student_teacher_ratio'] %></div>
+          </div>
+          <div class='row'>
+            <div class='row-headline row-title'>距离</div>
+            <div class='row-headline row-title'>年级</div>
+          </div>
+          <div class='row'>
+            <div class='row-headline'><%= school['distance'] %></div>
+            <div class='row-headline'><%= school['grade'] %></div>
+          </div>
+        </div>
+      </div>
+      <br/>
+    <% end %>
     </div>
-  <% end %>
+  </div>
 </div>
-<h3 class='sub-header'>其他附近学校</h3>
-<h4 class='school-name'>公立</h4>
-<% public_schools.each do |school|%>
-  <div class='school high'>
-    <div class='school-table'>
-      <div class='row row-name row-title'>学校名称</div>
-      <div class='row row-name'><%= school['name'] %></div>
-      <div class='row'>
-        <div class='row-headline row-title'>学校评分</div>
-        <div class='row-headline row-title'>教师学生比例</div>
-      </div>
-      <div class='row'>
-        <div class='row-headline'><%= school['rating'] %></div>
-        <div class='row-headline'><%= school['student_teacher_ratio'] %></div>
-      </div>
-      <div class='row'>
-        <div class='row-headline row-title'>距离</div>
-        <div class='row-headline row-title'>年级</div>
-      </div>
-      <div class='row'>
-        <div class='row-headline'><%= school['distance'] %></div>
-        <div class='row-headline'><%= school['grade'] %></div>
-      </div>
-    </div>
-  </div>
-<% end %>
-
-<h4 class='school-name'>私立</h4>
-<% private_schools.each do |school|%>
-  <div class='school high'>
-    <div class='school-table'>
-      <div class='row row-name row-title'>学校名称</div>
-      <div class='row row-name'><%= school['name'] %></div>
-      <div class='row'>
-        <div class='row-headline row-title'>学校评分</div>
-        <div class='row-headline row-title'>教师学生比例</div>
-      </div>
-      <div class='row'>
-        <div class='row-headline'><%= school['rating'] %></div>
-        <div class='row-headline'><%= school['student_teacher_ratio'] %></div>
-      </div>
-      <div class='row'>
-        <div class='row-headline row-title'>距离</div>
-        <div class='row-headline row-title'>年级</div>
-      </div>
-      <div class='row'>
-        <div class='row-headline'><%= school['distance'] %></div>
-        <div class='row-headline'><%= school['grade'] %></div>
-      </div>
-    </div>
-  </div>
-<% end %>
 
 <h4 class='school-name'>大学</h4>
 <% colleges.each do |school|%>

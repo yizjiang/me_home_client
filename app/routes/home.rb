@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 require 'typhoeus'
+require 'tilt/erb'
 
 module Routes
   class Home < Base
