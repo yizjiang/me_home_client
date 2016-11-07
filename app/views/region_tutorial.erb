@@ -14,8 +14,38 @@
   <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css' rel='stylesheet' />
   <style>
     #addSearch{
-      float: right;
-      color: red;
+      position: fixed;
+      height: 100%;
+      width: 100%;
+      background-color: rgba(0,0,0,0.6);
+      z-index: 2000;
+      top: 0;
+    }
+    .addmodal{
+      position: fixed;
+      background-color: white;
+      z-index: 2000;
+      width: 90%;
+      height: 200px;
+      top: 40px;
+      border-radius: 10px;
+      color: #555;
+      left: 5%;
+      padding: 80px 30px 30px;
+      box-sizing: border-box;
+      line-height: 1.5;
+      font-size: 16px;
+    }
+
+    .close-x{
+      position: fixed;
+      top: 50px;
+      right: 7%;
+      color: #555;
+      background-color: white;
+      border: 0;
+      z-index: 2001;
+      font-size: 20px;
     }
 
     body {
@@ -39,13 +69,21 @@
       height: 30px;
       width: 100%;
     }
-
+    .logo.modal-logo{
+      position: fixed;
+      top: 60px;
+      z-index: 2001;
+      width: 90%;
+      left: 5%;
+    }
     .rankings{
       width: 100%;
-      height: 164px;
+      height: auto;
       position: absolute;
       top: 50px;
       overflow-y: auto;
+      z-index: 1200;
+      background-color: white;
     }
     .title{
       font-size: 16px;
@@ -65,6 +103,11 @@
       position: absolute;
       right: 20px;
       top: 13px;
+      transition: all 0.3s;
+    }
+    .area.opened .title:after{
+      border-width: 0 10px 10px 10px;
+      border-color: transparent transparent #ee8a65 transparent;
     }
     .search-title{
       font-size: 16px;
@@ -88,7 +131,8 @@
       width: 100%;
       font-size: 0;
       border-bottom: 1px solid #ccc;
-      padding: 10px 0;
+      padding: 10px;
+      box-sizing: border-box;
     }
     .item:nth-child(even){
       background-color: rgba(126,188,31,.1);
@@ -108,7 +152,7 @@
       position: absolute; 
       bottom: 0; 
       width: 100%; 
-      height: calc(100% - 214px); 
+      height: calc(100% - 173px); 
     }
 
     .popup {
@@ -126,7 +170,27 @@
     .popup .cycle {
       padding:10px 0 20px;
     }
-
+    .look-map,.add-search {
+      display: inline-block;
+      height: 36px;
+      padding: 0 20px;
+      line-height: 36px;
+      font-size: 14px;
+      font-weight: 100;
+      margin-top: 10px;
+      border-radius: 5px;
+      box-shadow: 0;
+      outline: 0;
+      border: 0;
+      color: white;
+    }
+    .look-map{
+      background-color: #74c005;
+      margin-right: 20px;
+    }
+    .add-search{
+      background-color: #fbc03d;
+    }
   </style>
 </head>
 <body>
@@ -140,7 +204,6 @@
 
   <div class="header">
     <div class="logo">
-      <p id='addSearch' style="display: none">已添加</p>
     </div>
   </div>
   <div class="rankings">
@@ -156,27 +219,27 @@
           <h3 class="item-name">Foster City</h3>
           <p class="price">130万美金</p>
           <p class="size">114平方米</p>
-          <button onclick="regionSelect('foster')">查看地图</button>
+          <button class='look-map' onclick="regionSelect('foster')">查看地图</button>
           <% if @uid.present? %>
-            <button onclick="addSearch('foster')">加入条件搜索</button>
+            <button class='add-search' onclick="addSearch('foster')">加入条件搜索</button>
           <% end %>
         </li>
         <li class="item">
           <h3 class="item-name">Mountain View</h3>
           <p class="price">120万美金</p>
           <p class="size">124平方米</p>
-          <button onclick="regionSelect('mountain')">查看地图</button>
+          <button class='look-map' onclick="regionSelect('mountain')">查看地图</button>
           <% if @uid.present? %>
-            <button onclick="addSearch('mountain')">加入条件搜索</button>
+            <button class='add-search' onclick="addSearch('mountain')">加入条件搜索</button>
           <% end %>
         </li>
         <li class="item">
           <h3 class="item-name">San Jose</h3>
           <p class="price">108万美金</p>
           <p class="size">132平方米</p>
-          <button onclick="regionSelect('jose')">查看地图</button>
+          <button class='look-map' onclick="regionSelect('jose')">查看地图</button>
           <% if @uid.present? %>
-            <button onclick="addSearch('jose')">加入条件搜索</button>
+            <button class='add-search' onclick="addSearch('jose')">加入条件搜索</button>
           <% end %>
         </li>
       </ul>
@@ -194,27 +257,27 @@
           <h3 class="item-name">Atherton</h3>
           <p class="price">680万美金</p>
           <p class="size">143平方米</p>
-          <button onclick="regionSelect('atherton')">查看地图</button>
+          <button class='look-map' onclick="regionSelect('atherton')">查看地图</button>
           <% if @uid.present? %>
-            <button onclick="addSearch('atherton')">加入条件搜索</button>
+            <button class='add-search' onclick="addSearch('atherton')">加入条件搜索</button>
           <% end %>
         </li>
         <li class="item">
           <h3 class="item-name">Palo Alto</h3>
           <p class="price">642万美金</p>
           <p class="size">154平方米</p>
-          <button onclick="regionSelect('palo')">查看地图</button>
+          <button class='look-map' onclick="regionSelect('palo')">查看地图</button>
           <% if @uid.present? %>
-            <button onclick="addSearch('palo')">加入条件搜索</button>
+            <button class='add-search' onclick="addSearch('palo')">加入条件搜索</button>
           <% end %>
         </li>
         <li class="item">
           <h3 class="item-name">Hillsborough</h3>
           <p class="price">528万美金</p>
           <p class="size">234平方米</p>
-          <button onclick="regionSelect('hillsborough')">查看地图</button>
+          <button class='look-map' onclick="regionSelect('hillsborough')">查看地图</button>
           <% if @uid.present? %>
-            <button onclick="addSearch('hillsborough')">加入条件搜索</button>
+            <button class='add-search' onclick="addSearch('hillsborough')">加入条件搜索</button>
           <% end %>
         </li>
       </ul>
@@ -232,33 +295,38 @@
           <h3 class="item-name">San Jose</h3>
           <p class="price">123万美金</p>
           <p class="size">113平方米</p>
-          <button onclick="regionSelect('jose')">查看地图</button>
+          <button class='look-map' onclick="regionSelect('jose')">查看地图</button>
           <% if @uid.present? %>
-            <button onclick="addSearch('jose')">加入条件搜索</button>
+            <button class='add-search' onclick="addSearch('jose')">加入条件搜索</button>
           <% end %>
         </li>
         <li class="item">
           <h3 class="item-name">Mountain View</h3>
           <p class="price">120万美金</p>
           <p class="size">124平方米</p>
-          <button onclick="regionSelect('mountain')">查看地图</button>
+          <button class='look-map' onclick="regionSelect('mountain')">查看地图</button>
           <% if @uid.present? %>
-            <button onclick="addSearch('mountain')">加入条件搜索</button>
+            <button class='add-search' onclick="addSearch('mountain')">加入条件搜索</button>
           <% end %>
         </li>
         <li class="item">
           <h3 class="item-name">San Francisco</h3>
           <p class="price">248万美金</p>
           <p class="size">132平方米</p>
-          <button onclick="regionSelect('francisco')">查看地图</button>
+          <button class='look-map' onclick="regionSelect('francisco')">查看地图</button>
           <% if @uid.present? %>
-            <button onclick="regionSelect('francisco')">加入条件搜索</button>
+            <button class='add-search' onclick="regionSelect('francisco')">加入条件搜索</button>
           <% end %>
         </li>
       </ul>
     </div>
   </div>
   <div id='map'></div>
+  <div id='addSearch' style="display: none">
+    <div class="logo modal-logo"></div>
+    <button class="close-x" onclick="closeModal()">X</button>
+    <div class="addmodal">已添加该地区到您的条件搜索。<br>您可随时返回公众号，点击条件搜索再次查看。</div>
+  </div>
   <script>
 
     var geoJson = {
@@ -291,11 +359,15 @@
         success: function(data) {
          console.log('success')
           $("#addSearch").show();
-          setTimeout(function() { $("#addSearch").hide(); }, 2000);
+          setTimeout(function() { $("#addSearch").hide(); }, 6000);
         },
         error: function() {
         }
       });
+    }
+
+    function closeModal(){
+      $('#addSearch').hide();
     }
 
     function regionSelect(region) {
@@ -325,10 +397,7 @@
 
             var slideshowContent = '';
 
-            slideshowContent += '<div class="image active">' +
-                '<img src="' + image_url + '" />' +
-                '<div class="caption">' + home.short_desc + '</div>' +
-                '</div>';
+            slideshowContent += '<div class="image active">' + '<a href="' + CLIENT_URL + '/home/' + home.id + '">' + '<div class="price">' + home.price + '</div>' + '<img src="' + image_url + '" />' + '</a>' + '<div class="caption">' + home.short_desc + '</div>' + '</div>';
 
             // Create custom popup content
             var popupContent =  '<div id="' + home.id + '" class="popup">' +
@@ -349,6 +418,9 @@
           }
           map.addLayer(markers);
           map.setView([lat, long], map.getZoom() + 1);
+          var open_ranking = $('.title').parents('.opened');
+          open_ranking.find('.title').click();
+        
         },
         error: function(data) {
 
@@ -360,11 +432,12 @@
     $('.title').click(function(e){
       var target = $(e.target);
       var list = target.parent('.area');
-      var isHide = $('.ranking').hasClass('hidden');
-      console.log(isHide);
+      var isHide = list.find('.ranking').hasClass('hidden');
       if (isHide) {
+        list.addClass('opened');
         list.children('.ranking').removeClass('hidden');
       } else {
+        list.removeClass('opened');
         list.children('.ranking').addClass('hidden');
       }
     });
