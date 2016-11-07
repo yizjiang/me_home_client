@@ -666,8 +666,9 @@
       $(this).addClass("hidden");
     });
 
-
-    isMyFavoriteHome();
+    if(uid != '') {
+      isMyFavoriteHome();
+    }
 
     $.ajax({
       url: '/agent/' + agentId + '/meejia_image',
