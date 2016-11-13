@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Houses View List</title>
+</head>
+<body>
+<table border="1">
+<tr>
+  <th>id</th>
+  <th>user name</th>
+  <th>details</th>
+</tr>
+<% @results.each do |k, v| %>
+<tr>
+  <td><a href="/metric/user_house_view/<%= k %>"><%= k %></a></td>
+  <td><a href="/metric/user_house_view/<%= k %>"><%= v.delete("user_name") %></a></td>
+  <td><%= ERB::Util.html_escape v %></td>
+</tr>
+<% end %>
+</table>
+</body>
+</html>

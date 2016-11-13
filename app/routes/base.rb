@@ -141,6 +141,61 @@ module Routes
       response.body
     end
 
+    post '/metric/house_view' do
+      response = Typhoeus.post("#{MEEHOME_SERVER_URL}/user/metric_tracking_h", headers: {uid: request.env['HTTP_UID'] }, body: params.to_query )
+      200
+    end
+
+    get '/metric/home_view_list' do
+      response = Typhoeus.get("#{MEEHOME_SERVER_URL}/metric/home_view_list")
+      @results = JSON(response.body)
+      erb :home_view_list
+    end
+
+    get '/metric/home/:hid' do
+      if params[:uid]
+        uid = "?uid=#{params[:uid]}"
+        response = Typhoeus.post("#{MEEHOME_SERVER_URL}/user/metric_tracking_h", headers: {uid: params[:uid]}, body: params.to_query )
+      else
+        uid = ""
+      end
+      redirect "/home/#{params[:hid]}/" + uid
+    end
+
+    get '/metric/user_house_view/:id' do
+      response = Typhoeus.get("#{MEEHOME_SERVER_URL}/metric/user/#{params[:id]}/house_viewed")
+      @results = JSON.parse response.body
+      @max = @results.max_by{|k, v| v["view_times"].to_i}[1] rescue @max = {"geo_point"=>"37.75190734863281,-122.42798614501953"}
+      erb :user_view_list
+    end
+
+    get '/metric/house_viewed_stats' do
+      response = Typhoeus.get("#{MEEHOME_SERVER_URL}/metric/house_list")
+      re = JSON.parse response.body
+      @results = []
+      re.sort_by{|k,v| v["other"]}.reverse.each do |x|
+        h = {}
+        h["id"] = x[0]
+        h["total"] = x[1]["total"]
+        h["details"] = {}
+        x[1].each do |m, n|
+          case m
+          when "total"
+          when "h_m"
+            h["details"]["地图看房"] = n
+          when "we_a"
+            h["details"]["微信文章"] = n
+          when "other"
+            h["details"]["其他"] = n
+          else
+            h["details"][m] = n
+          end
+        end
+        @results << h
+      end
+      erb :house_viewed_stats
+    end
+
     private
 
   end
