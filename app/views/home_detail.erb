@@ -287,7 +287,7 @@
 <h3 class='sub-header'>附近学校</h3>
   <div class='school primary'>
     <h4 class='school-name'>小学</h4>
-    <% if elemental=assigned_school.select{|sch| sch['grade'].include?('K')}.first %>
+    <% if elemental = assigned_school.select{|sch| sch['grade'].include?('K')}.first %>
     <div class='school-table'>
       <div class='row row-name row-title'>学校名称</div>
       <div class='row row-name'><%= elemental['name'] %></div>
@@ -315,7 +315,7 @@
       <div class='school high'>
         <div class='school-table'>
           <div class='row row-name row-title'>学校名称</div>
-          <div class='row row-name'><%= elemental['name'] %></div>
+          <div class='row row-name'><%= school['name'] %></div>
           <div class='row row-name row-title'>学校性质</div>
           <div class='row row-name'>公立</div>
           <div class='row'>
@@ -342,7 +342,7 @@
       <div class='school high'>
         <div class='school-table'>
           <div class='row row-name row-title'>学校名称</div>
-          <div class='row row-name'><%= elemental['name'] %></div>
+          <div class='row row-name'><%= school['name'] %></div>
           <div class='row row-name row-title'>学校性质</div>
           <div class='row row-name'>私立</div>
           <div class='row'>
@@ -370,10 +370,10 @@
 
   <div class='school secondary'>
     <h4 class='school-name'>初中</h4>
-    <% if secondary=assigned_school.select{|sch| sch['grade'].include?('7')}.first %>
+    <% if secondary = assigned_school.select{|sch| sch['grade'].include?('7')}.first %>
     <div class='school-table'>
       <div class='row row-name row-title'>学校名称</div>
-      <div class='row row-name'><%= elemental['name'] %></div>
+      <div class='row row-name'><%= secondary['name'] %></div>
       <div class='row row-name row-title'>学校性质</div>
       <div class='row row-name'>对口学校</div>
       <div class='row'>
@@ -398,7 +398,7 @@
       <div class='school high'>
         <div class='school-table'>
           <div class='row row-name row-title'>学校名称</div>
-          <div class='row row-name'><%= elemental['name'] %></div>
+          <div class='row row-name'><%= school['name'] %></div>
           <div class='row row-name row-title'>学校性质</div>
           <div class='row row-name'>公立</div>
           <div class='row'>
@@ -425,7 +425,7 @@
       <div class='school high'>
         <div class='school-table'>
           <div class='row row-name row-title'>学校名称</div>
-          <div class='row row-name'><%= elemental['name'] %></div>
+          <div class='row row-name'><%= school['name'] %></div>
           <div class='row row-name row-title'>学校性质</div>
           <div class='row row-name'>公立</div>
           <div class='row'>
@@ -455,7 +455,7 @@
     <% if high=assigned_school.select{|sch| sch['grade'].include?('12')}.first %>
       <div class='school-table'>
         <div class='row row-name row-title'>学校名称</div>
-        <div class='row row-name'><%= elemental['name'] %></div>
+        <div class='row row-name'><%= high['name'] %></div>
         <div class='row row-name row-title'>学校性质</div>
         <div class='row row-name'>对口学校</div>
         <div class='row'>
@@ -480,7 +480,7 @@
       <div class='school high'>
         <div class='school-table'>
           <div class='row row-name row-title'>学校名称</div>
-          <div class='row row-name'><%= elemental['name'] %></div>
+          <div class='row row-name'><%= school['name'] %></div>
           <div class='row row-name row-title'>学校性质</div>
           <div class='row row-name'>公立</div>
           <div class='row'>
@@ -507,7 +507,7 @@
       <div class='school high'>
         <div class='school-table'>
           <div class='row row-name row-title'>学校名称</div>
-          <div class='row row-name'><%= elemental['name'] %></div>
+          <div class='row row-name'><%= school['name'] %></div>
           <div class='row row-name row-title'>学校性质</div>
           <div class='row row-name'>公立</div>
           <div class='row'>
