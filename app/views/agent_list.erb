@@ -1,0 +1,26 @@
+<div class="agent-list">
+  <div class="pagination" style='display: block;'>
+    <span class="<%= if @page != "1";"previous-page";else;"previous-page-dis";end %>">上一页</span>
+    <span class="<%= if @agent_list.length == APP_CONFIG["page_size"];"next-page";else;"next-page-dis";end %>">下一页</span>
+  </div>
+  <% @agent_list.each do |ag| %>
+  <table border=1>
+    <tr>
+      <td rowspan=2><a href='<%= "/agent/" + ag["agent_identifier"].to_s %>'><img class='profile_img' src=<%= ag["head_image"]%> /></a></td>
+      <td>经纪人姓名</td><td>经纪人执照号</td><td>房屋数量</td>
+    </tr>
+    <tr>
+      <td><%= ag["cn_name"]%></td><td><%= ag["license_id"] %></td><td>To Do</td>
+    </tr>
+    <tr>
+      <td>自我介绍</td><td colspan=3><%= ag["description"]%></td>
+    </tr>
+  </table>
+  <br />
+  <% end%>
+  
+  <div class="pagination" style='display: block;'>
+    <span class="<%= if @page != "1";"previous-page";else;"previous-page-dis";end %>">上一页</span>
+    <span class="<%= if @agent_list.length == APP_CONFIG["page_size"];"next-page";else;"next-page-dis";end %>">下一页</span>
+  </div>
+</div>

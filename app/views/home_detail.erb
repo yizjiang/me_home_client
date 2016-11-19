@@ -158,6 +158,7 @@
   $(window).load(function() {
     // Animate loader off screen
     $(".se-pre-con").fadeOut(1000);
+
   });
 </script>
 <div class="se-pre-con">
@@ -716,7 +717,6 @@
     }
     var lat = home.geo_point.split(',')[0];
     var long = home.geo_point.split(',')[1];
-
 
     var marker = L.marker(new L.LatLng(lat, long), {
       icon: L.mapbox.marker.icon({'marker-symbol': 'warehouse', 'marker-color': '0044FF'}),
