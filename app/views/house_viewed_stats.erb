@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Houses Viewed Stats</title>
+</head>
+<body>
+<table border="1">
+<tr>
+  <th>Id</th>
+  <th>Total Viewed</th>
+  <th>details</th>
+</tr>
+<% @results.each do |h| %>
+<tr>
+  <td><a href="/home/<%= h['id'] %>" target="_blank"><%= h["id"] %></a></td>
+  <td><%= h["total"] %></td>
+  <td><%= h["details"] %></td>
+</tr>
+<% end %>
+</table>
+</body>
+</html>

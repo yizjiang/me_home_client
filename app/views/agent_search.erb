@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>觅家美国</title>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<%= stylesheet_link File.join(ASSET_URL, '/wechat/agent.css') %>
+<%= javascript_tag File.join(ASSET_URL, '/wechat/agent_setting.js') %>
+<%= stylesheet_link File.join(ASSET_URL, '/wechat/agent_setting.css') %>
+<style>
+.previous-page { color: blue; }
+.next-page { color: blue; }
+.previous-page-dis { color: gray; }
+.next-page-dis { color: gray; }
+</style>
+</head>
+<body>
+<script type="text/javascript">
+var SERVER_URL = "<%= MEEHOME_SERVER_URL %>";
+var CLIENT_URL = "<%= MEEHOME_CLIENT_URL %>";
+var CDN_URL = "<%= CDN_URL %>"
+
+$(document).ready(function() {
+  $(".se-pre-con").fadeOut("slow");
+  var page = 1;
+  $("#areaSelector").select2();
+  
+  $.ajax({
+    url: "/bay_area/?area=SF",
+    context:  $("#areaSelector")
+  }).done(function(areas) {
+    var result = '';
+    areas = JSON.parse(areas);
+    var element = $( this );
+    var result = '';
+
+    for(var i in areas){
+      // TODO how to pre-select
+      result += '<option value="' + areas[i].split(',')[0] + '"';
+      result += '>' + areas[i] + '</option>';
+     }
+    element.append(result)
+  });
+        
+  function doSearch(p_shift) {
+    if(typeof(p_shift) == 'undefined'){
+      page = 1;
+      p_shift = 0;
+    };
+
+    $.ajax({
+      url: '/agents/list',
+      type: 'get',
+      dataType: 'html',
+      data: getherData(p_shift),
+      success: function(d) {
+        $(".agent-list").html(d);
+        page += p_shift;
+      }
+    });
+  }
+
+  doSearch(0);
+
+  function getherData(p_shift) {
+    var h = {'page_num': page + p_shift};
+    h["key-words"] = $(".key-words").val();
+    h["key-type"] = $(".key-type").val();
+    h["house-num"] = $(".house-num").val();
+    var regionValue = [];
+    var selectedValue = $('#areaSelector').select2("data");
+    for(var index in selectedValue){
+      regionValue.push(selectedValue[index].text.split(',')[0])
+    }
+    h["areas"] = regionValue
+    return h;
+  }
+
+  $(document).on("click", ".next-page", function(){
+    doSearch(1);
+  });
+
+  $(document).on("click", ".previous-page", function(){
+    doSearch(-1);
+  });
+
+  $(".cond-reset").click(function(){
+    $("#areaSelector").val(null).trigger("change");
+    $(".key-words").val("");
+    $(".key-type").val("name");
+    $(".house-num").val("1");
+    doSearch();
+  });
+
+  $(".cond-submit").click(function(){
+    doSearch();
+  });
+
+  $(".cond-collapse").click(function(){
+    var slideheight = 200;
+    $(".search-conditions").slideToggle(function(){
+      if($(".search-conditions").css('display') == 'none'){
+        $(".search-tag").text("展开");
+      } else {
+        $(".search-tag").text("收起");
+      }
+    });
+  });
+
+//  updateHomeLIst(true);
+})
+
+</script>
+
+<div class="se-pre-con">
+  <div class="loading-text">稍安勿躁<br>休息,休息一下</div>
+  <div class="preloading"></div>
+</div>
+<div id="agentcontent">
+  <div class="header">
+    <div class="logo">觅家经纪人精英</div>
+  </div>
+  <div class="search-conditions" style="display: none;" >
+    <div style=" width: fit-content; margin: auto;">
+      <input type="text" class='key-words' style=""/>
+      <select class="key-type">
+        <option value="name">姓名</option>
+        <option value="license_id">执照号码</option>
+        <option value="email">邮箱</option>
+        <option value="wechat_id">微信号</option>
+      </select>
+    </div>
+    <div class="weui_cell">
+      <div class="weui_cell_hd">
+        <label class="weui_label">城市:</label>
+      </div>
+      <div class="weui_cell_bd weui_cell_primary">
+        <select class="weui_select" id="areaSelector" name="select2" multiple="multiple" style="width: 100%">
+        </select>
+      </div>
+    </div>
+    <div style=" width: fit-content; margin: auto;">
+      <span>房屋数量</span>
+        <select class="house-num">
+        <option value="1">&lt;10</option>
+        <option value="2">10~50</option>
+        <option value="3">50~100</option>
+        <option value="4">&gt;100</option>
+      </select>
+    </div>
+
+    <div style="display: block; width: fit-content; margin: auto;">
+      <button type="button" class="cond-reset">重置</button>
+      <button type="button" class="cond-submit">搜索</button>
+    </div>
+  </div>
+  <div class='cond-collapse' style="width: fit-content; margin: auto;">
+    <span class='search-tag'>展开</span>
+  </div>
+  <div class="agent-list">
+  </div>
+</div>
+</body>
+</html>

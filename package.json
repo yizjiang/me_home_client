@@ -59,6 +59,8 @@
     "gulp-compass": "^2.1.0",
     "gulp-imagemin": "^2.3.0",
     "gulp-replace": "^0.5.4",
-    "path": "^0.11.14"
+    "path": "^0.11.14",
+    "gulp": "~3.9.1",
+    "gulp-rename": "~1.2.2"
   }
 }

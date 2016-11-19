@@ -75,7 +75,11 @@
 
     // Create custom popup content
     var popupContent =  '<div id="' + home.id + '" class="popup">' +
-      '<a href="' + CLIENT_URL + '/home/' + home.id + '">' +
+      <% if @uid %>
+      '<a href="' + CLIENT_URL + '/metric/home/' + home.id + '?uid=<%= @uid %>' + '&s=<%= TRACKING_SOURCE["home_map"]%>">' +
+      <% else %>
+      '<a href="' + CLIENT_URL + '/metric/home/' + home.id + '?s=h_m">' +
+      <% end %>
       '<h2>' + home.addr1 + '</h2>' + '</a>' +
       '<div class="slideshow">' +
         slideshowContent +
