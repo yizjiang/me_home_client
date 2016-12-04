@@ -263,7 +263,7 @@
           var home = homes[bidIndex];
           if(home) {
             $('.step-content').html(cachedContent +
-                '</p><a href="./home/' + home.id + '?glk=true&price=' + home.finalPrice + '">点击查看房屋详情</a>');
+                '</p><a href="./metric/home/' + home.id + '?glk=true&s=<%= TRACKING_SOURCE["home_game"] %>&price=' + home.finalPrice + '">点击查看房屋详情</a>');
           }
         }
 
