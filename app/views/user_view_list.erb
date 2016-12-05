@@ -1,86 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>觅家美国</title>
-  <meta charset="utf-8">
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
-
-  <style>
-    body { margin:0; padding:0; }
-    #myMap { position:absolute; top:0; bottom:0; width:30%; }
-  </style>
-
-  <%= stylesheet_link File.join(ASSET_URL, '/wechat/home_detail.css') %>
-  <%= javascript_tag File.join(ASSET_URL, '/wechat/home_detail.js') %>
-
-  <script>
-    var CDN_URL = "<%= CDN_URL %>";
-    var ACCESS_KEY = "<%= ACCESS_KEY %>";
-  </script>
+<title>Houses View List</title>
 </head>
-
-<body class='mobile-container'>
-<script src='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js'></script>
-<link href='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css' rel='stylesheet' />
-
-
-<script type="text/javascript">
-  $(window).load(function() {
-    // Animate loader off screen
-    $(".se-pre-con").fadeOut(1000);
-  });
-</script>
-
-<div class="se-pre-con">
-  <div class="loading-text">稍安勿躁<br>休息 休息一下</div>
-  <div class="preloading"></div>
-</div>
-
-<div class='map-canvas'>
-  <div id='myMap' class='map' style="height:600px; width: 100%;"></div>
-</div>
-
-<script type="text/javascript">
-  $(document).ready(function () {
-
-    L.mapbox.accessToken = 'pk.eyJ1IjoiZGV1Ym95IiwiYSI6ImNpcDg3cm1xMzAxN3VzeW5vdWd6YWx4c2IifQ.cU1CJ-BMZuoyHigylGe4gA';
-
-    var geojson = [
-      <% @results.each do |k, v| %>
-      {
-        type: 'Feature',
-        geometry: {
-          type: 'Point',
-          coordinates: <%= [v["geo_point"].split(',')[1], v["geo_point"].split(',')[0]] %>
-        },
-        properties: {
-          title: '<%= v["addr1"].gsub("'", "\\\\'") %>',
-          description: '<%= v["description"].gsub("'", "\\\\'") %>',
-          <% case
-            when v["view_times"].to_i < 4 %>
-            'marker-color': '#3ca0d3',
-            'marker-size': 'small',
-          <% when (4..7) === v["view_times"].to_i %>
-            'marker-color': '#d33cd3',
-            'marker-size': 'medium',
-          <% when v["view_times"].to_i > 7 %>
-            'marker-color': '#d33c3c',
-            'marker-size': 'large',
-          <% end %>
-            'marker-symbol': <%= v["view_times"].to_i %>
-        }
-      },
-    <% end %>
-    ];
-    var mapSimple = L.mapbox.map('myMap', 'mapbox.streets').setView(<%= [@max["geo_point"].split(',')[0], @max["geo_point"].split(',')[1]] %>, 12);
-    var myLayer = L.mapbox.featureLayer().setGeoJSON(geojson).addTo(mapSimple);
-
-  });
-</script>
-
+<body>
+<table border="1">
+<tr>
+  <th>id</th>
+  <th>user name</th>
+  <th>house list</th>
+  <th>source list</th>
+</tr>
+<% @results.each do |k, v| %>
+<tr>
+  <td><a href="/metric/user_house_view/<%= k %>"><%= k %></a></td>
+  <td><a href="/metric/user_house_view/<%= k %>"><%= v.delete("user_name") %></a></td>
+  <td><%= ERB::Util.html_escape v["home_list"] %></td>
+  <td><%= ERB::Util.html_escape v["source_list"] %></td>
+</tr>
+<% end %>
+</table>
 </body>
-
 </html>
