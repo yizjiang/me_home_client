@@ -6,6 +6,9 @@
   <meta charset=utf-8 />
   <title>A simple map</title>
   <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
+  <script src='js/region_tutorial.js'></script>
+
   <script src='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js'></script>
   <link href='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css' rel='stylesheet' />
   <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
@@ -137,18 +140,30 @@
     .item:nth-child(even){
       background-color: rgba(126,188,31,.1);
     }
-    .item-name,.price,.size{
+    .item-name,.name,.price,.size{
       display: inline-block;
       font-weight: 300;
       font-size: 14px;
       color: #333;
-      width: 33.33%;
+      width: 30%;
       padding: 0;
       margin: 0;
       line-height: 1.5;
     }
 
-    #map { 
+    .interest{
+      display: inline-block;
+      font-weight: 300;
+      font-size: 14px;
+      color: #333;
+      width: 10%;
+      padding: 0;
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    #map {
+      visibility: hidden;
       position: absolute; 
       bottom: 0; 
       width: 100%; 
@@ -186,7 +201,8 @@
     }
     .look-map{
       background-color: #74c005;
-      margin-right: 20px;
+      width: 120px;
+      margin: 20px calc(50% - 60px);
     }
     .add-search{
       background-color: #fbc03d;
@@ -197,130 +213,59 @@
 <script>
   uid = "<%=@uid%>";
   loginPic = '';
-  console.log(uid);
   var CDN_URL = "<%= CDN_URL %>";
   var CLIENT_URL = "<%= MEEHOME_CLIENT_URL %>";
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function(e) {
+     data = data[0];
+     var $element = '';
+     for(var i = 0; i < data.regions.length; i++) {
+       $element += '<div class="area">';
+       $element += ' <div class="title">' + data.regions[i].title + '</div>';
+       $element += '<ul class="ranking';
+       if(i>0) {
+         $element += ' hidden';
+       }
+       $element += '">';
+       $element += '<li class="item"> <h3 class="item-name">城市</h3> <p class="price">均价</p> <p class="size">概况</p> <p class="interest">感兴趣</p> </li>';
+       for(var j = 0; j < data.regions[i].cities.length; j++) {
+         $element += '<li class="item">';
+         $element += '<h3 class="item-name name">' + data.regions[i].cities[j].name + '/' +  data.regions[i].cities[j].en + '</h3>';
+         $element +=  '<p class="price">' + data.regions[i].cities[j].price + '</p>';
+         $element +=  '<p class="size">' + data.regions[i].cities[j].summary + '</p>';
+         $element += '<input type="checkbox" value="'  + data.regions[i].cities[j].en +'"></li>'
+       }
+       $element += '</li></ul></div>';
+     }
+    $('#ranking').prepend($element);
+    $('.area').eq(0).addClass('opened');
+
+    $('.title').click(function(e){
+      var target = $(e.target);
+      var list = target.parent('.area');
+      var isHide = list.find('.ranking').hasClass('hidden');
+      if (isHide) {
+        list.addClass('opened');
+        list.children('.ranking').removeClass('hidden');
+      } else {
+        list.removeClass('opened');
+        list.children('.ranking').addClass('hidden');
+      }
+    });
+  });
 </script>
 
   <div class="header">
     <div class="logo">
     </div>
   </div>
-  <div class="rankings">
-    <div class="chinese-area area">
-      <div class="title">华人最多的城市</div>
-      <ul class="chinese-ranking ranking hidden">
-        <li class="item">
-          <h3 class="item-name">城市</h3>
-          <p class="price">均价</p>
-          <p class="size">面积</p>
-        </li>
-        <li class="item">
-          <h3 class="item-name">Foster City</h3>
-          <p class="price">130万美金</p>
-          <p class="size">114平方米</p>
-          <button class='look-map' onclick="regionSelect('foster')">查看地图</button>
-          <% if @uid.present? %>
-            <button class='add-search' onclick="addSearch('foster')">加入条件搜索</button>
-          <% end %>
-        </li>
-        <li class="item">
-          <h3 class="item-name">Mountain View</h3>
-          <p class="price">120万美金</p>
-          <p class="size">124平方米</p>
-          <button class='look-map' onclick="regionSelect('mountain')">查看地图</button>
-          <% if @uid.present? %>
-            <button class='add-search' onclick="addSearch('mountain')">加入条件搜索</button>
-          <% end %>
-        </li>
-        <li class="item">
-          <h3 class="item-name">San Jose</h3>
-          <p class="price">108万美金</p>
-          <p class="size">132平方米</p>
-          <button class='look-map' onclick="regionSelect('jose')">查看地图</button>
-          <% if @uid.present? %>
-            <button class='add-search' onclick="addSearch('jose')">加入条件搜索</button>
-          <% end %>
-        </li>
-      </ul>
-    </div>
 
-    <div class="wealth-area area">
-      <div class="title">最有钱的社区</div>
-      <ul class="wealth-ranking ranking hidden">
-        <li class="item">
-          <h3 class="item-name">城市</h3>
-          <p class="price">均价</p>
-          <p class="size">面积</p>
-        </li>
-        <li class="item">
-          <h3 class="item-name">Atherton</h3>
-          <p class="price">680万美金</p>
-          <p class="size">143平方米</p>
-          <button class='look-map' onclick="regionSelect('atherton')">查看地图</button>
-          <% if @uid.present? %>
-            <button class='add-search' onclick="addSearch('atherton')">加入条件搜索</button>
-          <% end %>
-        </li>
-        <li class="item">
-          <h3 class="item-name">Palo Alto</h3>
-          <p class="price">642万美金</p>
-          <p class="size">154平方米</p>
-          <button class='look-map' onclick="regionSelect('palo')">查看地图</button>
-          <% if @uid.present? %>
-            <button class='add-search' onclick="addSearch('palo')">加入条件搜索</button>
-          <% end %>
-        </li>
-        <li class="item">
-          <h3 class="item-name">Hillsborough</h3>
-          <p class="price">528万美金</p>
-          <p class="size">234平方米</p>
-          <button class='look-map' onclick="regionSelect('hillsborough')">查看地图</button>
-          <% if @uid.present? %>
-            <button class='add-search' onclick="addSearch('hillsborough')">加入条件搜索</button>
-          <% end %>
-        </li>
-      </ul>
-    </div>
-
-    <div class="tech-area area">
-      <div class="title">科技公司的集中地</div>
-      <ul class="tech-ranking ranking hidden">
-        <li class="item">
-          <h3 class="item-name">城市</h3>
-          <p class="price">均价</p>
-          <p class="size">面积</p>
-        </li>
-        <li class="item">
-          <h3 class="item-name">San Jose</h3>
-          <p class="price">123万美金</p>
-          <p class="size">113平方米</p>
-          <button class='look-map' onclick="regionSelect('jose')">查看地图</button>
-          <% if @uid.present? %>
-            <button class='add-search' onclick="addSearch('jose')">加入条件搜索</button>
-          <% end %>
-        </li>
-        <li class="item">
-          <h3 class="item-name">Mountain View</h3>
-          <p class="price">120万美金</p>
-          <p class="size">124平方米</p>
-          <button class='look-map' onclick="regionSelect('mountain')">查看地图</button>
-          <% if @uid.present? %>
-            <button class='add-search' onclick="addSearch('mountain')">加入条件搜索</button>
-          <% end %>
-        </li>
-        <li class="item">
-          <h3 class="item-name">San Francisco</h3>
-          <p class="price">248万美金</p>
-          <p class="size">132平方米</p>
-          <button class='look-map' onclick="regionSelect('francisco')">查看地图</button>
-          <% if @uid.present? %>
-            <button class='add-search' onclick="regionSelect('francisco')">加入条件搜索</button>
-          <% end %>
-        </li>
-      </ul>
-    </div>
+  <div class="rankings" id="ranking">
+    <button class='look-map' onclick="regionSelect()">查看地图</button>
   </div>
+
   <div id='map'></div>
   <div id='addSearch' style="display: none">
     <div class="logo modal-logo"></div>
@@ -329,22 +274,12 @@
   </div>
   <script>
 
-    var geoJson = {
-      foster: 'Foster City',
-      palo: 'Palo Alto',
-      mountain: 'Mountain View',
-      francisco: 'San Francisco',
-      jose: 'San Jose',
-      hillsborough: 'Hillsborough',
-      atherton: 'Atherton',
-      chinese: 'Foster City, Fremont, Union City',
-      wealthy: 'Palo Alto, Los Altos',
-      tech: 'Mountain View, Sunnyvale'
-    };
-
     L.mapbox.accessToken = 'pk.eyJ1IjoiZGV1Ym95IiwiYSI6ImNpcDg3cm1xMzAxN3VzeW5vdWd6YWx4c2IifQ.cU1CJ-BMZuoyHigylGe4gA';
     map = L.mapbox.map('map', 'mapbox.streets').setView([37.5483, -121.9886], 10);
     var markers = new L.MarkerClusterGroup();
+
+    function closeArea() {
+    }
 
     function addSearch(city) {
       $.ajax({
@@ -357,7 +292,6 @@
         ),
 
         success: function(data) {
-         console.log('success')
           $("#addSearch").show();
           setTimeout(function() { $("#addSearch").hide(); }, 6000);
         },
@@ -370,18 +304,28 @@
       $('#addSearch').hide();
     }
 
-    function regionSelect(region) {
+    function regionSelect() {
+
+      var selectedRegion = $( "input:checked" );
+      var regionValue = '';
+      for(var i = 0; i < selectedRegion.length; i++){
+        regionValue += selectedRegion[i].value;
+        if(i < selectedRegion.length - 1) {
+          regionValue += ',';
+        }
+      }
+      console.log(regionValue);
       markers.clearLayers();
 
       $.ajax({
         url: '/homeSearch',
-        data: {regionValue: geoJson[region] , priceMin: 50.0, priceMax: 300.0, limit: 300, shorten: true},
+        data: {regionValue: regionValue , priceMin: 50.0, priceMax: 500.0, limit: 300, shorten: true},
         type: 'get',
 
         success: function(data) {
           var homes = JSON.parse(data);
           var long, lat, marker;
-          map.setView([37.5483, -121.9886], 10);
+          map.setView([37.5483, -121.9886], 8);
           for(var i = 0; i < homes.length; i++) {
             var home = homes[i];
             var image_url = '';
@@ -418,29 +362,21 @@
           }
           map.addLayer(markers);
           map.setView([lat, long], map.getZoom() + 1);
-          var open_ranking = $('.title').parents('.opened');
-          open_ranking.find('.title').click();
-        
+
+          closeArea();
+          $("#map").css("visibility", "visible");
+          $(".opened .title").trigger('click');
         },
         error: function(data) {
 
         }
       });
 
-    };
-
-    $('.title').click(function(e){
-      var target = $(e.target);
-      var list = target.parent('.area');
-      var isHide = list.find('.ranking').hasClass('hidden');
-      if (isHide) {
-        list.addClass('opened');
-        list.children('.ranking').removeClass('hidden');
-      } else {
-        list.removeClass('opened');
-        list.children('.ranking').addClass('hidden');
+      if(uid != '' && uid != undefined)   {
+        addSearch(region)
       }
-    });
+
+    };
   </script>
 </body>
 </html>

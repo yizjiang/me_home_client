@@ -13,6 +13,7 @@
   </style>
   <script>
     var homes = <%= @homes.to_json %>;
+    var myLoc = "<%= @location %>";
     var CDN_URL = "<%= CDN_URL %>";
     var CLIENT_URL = "<%= MEEHOME_CLIENT_URL %>";
   </script>
@@ -46,12 +47,24 @@
 
 <script>
   L.mapbox.accessToken = 'pk.eyJ1IjoiZGV1Ym95IiwiYSI6ImNpcDg3cm1xMzAxN3VzeW5vdWd6YWx4c2IifQ.cU1CJ-BMZuoyHigylGe4gA';
-  var map = L.mapbox.map('meemap', 'mapbox.streets')
-    .setView([homes[0].geo_point.split(',')[0], homes[0].geo_point.split(',')[1]], 13);
 
-  var myLayer = L.mapbox.featureLayer().addTo(map);
   var markers = new L.MarkerClusterGroup();
 
+  if(myLoc.split(',').length == 2) {
+
+    var myLat = myLoc.split(',')[0];
+    var myLong = myLoc.split(',')[1];
+    var map = L.mapbox.map('meemap', 'mapbox.streets').setView([myLat, myLong], 14.5);
+
+    var myMarker = L.marker(new L.LatLng(myLat, myLong), {
+      icon: L.mapbox.marker.icon({'marker-symbol': 'water', 'marker-color': 'ff0044'}),
+    });
+    markers.addLayer(myMarker);
+  } else {
+    var map = L.mapbox.map('meemap', 'mapbox.streets')
+        .setView([homes[0].geo_point.split(',')[0], homes[0].geo_point.split(',')[1]], 14.5);
+  }
+  var myLayer = L.mapbox.featureLayer().addTo(map);
 
   for (var i in homes) {
     var home = homes[i];

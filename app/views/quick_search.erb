@@ -201,6 +201,54 @@
     </div>
   </div>
 
+  <div class="weui_cell weui_cell_select weui_select_after">
+    <div class="weui_cell_hd">
+      小学评分
+    </div>
+    <div class="weui_cell_bd weui_cell_primary">
+      <select id='primaryRating' class="weui_select" name="select2">
+        <option value="0">不限</option>
+        <option value="2">2分以上</option>
+        <option value="4">4分以上</option>
+        <option value="6">6分以上</option>
+        <option value="8">8分以上</option>
+        <option value="10">10分</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="weui_cell weui_cell_select weui_select_after">
+    <div class="weui_cell_hd">
+      初中评分
+    </div>
+    <div class="weui_cell_bd weui_cell_primary">
+      <select id='juniorHighRating' class="weui_select" name="select2">
+        <option value="0">不限</option>
+        <option value="2">2分以上</option>
+        <option value="4">4分以上</option>
+        <option value="6">6分以上</option>
+        <option value="8">8分以上</option>
+        <option value="10">10分</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="weui_cell weui_cell_select weui_select_after">
+    <div class="weui_cell_hd">
+      高中评分
+    </div>
+    <div class="weui_cell_bd weui_cell_primary">
+      <select id='seniorHighRating' class="weui_select" name="select2">
+        <option value="0">不限</option>
+        <option value="2">2分以上</option>
+        <option value="4">4分以上</option>
+        <option value="6">6分以上</option>
+        <option value="8">8分以上</option>
+        <option value="10">10分</option>
+      </select>
+    </div>
+  </div>
+
   <div id="loadingToast" class="weui_loading_toast" style="display:none;">
     <div class="weui_mask_transparent"></div>
     <div class="weui_toast">
@@ -281,6 +329,10 @@
       search['farm'] = $('#farm').prop('checked');
       search['other'] = $('#other').prop('checked');
 
+      search['primary_rating'] = $('#primaryRating').val();
+      search['junior_high_rating'] = $('#juniorHighRating').val();
+      search['senior_high_rating'] = $('#seniorHighRating').val();
+
       search['customer_id'] = wechatUserId;
       search['from_agent'] = fromAgent;
       return search;
@@ -290,8 +342,7 @@
       $('#regionError').hide();
     })
 
-    $("#areaSelector").select2({placeholder: search.regionValue});
-
+    $("#areaSelector").select2();
 
     (function() {
       $('#bedNum').val(search.bedNum || 2).change();
@@ -299,6 +350,10 @@
       $('#homeAge').val(search.home_age || '10').change();
       $('#priceMin').val(search.priceMin || '0').change();
       $('#priceMax').val(search.priceMax || '20000').change();
+
+      $('#primaryRating').val(search.primary_rating || 0).change();;
+      $('#juniorHighRating').val(search.junior_high_rating || 0).change();;
+      $('#seniorHighRating').val(search.senior_high_rating || 0).change();;
 
       for(var i in search.client_home_type){
         $('#'+search.client_home_type[i]).attr("checked",true);
@@ -315,13 +370,15 @@
         areas = JSON.parse(areas);
         var element = $( this );
         var result = '';
-
         for(var i in areas){
           // TODO how to pre-select
           result += '<option value="' + areas[i].split(',')[0] + '"';
+          if(search.regionValue.split(',').indexOf(areas[i].split(',')[0]) != -1){
+            result += 'selected="selected"'
+          }
           result += '>' + areas[i] + '</option>';
          }
-        element.append(result)
+        element.append(result);
       });
 
     $("#submit1").click(function() {

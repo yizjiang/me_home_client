@@ -42,6 +42,7 @@ module Routes
       end
       @uid = params[:uid]
       @homes = JSON.parse response.body
+      @location = params[:loc] || ''
       content_type :html
       erb :home_map
     end

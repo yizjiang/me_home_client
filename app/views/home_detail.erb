@@ -371,7 +371,7 @@
 
   <div class='school secondary'>
     <h4 class='school-name'>初中</h4>
-    <% if secondary = assigned_school.select{|sch| sch['grade'].include?('7')}.first %>
+    <% if secondary = assigned_school.select{|sch| sch['grade'].include?('6') || sch['grade'].include?('8') }.first %>
     <div class='school-table'>
       <div class='row row-name row-title'>学校名称</div>
       <div class='row row-name'><%= secondary['name'] %></div>
@@ -395,7 +395,7 @@
       </div>
       <% end %>
     <br/>
-     <% public_schools.select{|sch| sch['grade'].include?('7')}.each do |school|%>
+     <% public_schools.select{|sch| sch['grade'].include?('6') || sch['grade'].include?('8')}.each do |school|%>
       <div class='school high'>
         <div class='school-table'>
           <div class='row row-name row-title'>学校名称</div>
@@ -422,7 +422,7 @@
       </div>
       <br/>
     <% end %>
-    <% private_schools.select{|sch| sch['grade'].include?('7')}.each do |school|%>
+    <% private_schools.select{|sch| sch['grade'].include?('6') || sch['grade'].include?('8')}.each do |school|%>
       <div class='school high'>
         <div class='school-table'>
           <div class='row row-name row-title'>学校名称</div>
