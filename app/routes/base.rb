@@ -162,7 +162,6 @@ module Routes
     get '/metric/user_viewed_stats' do
       response = Typhoeus.get("#{MEEHOME_SERVER_URL}/metric/home_view_list")
       @results = JSON(response.body)
-      p @results,">>>>"*20
       erb :user_view_list
     end
 
