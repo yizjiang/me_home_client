@@ -180,6 +180,16 @@
       color: #ee8a65;
       display: inline-block;
     }
+    .prompt-price{
+      margin-right: 10px;
+      display: none;
+      color: red;
+    }
+    .prompt-size{
+      margin-right: 10px;
+      display: none;
+      color: red;
+    }
   </style>
 </head>
 <body>
@@ -341,7 +351,7 @@
               personalInfo.resident = data.label
               $('.step').removeClass('hidden');
               $('.overlay').addClass('hidden');
-              $('.step-content').html('<div class="step-item">' + '<div class="step-location">您的位置在<div class="location-data">' + data.label + '</div></div><div class="steps-container">步骤1: 每平米房价<br>' + '<input type="text" id="price" class="step-input" placeholder="例如：' +  data.price/10000 + '">万<br>' + '<br>' + '步骤2: 输入你当前房屋的面积<br><input type="text" id="indoor-size" class="step-input" placeholder="例如：100">平米<br><br>步骤3: 能额外支付的金额<br>' + '<input type="text" id="cash" class="step-input">' + '万人民币' + '</div>');
+              $('.step-content').html('<div class="step-item">' + '<div class="step-location">您的位置在<div class="location-data">' + data.label + '</div></div><div class="steps-container">步骤1: 每平米房价<br>' + '<input type="text" id="price" class="step-input" placeholder="例如：' +  data.price/10000 + '">万<span class="prompt-price">请输入有效价格</span><br>' + '<br>' + '步骤2: 输入你当前房屋的面积<br><input type="text" id="indoor-size" class="step-input" placeholder="例如：100">平米<span class="prompt-size">请输入有效面积</span><br><br>步骤3: 能额外支付的金额<br>' + '<input type="text" id="cash" class="step-input">' + '万人民币' + '</div>');
               $('#fly').show();
             },
             error: function(data) {
@@ -438,15 +448,19 @@
     document.getElementById('fly').addEventListener('click', function () {
         // Fly to a random location by offsetting the point -74.50, 40
         // by up to 5 degrees.
-        var propertyValue = parseInt($('#indoor-size').val()) * parseFloat($('#price').val()) * 10000
-                + (parseInt($('#cash').val()) || 0) * 10000
-        personalInfo.propertyValue = (propertyValue / 6.67 / 10000).toFixed(2) ;
-
-
-        $('overlay').addClass('hidden');
-
-       loadHome( {indoor_size: $('#indoor-size').val(), price: $('#price').val() * 10000, cash: $('#cash').val() * 10000 });
-        $('.step').addClass('hidden');
+        if(isNaN($('#indoor-size').val()) || isNaN($('#price').val()) || $('#indoor-size').val() == "" || $('#price').val() == "") {
+            if(isNaN($('#indoor-size').val()) || $('#indoor-size').val() == "") { $(".prompt-size").show(); };
+            if(isNaN($('#price').val()) || $('#price').val() == "") { $(".prompt-price").show(); };
+        } else {
+          var propertyValue = parseInt($('#indoor-size').val()) * parseFloat($('#price').val()) * 10000
+                  + (parseInt($('#cash').val()) || 0) * 10000
+          personalInfo.propertyValue = (propertyValue / 6.67 / 10000).toFixed(2) ;
+          $('overlay').addClass('hidden');
+         loadHome( {indoor_size: $('#indoor-size').val(), price: $('#price').val() * 10000, cash: $('#cash').val() * 10000 });
+          $(".prompt-size").hide();
+          $(".prompt-price").hide();
+          $('.step').addClass('hidden');
+        }
     });
 
     function zoomIn(coords) {
@@ -594,7 +608,7 @@
                     var indoorSize = $('#indoor-size').val();
                     var price = $('#price').val();
                     var cash =  $('#cash').val() || 0;
-                    $('.step-content').html('<div class="step-item"><div class="steps-container">您所在地的每平米房价' + '<input type="text" id="price" class="step-input" value="' +  price + '">万人民币<br>' + '面积 <input class="step-input" type="text" id="indoor-size" value="' + indoorSize + '">平米<br> ' + '您现有住房不足以换到美国房产, 请选择另一处房产或输入您能补出的金额:<br> ' + '<input class="step-input" type="text" id="cash" value="' + cash +'">' + '万人民币后再试</div></div>'
+                    $('.step-content').html('<div class="step-item"><div class="steps-container">您所在地的每平米房价' + '<input type="text" id="price" class="step-input" value="' +  price + '">万人民币<span class="prompt-price">请输入有效价格</span><br>' + '面积 <input class="step-input" type="text" id="indoor-size" value="' + indoorSize + '">平米<span class="prompt-size">请输入有效面积</span><br> ' + '您现有住房不足以换到美国房产, 请选择另一处房产或输入您能补出的金额:<br> ' + '<input class="step-input" type="text" id="cash" value="' + cash +'">' + '万人民币后再试</div></div>'
                     );
                 }
 
