@@ -54,7 +54,7 @@
 
     var myLat = myLoc.split(',')[0];
     var myLong = myLoc.split(',')[1];
-    var map = L.mapbox.map('meemap', 'mapbox.streets').setView([myLat, myLong], 14.5);
+    var map = L.mapbox.map('meemap', 'mapbox.streets').setView([myLat, myLong], 14);
 
     var myMarker = L.marker(new L.LatLng(myLat, myLong), {
       icon: L.mapbox.marker.icon({'marker-symbol': 'water', 'marker-color': 'ff0044'}),
@@ -62,7 +62,7 @@
     markers.addLayer(myMarker);
   } else {
     var map = L.mapbox.map('meemap', 'mapbox.streets')
-        .setView([homes[0].geo_point.split(',')[0], homes[0].geo_point.split(',')[1]], 14.5);
+        .setView([homes[0].geo_point.split(',')[0], homes[0].geo_point.split(',')[1]], 14);
   }
   var myLayer = L.mapbox.featureLayer().addTo(map);
 
