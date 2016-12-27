@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>觅家美国</title>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+
+
+  <style>
+    body { margin:0; padding:0; }
+    #myMap { position:absolute; top:0; bottom:0; width:30%; }
+  </style>
+
+  <%= stylesheet_link File.join(ASSET_URL, '/wechat/home_detail.css') %>
+  <%= javascript_tag File.join(ASSET_URL, '/wechat/home_detail.js') %>
+
+  <script>
+    var CDN_URL = "<%= CDN_URL %>";
+    var uid = "<%=@uid%>";
+    var ACCESS_KEY = "<%= ACCESS_KEY %>";
+    var agentId = "<%= @agents.first.try(:[], 'agent_id') %>"
+
+    var home = {
+      addr1: "<%= addr1 %>",
+      cap_rate: "<%= cap_rate %>",
+      category: "<%= category %>",
+      city: "<%= city %>",
+      county: "<%= county %>",
+      geo_point: "<%= geo_point %>",
+      id: "<%= id %>",
+      land_size: "<%= land_size %>",
+      market: "<%= market %>",
+      name: "<%= name %>",
+      num_of_properties: "<%=num_of_properties %>",
+      on_market: "<%= on_market %>",
+      price: "<%= price %>",
+      price_sf: "<%= price_sf %>",
+      property_type: "<%= property_type %>",
+      rating: <%= rating %>,
+      sale_type: "<%= sale_type %>",
+      size: "<%= size %>",
+      source_id: "<%= source_id %>",
+      state: "<%= state %>",
+      stories: "<%= stories %>",
+      zipcode: "<%= zipcode %>",
+      submarket: "<%= submarket %>",
+      city_info: <%= city_info.to_json %>,
+      images: <%=  images.to_json %>,
+      properties: <%=  properties.to_json %>,
+    };
+
+  </script>
+</head>
+
+<body class='mobile-container'>
+<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
+<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css' rel='stylesheet' />
+<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css' rel='stylesheet' />
+
+<script type="text/javascript">
+  $(window).load(function() {
+    // Animate loader off screen
+    $(".se-pre-con").fadeOut(1000);
+
+  });
+</script>
+<div class="se-pre-con">
+  <div class="loading-text">正在加载<br>休息 休息一下</div>
+  <div class="preloading"></div>
+</div>
+
+<div class='header'>
+  <% content = '觅家优质投资房产' %>
+  <%= content %>
+
+<div id="owl-demo" class="owl-carousel">
+</div>
+
+
+<div class='info'>
+  <h3 class='sub-header'>房源信息</h3>
+  <div class='item-wrap price'>
+
+    <div class='info-detail'><%= price / 10000 %>万美元</div>
+  </div>
+  <div class='item-wrap'>
+    <h4 class='info-item'>房屋地址：</h4>
+    <div class='info-detail'>
+      <%= addr1 %> <%= city %>, <%= state %> <%= zipcode %>
+    </div>
+  </div>
+  <div class='item-wrap'>
+    <h4 class='info-item'>类别：</h4>
+    <div class='info-detail'>
+      <%= category %>
+    </div>
+  </div>
+  <div class='item-wrap'>
+    <h4 class='info-item'>面积：</h4>
+    <div class='info-detail'>
+      <%= size %>
+    </div>
+  </div>
+  <div class='item-wrap'>
+    <h4 class='info-item'>市场：</h4>
+    <div class='info-detail'>
+      <%= market %>, <%= submarket %>
+    </div>
+  </div>
+  <div class='item-wrap'>
+    <h4 class='info-item'>房屋单价：</h4>
+    <div class='info-detail'>
+      <%= (price_sf / 0.09).round(1) %>美元/平方米
+    </div>
+  </div>
+</div>
+
+  <div>
+    <h3 class='sub-header'>包含房产</h3>
+    <div class='school primary'>
+      <% properties.each do |property|%>
+
+        <div class='school high'>
+          <div class='school-table'>
+            <div class='row row-name row-title'>地址</div>
+            <a href="<%= property['costar_link'] %>">
+              <div class='row row-name'><%= property['addr1'] %></div>
+            </a>
+            <div class='row row-name row-title'>城市</div>
+            <div class='row row-name'><%= property['city'] %></div>
+            <div class='row'>
+              <div class='row-headline row-title'>建筑介绍</div>
+              <div class='row row-name'><%= property['building_desc'] %></div>
+              <div class='row-headline row-title'>建筑级别</div>
+              <div class='row-headline'><%= property['building_class'] %></div>
+            </div>
+            <div class='row'>
+              <div class='row-headline row-title'>建造时间</div>
+              <div class='row row-name'><%= property['year_built'] %></div>
+              <div class='row-headline row-title'>建筑面积</div>
+              <div class='row row-name'><%= property['building_size'] %></div>
+              <div class='row-headline row-title'>建筑楼层</div>
+              <div class='row-headline'><%= property['building_stories'] %></div>
+            </div>
+            <div class='row'>
+              <div class='row-headline row-title'>占地面积</div>
+              <div class='row row-name'><%= property['land_size'] %></div>
+              <div class='row-headline row-title'>资产类别</div>
+              <div class='row-headline'><%= property['property_type'] %></div>
+            </div>
+          </div>
+        </div>
+        <br/>
+      <% end %>
+    </div>
+  </div>
+
+<% if city_info%>
+  <div class='area'>
+    <h3 class='sub-header'>族裔比例</h3>
+    <div id="canvas-holder">
+      <canvas id="chart-area" width="150" height="150"/>
+    </div>
+    <ul class='area-list'>
+      <li><span class='color-sq sq-red'></span>白人: <span class='data-span'><%= city_info['caucasion'] %></span></li>
+      <li><span class='color-sq sq-blue'></span>亚裔: <span class='data-span'><%= city_info['asian'] %></span></li>
+      <li><span class='color-sq sq-yellow'></span>非洲裔: <span class='data-span'><%= city_info['black'] %></span></li>
+      <li><span class='color-sq sq-dark'></span>西班牙裔: <span class='data-span'><%= city_info['hispanics'] %></span></li>
+      <li><span class='color-sq sq-grey'></span>其他: <span class='data-span'><%= (100 - (city_info['asian']).to_i - (city_info['black']).to_i - (city_info['caucasion']).to_i - (city_info['hispanics']).to_i) %></span></li>
+    </ul>
+  </div>
+
+  <div>
+    <h3 class='sub-header'>房源地区</h3>
+    <table class='area-table'>
+      <tr>
+        <th>PM2.5指数</th>
+        <th>平均家庭收入</th>
+      </tr>
+      <tr>
+        <td><%= city_info['PMI'] %></td>
+        <td><%= city_info['income'] %></td>
+      </tr>
+      <tr>
+        <th>人口</th>
+        <th>平均受教育程度</th>
+      </tr>
+      <tr>
+        <td><%= city_info['population'] %></td>
+        <td><%= city_info['above_bachelor'] %></td>
+      </tr>
+      <tr>
+        <th>州失业率</th>
+        <th>本市失业率</th>
+      </tr>
+      <tr>
+        <td><%= city_info['state_unemploy'] %></td>
+        <td><%= city_info['unemploy'] %></td>
+      </tr>
+      <tr>
+        <th>全美犯罪指数</th>
+        <th>本市犯罪指数</th>
+      </tr>
+      <tr>
+        <td><%= city_info['us_crime'] %></td>
+        <td><%= city_info['crime'] %></td>
+      </tr>
+    </table>
+    <div class='map-canvas'>
+      <div id='myMap'></div>
+    </div>
+  </div>
+<% end %>
+
+
+<div class="last-wrap">
+</div>
+<div class="arrow-container">
+  <!--<div class="open-panel" onclick="sendHomeCard()">-->
+  <!--发送房屋名牌-->
+  <!--</div>-->
+  <!--<div class="arrow"></div>-->
+  <p style="display: none" id="homeCardConfirmation"></p>
+  <br/>
+  <div class="open-panel">
+    关注觅家，长按获取
+  </div>
+  <div class="arrow">
+  </div>
+  <div id="qr-anchor" class="qr-wrap">
+    <img id='meejiaImage' class='agent_qr_img loading' src=<%= File.join(MEEHOME_CLIENT_URL, 'img/preload.gif')%> />
+  </div>
+</div>
+<% if @agents.length > 0 %>
+  <div class="float-agent">
+    <% agent = @agents.first %>
+    <% url = MEEHOME_CLIENT_URL + '/agent/' + agent['agent_identifier'] + '?uid=' + @uid%>
+    <div class="agent-info-wrap">
+      <a class="profile-img" href=<%=url %> style="background:url(<%=agent['head_image'] %>) no-repeat center / cover"/>
+      </a>
+      <div class="agent-info">
+        <a class="agent-name" href=<%=url %> ><%= "#{agent['cn_name']}: 专业的置业经纪人希望为您服务"%></a>
+        <div class="icon-wrap">
+          <a class="phone-icon" href=<%= "tel:#{agent['phone']}" %> > </a>
+          <a class="wechat-icon"> </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="qrcode-layer hidden">
+    <img class="qr-code-img" src=<%=agent['qr_code'] %>/>
+    <p class="qr-code-description">长按扫码</p>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+  $(document).ready(function () {
+    $(".wechat-icon").click(function(){
+      $(".qrcode-layer").removeClass("hidden");
+      $(".qrcode-layer").addClass("show");
+    });
+
+    $(".qrcode-layer").click(function(){
+      $(this).removeClass("show");
+      $(this).addClass("hidden");
+    });
+
+    if(uid != '') {
+      isMyFavoriteHome();
+    }
+
+    $.ajax({
+      url: '/agent/' + agentId + '/meejia_image',
+      type: 'get',
+
+      success: function(data) {
+        data = JSON.parse(data);
+        var qrImage;
+        if(data.is_followed){
+          qrImage = data.img_url
+        } else {
+          qrImage = data.meejia_url
+        }
+        $('#meejiaImage').removeClass('loading')
+        $('#meejiaImage').attr('src', qrImage);
+      },
+
+      error: function() {
+        console.log('error generate qr code');
+      }
+    });
+
+    var result = '';
+    var element = $( this );
+    for(var index in home.images){
+      result += '<div class="item"><img class="lazyOwl" data-src="' + CDN_URL + '/photo/property/' + home.images[index] + '" alt="Lazy Owl Image"></div>';
+    }
+    $(".owl-carousel").append(result);
+
+    $(".owl-carousel").owlCarousel({
+      items : 2,
+      lazyLoad : true,
+      navigation : true
+    });
+
+    var data = home.city_info;
+    var other = 100 - parseInt(data.asian) - parseInt(data.black) - parseInt(data.caucasion) -  parseInt(data.hispanics)
+    var pieData = [
+      {
+        value: parseInt(data.asian),
+        color:"#45BDBC",
+        highlight: "#45BDBC",
+        label: "亚裔"
+      },
+      {
+        value: parseInt(data.black),
+        color: "#FDB45C",
+        highlight: "#FDB45C",
+        label: "非洲裔"
+      },
+      {
+        value: parseInt(data.caucasion),
+        color: "#F54549",
+        highlight: "#F54549",
+        label: "白人"
+      },
+      {
+        value: parseInt(data.hispanics),
+        color: "#4D5360",
+        highlight: "#4D5360",
+        label: '西班牙裔'
+      },
+      {
+        value: parseInt(other),
+        color: "#949FB1",
+        highlight: "#949FB1",
+        label: "其他"
+      },
+    ];
+
+
+    L.mapbox.accessToken = 'pk.eyJ1IjoiZGV1Ym95IiwiYSI6ImNpcDg3cm1xMzAxN3VzeW5vdWd6YWx4c2IifQ.cU1CJ-BMZuoyHigylGe4gA';
+
+    var map = L.mapbox.map('myMap', 'mapbox.streets')
+        .setView([home.geo_point.split(',')[0], home.geo_point.split(',')[1]], 15);
+    var markers = new L.MarkerClusterGroup();
+
+    var image_url = '';
+    if(home.images.length > 0 && home.images[0] != undefined){
+      image_url = CDN_URL + home.images[0].image_url
+    }
+    var lat = home.geo_point.split(',')[0];
+    var long = home.geo_point.split(',')[1];
+
+    var marker = L.marker(new L.LatLng(lat, long), {
+      icon: L.mapbox.marker.icon({'marker-symbol': 'warehouse', 'marker-color': '0044FF'}),
+    });
+
+    markers.addLayer(marker);
+
+    var title = '';
+    for (var i in home.assigned_school){
+      lat = home.assigned_school[i].geo_point.split(',')[0];
+      long = home.assigned_school[i].geo_point.split(',')[1];
+      title = home.assigned_school[i].name;
+      marker = L.marker(new L.LatLng(lat, long), {
+        icon: L.mapbox.marker.icon({'marker-symbol': 'college', 'marker-color': '228B22'}),
+        title: title
+      });
+      marker.bindPopup(title);
+      markers.addLayer(marker);
+    }
+
+    map.addLayer(markers);
+    var ctx = document.getElementById("chart-area").getContext("2d");
+    window.myPie = new Chart(ctx).Pie(pieData);
+
+  });
+</script>
+
+</body>
+
+</html>

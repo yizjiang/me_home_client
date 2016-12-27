@@ -107,6 +107,20 @@ module Routes
       erb :home_detail, :locals => home.symbolize_keys
     end
 
+    get '/commercial/:id' do
+      response = Typhoeus.get("#{MEEHOME_SERVER_URL}/commercial/#{params[:id]}")     #todo request agent
+      commercial = JSON.parse response.body
+
+      if params[:agent_id]
+        agent = JSON.parse Typhoeus.get("#{MEEHOME_SERVER_URL}/agent/#{params[:agent_id]}/show").body
+        @agents = [agent]
+      else
+        @agents = JSON.parse Typhoeus.get("#{MEEHOME_SERVER_URL}/agents").body
+      end
+      @uid = params['uid'] || ''
+      erb :commercial_detail, :locals => commercial.symbolize_keys
+    end
+
     get '/auth_callback' do
       erb :login_callback, layout: false
     end
