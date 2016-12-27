@@ -57,8 +57,8 @@
           coordinates: <%= [v["geo_point"].split(',')[1], v["geo_point"].split(',')[0]] %>
         },
         properties: {
-          title: '<%= v["addr1"].gsub("'", "\\\\'") %>',
-          description: '<%= v["description"].gsub("'", "\\\\'") %>',
+          title: '<%= (v["addr1"]||"").gsub("'", "\\\\'") %>',
+          description: '<%= (v["description"]||"").gsub("'", "\\\\'") %>',
           <% case
             when v["view_times"].to_i < 4 %>
             'marker-color': '#3ca0d3',
