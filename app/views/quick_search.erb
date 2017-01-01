@@ -8,6 +8,15 @@
     var wechatUserId = "<%= @wechat_user_id %>";
     var search = <%= @search %>
     var fromAgent = <%= @from_agent %>
+
+        function categorySelect() {
+          if($('#category').val() == 'business') {
+            $('#residentFilter').hide();
+          } else {
+            $('#residentFilter').show();
+          }
+        };
+
   </script>
   <%= javascript_tag File.join(ASSET_URL, '/wechat/agent_setting.js') %>
   <%= stylesheet_link File.join(ASSET_URL, '/wechat/agent_setting.css') %>
@@ -25,6 +34,16 @@
       </select>
     </div>
   </div>
+  <div class="weui_cells_title">房产类型: </div>
+
+  <div class="weui_cell_bd weui_cell_primary">
+    <select id='category' class="weui_select" name="select2" onchange="categorySelect()">
+      <option value="resident">普通家用</option>
+      <option value="business">专业投资</option>
+    </select>
+  </div>
+
+  <div id="residentFilter">
   <div class="weui_cells_title">房型: </div>
   <div class="weui_cells weui_cells_checkbox">
     <label class="weui_cell weui_check_label" for="single_family">
@@ -249,6 +268,8 @@
     </div>
   </div>
 
+  </div>
+
   <div id="loadingToast" class="weui_loading_toast" style="display:none;">
     <div class="weui_mask_transparent"></div>
     <div class="weui_toast">
@@ -314,6 +335,8 @@
       for(var index in selectedValue){
         regionValue.push(selectedValue[index].text.split(',')[0])
       }
+      search['propertyType'] = $('#category').val();
+
       search['regionValue'] = regionValue.join(',');
       search['priceMin'] = $('#priceMin').val();
       search['priceMax'] = $('#priceMax').val();
@@ -343,6 +366,10 @@
     })
 
     $("#areaSelector").select2();
+
+    $('#category').on("select2-selecting", function(e) {
+      console.log('sasa');
+    });
 
     (function() {
       $('#bedNum').val(search.bedNum || 2).change();

@@ -166,6 +166,13 @@ module Routes
       redirect "/home/#{params['hid']}" + "?" + params.to_query
     end
 
+    get '/metric/commercial/:hid' do
+      params.delete("splat")
+      params.delete("captures")
+      response = Typhoeus.post("#{MEEHOME_SERVER_URL}/user/metric_tracking_h", headers: {uid: params["uid"]||""}, body: params.to_query)
+      redirect "/commercial/#{params['hid']}" + "?" + params.to_query
+    end
+
     get '/metric/user_house_view/:id' do
       response = Typhoeus.get("#{MEEHOME_SERVER_URL}/metric/user/#{params[:id]}/house_viewed")
       @results = JSON.parse response.body

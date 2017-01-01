@@ -52,6 +52,7 @@
       properties: <%=  properties.to_json %>,
     };
 
+    function isMyFavoriteHome() {};
   </script>
 </head>
 
@@ -101,7 +102,7 @@
   <div class='item-wrap'>
     <h4 class='info-item'>面积：</h4>
     <div class='info-detail'>
-      <%= size %>
+      <%= (size * 0.09).round(1)%>平方米
     </div>
   </div>
   <div class='item-wrap'>
@@ -141,7 +142,7 @@
               <div class='row-headline row-title'>建造时间</div>
               <div class='row row-name'><%= property['year_built'] %></div>
               <div class='row-headline row-title'>建筑面积</div>
-              <div class='row row-name'><%= property['building_size'] %></div>
+              <div class='row row-name'><%= (property['building_size'] * 0.09).round(1) %>平方米</div>
               <div class='row-headline row-title'>建筑楼层</div>
               <div class='row-headline'><%= property['building_stories'] %></div>
             </div>
@@ -296,7 +297,7 @@
     var result = '';
     var element = $( this );
     for(var index in home.images){
-      result += '<div class="item"><img class="lazyOwl" data-src="' + CDN_URL + '/photo/property/' + home.images[index] + '" alt="Lazy Owl Image"></div>';
+        result += '<div class="item"><img class="lazyOwl" data-src="' + CDN_URL + '/photo/' + home.images[index] + '" alt="Lazy Owl Image"></div>';
     }
     $(".owl-carousel").append(result);
 
